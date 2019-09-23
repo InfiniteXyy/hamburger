@@ -1,33 +1,42 @@
-import React from "react";
-export function VStack(...elements) {
-  let padding;
-  function setPadding(_padding) {
-    padding = _padding;
-    return closure;
+import React from 'react';
+import { ViewClass } from './View';
+import { generateChildKey } from './utils';
+
+class StackClass extends ViewClass {
+  constructor(...elements) {
+    super();
+    this._elements = elements;
   }
-  function build() {
-    return (
-      <div style={{ padding }}>
-        {elements.map(i => (i.build ? i.build() : i))}
-      </div>
-    );
-  }
-  const closure = {
-    build,
-    padding: setPadding
-  };
-  return closure;
 }
-export function HStack(...elements) {
-  function build() {
+
+class VStackClass extends StackClass {
+  build() {
     return (
-      <div style={{ display: "flex" }}>
-        {elements.map(i => (i.build ? i.build() : i))}
+      <div style={this._styleObj}>
+        {this._elements
+          .map(i => (i.build ? i.build() : i))
+          .map(generateChildKey)}
       </div>
     );
   }
-  const closure = {
-    build
-  };
-  return closure;
+}
+
+class HStackClass extends StackClass {
+  build() {
+    return (
+      <div style={{ ...this._styleObj, display: 'flex' }}>
+        {this._elements
+          .map(i => (i.build ? i.build() : i))
+          .map(generateChildKey)}
+      </div>
+    );
+  }
+}
+
+export function HStack(...elements) {
+  return new HStackClass(...elements);
+}
+
+export function VStack(...elements) {
+  return new VStackClass(...elements);
 }

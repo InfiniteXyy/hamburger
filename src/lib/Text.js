@@ -1,60 +1,40 @@
-import React from "react";
+import React from 'react';
+import { ViewClass } from './View';
 
-export function Text(_content) {
-  let hex = "black";
-  let bold = false;
-  let content = _content;
-  let fontSize = 16;
-  let margin = {
-    left: undefined,
-    right: undefined,
-    top: undefined,
-    bottom: undefined
-  };
+class TextClass extends ViewClass {
+  constructor(content) {
+    super();
+    this._content = content;
+  }
 
-  let setMargin = function(_margin) {
-    margin = _margin;
-    return closure;
-  };
-  let build = function() {
-    return (
-      <div
-        style={{
-          color: hex,
-          fontSize,
-          marginLeft: margin.left,
-          marginTop: margin.top,
-          marginRight: margin.right,
-          marginBottom: margin.bottom,
-          fontWeight: bold ? "bold" : "400"
-        }}
-      >
-        {content}
-      </div>
-    );
-  };
+  build() {
+    return <div style={this._styleObj}>{this._content}</div>;
+  }
 
-  let color = function(_hex) {
-    hex = _hex;
-    return closure;
-  };
+  color(color): this {
+    this._styleObj = {
+      ...this._styleObj,
+      color: color,
+    };
+    return this;
+  }
 
-  let setBold = function() {
-    bold = true;
-    return closure;
-  };
+  bold(): this {
+    this._styleObj = {
+      ...this._styleObj,
+      fontWeight: 'bold',
+    };
+    return this;
+  }
 
-  let size = function(_size) {
-    fontSize = _size;
-    return closure;
-  };
-
-  const closure = {
-    color,
-    bold: setBold,
-    margin: setMargin,
-    size,
-    build
-  };
-  return closure;
+  size(value): this {
+    this._styleObj = {
+      ...this._styleObj,
+      fontSize: value,
+    };
+    return this;
+  }
+}
+export function Text(content) {
+  return new TextClass(content);
 }
