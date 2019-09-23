@@ -13,7 +13,7 @@ class ButtonClass extends ViewClass {
   }
 
   disabled(when?): this {
-    this._disabled = when ? when() : true;
+    this._disabled = when;
     return this;
   }
 

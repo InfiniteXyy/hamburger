@@ -5,30 +5,45 @@ import { Button } from '../lib/Button';
 import { Text } from '../lib/Text';
 
 export default function TodoList() {
-  const [list, setList] = useState(['Find a job']);
+  const [list, setList] = useState([
+    { title: 'Find a job', important: true },
+    { title: 'chore', important: false },
+  ]);
   const [input, setInput] = useState('');
+  const [importantCheck, setImportantCheck] = useState(false);
 
   function onRemove(item) {
     return () => {
-      setList(list.filter(i => i !== item));
+      setList(list.filter(i => i.title !== item.title));
     };
   }
 
   function onAdd() {
     if (!input) return;
-    setList([...list, input]);
+    setList([...list, { title: input, important: importantCheck }]);
     setInput('');
+    setImportantCheck(false);
   }
 
   return VStack(
     HStack(
       Input(input, e => setInput(e.target.value)),
+      Text('Important'),
+      Input('important', e => setImportantCheck(e.target.checked), 'checkbox', {
+        checked: importantCheck,
+      }),
       Button('add').onClick(onAdd),
     )
       .justify('space-between')
       .align('center'),
     ...list.map(item =>
-      HStack(Text(item), Button('X').onClick(onRemove(item)))
+      HStack(
+        Text(item.title)
+          .color('blue')
+          .color('red', item.important)
+          .bold(item.important),
+        Button('X').onClick(onRemove(item)),
+      )
         .justify('space-between')
         .margin({ top: 10 }),
     ),

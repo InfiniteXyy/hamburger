@@ -11,27 +11,22 @@ class TextClass extends ViewClass {
     return <div style={this._styleObj}>{this._content}</div>;
   }
 
-  color(color): this {
-    this._styleObj = {
-      ...this._styleObj,
-      color: color,
-    };
+  color(color, when?): this {
+    if (when !== false) this._styleObj.color = color;
+
     return this;
   }
 
-  bold(): this {
-    this._styleObj = {
-      ...this._styleObj,
-      fontWeight: 'bold',
-    };
+  bold(when?): this {
+    if (when !== false) this._styleObj.fontWeight = 'bold';
+
     return this;
   }
 
-  size(value): this {
-    this._styleObj = {
-      ...this._styleObj,
-      fontSize: value,
-    };
+  size(value, when?): this {
+    if (when !== false) {
+      this._styleObj.fontSize = value;
+    }
     return this;
   }
 }

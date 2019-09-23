@@ -8,13 +8,13 @@ class StackClass extends ViewClass {
     this._elements = elements;
   }
 
-  align(alignItems): this {
-    this._styleObj.alignItems = alignItems;
+  align(alignItems, when?): this {
+    if (when !== false) this._styleObj.alignItems = alignItems;
     return this;
   }
 
-  justify(justifyContent): this {
-    this._styleObj.justifyContent = justifyContent;
+  justify(justifyContent, when?): this {
+    if (when !== false) this._styleObj.justifyContent = justifyContent;
     return this;
   }
 }

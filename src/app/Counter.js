@@ -9,8 +9,7 @@ export default function Counter() {
   return HStack(
     Button('-')
       .onClick(() => setCount(count - 1))
-      .disabled(() => count === 0),
-
+      .disabled(count === 0),
     Text(count).padding(10),
     Button('+').onClick(() => setCount(count + 1)),
   )

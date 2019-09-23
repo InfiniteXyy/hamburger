@@ -3,46 +3,42 @@ export class ViewClass {
     this._classNames = '';
     this._styleObj = {};
   }
-  padding(value): this {
+  padding(value, when?): this {
+    if (when === false) return this;
     if (typeof value === 'number') {
       this._styleObj = { ...this._styleObj, padding: value };
     } else {
-      let tmp = {};
+      let tmp = this._styleObj;
       if ('horizontal' in value) {
         tmp.paddingLeft = tmp.paddingRight = value.horizontal;
       }
       if ('vertical' in value) {
         tmp.paddingTop = tmp.paddingBottom = value.vertical;
       }
-      tmp = {
-        paddingTop: tmp.paddingTop || value.top,
-        paddingBottom: tmp.paddingBottom || value.bottom,
-        paddingLeft: tmp.paddingLeft || value.left,
-        paddingRight: tmp.paddingRight || value.right,
-      };
-      this._styleObj = { ...this._styleObj, ...tmp };
+      tmp.paddingTop = tmp.paddingTop || value.top;
+      tmp.paddingBottom = tmp.paddingBottom || value.bottom;
+      tmp.paddingLeft = tmp.paddingLeft || value.left;
+      tmp.paddingRight = tmp.paddingRight || value.right;
     }
     return this;
   }
 
-  margin(value): this {
+  margin(value, when?): this {
+    if (when === false) return this;
     if (typeof value === 'number') {
       this._styleObj = { ...this._styleObj, margin: value };
     } else {
-      let tmp = {};
+      let tmp = this._styleObj;
       if ('horizontal' in value) {
         tmp.marginLeft = tmp.marginRight = value.horizontal;
       }
       if ('vertical' in value) {
         tmp.marginTop = tmp.marginBottom = value.vertical;
       }
-      tmp = {
-        marginTop: tmp.marginTop || value.top,
-        marginBottom: tmp.marginBottom || value.bottom,
-        marginLeft: tmp.marginLeft || value.left,
-        marginRight: tmp.marginRight || value.right,
-      };
-      this._styleObj = { ...this._styleObj, ...tmp };
+      tmp.marginTop = tmp.marginTop || value.top;
+      tmp.marginBottom = tmp.marginBottom || value.bottom;
+      tmp.marginLeft = tmp.marginLeft || value.left;
+      tmp.marginRight = tmp.marginRight || value.right;
     }
     return this;
   }
