@@ -15,6 +15,7 @@ class InputClass extends ViewClass {
         value={this._value}
         onChange={this._onChange}
         style={this._styleObj}
+        type={this._type}
       />
     );
   }

@@ -25,6 +25,7 @@ function App() {
     .margin({ horizontal: 16 })
     .padding(20)
     .border(1.5, '#4a4a4a', 0)
+    .size({ width: 500 })
     .build();
 }
 

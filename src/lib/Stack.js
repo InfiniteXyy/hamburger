@@ -7,6 +7,16 @@ class StackClass extends ViewClass {
     super();
     this._elements = elements;
   }
+
+  align(alignItems): this {
+    this._styleObj.alignItems = alignItems;
+    return this;
+  }
+
+  justify(justifyContent): this {
+    this._styleObj.justifyContent = justifyContent;
+    return this;
+  }
 }
 
 class VStackClass extends StackClass {

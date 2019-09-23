@@ -4,10 +4,24 @@ export class ViewClass {
     this._styleObj = {};
   }
   padding(value): this {
-    this._styleObj = {
-      ...this._styleObj,
-      padding: value,
-    };
+    if (typeof value === 'number') {
+      this._styleObj = { ...this._styleObj, padding: value };
+    } else {
+      let tmp = {};
+      if ('horizontal' in value) {
+        tmp.paddingLeft = tmp.paddingRight = value.horizontal;
+      }
+      if ('vertical' in value) {
+        tmp.paddingTop = tmp.paddingBottom = value.vertical;
+      }
+      tmp = {
+        paddingTop: tmp.paddingTop || value.top,
+        paddingBottom: tmp.paddingBottom || value.bottom,
+        paddingLeft: tmp.paddingLeft || value.left,
+        paddingRight: tmp.paddingRight || value.right,
+      };
+      this._styleObj = { ...this._styleObj, ...tmp };
+    }
     return this;
   }
 
@@ -30,6 +44,12 @@ export class ViewClass {
       };
       this._styleObj = { ...this._styleObj, ...tmp };
     }
+    return this;
+  }
+
+  size(sizeConfig): this {
+    this._styleObj.width = sizeConfig.width;
+    this._styleObj.height = sizeConfig.height;
     return this;
   }
 
