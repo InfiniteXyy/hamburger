@@ -8,22 +8,22 @@ class TextClass extends ViewClass {
   }
 
   build() {
-    return <div style={this._styleObj}>{this._content}</div>;
+    return React.createElement('div', { style: this._styleObj }, this._content);
   }
 
-  color(color, when?): this {
+  color(color, when) {
     if (when !== false) this._styleObj.color = color;
 
     return this;
   }
 
-  bold(when?): this {
+  bold(when) {
     if (when !== false) this._styleObj.fontWeight = 'bold';
 
     return this;
   }
 
-  size(value, when?): this {
+  size(value, when) {
     if (when !== false) {
       this._styleObj.fontSize = value;
     }

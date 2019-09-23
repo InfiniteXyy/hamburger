@@ -1,0 +1,23 @@
+{
+  "name": "declarative-react",
+  "version": "0.0.1",
+  "private": false,
+  "main": "index.js",
+  "author": {
+    "email": "xuyiyangwing@gmail.com",
+    "name": "Yiyang Xu"
+  },
+  "keywords": [
+    "react",
+    "declarative"
+  ],
+  "homepage": "https://github.com/InfiniteXyy/declarative-react",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}

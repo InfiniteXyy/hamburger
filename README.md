@@ -2,6 +2,7 @@
 
 if you have any opinion or suggestion, give me an **issue**!
 
+
 ## About
 
 😢 Have you ever encountered such a scene? When you just want to `style` a word, make it blue, you have to write
@@ -17,6 +18,14 @@ Text('something').color('skyblue');
 ```
 
 🦉 Most importantly, this lib is not a framework, it's just a helper. You can use it anywhere in the project.
+
+## Example App
+```bash
+git clone https://github.com/InfiniteXyy/declarative-react.git
+yarn 
+cd example
+yarn start
+```
 
 ## Preview
 

@@ -7,26 +7,26 @@ class ButtonClass extends ViewClass {
     this._content = content;
   }
 
-  onClick(callback): this {
+  onClick(callback) {
     this.onClickCallback = callback;
     return this;
   }
 
-  disabled(when?): this {
+  disabled(when) {
     this._disabled = when;
     return this;
   }
 
   build() {
-    return (
-      <button
-        onClick={this.onClickCallback}
-        disabled={this._disabled}
-        style={this._styleObj}
-        className={this._classNames}
-      >
-        {this._content}
-      </button>
+    return React.createElement(
+      'button',
+      {
+        onClick: this.onClickCallback,
+        disabled: this._disabled,
+        style: this._styleObj,
+        className: this._className,
+      },
+      this._content,
     );
   }
 }

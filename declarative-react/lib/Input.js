@@ -11,14 +11,16 @@ class InputClass extends ViewClass {
   }
 
   build() {
-    return (
-      <input
-        value={this._value}
-        onChange={this._onChange}
-        style={this._styleObj}
-        type={this._type}
-        {...this._props}
-      />
+    return React.createElement(
+      'input',
+      {
+        value: this._value,
+        onChange: this._onChange,
+        style: this._styleObj,
+        type: this._type,
+        ...this._props,
+      },
+      null,
     );
   }
 }

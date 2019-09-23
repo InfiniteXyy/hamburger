@@ -8,12 +8,12 @@ class StackClass extends ViewClass {
     this._elements = elements;
   }
 
-  align(alignItems, when?): this {
+  align(alignItems, when) {
     if (when !== false) this._styleObj.alignItems = alignItems;
     return this;
   }
 
-  justify(justifyContent, when?): this {
+  justify(justifyContent, when) {
     if (when !== false) this._styleObj.justifyContent = justifyContent;
     return this;
   }
@@ -21,24 +21,24 @@ class StackClass extends ViewClass {
 
 class VStackClass extends StackClass {
   build() {
-    return (
-      <div style={this._styleObj}>
-        {this._elements
-          .map(i => (i.build ? i.build() : i))
-          .map(generateChildKey)}
-      </div>
+    return React.createElement(
+      'div',
+      {
+        style: this._styleObj,
+      },
+      this._elements.map(i => (i.build ? i.build() : i)).map(generateChildKey),
     );
   }
 }
 
 class HStackClass extends StackClass {
   build() {
-    return (
-      <div style={{ ...this._styleObj, display: 'flex' }}>
-        {this._elements
-          .map(i => (i.build ? i.build() : i))
-          .map(generateChildKey)}
-      </div>
+    return React.createElement(
+      'div',
+      {
+        style: { ...this._styleObj, ...{ display: 'flex' } },
+      },
+      this._elements.map(i => (i.build ? i.build() : i)).map(generateChildKey),
     );
   }
 }

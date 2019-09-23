@@ -3,7 +3,7 @@ export class ViewClass {
     this._classNames = '';
     this._styleObj = {};
   }
-  padding(value, when?): this {
+  padding(value, when) {
     if (when === false) return this;
     if (typeof value === 'number') {
       this._styleObj = { ...this._styleObj, padding: value };
@@ -23,7 +23,7 @@ export class ViewClass {
     return this;
   }
 
-  margin(value, when?): this {
+  margin(value, when) {
     if (when === false) return this;
     if (typeof value === 'number') {
       this._styleObj = { ...this._styleObj, margin: value };
@@ -43,13 +43,15 @@ export class ViewClass {
     return this;
   }
 
-  size(sizeConfig): this {
+  size(sizeConfig, when) {
+    if (when === false) return this;
     this._styleObj.width = sizeConfig.width;
     this._styleObj.height = sizeConfig.height;
     return this;
   }
 
-  border(width, color = 'black', radius = 0): this {
+  border(width, color = 'black', radius = 0, when) {
+    if (when === false) return this;
     this._styleObj = {
       ...this._styleObj,
       border: width ? 'solid' : '',
@@ -60,11 +62,13 @@ export class ViewClass {
     return this;
   }
 
-  class(className): this {
+  class(className, when) {
+    if (when === false) return this;
     this._classNames += ' ' + className;
     return this;
   }
-  style(styleObject): this {
+  style(styleObject, when) {
+    if (when === false) return this;
     this._styleObj = { ...this._styleObj, ...styleObject };
     return this;
   }
