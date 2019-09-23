@@ -98,7 +98,7 @@ function App() {
       ),
     ),
     HStack(
-      Button('-').onClick(() => setCount(count - 1)).disabled(() => count === 0),
+      Button('-').onClick(() => setCount(count - 1)).disabled(count === 0),
       Text(`count: ${count}`).bold(),
       Button('+').onClick(() => setCount(count + 1)),
     ),
@@ -139,13 +139,15 @@ function Counter() {
 }
 ```
 
-## TODOs
+## TODOs (version 0.0.1)
 
-- [ ] Base Class (View, Text)
+- [x] Base Class (View, Text)
 - [ ] example application: TODO MVC
+- [ ] Review
 - [ ] More Classes (Image, Textarea...)
 - [ ] More APIs (`.boxShadow()`...)
 - [ ] TypeScript support
+- [ ] Review
 - [ ] compatibility with popular UI Library
 - [ ] performance test
 

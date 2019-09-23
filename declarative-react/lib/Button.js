@@ -24,7 +24,7 @@ class ButtonClass extends ViewClass {
         onClick: this.onClickCallback,
         disabled: this._disabled,
         style: this._styleObj,
-        className: this._className,
+        className: this._classNames,
       },
       this._content,
     );
