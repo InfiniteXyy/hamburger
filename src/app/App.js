@@ -16,14 +16,16 @@ function App() {
       Text('TODO Test')
         .color('pink')
         .size(32),
-    )
-      .padding(16)
-      .border(1.5, '#aaaaaa', 8),
-    <WithStyle />,
+    ),
+    <WithStyle />, // use JSX components
     <WithClassName />,
     <Counter />,
     <TodoList />,
-  ).build();
+  )
+    .margin({ horizontal: 16 })
+    .padding(20)
+    .border(1.5, '#4a4a4a', 0)
+    .build();
 }
 
 export default App;
