@@ -3,9 +3,11 @@ import { ViewClass } from './View';
 import { generateChildKey } from './utils';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 
+type ChildElement = JSX.Element | ViewClass;
+
 abstract class StackClass extends ViewClass {
-  protected _elements: (JSX.Element | ViewClass)[];
-  constructor(...elements: (JSX.Element | ViewClass)[]) {
+  protected _elements: ChildElement[];
+  constructor(...elements: ChildElement[]) {
     super();
     this._elements = elements;
   }
@@ -24,9 +26,10 @@ abstract class StackClass extends ViewClass {
 class VStackClass extends StackClass {
   public build() {
     return React.createElement(
-      'div',
+      this._tag,
       {
         style: this._styleObj,
+        className: !!this._classNames ? this._classNames : undefined,
       },
       this._elements
         .map(i => (i instanceof ViewClass ? i.build() : i))
@@ -38,9 +41,10 @@ class VStackClass extends StackClass {
 class HStackClass extends StackClass {
   public build() {
     return React.createElement(
-      'div',
+      this._tag,
       {
         style: { ...this._styleObj, ...{ display: 'flex' } },
+        className: !!this._classNames ? this._classNames : undefined,
       },
       this._elements
         .map(i => (i instanceof ViewClass ? i.build() : i))
@@ -49,10 +53,20 @@ class HStackClass extends StackClass {
   }
 }
 
-export function HStack(...elements: (JSX.Element | ViewClass)[]) {
+export function HStack(...elements: ChildElement[]) {
   return new HStackClass(...elements);
 }
 
-export function VStack(...elements: (JSX.Element | ViewClass)[]) {
-  return new VStackClass(...elements);
+export function VStack(
+  tag: string,
+): (...elements: ChildElement[]) => VStackClass;
+export function VStack(...elements: ChildElement[]): VStackClass;
+
+export function VStack(...elementsOrTag: (ChildElement | string)[]) {
+  if (typeof elementsOrTag[0] === 'string') {
+    return (...elements: ChildElement[]) => {
+      return VStack(...elements).tag(elementsOrTag[0] as string);
+    };
+  }
+  return new VStackClass(...(elementsOrTag as ChildElement[]));
 }

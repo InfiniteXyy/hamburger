@@ -96,7 +96,8 @@ export abstract class ViewClass {
 
   public class(className: string, when?: boolean) {
     if (when === false) return this;
-    this._classNames += ' ' + className;
+    if (!this._classNames) this._classNames = className;
+    else this._classNames += ' ' + className;
     return this;
   }
 
