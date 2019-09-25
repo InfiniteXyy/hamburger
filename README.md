@@ -22,8 +22,11 @@ Text('something').color('skyblue');
 ## Example App
 ```bash
 git clone https://github.com/InfiniteXyy/declarative-react.git
-yarn 
-cd example
+cd declarative-react
+yarn install
+cd declarative-react
+yarn build
+cd ../example
 yarn start
 ```
 
@@ -142,11 +145,11 @@ function Counter() {
 ## TODOs (version 0.0.1)
 
 - [x] Base Class (View, Text)
+- [x] TypeScript support
 - [ ] example application: TODO MVC
 - [ ] Review
 - [ ] More Classes (Image, Textarea...)
 - [ ] More APIs (`.boxShadow()`...)
-- [ ] TypeScript support
 - [ ] Review
 - [ ] compatibility with popular UI Library
 - [ ] performance test

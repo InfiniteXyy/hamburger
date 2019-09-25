@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, VStack } from 'declarative-react';
+import { Text, VStack } from 'declarative-react/src';
 import Counter from './Counter';
 import TodoList from './TodoList';
 import WithStyle from './WithStyle';
@@ -11,10 +11,11 @@ function App() {
       Text('Declarative UI')
         .color('skyblue')
         .bold()
-        .size(50),
+        .margin(0)
+        .fontSize(50),
       Text('TODO Test')
         .color('pink')
-        .size(32),
+        .fontSize(32),
     ),
     <WithStyle />, // use JSX components
     <WithClassName />,
@@ -23,7 +24,7 @@ function App() {
   )
     .margin({ horizontal: 16 })
     .padding(20)
-    .border(1.5, '#4a4a4a', 0)
+    .border({ borderWidth: 1.5, borderColor: '#4a4a4a' })
     .size({ width: 500 })
     .build();
 }

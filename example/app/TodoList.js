@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, VStack, Input, Button, Text } from 'declarative-react';
+import { HStack, VStack, Input, Button, Text } from 'declarative-react/src';
 
 export default function TodoList() {
   const [list, setList] = useState([
@@ -24,11 +24,11 @@ export default function TodoList() {
 
   return VStack(
     HStack(
-      Input(input, e => setInput(e.target.value)),
+      Input(input).onChange(e => setInput(e.target.value)),
       Text('Important'),
-      Input('important', e => setImportantCheck(e.target.checked), 'checkbox', {
+      Input('important', 'checkbox', {
         checked: importantCheck,
-      }),
+      }).onChange(e => setImportantCheck(e.target.checked)),
       Button('add').onClick(onAdd),
     )
       .justify('space-between')

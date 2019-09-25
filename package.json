@@ -4,7 +4,7 @@
   "main": "index.js",
   "private": true,
   "repository": "https://github.com/InfiniteXyy/declarative-react.git",
-  "workspaces": ["declarative-react", "example"],
+  "workspaces": ["declarative-react", "example", "todo-mvc"],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "devDependencies": {
