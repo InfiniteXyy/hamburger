@@ -1,4 +1,4 @@
-import { HStack, Button } from 'declarative-react/src';
+import { HStack, Button } from 'declarative-react';
 import './WithClassName.css';
 
 function FlatButton(content) {

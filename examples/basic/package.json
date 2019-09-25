@@ -1,11 +1,11 @@
 {
-  "name": "todo-mvc",
-  "version": "1.0.0",
+  "name": "example",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "parcel ./index.html"
+    "start": "node_modules/.bin/parcel ./index.html"
   },
   "dependencies": {
     "react": "^16.9.0",

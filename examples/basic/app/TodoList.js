@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, VStack, Input, Button, Text } from 'declarative-react/src';
+import { HStack, VStack, Input, Button, Text } from 'declarative-react';
 
 export default function TodoList() {
   const [list, setList] = useState([

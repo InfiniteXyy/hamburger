@@ -1,4 +1,4 @@
-import { HStack, Button } from 'declarative-react/src';
+import { HStack, Button } from 'declarative-react';
 
 function BaseButton(content) {
   return Button(content).style(styles.baseButton);

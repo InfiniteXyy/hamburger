@@ -24,9 +24,7 @@ Text('something').color('skyblue');
 git clone https://github.com/InfiniteXyy/declarative-react.git
 cd declarative-react
 yarn install
-cd declarative-react
-yarn build
-cd ../example
+cd ../examples/basic/
 yarn start
 ```
 

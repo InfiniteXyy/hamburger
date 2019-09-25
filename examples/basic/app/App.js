@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, VStack } from 'declarative-react/src';
+import { Text, VStack } from 'declarative-react';
 import Counter from './Counter';
 import TodoList from './TodoList';
 import WithStyle from './WithStyle';

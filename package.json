@@ -4,10 +4,17 @@
   "main": "index.js",
   "private": true,
   "repository": "https://github.com/InfiniteXyy/declarative-react.git",
-  "workspaces": ["declarative-react", "example", "todo-mvc"],
+  "workspaces": [
+    "declarative-react",
+    "examples/**"
+  ],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "install": "lerna bootstrap"
+  },
   "devDependencies": {
+    "lerna": "^3.16.4",
     "prettier": "^1.18.2"
   }
 }

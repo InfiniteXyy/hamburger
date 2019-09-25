@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, Button, Text } from 'declarative-react/src';
+import { HStack, Button, Text } from 'declarative-react';
 
 export default function Counter() {
   const [count, setCount] = useState(0);
