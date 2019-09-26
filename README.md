@@ -144,9 +144,9 @@ function Counter() {
 
 - [x] Base Class (View, Text)
 - [x] TypeScript support
-- [ ] example application: TODO MVC
-- [ ] Review
-- [ ] More Classes (Image, Textarea...)
+- [x] simple todo mvc
+- [ ] Review & Test
+- [ ] More Classes (Image, Textarea, Li...)
 - [ ] More APIs (`.boxShadow()`...)
 - [ ] Review
 - [ ] compatibility with popular UI Library

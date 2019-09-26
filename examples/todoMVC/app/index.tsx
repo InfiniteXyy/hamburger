@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
-import 'todomvc-app-css/index.css';
-import 'todomvc-common/base.css';
-import { Text, VStack, Input } from 'declarative-react';
+import React, { useReducer } from 'react';
+import { Input, Text, VStack } from 'declarative-react';
+import TodoList from './TodoList';
+import { appReducer, IAction, IAppState, initState, setInput } from './store';
+
+export const appContext = React.createContext<{
+  state: IAppState;
+  dispatch(action: IAction);
+}>({ state: initState, dispatch: () => {} });
 
 export default function App() {
-  const [inputValue, setInputValue] = useState();
-  return VStack('section')(
-    VStack('header')(
-      Text('todo').tag('h1'),
-      Input(inputValue)
-        .class('new-todo')
-        .props({ placeholder: 'What needs to be done?', autoFocus: true })
-        .onChange(e => setInputValue(e.target.value)),
-    ).class('header'),
-  )
-    .class('todoapp')
-    .build();
+  const [state, dispatch] = useReducer(appReducer, initState);
+
+  return (
+    <appContext.Provider value={{ state, dispatch }}>
+      {VStack(
+        Text('todos')
+          .color('skyblue')
+          .fontWeight(100)
+          .fontSize(100)
+          .margin(0),
+        <TodoList todoList={state.todoList} />,
+      )
+        .align('center')
+        .build()}
+    </appContext.Provider>
+  );
 }
