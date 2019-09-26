@@ -5,10 +5,12 @@ import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 
 type ChildElement = JSX.Element | ViewClass;
 
-abstract class StackClass extends ViewClass {
+class StackClass extends ViewClass {
   protected _elements: ChildElement[];
   constructor(...elements: ChildElement[]) {
     super();
+    this._styleObj.display = 'flex';
+    this._styleObj.flexDirection = 'column';
     this._elements = elements;
   }
 
@@ -21,9 +23,7 @@ abstract class StackClass extends ViewClass {
     if (when !== false) this._styleObj.justifyContent = justifyContent;
     return this;
   }
-}
 
-class VStackClass extends StackClass {
   public build() {
     return React.createElement(
       this._tag,
@@ -36,31 +36,31 @@ class VStackClass extends StackClass {
         .map(generateChildKey),
     );
   }
-}
 
-class HStackClass extends StackClass {
-  public build() {
-    return React.createElement(
-      this._tag,
-      {
-        style: { ...this._styleObj, ...{ display: 'flex' } },
-        className: !!this._classNames ? this._classNames : undefined,
-      },
-      this._elements
-        .map(i => (i instanceof ViewClass ? i.build() : i))
-        .map(generateChildKey),
-    );
+  public horizontal(when?: boolean) {
+    if (when !== false) this._styleObj.flexDirection = 'row';
+    return this;
   }
 }
 
-export function HStack(...elements: ChildElement[]) {
-  return new HStackClass(...elements);
+export function HStack(
+  tag: string,
+): (...elements: ChildElement[]) => StackClass;
+export function HStack(...elements: ChildElement[]): StackClass;
+
+export function HStack(...elementsOrTag: (ChildElement | string)[]) {
+  if (typeof elementsOrTag[0] === 'string') {
+    return (...elements: ChildElement[]) => {
+      return VStack(...elements).tag(elementsOrTag[0] as string);
+    };
+  }
+  return new StackClass(...(elementsOrTag as ChildElement[])).horizontal();
 }
 
 export function VStack(
   tag: string,
-): (...elements: ChildElement[]) => VStackClass;
-export function VStack(...elements: ChildElement[]): VStackClass;
+): (...elements: ChildElement[]) => StackClass;
+export function VStack(...elements: ChildElement[]): StackClass;
 
 export function VStack(...elementsOrTag: (ChildElement | string)[]) {
   if (typeof elementsOrTag[0] === 'string') {
@@ -68,5 +68,5 @@ export function VStack(...elementsOrTag: (ChildElement | string)[]) {
       return VStack(...elements).tag(elementsOrTag[0] as string);
     };
   }
-  return new VStackClass(...(elementsOrTag as ChildElement[]));
+  return new StackClass(...(elementsOrTag as ChildElement[]));
 }
