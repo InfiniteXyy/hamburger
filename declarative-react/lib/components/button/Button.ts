@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewClass } from './View';
+import { ViewClass } from '../View';
 
 class ButtonClass extends ViewClass {
   private _content: string;

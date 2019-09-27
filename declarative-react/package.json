@@ -2,19 +2,20 @@
   "name": "declarative-react",
   "version": "0.0.1",
   "private": false,
-  "main": "./build/index.js",
+  "main": "./src/index.js",
   "author": {
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
   },
-  "types": "./build/index.d.ts",
+  "types": "./src/index.d.ts",
   "keywords": [
     "react",
     "declarative"
   ],
   "scripts": {
     "dev": "tsc -w",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "homepage": "https://github.com/InfiniteXyy/declarative-react",
   "license": "MIT",
@@ -23,9 +24,22 @@
     "react-dom": ">=16.0.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.18",
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "typescript": "^3.6.3"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/scripts/setupTests.js"
+    ]
   }
 }

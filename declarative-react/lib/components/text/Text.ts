@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewClass } from './View';
+import { ViewClass } from '../View';
 import { FontWeightProperty, FontSizeProperty } from 'csstype';
 
 class TextClass extends ViewClass {

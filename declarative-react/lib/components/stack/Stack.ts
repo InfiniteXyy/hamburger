@@ -1,6 +1,6 @@
 import React from 'react';
-import { ViewClass } from './View';
-import { generateChildKey } from './utils';
+import { ViewClass } from '../View';
+import { generateChildKey } from '../../utils';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 
 type ChildElement = JSX.Element | ViewClass;

@@ -1,7 +1,8 @@
 ## Declarative React (developing)
 
-if you have any opinion or suggestion, give me an **issue**!
+[![Build Status](https://travis-ci.org/InfiniteXyy/declarative-react.svg?branch=master)](https://travis-ci.org/InfiniteXyy/declarative-react)
 
+if you have any opinion or suggestion, give me an **issue**!
 
 ## About
 
