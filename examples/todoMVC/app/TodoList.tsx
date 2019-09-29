@@ -45,14 +45,13 @@ function TodoList(props: ITodoListProps) {
         .style(styles.inputContainer)
         .style({ boxSizing: 'border-box' }),
     ),
-    ...props.todoList.map(item => (
-      <ListItem
-        item={item}
-        onRemove={handleRemove(item)}
-        onToggle={handleToggle(item)}
-      />
-    )),
-  ).build();
+    ...props.todoList.map(item => <ListItem item={item} onRemove={handleRemove(item)} onToggle={handleToggle(item)} />),
+  )
+    .margin({ top: 30 })
+    .padding({ horizontal: 10, bottom: 10 })
+    .border({ borderRadius: 8 })
+    .style({ backgroundColor: 'white' })
+    .build();
 }
 
 const styles = {

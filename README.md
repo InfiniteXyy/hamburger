@@ -146,7 +146,7 @@ function Counter() {
 - [x] Base Class (View, Text)
 - [x] TypeScript support
 - [x] simple todo mvc
-- [ ] Review & Test
+- [x] Review & Test
 - [ ] More Classes (Image, Textarea, Li...)
 - [ ] More APIs (`.boxShadow()`...)
 - [ ] Review

@@ -27,14 +27,7 @@ function ListItem(props: IListItemProps) {
   )
     .align('center')
     .size({ width: 550, height: 58 })
-    .style(styles.itemContainer)
     .build();
 }
-
-const styles = {
-  itemContainer: {
-    backgroundColor: 'white',
-  },
-};
 
 export default ListItem;

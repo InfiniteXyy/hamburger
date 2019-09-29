@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewClass } from '../View';
 
-class ButtonClass extends ViewClass {
+class ButtonClass extends ViewClass<HTMLButtonElement> {
   private _content: string;
   private _disabled: boolean;
   private _onClick?: (e: React.MouseEventHandler<HTMLInputElement>) => void;
@@ -19,7 +19,8 @@ class ButtonClass extends ViewClass {
   }
 
   public disabled(when?: boolean) {
-    if (when !== undefined) this._disabled = when;
+    if (when === undefined) this._disabled = true;
+    else this._disabled = when;
     return this;
   }
 
@@ -34,8 +35,10 @@ class ButtonClass extends ViewClass {
       {
         onClick: this._onClick,
         disabled: this._disabled,
-        style: this._styleObj,
+        style: this._style,
         className: this._classNames,
+        id: this._id,
+        ...this._props,
       },
       this._content,
     );
