@@ -1,6 +1,6 @@
 import React from 'react';
 import { ITodoItem } from '../store';
-import { HStack, Text } from 'declarative-react';
+import { HStack, Text, Button } from 'declarative-react';
 import Checkbox from './Checkbox';
 import './ListItem.css';
 
@@ -18,14 +18,21 @@ function ListItem(props: IListItemProps) {
   }
 
   return HStack(
-    <Checkbox checked={item.finished} onClick={onClickItem} />,
-    Text(item.title)
-      .margin(0)
-      .fontSize(24)
-      .class('list-item')
-      .class('completed', item.finished),
+    HStack(
+      <Checkbox checked={item.finished} onClick={onClickItem} />,
+      Text(item.title)
+        .margin(0)
+        .fontSize(24)
+        .class('list-item')
+        .class('completed', item.finished),
+    ).align('center'),
+    Button('×')
+      .onClick(onRemove)
+      .class('delete-icon'),
   )
+    .class('list-item-container')
     .align('center')
+    .justify('space-between')
     .size({ width: 550, height: 58 })
     .build();
 }

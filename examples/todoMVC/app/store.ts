@@ -37,13 +37,11 @@ export function appReducer(state: IAppState, action: IAction) {
       return { ...state, inputValue: action.payload };
     }
     case ADD_ITEM: {
+      if (state.todoList.find(i => i.title === action.payload)) return state;
       return {
         ...state,
         inputValue: '',
-        todoList: [
-          ...state.todoList,
-          { title: action.payload, finished: false },
-        ],
+        todoList: [...state.todoList, { title: action.payload, finished: false }],
       };
     }
     case TOGGLE_ITEM: {

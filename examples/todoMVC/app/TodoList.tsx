@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Input, VStack } from 'declarative-react';
 import ListItem from './components/ListItem';
-import { addItem, ITodoItem, setInput, toggleItem } from './store';
+import { addItem, ITodoItem, removeItem, setInput, toggleItem } from './store';
 import { appContext } from './index';
 
 interface ITodoListProps {
@@ -16,7 +16,7 @@ function TodoList(props: ITodoListProps) {
 
   function handleRemove(item: ITodoItem) {
     return () => {
-      alert(item);
+      dispatch(removeItem(item.title));
     };
   }
 
@@ -48,7 +48,8 @@ function TodoList(props: ITodoListProps) {
     ...props.todoList.map(item => <ListItem item={item} onRemove={handleRemove(item)} onToggle={handleToggle(item)} />),
   )
     .margin({ top: 30 })
-    .padding({ horizontal: 10, bottom: 10 })
+    .padding({ horizontal: 10 })
+    .padding({ bottom: 10 }, props.todoList.length !== 0)
     .border({ borderRadius: 8 })
     .style({ backgroundColor: 'white' })
     .build();
