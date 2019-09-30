@@ -3,42 +3,28 @@ import { ViewClass } from '../View';
 import { generateChildKey } from '../../utils';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 
-type ChildElement = JSX.Element | ViewClass<any>;
+type ChildElement = JSX.Element | ViewClass<any, any>;
 
-class StackClass extends ViewClass<HTMLDivElement> {
-  protected _elements: ChildElement[];
+class StackClass extends ViewClass<HTMLDivElement, React.FunctionComponentElement<any>[]> {
   constructor(...elements: ChildElement[]) {
     super();
-    this._style.display = 'flex';
-    this._style.flexDirection = 'column';
-    this._elements = elements;
+    this._props.style.display = 'flex';
+    this._props.style.flexDirection = 'column';
+    this._children = elements.map(i => (i instanceof ViewClass ? i.build() : i)).map(generateChildKey);
   }
 
   public align(alignItems: AlignItemsProperty, when?: boolean) {
-    if (when !== false) this._style.alignItems = alignItems;
+    if (when !== false) this._props.style.alignItems = alignItems;
     return this;
   }
 
   public justify(justifyContent: JustifyContentProperty, when?: boolean) {
-    if (when !== false) this._style.justifyContent = justifyContent;
+    if (when !== false) this._props.style.justifyContent = justifyContent;
     return this;
   }
 
-  public build() {
-    return React.createElement(
-      this._tag,
-      {
-        style: this._style,
-        className: !!this._classNames ? this._classNames : undefined,
-        id: this._id,
-        ...this._props,
-      },
-      this._elements.map(i => (i instanceof ViewClass ? i.build() : i)).map(generateChildKey),
-    );
-  }
-
   public horizontal(when?: boolean) {
-    if (when !== false) this._style.flexDirection = 'row';
+    if (when !== false) this._props.style.flexDirection = 'row';
     return this;
   }
 }

@@ -19,18 +19,17 @@ describe.each([HStack, VStack, Text, Button, Input])('test base html %p', functi
           .build(),
       );
 
-      expect(wrapper.props().style).toMatchObject(
-        i === 10
-          ? {
-              [name]: 10,
-            }
-          : {
-              [`${name}Top`]: i.includes('top') || i.includes('vertical') ? 10 : undefined,
-              [`${name}Right`]: i.includes('right') || i.includes('horizontal') ? 10 : undefined,
-              [`${name}Bottom`]: i.includes('bottom') || i.includes('vertical') ? 10 : undefined,
-              [`${name}Left`]: i.includes('left') || i.includes('horizontal') ? 10 : undefined,
-            },
-      );
+      if (i === 10) {
+        expect(wrapper.props().style).toHaveProperty(name, 10);
+      } else {
+        if (i.includes('top') || i.includes('vertical')) expect(wrapper.props().style).toHaveProperty(`${name}Top`, 10);
+        if (i.includes('right') || i.includes('horizontal'))
+          expect(wrapper.props().style).toHaveProperty(`${name}Right`, 10);
+        if (i.includes('bottom') || i.includes('vertical'))
+          expect(wrapper.props().style).toHaveProperty(`${name}Bottom`, 10);
+        if (i.includes('left') || i.includes('horizontal'))
+          expect(wrapper.props().style).toHaveProperty(`${name}Left`, 10);
+      }
     });
   });
 

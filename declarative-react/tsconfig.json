@@ -5,7 +5,8 @@
     "target": "es6",
     "module": "commonjs",
     "declaration": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   },
   "include": ["./lib/*"]
 }

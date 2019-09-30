@@ -1,47 +1,26 @@
 import React from 'react';
 import { ViewClass } from '../View';
 
-class ButtonClass extends ViewClass<HTMLButtonElement> {
-  private _content: string;
-  private _disabled: boolean;
-  private _onClick?: (e: React.MouseEventHandler<HTMLInputElement>) => void;
+class ButtonClass extends ViewClass<HTMLButtonElement, string> {
   constructor(content: string) {
     super();
-    this._content = content;
-    this._disabled = false;
-    this._onClick = undefined;
+    this._children = content;
     this._tag = 'button';
   }
 
   public content(content: string, when?: boolean) {
-    if (when !== false) this._content = content;
+    if (when !== false) this._children = content;
     return this;
   }
 
   public disabled(when?: boolean) {
-    if (when === undefined) this._disabled = true;
-    else this._disabled = when;
+    if (when !== false) this._props.disabled = true;
     return this;
   }
 
-  public onClick(callback: (e: React.MouseEventHandler<HTMLInputElement>) => void) {
-    this._onClick = callback;
+  public onClick(callback: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) {
+    this._props.onClick = callback;
     return this;
-  }
-
-  public build() {
-    return React.createElement(
-      this._tag,
-      {
-        onClick: this._onClick,
-        disabled: this._disabled,
-        style: this._style,
-        className: this._classNames,
-        id: this._id,
-        ...this._props,
-      },
-      this._content,
-    );
   }
 }
 

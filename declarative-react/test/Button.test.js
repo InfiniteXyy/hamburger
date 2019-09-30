@@ -28,6 +28,6 @@ describe('button component test', function() {
         .disabled(shouldDisable)
         .build(),
     );
-    expect(wrapper.props().disabled).toBe(shouldDisable);
+    expect(!!wrapper.props().disabled).toBe(shouldDisable);
   });
 });
