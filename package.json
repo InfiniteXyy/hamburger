@@ -11,6 +11,7 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build:lib": "cd declarative-react && yarn build",
     "test:lib": "cd declarative-react && yarn build && yarn test"
   },
   "devDependencies": {
