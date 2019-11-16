@@ -10,7 +10,7 @@ Let **Code** show everything.
 
 😢 Have you ever encountered such scene? When you just want to highlight a word when it is selected, you have to write like:
 
-```js
+```jsx
 // inline style
 <p style={[styles.defaultText, shouldHighlight && { color: 'red' }]}>...</p>
 
@@ -41,7 +41,7 @@ yarn start
 ## Features
 
 #### Content in the first place
-```js
+```jsx
 // with tradition jsx
 function App2() {
   return (
@@ -132,19 +132,22 @@ If you want to use this lib, but you <u>don't want to read the doc</u>.
 3. Type `@`, see all available components.
 4. Type `.` after the component, see everything you can do.
 
-## TODOs (version 0.0.1)
+## TODOs
 
+version 0.0.1
 - [x] Base Class (View, Text)
 - [x] TypeScript support
 - [x] simple todo mvc
 - [x] Review & Test
-- [ ] More Classes (Image, Textarea, Li...)
-- [ ] More APIs (`.boxShadow()`...)
+- [x] More Classes (Image...)
+- [ ] new APIs (`.shadow.when(...)`, `.shadow.on.hover()`)
 - [ ] Review
+
+version 0.0.2
 - [ ] VSCode plugin, type `@`, and auto suggest all available components
 - [ ] compatibility with popular UI Library
-- [ ] compatibility with React Native
 - [ ] performance test
+
 
 ## More
 

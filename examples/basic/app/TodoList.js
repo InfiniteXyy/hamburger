@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { HStack, VStack, Input, Button, Text } from 'declarative-react';
 
 export default function TodoList() {
-  const [list, setList] = useState([
-    { title: 'Find a job', important: true },
-    { title: 'chore', important: false },
-  ]);
+  const [list, setList] = useState([{ title: 'Find a job', important: true }, { title: 'chore', important: false }]);
   const [input, setInput] = useState('');
   const [importantCheck, setImportantCheck] = useState(false);
 
@@ -26,9 +23,9 @@ export default function TodoList() {
     HStack(
       Input(input).onChange(e => setInput(e.target.value)),
       Text('Important'),
-      Input('important', 'checkbox', {
-        checked: importantCheck,
-      }).onChange(e => setImportantCheck(e.target.checked)),
+      Input('important', 'checkbox')
+        .onChange(e => setImportantCheck(e.target.checked))
+        .props({ checked: importantCheck }),
       Button('add').onClick(onAdd),
     )
       .justify('space-between')

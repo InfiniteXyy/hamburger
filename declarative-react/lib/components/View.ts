@@ -1,4 +1,7 @@
 import React from 'react';
+import classnames from 'classnames';
+import { ClassValue } from 'classnames/types';
+import { should, WhenModel } from '../utils';
 
 interface MarginModel {
   top?: number;
@@ -70,10 +73,14 @@ export class ViewClass<T extends HTMLElement, CT> {
     return this;
   }
 
-  public size(size: SizeModel, when?: boolean) {
+  public size(size: number | SizeModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style.width = size.width;
-    this._props.style.height = size.height;
+    if (typeof size === 'number') {
+      this._props.style.width = this._props.style.height = size;
+    } else {
+      this._props.style.width = size.width;
+      this._props.style.height = size.height;
+    }
     return this;
   }
 
@@ -86,8 +93,20 @@ export class ViewClass<T extends HTMLElement, CT> {
     return this;
   }
 
-  public class(className: string, when?: boolean) {
-    if (when === false) return this;
+  // todo: test new 'when' model
+  public shadow(type: 'big' | 'small', when?: WhenModel | boolean) {
+    if (should(when)) {
+      if (type === 'big') {
+        this._props.style.boxShadow = '0 5px 6px rgba(83,83,83,0.73)';
+      } else if (type === 'small') {
+        this._props.style.boxShadow = '0 5px 6px rgba(83,83,83,0.38)';
+      }
+    }
+    return this;
+  }
+
+  public class(...classes: ClassValue[]) {
+    const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
     else this._props.className += ' ' + className;
     return this;
@@ -108,6 +127,14 @@ export class ViewClass<T extends HTMLElement, CT> {
     if (when === false) return this;
     this._props = Object.assign(this._props, props);
     return this;
+  }
+
+  // todo: 'as' function type
+  public as(newType: any): any {
+    const newObj = new newType();
+    Object.assign(newObj._props, this._props);
+    newObj._tag = this._tag;
+    return newObj;
   }
 
   public build() {

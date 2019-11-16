@@ -62,8 +62,7 @@ describe.each([HStack, VStack, Text, Button, Input])('test base html %p', functi
   it('should className correct', function() {
     const wrapper = shallow(
       Type()
-        .class('class-1')
-        .class('class-2')
+        .class('class-1', { 'class-2': true, 'class-3': false })
         .build(),
     );
     expect(wrapper.props().className).toBe('class-1 class-2');

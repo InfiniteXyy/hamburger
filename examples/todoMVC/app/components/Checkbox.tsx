@@ -9,9 +9,7 @@ interface ICheckboxProps {
 function Checkbox(props: ICheckboxProps) {
   return Button('')
     .tag('div')
-    .class('base-checkbox')
-    .class('checked', props.checked)
-    .class('unchecked', !props.checked)
+    .class('base-checkbox', { checked: props.checked })
     .onClick(props.onClick)
     .build();
 }

@@ -23,8 +23,7 @@ function ListItem(props: IListItemProps) {
       Text(item.title)
         .margin(0)
         .fontSize(24)
-        .class('list-item')
-        .class('completed', item.finished),
+        .class('list-item', { completed: item.finished }),
     ).align('center'),
     Button('×')
       .onClick(onRemove)

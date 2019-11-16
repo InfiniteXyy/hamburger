@@ -1,8 +1,8 @@
 import { ViewClass } from '../View';
 import { FontSizeProperty, FontWeightProperty } from 'csstype';
 
-class TextClass extends ViewClass<HTMLParagraphElement, string> {
-  constructor(content: string) {
+class TextClass extends ViewClass<HTMLParagraphElement, string | number> {
+  constructor(content: string | number) {
     super();
     this._children = content;
     this._tag = 'p';
@@ -33,6 +33,6 @@ class TextClass extends ViewClass<HTMLParagraphElement, string> {
     return this;
   }
 }
-export function Text(content: string) {
+export function Text(content: string | number) {
   return new TextClass(content);
 }
