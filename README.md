@@ -140,7 +140,8 @@ version 0.0.1
 - [x] simple todo mvc
 - [x] Review & Test
 - [x] More Classes (Image...)
-- [ ] new APIs (`.shadow.when(...)`, `.shadow.on.hover()`)
+- [x] new APIs (`.shadow("small", { on: "hover" })`)
+- [x] test input binding like v-model
 - [ ] Review
 
 version 0.0.2

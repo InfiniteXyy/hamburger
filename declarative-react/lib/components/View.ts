@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
-import { should, WhenModel } from '../utils';
+import { should, WhenModel } from '../when';
 
 interface MarginModel {
   top?: number;
@@ -129,11 +129,11 @@ export class ViewClass<T extends HTMLElement, CT> {
     return this;
   }
 
-  // todo: 'as' function type
-  public as(newType: any): any {
-    const newObj = new newType();
+  public as<NT extends ViewClass<any, any>>(newType: (...arg: any) => NT): NT {
+    const newObj = newType();
     Object.assign(newObj._props, this._props);
     newObj._tag = this._tag;
+    newObj._children = this._children;
     return newObj;
   }
 

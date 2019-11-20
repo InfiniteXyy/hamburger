@@ -10,27 +10,33 @@ function App() {
   return VStack(
     VStack(
       Text('Hamburger')
-        .color('skyblue')
+        .color('red')
         .bold()
         .margin(0)
         .fontSize(50),
       Image('http://img0.imgtn.bdimg.com/it/u=452966427,3842240659&fm=26&gp=0.jpg')
         .roundCrop()
-        .size(200)
-        .shadow('small', hasShadow)
+        .size(300)
+        .shadow('big', hasShadow)
         .as(Button)
-        .onClick(() => setHasShadow(true)),
+        .onClick(() => setHasShadow(!hasShadow)),
     ),
     <WithStyle />, // use JSX components
     <WithClassName />,
     <Counter />,
     <TodoList />,
   )
-    .margin({ horizontal: 16 })
-    .padding(20)
-    .border({ borderWidth: 1.5, borderColor: '#4a4a4a' })
-    .size({ width: 500 })
+    .style(styles.container)
     .build();
 }
+
+const styles = {
+  container: {
+    margin: '0 16px',
+    padding: 20,
+    border: '1.5px solid #4a4a4a',
+    width: 500,
+  },
+};
 
 export default App;

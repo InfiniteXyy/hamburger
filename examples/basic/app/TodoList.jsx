@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { HStack, VStack, Input, Button, Text } from 'declarative-react';
 
+function FlatButton() {
+  return Button('✖')
+    .border({ borderWidth: 0 })
+    .style({ color: '#9b9b9b' });
+}
+
 export default function TodoList() {
   const [list, setList] = useState([{ title: 'Find a job', important: true }, { title: 'chore', important: false }]);
   const [input, setInput] = useState('');
@@ -21,7 +27,7 @@ export default function TodoList() {
 
   return VStack(
     HStack(
-      Input(input).onChange(e => setInput(e.target.value)),
+      Input(input).bind(setInput),
       Text('Important'),
       Input('important', 'checkbox')
         .onChange(e => setImportantCheck(e.target.checked))
@@ -36,7 +42,7 @@ export default function TodoList() {
           .color('blue')
           .color('red', item.important)
           .bold(item.important),
-        Button('X').onClick(onRemove(item)),
+        FlatButton().onClick(onRemove(item)),
       )
         .justify('space-between')
         .margin({ top: 10 }),

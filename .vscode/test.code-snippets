@@ -1,0 +1,39 @@
+{
+  // Place your hamburger 工作区 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  "new Text": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": "@Text",
+    "body": ["Text($1)"],
+    "description": "Text component"
+  },
+  "new Image": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": "@Image",
+    "body": ["Image($1)"],
+    "description": "Image Component"
+  },
+  "new VStack Container": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": "@VStack",
+    "body": ["VStack(\n\t$1\n)"],
+    "description": "Vertical Stack Component"
+  },
+  "new HStack Container": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": "@HStack",
+    "body": ["HStack(\n\t$1\n)"],
+    "description": "Horizontal Stack Component"
+  },
+  "new Button": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": "@Button",
+    "body": ["Button()"],
+    "description": "Button Component"
+  }
+}
