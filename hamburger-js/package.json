@@ -1,5 +1,5 @@
 {
-  "name": "declarative-react",
+  "name": "hamburger-js",
   "version": "0.0.1",
   "private": false,
   "main": "./src/index.js",
@@ -17,7 +17,6 @@
     "build": "tsc",
     "test": "jest"
   },
-  "homepage": "https://github.com/InfiniteXyy/declarative-react",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.0.0",

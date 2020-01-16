@@ -1,6 +1,7 @@
 ## hamburger.js
 
 Let **IDE** teach you.
+
 Let **Code** show everything.
 
 [![Build Status](https://travis-ci.org/hamburger-js/hamburger.svg?branch=master)](https://travis-ci.org/hamburger-js/hamburger)
@@ -33,9 +34,8 @@ Text('...').style(styles.defaultText).color('red', shouldHighlight);
 git clone https://github.com/hamburger-js/hamburger.git
 cd hamburger
 yarn # or npm i
-yarn build:lib
-cd examples/basic/
-yarn start
+yarn dev:lib
+yarn playground
 ```
 
 ## Features

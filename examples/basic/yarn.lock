@@ -1772,7 +1772,7 @@ debug@^4.1.0:
   dependencies:
     ms "^2.1.1"
 
-"declarative-react@file:..":
+"hamburger-js@file:..":
   version "0.0.1"
 
 decode-uri-component@^0.2.0:

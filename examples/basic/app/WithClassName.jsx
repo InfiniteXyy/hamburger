@@ -1,4 +1,4 @@
-import { HStack, Button } from 'declarative-react';
+import { HStack, Button } from 'hamburger-js';
 import './WithClassName.css';
 
 function FlatButton(content) {

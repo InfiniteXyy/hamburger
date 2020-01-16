@@ -1,0 +1,7 @@
+.shadow-lg {
+    box-shadow: 0 5px 6px rgba(83, 83, 83, 0.73)
+}
+
+.shadow {
+    box-shadow: 0 5px 6px rgba(83, 83, 83, 0.38);
+}

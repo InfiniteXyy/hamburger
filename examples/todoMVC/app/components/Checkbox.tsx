@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'declarative-react';
+import { Button } from 'hamburger-js';
 import './Checkbox.css';
 
 interface ICheckboxProps {

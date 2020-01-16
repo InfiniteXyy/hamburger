@@ -1,4 +1,3 @@
-import React from 'react';
 import { ViewClass } from '../View';
 
 class ButtonClass extends ViewClass<HTMLButtonElement, string> {
@@ -15,11 +14,6 @@ class ButtonClass extends ViewClass<HTMLButtonElement, string> {
 
   public disabled(when?: boolean) {
     if (when !== false) this._props.disabled = true;
-    return this;
-  }
-
-  public onClick(callback: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) {
-    this._props.onClick = callback;
     return this;
   }
 }

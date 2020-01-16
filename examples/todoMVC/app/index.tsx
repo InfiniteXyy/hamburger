@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { Input, Text, VStack } from 'declarative-react';
+import { Input, Text, VStack } from 'hamburger-js';
 import TodoList from './TodoList';
 import { appReducer, IAction, IAppState, initState, setInput } from './store';
 

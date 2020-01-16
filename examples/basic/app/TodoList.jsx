@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, VStack, Input, Button, Text } from 'declarative-react';
+import { HStack, VStack, Input, Button, Text } from 'hamburger-js';
 
 function FlatButton() {
   return Button('✖')

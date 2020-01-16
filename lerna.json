@@ -1,5 +1,5 @@
 {
-  "packages": ["declarative-react", "examples/**"],
+  "packages": ["hamburger-js", "examples/**"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "0.0.1"

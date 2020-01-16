@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
 import { should, WhenModel } from '../when';
+import { hamburger } from '../bindings';
 
 interface MarginModel {
   top?: number;
@@ -11,6 +12,7 @@ interface MarginModel {
   horizontal?: number;
   vertical?: number;
 }
+
 interface PaddingModel {
   top?: number;
   bottom?: number;
@@ -35,6 +37,7 @@ export class ViewClass<T extends HTMLElement, CT> {
   protected _tag: string;
   protected _props: { style: React.CSSProperties } & React.HTMLProps<T>; // with default empty style
   protected _children: CT | null;
+
   protected constructor() {
     this._tag = 'div';
     this._props = { style: {} };
@@ -93,15 +96,25 @@ export class ViewClass<T extends HTMLElement, CT> {
     return this;
   }
 
+  public onClick(callback: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void) {
+    this._props.onClick = callback;
+    return this;
+  }
+
   // todo: test new 'when' model
   public shadow(type: 'big' | 'small', when?: WhenModel | boolean) {
     if (should(when)) {
       if (type === 'big') {
-        this._props.style.boxShadow = '0 5px 6px rgba(83,83,83,0.73)';
+        this.class('shadow-lg');
       } else if (type === 'small') {
-        this._props.style.boxShadow = '0 5px 6px rgba(83,83,83,0.38)';
+        this.class('shadow');
       }
     }
+    return this;
+  }
+
+  public unselectable() {
+    this._props.style.userSelect = 'none';
     return this;
   }
 
@@ -138,6 +151,6 @@ export class ViewClass<T extends HTMLElement, CT> {
   }
 
   public build() {
-    return React.createElement(this._tag, this._props, this._children);
+    return hamburger.getEngine().createElement(this._tag, this._props, this._children);
   }
 }
