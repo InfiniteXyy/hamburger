@@ -9,15 +9,17 @@ function App() {
   const [hasShadow, setHasShadow] = useState(false);
   return VStack(
     VStack(
+      Text('something')
+        .color('red')
+        .fontSize(18),
       Text('Hamburger')
         .color('red')
         .bold()
         .margin(0)
         .fontSize(50),
       Image('http://img0.imgtn.bdimg.com/it/u=452966427,3842240659&fm=26&gp=0.jpg')
-        .unselectable()
-        .roundCrop()
         .size(300)
+        .roundCrop()
         .shadow('small', hasShadow)
         .onClick(() => setHasShadow(!hasShadow)),
     ),
