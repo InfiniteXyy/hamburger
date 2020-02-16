@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
 import { should, WhenModel } from '../when';
-import { hamburger } from '../bindings';
+import theme, { IShadow } from '../themes';
 
 interface MarginModel {
   top?: number;
@@ -102,13 +102,9 @@ export class ViewClass<T extends HTMLElement, CT> {
   }
 
   // todo: test new 'when' model
-  public shadow(type: 'big' | 'small', when?: WhenModel | boolean) {
+  public shadow(type: keyof IShadow = 'regular', when?: WhenModel | boolean) {
     if (should(when)) {
-      if (type === 'big') {
-        this.class('shadow-lg');
-      } else if (type === 'small') {
-        this.class('shadow');
-      }
+      this.class(theme.common.shadow[type]);
     }
     return this;
   }
@@ -142,15 +138,7 @@ export class ViewClass<T extends HTMLElement, CT> {
     return this;
   }
 
-  public as<NT extends ViewClass<any, any>>(newType: (...arg: any) => NT): NT {
-    const newObj = newType();
-    Object.assign(newObj._props, this._props);
-    newObj._tag = this._tag;
-    newObj._children = this._children;
-    return newObj;
-  }
-
   public build() {
-    return hamburger.getEngine().createElement(this._tag, this._props, this._children);
+    return React.createElement(this._tag, this._props, this._children);
   }
 }

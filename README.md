@@ -8,7 +8,6 @@ Let **Code** show everything.
 
 ## About
 
-
 😢 Have you ever encountered such scene? When you just want to highlight a word when it is selected, you have to write like:
 
 ```jsx
@@ -24,12 +23,15 @@ Let **Code** show everything.
 😄 But when you use hamburger, you only need to _tell_ computer what to do, and the library will do all rest things for you.
 
 ```js
-Text('...').style(styles.defaultText).color('red', shouldHighlight);
+Text('...')
+  .style(styles.defaultText)
+  .color('red', shouldHighlight);
 ```
 
 🦉 Most importantly, this lib is not a framework, it's just a helper. You can use it anywhere in the project with existing React component.
 
 ## Quick Start and Try
+
 ```bash
 git clone https://github.com/hamburger-js/hamburger.git
 cd hamburger
@@ -41,15 +43,14 @@ yarn playground
 ## Features
 
 #### Content in the first place
+
 ```jsx
 // with tradition jsx
 function App2() {
   return (
     <div>
       <div style={{ padding: 16 }}>
-        <div style={{ color: 'skyblue', fontWeight: 'bold', fontSize: 64 }}>
-          Declarative UI
-        </div>
+        <div style={{ color: 'skyblue', fontWeight: 'bold', fontSize: 64 }}>Declarative UI</div>
         <div style={{ color: 'pink', fontSize: 48 }}>Super Easy</div>
         <div style={{ display: 'flex' }}>
           <div style={{ marginRight: 4 }}>made by</div>
@@ -60,20 +61,23 @@ function App2() {
   );
 }
 
-/* 
+/*
  * with declarative api
- * You can see that the Annoying duplicated `<div style={{` was all removed! 
+ * You can see that the Annoying duplicated `<div style={{` was all removed!
  * 😊 And the most important thing, content, is put in the very first place.
  */
 function App() {
   return VStack(
     VStack(
-      Text('Declarative UI').color('skyblue').size(64).bold(),
-      Text('Super Easy').color('pink').size(48),
-      HStack(
-        Text('made by').margin({ right: 4 }),
-        Text('InfiniteX').bold()),
-    ).padding(16)
+      Text('Declarative UI')
+        .color('skyblue')
+        .size(64)
+        .bold(),
+      Text('Super Easy')
+        .color('pink')
+        .size(48),
+      HStack(Text('made by').margin({ right: 4 }), Text('InfiniteX').bold()),
+    ).padding(16),
   ).build();
 }
 ```
@@ -87,10 +91,7 @@ function BaseButton(content) {
 }
 
 export default function App() {
-  return HStack(
-    BaseButton('Primary').style(styles.buttonPrimary),
-    BaseButton('Secondary').style(styles.buttonSuccess),
-  )
+  return HStack(BaseButton('Primary').style(styles.buttonPrimary), BaseButton('Secondary').style(styles.buttonSuccess))
     .margin({ top: 10 })
     .build();
 }
@@ -101,13 +102,9 @@ export default function App() {
 ```jsx
 function Counter() {
   const [count, setCount] = useState(0);
-  return HStack(
-    Text(count),
-    <button onClick={() => setCount(count + 1)}>add</button>,
-  ).build();
+  return HStack(Text(count), <button onClick={() => setCount(count + 1)}>add</button>).build();
 }
 ```
-
 
 #### All declaration are in control with condition
 
@@ -115,18 +112,38 @@ function Counter() {
 function App(props) {
   const { isDisabled, isImmportant } = props;
   return HStack(
-    Text("love hamburger").color("blue").color("red", isImportant),
-    Button("click me").content("disabled", isDisabled).disabled(isDisabled)
+    Text('love hamburger')
+      .color('blue')
+      .color('red', isImportant),
+    Button('click me')
+      .content('disabled', isDisabled)
+      .disabled(isDisabled),
   ).build();
 }
 ```
 
+#### All utils simple to use (developing)
+
+If you want to create your App with a classic layout, hamburger.js has already prepared for you.
+use them like
+
+```jsx
+export default function App() {
+  return Layout('top-aside-main-bottom') // or top-main-bottom, top-main, top-aside-main, etc...
+    .top(Navbar)
+    .main(MainView)
+    .aside(AsideMenu)
+    .bottom(BottomBar)
+    .build();
+}
+```
 
 #### IDE is the doc (developing)
 
 hamburger.js was designed for **everyone**, even you are not quite familiar with HTML/CSS/JS.
 
 If you want to use this lib, but you <u>don't want to read the doc</u>.
+
 1. open you IDE and download the plugin.
 2. write a function like it was in React.
 3. Type `@`, see all available components.
@@ -135,20 +152,23 @@ If you want to use this lib, but you <u>don't want to read the doc</u>.
 ## TODOs
 
 version 0.0.1
+
 - [x] Base Class (View, Text)
 - [x] TypeScript support
 - [x] simple todo mvc
 - [x] Review & Test
 - [x] More Classes (Image...)
-- [x] new APIs (`.shadow("small", { on: "hover" })`)
 - [x] test input binding like v-model
+- [x] Layout Class
+- [ ] use custom class comfig
+- [ ] new APIs (`.shadow("small", { on: "hover" })`) ()
 - [ ] Review
 
 version 0.0.2
+
 - [ ] VSCode plugin, type `@`, and auto suggest all available components
 - [ ] compatibility with popular UI Library
 - [ ] performance test
-
 
 ## More
 

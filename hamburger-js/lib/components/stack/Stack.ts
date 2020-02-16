@@ -29,26 +29,10 @@ class StackClass extends ViewClass<HTMLDivElement, React.FunctionComponentElemen
   }
 }
 
-export function HStack(tag: string): (...elements: ChildElement[]) => StackClass;
-export function HStack(...elements: ChildElement[]): StackClass;
-
-export function HStack(...elementsOrTag: (ChildElement | string)[]) {
-  if (typeof elementsOrTag[0] === 'string') {
-    return (...elements: ChildElement[]) => {
-      return VStack(...elements).tag(elementsOrTag[0] as string);
-    };
-  }
-  return new StackClass(...(elementsOrTag as ChildElement[])).horizontal();
+export function HStack(...elementsOrTag: ChildElement[]) {
+  return new StackClass(...elementsOrTag).horizontal();
 }
 
-export function VStack(tag: string): (...elements: ChildElement[]) => StackClass;
-export function VStack(...elements: ChildElement[]): StackClass;
-
-export function VStack(...elementsOrTag: (ChildElement | string)[]) {
-  if (typeof elementsOrTag[0] === 'string') {
-    return (...elements: ChildElement[]) => {
-      return VStack(...elements).tag(elementsOrTag[0] as string);
-    };
-  }
-  return new StackClass(...(elementsOrTag as ChildElement[]));
+export function VStack(...elementsOrTag: ChildElement[]) {
+  return new StackClass(...elementsOrTag);
 }

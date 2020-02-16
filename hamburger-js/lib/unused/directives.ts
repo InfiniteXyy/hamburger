@@ -19,17 +19,17 @@
 //   return new Directive('plus', value);
 // }
 
-
 /*
 eg:
 
 want to use like this:
 
+// with hamburger
 function counter() {
   return Text(count).content(plus(1), { on: "click" })
 }
 
-// useHook
+// with React hook
 function counter() {
   const [count, setCount] = useState(0);
   return (

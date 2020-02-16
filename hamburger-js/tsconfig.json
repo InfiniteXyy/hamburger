@@ -8,5 +8,5 @@
     "esModuleInterop": true,
     "experimentalDecorators": true
   },
-  "include": ["./lib/*"]
+  "include": ["./lib/*", "lib/unused/directives.ts"]
 }
