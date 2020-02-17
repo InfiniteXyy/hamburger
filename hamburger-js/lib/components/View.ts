@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
 import { should, WhenModel } from '../when';
 import theme, { IShadow } from '../themes';
+import { IBuildable } from '../common';
 
 interface MarginModel {
   top?: number;
@@ -33,7 +34,7 @@ interface BorderModel {
   borderColor?: string;
 }
 
-export class ViewClass<T extends HTMLElement, CT> {
+export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
   protected _tag: string;
   protected _props: { style: React.CSSProperties } & React.HTMLProps<T>; // with default empty style
   protected _children: CT | null;

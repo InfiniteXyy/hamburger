@@ -160,7 +160,7 @@ version 0.0.1
 - [x] More Classes (Image...)
 - [x] test input binding like v-model
 - [x] Layout Class
-- [ ] use custom class comfig
+- [ ] use custom theme config
 - [ ] new APIs (`.shadow("small", { on: "hover" })`) ()
 - [ ] Review
 

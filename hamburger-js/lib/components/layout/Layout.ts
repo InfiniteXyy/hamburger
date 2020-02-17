@@ -1,10 +1,9 @@
-import React from 'react';
-import { ViewClass } from '../View';
-import { VStack, HStack } from '../..';
+import { HStack, VStack } from '../..';
 import { createPlaceHolder } from '../../utils';
+import { ChildElement, IBuildable } from '../../common';
 
 type LayoutType =
-  'top-main'
+  | 'top-main'
   | 'top-main-bottom'
   | 'top-aside-main'
   | 'top-aside-main-bottom'
@@ -12,36 +11,39 @@ type LayoutType =
   | 'aside-main'
   | 'aside-main-bottom';
 
-type ChildElement = JSX.Element | ViewClass<any, any>;
 
-class LayoutClass {
-  private topElement: ChildElement = createPlaceHolder('100vw', '48px', 'top');
-  private bottomElement: ChildElement = createPlaceHolder('100vw', '48px', 'bottom');
-  private asideElement: ChildElement = createPlaceHolder('20vw', '75vh', 'aside');
-  private mainElement: ChildElement = createPlaceHolder('80vw', '75vh', 'main');
-  private readonly layoutType: LayoutType = 'top-main';
+class LayoutClass implements IBuildable {
+  private topElement: ChildElement;
+  private bottomElement: ChildElement;
+  private asideElement: ChildElement;
+  private mainElement: ChildElement;
+  private readonly layoutType: LayoutType;
 
   constructor(type: LayoutType) {
-    this.layoutType = type;
+    this.layoutType = type || 'top-main';
+    this.topElement = createPlaceHolder('100vw', '48px', 'top');
+    this.bottomElement = createPlaceHolder('100vw', '48px', 'bottom');
+    this.asideElement = createPlaceHolder('20vw', '75vh', 'aside');
+    this.mainElement = createPlaceHolder('80vw', '75vh', 'main');
   }
 
-  public top(element: ChildElement) {
-    this.topElement = element;
+  public top(element: () => ChildElement) {
+    this.topElement = element();
     return this;
   }
 
-  public bottom(element: ChildElement) {
-    this.bottomElement = element;
+  public bottom(element: () => ChildElement) {
+    this.bottomElement = element();
     return this;
   }
 
-  public main(element: ChildElement) {
-    this.mainElement = element;
+  public main(element: () => ChildElement) {
+    this.mainElement = element();
     return this;
   }
 
-  public aside(element: ChildElement) {
-    this.asideElement = element;
+  public aside(element: () => ChildElement) {
+    this.asideElement = element();
     return this;
   }
 
