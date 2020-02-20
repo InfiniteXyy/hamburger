@@ -66,7 +66,7 @@ function App2() {
  * You can see that the Annoying duplicated `<div style={{` was all removed!
  * 😊 And the most important thing, content, is put in the very first place.
  */
-function App() {
+function Main() {
   return VStack(
     VStack(
       Text('Declarative UI')
@@ -90,7 +90,7 @@ function BaseButton(content) {
   return Button(content).style(styles.baseButton);
 }
 
-export default function App() {
+export default function Main() {
   return HStack(BaseButton('Primary').style(styles.buttonPrimary), BaseButton('Secondary').style(styles.buttonSuccess))
     .margin({ top: 10 })
     .build();
@@ -109,7 +109,7 @@ function Counter() {
 #### All declaration are in control with condition
 
 ```jsx
-function App(props) {
+function Main(props) {
   const { isDisabled, isImmportant } = props;
   return HStack(
     Text('love hamburger')
@@ -124,11 +124,11 @@ function App(props) {
 
 #### All utils simple to use (developing)
 
-If you want to create your App with a classic layout, hamburger.js has already prepared for you.
+If you want to create your Main with a classic layout, hamburger.js has already prepared for you.
 use them like
 
 ```jsx
-export default function App() {
+export default function Main() {
   return Layout('top-aside-main-bottom') // or top-main-bottom, top-main, top-aside-main, etc...
     .top(Navbar)
     .main(MainView)

@@ -1,26 +1,50 @@
 import React from 'react';
-import { VStack, HStack, Image, Text, Layout } from 'hamburger-js';
+import { VStack, HStack, Image, Text } from 'hamburger-js';
 
-function NewsItemTitle() {
-  return HStack(
-    Image('http://img0.imgtn.bdimg.com/it/u=452966427,3842240659&fm=26&gp=0.jpg')
-      .roundCrop()
-      .size(40),
-    VStack(Text('InfiniteX发表了话题'), Text('2小时前').color('gray')),
-  );
-}
+// mock
+const mockData = {
+  title: '为什么pokemmo这么好玩',
+  time: '2小时前',
+  author: 'InfiniteX发表了话题',
+  content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容',
+  avatar: 'https://via.placeholder.com/120',
+};
 
-function NewsItemBody() {
+// header
+
+const NewsItemTitle = HStack(
+  Image(mockData.avatar)
+    .variant('circular')
+    .size(40),
+  VStack(
+    Text(mockData.author).margin(0),
+    Text(mockData.time).color('gray'),
+  )
+    .margin({ left: 10 })
+  ,
+);
+
+
+// body
+
+
+const NewsItemBody = VStack(
+  Text(mockData.title, 'h5'),
+  Text(mockData.content).color('gray'),
+).padding({ vertical: 10 });
+
+
+// renderer
+
+
+function renderNewsItem(content) {
   return VStack(
-    Text('为什么pokemmo这么好玩', 'h6'),
-    Text('内容内容内容内容内容内容内容内容内容内容内容内容内容内容').color('gray'),
-  );
-}
-function NewsItem(content) {
-  return Layout('top-main')
-    .top(NewsItemTitle)
-    .main(NewsItemBody)
-    .build();
+    NewsItemTitle,
+    NewsItemBody,
+  )
+    .margin({ bottom: 20 })
+    .padding(20)
+    .shadow('small');
 }
 
-export default NewsItem;
+export { renderNewsItem };

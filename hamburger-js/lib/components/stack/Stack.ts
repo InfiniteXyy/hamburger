@@ -1,16 +1,15 @@
 import React from 'react';
 import { ViewClass } from '../View';
-import { generateChildKey } from '../../utils';
+import { buildElement, generateChildKey, wrapContainer } from '../../utils';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 import theme from '../../themes';
 import { ChildElement } from '../../common';
 
-
 class StackClass extends ViewClass<HTMLDivElement, React.FunctionComponentElement<any>[]> {
   constructor(isHorizontal: boolean, ...elements: ChildElement[]) {
     super();
-    this._children = elements.map(i => ('build' in i ? i.build() : i)).map(generateChildKey);
-    this.class(isHorizontal ? theme.layout.horizontal : theme.layout.vertical);
+    this._children = elements.map(buildElement).map(generateChildKey);
+    this.class(isHorizontal ? theme.layout.horizontal || 'hbg-row' : theme.layout.vertical);
   }
 
   public align(alignItems: AlignItemsProperty, when?: boolean) {

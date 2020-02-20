@@ -119,6 +119,7 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
     const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
     else this._props.className += ' ' + className;
+    if (this._props.className === '') this._props.className = undefined;
     return this;
   }
 

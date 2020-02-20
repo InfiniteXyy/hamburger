@@ -1,13 +1,9 @@
 import { Layout } from 'hamburger-js';
 import Navbar from './components/Navbar';
-import AsideMenu from './components/AsideMenu';
-import App from './components/App';
-import React from 'react';
+import Main from './components/Main';
 
-export default function Timeline() {
-  return Layout('top-aside-main-bottom')
-    .top(Navbar)
-    .aside(AsideMenu)
-    .main(App)
-    .build();
-}
+const Timeline = Layout('top-main')
+  .top(Navbar)
+  .main(Main);
+
+export default Timeline;

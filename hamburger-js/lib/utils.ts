@@ -1,11 +1,16 @@
 import React from 'react';
+import { ChildElement } from './common';
 
 export function generateChildKey(child: JSX.Element, index: number | string) {
   return React.cloneElement(child, { key: index });
 }
 
-export function adjustElement(child: any) {
-  if (typeof child.build === 'function') {
+export function wrapContainer(className: string) {
+  return (child: JSX.Element) => React.createElement('div', { className }, child);
+}
+
+export function buildElement(child: ChildElement) {
+  if ('build' in child) {
     return child.build();
   } else {
     return child;

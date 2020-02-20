@@ -1,8 +1,6 @@
 import React from 'react';
 import { Text } from 'hamburger-js';
 
-function Navbar() {
-  return Text('test');
-}
+const Navbar = Text('test');
 
 export default Navbar;

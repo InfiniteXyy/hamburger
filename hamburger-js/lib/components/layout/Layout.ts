@@ -1,5 +1,5 @@
 import { HStack, VStack } from '../..';
-import { createPlaceHolder } from '../../utils';
+import { buildElement, createPlaceHolder } from '../../utils';
 import { ChildElement, IBuildable } from '../../common';
 
 type LayoutType =
@@ -10,7 +10,6 @@ type LayoutType =
   | 'main-bottom'
   | 'aside-main'
   | 'aside-main-bottom';
-
 
 class LayoutClass implements IBuildable {
   private topElement: ChildElement;
@@ -27,23 +26,23 @@ class LayoutClass implements IBuildable {
     this.mainElement = createPlaceHolder('80vw', '75vh', 'main');
   }
 
-  public top(element: () => ChildElement) {
-    this.topElement = element();
+  public top(element: ChildElement) {
+    this.topElement = buildElement(element);
     return this;
   }
 
-  public bottom(element: () => ChildElement) {
-    this.bottomElement = element();
+  public bottom(element: ChildElement) {
+    this.bottomElement = buildElement(element);
     return this;
   }
 
-  public main(element: () => ChildElement) {
-    this.mainElement = element();
+  public main(element: ChildElement) {
+    this.mainElement = buildElement(element);
     return this;
   }
 
-  public aside(element: () => ChildElement) {
-    this.asideElement = element();
+  public aside(element: ChildElement) {
+    this.asideElement = buildElement(element);
     return this;
   }
 

@@ -6,7 +6,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement, string | number> 
   constructor(content: string | number, variant: keyof ITextVariant) {
     super();
     this._children = content;
-    this._tag = 'p';
+    this._tag = 'div';
     if (!!theme.text.variant[variant]) this.class(theme.text.variant[variant]);
   }
 

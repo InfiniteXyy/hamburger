@@ -1,8 +1,16 @@
 import { IHamburgerTheme } from './index';
 
 const theme: IHamburgerTheme = {
-  navbar: { common: 'nav', item: { common: 'nav-link' } },
-  layout: { horizontal: 'row', vertical: 'col' },
+  image: {
+    common: 'image',
+    variant: { circular: 'hbg-circular', regular: '', avatar: 'avatar' },
+    size: {
+      medium: 'medium',
+      mini: 'mini',
+    },
+  },
+  navbar: { common: 'nav', item: { common: 'nav-link', brand: 'navbar-brand' } },
+  layout: { horizontal: '', vertical: '' },
   button: { common: 'btn', variant: { primary: 'btn-primary', secondary: 'btn-secondary' } },
   common: { shadow: { large: 'shadow-lg', regular: 'shadow', small: 'shadow-sm' } },
   text: {
