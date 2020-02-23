@@ -1,25 +1,22 @@
-import { ViewClass } from '../View';
+import theme from '../../themes';
 import { FontSizeProperty, FontWeightProperty } from 'csstype';
-import theme, { ITextVariant } from '../../themes';
+import { ViewClass } from '../View';
+import { IThemeable } from '../../common';
 
-export class TextClass extends ViewClass<HTMLParagraphElement, string | number> {
-  constructor(content: string | number, variant: keyof ITextVariant) {
+export class TextClass extends ViewClass<HTMLParagraphElement, any> implements IThemeable {
+  constructor(content) {
     super();
     this._children = content;
     this._tag = 'div';
-    if (!!theme.text.variant[variant]) this.class(theme.text.variant[variant]);
   }
 
+  // 内容方法
   public content(content: string, when?: boolean) {
     if (when !== false) this._children = content;
     return this;
   }
 
-  public color(color: string, when?: boolean) {
-    if (when !== false) this._props.style.color = color;
-    return this;
-  }
-
+  // 样式方法
   public bold(when?: boolean) {
     if (when !== false) this._props.style.fontWeight = 'bold';
     return this;
@@ -34,7 +31,12 @@ export class TextClass extends ViewClass<HTMLParagraphElement, string | number> 
     if (when !== false) this._props.style.fontWeight = value;
     return this;
   }
+
+  public useTheme(name: string, when?: boolean): this {
+    if (when !== false) this.class(theme.text.variant[name]);
+    return this;
+  }
 }
-export function Text(content: string | number, variant: keyof ITextVariant = 'p') {
-  return new TextClass(content, variant);
+export function Text(content: string | number) {
+  return new TextClass(content);
 }

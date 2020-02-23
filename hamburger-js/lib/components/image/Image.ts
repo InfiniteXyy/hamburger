@@ -1,26 +1,21 @@
 import { ViewClass } from '../View';
-import theme, { IImageSize, IImageVariant } from '../../themes';
+import { IThemeable } from '../../common';
+import theme from '../../themes';
 
-class ImageClass extends ViewClass<HTMLImageElement, null> {
-  constructor(src: string, variant: keyof IImageVariant) {
+class ImageClass extends ViewClass<HTMLImageElement, null> implements IThemeable {
+  constructor(src: string) {
     super();
     this._props.src = src;
     this._tag = 'img';
-    this.class(theme.image.common);
-    if (!!theme.image.variant[variant]) this.class(theme.image.variant[variant]);
   }
 
-  public variant(variant: keyof IImageVariant) {
-    this.class(theme.image.variant[variant]);
-    return this;
-  }
-
-  public imageSize(size: keyof IImageSize) {
-    this.class(theme.image.size[size]);
+  // 样式方法
+  public useTheme(name: string, when?: boolean): this {
+    if (when !== false) this.class(theme.image.variant[name]);
     return this;
   }
 }
 
-export function Image(src: string, variant: keyof IImageVariant = 'regular') {
-  return new ImageClass(src, variant);
+export function Image(src: string) {
+  return new ImageClass(src).class(theme.image.common);
 }

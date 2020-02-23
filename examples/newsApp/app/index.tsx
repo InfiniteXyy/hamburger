@@ -1,9 +1,9 @@
 import { Layout } from 'hamburger-js';
 import Navbar from './components/Navbar';
-import Main from './components/Main';
+import Playground from './playground';
 
 const Timeline = Layout('top-main')
   .top(Navbar)
-  .main(Main);
+  .main(Playground);
 
 export default Timeline;

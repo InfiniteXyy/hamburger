@@ -1,11 +1,16 @@
-import React from 'react';
-import { Navbar, NavItem } from 'hamburger-js';
+import { HStack, Image, Text } from 'hamburger-js';
 
-const MyNav = Navbar(
-  NavItem('NewsApp', { isBrand: true }),
-  NavItem('首页'),
-  NavItem('关注'),
-  NavItem('设置'),
-);
+const MyNav = HStack(
+  HStack(
+    Text('时间线').bold(),
+    Image('https://via.placeholder.com/120').useTheme('circle').size(40),
+  )
+    .class('container')
+    .centerItems()
+    .expandItems()
+    .padding({ vertical: 10 }),
+)
+  .shadow('small');
+
 
 export default MyNav;

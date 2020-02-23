@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './app';
+import hamburger, { applyTheme, bootstrapTheme } from 'hamburger-js';
 
-ReactDOM.render(App.build(), document.getElementById('root'));
+applyTheme(bootstrapTheme);
+hamburger.mount(App, 'root');

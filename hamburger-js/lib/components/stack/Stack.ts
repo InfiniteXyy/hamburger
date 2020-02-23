@@ -1,24 +1,49 @@
-import React from 'react';
-import { ViewClass } from '../View';
-import { buildElement, generateChildKey, wrapContainer } from '../../utils';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
-import theme from '../../themes';
 import { ChildElement } from '../../common';
+import { buildElement } from '../../utils';
+import { ViewClass } from '../View';
 
-class StackClass extends ViewClass<HTMLDivElement, React.FunctionComponentElement<any>[]> {
-  constructor(isHorizontal: boolean, ...elements: ChildElement[]) {
+class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> {
+  constructor(private isHorizontal: boolean, ...elements: ChildElement[]) {
     super();
-    this._children = elements.map(buildElement).map(generateChildKey);
-    this.class(isHorizontal ? theme.layout.horizontal || 'hbg-row' : theme.layout.vertical);
+    if (Array.isArray(elements[0])) elements = elements[0];
+    this._children = elements;
+    this.class(isHorizontal ? 'hbg-row' : 'hbg-col');
   }
 
-  public align(alignItems: AlignItemsProperty, when?: boolean) {
-    if (when !== false) this._props.style.alignItems = alignItems;
+  // 功能方法
+  public mapItem(wrapper: (item: ViewClass<any, any>) => ChildElement) {
+    this._children = this._children.map(wrapper);
     return this;
   }
 
-  public justify(justifyContent: JustifyContentProperty, when?: boolean) {
-    if (when !== false) this._props.style.justifyContent = justifyContent;
+  // 布局方法
+  public align(alignItems: AlignItemsProperty) {
+    this._props.style.alignItems = alignItems;
+    return this;
+  }
+
+  public justify(justifyContent: JustifyContentProperty) {
+    this._props.style.justifyContent = justifyContent;
+    return this;
+  }
+
+  public centerItems() {
+    this.class('hbg-align-center');
+    return this;
+  }
+
+  public expandItems() {
+    this.class('hbg-space-between');
+    return this;
+  }
+
+  public inflate() {
+    if (!this.isHorizontal) {
+      this.class('hbg-inflate-horizontal');
+    } else {
+      this.class('hbg-inflate-vertical');
+    }
     return this;
   }
 }

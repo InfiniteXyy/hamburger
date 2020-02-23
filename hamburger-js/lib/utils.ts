@@ -1,12 +1,8 @@
 import React from 'react';
-import { ChildElement } from './common';
+import { ChildElement, isReact } from './common';
 
 export function generateChildKey(child: JSX.Element, index: number | string) {
   return React.cloneElement(child, { key: index });
-}
-
-export function wrapContainer(className: string) {
-  return (child: JSX.Element) => React.createElement('div', { className }, child);
 }
 
 export function buildElement(child: ChildElement) {
@@ -17,12 +13,23 @@ export function buildElement(child: ChildElement) {
   }
 }
 
-export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea') {
-  return React.createElement(
-    'div',
-    {
-      style: { backgroundColor, width, height, border: '2px solid white', padding: 10 },
-    },
-    innerWords,
-  );
+export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea'): any {
+  if (isReact) {
+    return React.createElement(
+      'div',
+      {
+        style: { backgroundColor, width, height, border: '2px solid white', padding: 10 },
+      },
+      innerWords,
+    );
+  } else {
+    const element = document.createElement('div');
+    element.style.backgroundColor = backgroundColor;
+    element.style.width = width;
+    element.style.height = height;
+    element.style.border = '2px solid white';
+    element.style.padding = '10px';
+    element.innerText = innerWords;
+    return element;
+  }
 }

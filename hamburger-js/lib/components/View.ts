@@ -4,6 +4,8 @@ import { ClassValue } from 'classnames/types';
 import { should, WhenModel } from '../when';
 import theme, { IShadow } from '../themes';
 import { IBuildable } from '../common';
+import { createElement } from '../core';
+import { buildElement } from '../utils';
 
 interface MarginModel {
   top?: number;
@@ -105,7 +107,7 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
   // todo: test new 'when' model
   public shadow(type: keyof IShadow = 'regular', when?: WhenModel | boolean) {
     if (should(when)) {
-      this.class(theme.common.shadow[type]);
+      this.class(theme.utility.shadow[type]);
     }
     return this;
   }
@@ -115,7 +117,13 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
     return this;
   }
 
+  public hide(when?: boolean) {
+    if (!when) this._props.style.display = 'none';
+    return this;
+  }
+
   public class(...classes: ClassValue[]) {
+    classes = classes.filter(i => !!i);
     const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
     else this._props.className += ' ' + className;
@@ -141,6 +149,11 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
   }
 
   public build() {
-    return React.createElement(this._tag, this._props, this._children);
+    // 对所有子元素进行 build
+    let childrenElements: any = this._children;
+    if (Array.isArray(this._children)) {
+      childrenElements = this._children.map(buildElement);
+    }
+    return createElement(this._tag, this._props, childrenElements) as Element;
   }
 }

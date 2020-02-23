@@ -1,10 +1,8 @@
-import { ViewClass } from '../View';
-import { ITextVariant } from '../../themes';
 import { TextClass } from './Text';
 
 class LinkClass extends TextClass {
-  constructor(content: string | number, variant: keyof ITextVariant) {
-    super(content, variant);
+  constructor(content) {
+    super(content);
     this._tag = 'a';
     this._props.href = '#';
   }
@@ -15,6 +13,6 @@ class LinkClass extends TextClass {
   }
 }
 
-export function Link(content: string | number, variant: keyof ITextVariant = 'p') {
-  return new LinkClass(content, variant);
+export function Link(content) {
+  return new LinkClass(content);
 }

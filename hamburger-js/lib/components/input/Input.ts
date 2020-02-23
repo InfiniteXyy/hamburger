@@ -1,7 +1,5 @@
-import React from 'react';
 import { ViewClass } from '../View';
-
-type HookModel<T> = [T, (value: T) => void];
+import theme from '../../themes';
 
 class InputClass extends ViewClass<HTMLInputElement, null> {
   constructor(value: string, type?: string) {
@@ -11,19 +9,20 @@ class InputClass extends ViewClass<HTMLInputElement, null> {
     this._tag = 'input';
   }
 
-  public onChange(callback: React.ChangeEventHandler<HTMLInputElement>) {
+  // 功能方法
+  public onChange(callback: any) {
     this._props.onChange = callback;
     return this;
   }
 
   public bind<T>(onChange: (value: T) => void) {
-    this._props.onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      onChange(event.target.value as any);
+    this._props.onChange = (event: any) => {
+      onChange(event.target.value);
     };
     return this;
   }
 }
 
 export function Input(value: string, type?: string) {
-  return new InputClass(value, type);
+  return new InputClass(value, type).class(theme.input.common);
 }

@@ -1,5 +1,13 @@
 export interface IBuildable {
-  build(): JSX.Element;
+  build(): Element;
 }
 
-export type ChildElement = JSX.Element | IBuildable;
+export interface IThemeable {
+  useTheme(name: string, when?: boolean): this;
+}
+
+export type ChildElement = Element | IBuildable;
+
+const isReact = false;
+
+export { isReact };

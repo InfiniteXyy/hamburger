@@ -6,6 +6,7 @@ type LayoutType =
   | 'top-main'
   | 'top-main-bottom'
   | 'top-aside-main'
+  | 'top-main-aside'
   | 'top-aside-main-bottom'
   | 'main-bottom'
   | 'aside-main'
@@ -54,6 +55,8 @@ class LayoutClass implements IBuildable {
         return VStack(this.topElement, this.mainElement, this.bottomElement).build();
       case 'top-aside-main':
         return VStack(this.topElement, HStack(this.asideElement, this.mainElement)).build();
+      case 'top-main-aside':
+        return VStack(this.topElement, HStack(this.mainElement, this.asideElement)).build();
       case 'top-aside-main-bottom':
         return VStack(this.topElement, HStack(this.asideElement, this.mainElement), this.bottomElement).build();
       case 'main-bottom':

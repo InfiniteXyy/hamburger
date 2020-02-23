@@ -1,11 +1,18 @@
-import { VStack, Text, Button } from 'hamburger-js';
-import { renderNewsItem } from './NewsItem';
+import { VStack, Button } from 'hamburger-js';
+import { messages } from '../mockData';
+import { renderMessageList } from './MessageList';
+
+
+const Loader = VStack();
+
+const InputBar = VStack();
 
 function renderApp() {
-  const newsList = ['something', 'another'];
   return VStack(
-    ...newsList.map(renderNewsItem),
-  );
+    InputBar,
+    renderMessageList(messages),
+    Loader,
+  ).class('container');
 }
 
 export default renderApp();

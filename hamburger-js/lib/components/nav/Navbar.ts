@@ -1,7 +1,6 @@
-import { ViewClass } from '../View';
-import theme from '../../themes';
 import { Link, Text } from '../..';
 import { buildElement, generateChildKey } from '../../utils';
+import { ViewClass } from '../View';
 
 interface INavbarItemConfig {
   isBrand?: boolean;
@@ -24,16 +23,15 @@ class NavbarClass extends ViewClass<HTMLDivElement, any> {
     this._children = navMenu
       .map(i => {
         if (i.isBrand) {
-          return Text(i.content).class(theme.navbar.item.brand);
+          return Text(i.content).class('');
         } else {
           return Link(i.content)
-            .class(theme.navbar.item.common)
+            .class('')
             .href(i.link || defaultNavbarItemConfig.link);
         }
       })
-      .map(buildElement)
-      .map(generateChildKey);
-    this.class(theme.navbar.common);
+      .map(buildElement);
+    this.class('');
   }
 }
 

@@ -1,23 +1,47 @@
 import { IHamburgerTheme } from './index';
 
-const theme: IHamburgerTheme = {
-  image: {
-    common: 'image',
-    variant: { circular: 'hbg-circular', regular: '', avatar: 'avatar' },
-    size: {
-      medium: 'medium',
-      mini: 'mini',
+const bootstrapTheme: IHamburgerTheme = {
+  utility: {
+    shadow: {
+      small: 'shadow-sm',
+      regular: 'shadow',
+      large: 'shadow-lg',
     },
   },
-  navbar: { common: 'nav', item: { common: 'nav-link', brand: 'navbar-brand' } },
-  layout: { horizontal: '', vertical: '' },
-  button: { common: 'btn', variant: { primary: 'btn-primary', secondary: 'btn-secondary' } },
-  common: { shadow: { large: 'shadow-lg', regular: 'shadow', small: 'shadow-sm' } },
+  input: {
+    common: 'form-control',
+  },
+  button: {
+    common: 'btn',
+    variant: {
+      primary: 'btn-primary',
+      secondary: 'btn-secondary',
+      success: 'btn-success',
+      info: 'btn-info',
+      danger: 'btn-danger',
+      'primary-outline': 'btn-outline-primary',
+    },
+  },
   text: {
-    variant: { p: '', h1: 'h1', h2: 'h2', h3: 'h3', h4: 'h4', h5: 'h5', h6: 'h6' },
+    variant: {
+      h1: 'h1',
+      h2: 'h2',
+      h3: 'h3',
+      h4: 'h4',
+      h5: 'h5',
+      h6: 'h6',
+    },
+  },
+  image: {
+    common: 'img',
+    variant: {
+      circle: 'rounded-circle',
+      rounded: 'rounded',
+      thumbnail: 'img-thumbnail',
+    },
   },
 };
 
-export default theme;
+export default bootstrapTheme;
 
 //TODO: more themes
