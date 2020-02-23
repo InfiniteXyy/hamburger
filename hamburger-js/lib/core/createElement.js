@@ -4,7 +4,7 @@ import React from 'react';
 /**
  * 将 styleObject 类型转变为 inline css
  */
-function toCSS(cssObj) {
+export function toCSS(cssObj) {
   return Object.entries(cssObj).reduce((styleString, [propName, propValue]) => {
     const _propName = propName.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
     if (Number.isInteger(+propValue)) {

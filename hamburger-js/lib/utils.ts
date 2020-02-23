@@ -5,7 +5,7 @@ export function generateChildKey(child: JSX.Element, index: number | string) {
   return React.cloneElement(child, { key: index });
 }
 
-export function buildElement(child: ChildElement) {
+export function buildElement(child: ChildElement, ) {
   if ('build' in child) {
     return child.build();
   } else {

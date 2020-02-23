@@ -8,7 +8,7 @@ export * from './components/image/Image';
 export * from './components/layout/Layout';
 export * from './components/nav/Navbar';
 export * from './themes';
-import { mount } from './core';
+import { mount, buildStaticHTML } from './core';
 
 
-export default { mount };
+export default { mount, buildStaticHTML };

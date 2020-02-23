@@ -1,6 +1,6 @@
 import { isReact } from '../common';
-import ReactDOM from 'react-dom';
 import { buildElement } from '../utils';
+import ReactDOM from 'react-dom';
 
 function mount(element, id) {
   const target = document.getElementById(id);
