@@ -8,6 +8,6 @@ export interface IThemeable {
 
 export type ChildElement = Element | IBuildable;
 
-const isReact = false;
+const isReact = true;
 
 export { isReact };

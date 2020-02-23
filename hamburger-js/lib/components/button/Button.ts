@@ -5,6 +5,7 @@ import theme from '../../themes';
 class ButtonClass extends ViewClass<HTMLButtonElement, string> implements IThemeable {
   constructor(content: string) {
     super();
+    this._tag = 'button';
     this._children = content;
   }
 

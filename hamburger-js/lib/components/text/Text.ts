@@ -27,6 +27,11 @@ export class TextClass extends ViewClass<HTMLParagraphElement, any> implements I
     return this;
   }
 
+  public color(value: string, when?: boolean) {
+    if (when !== false) this._props.style.color = value;
+    return this;
+  }
+
   public fontWeight(value: FontWeightProperty, when?: boolean) {
     if (when !== false) this._props.style.fontWeight = value;
     return this;

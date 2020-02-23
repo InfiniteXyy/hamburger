@@ -1,18 +1,5 @@
 import { HStack, Button } from 'hamburger-js';
 
-function BaseButton(content) {
-  return Button(content).style(styles.baseButton);
-}
-
-export default function WithStyle() {
-  return HStack(
-    BaseButton('Primary').style(styles.buttonPrimary),
-    BaseButton('Secondary').style(styles.buttonSuccess),
-  )
-    .margin({ top: 10 })
-    .build();
-}
-
 const styles = {
   baseButton: {
     padding: '6px 11px',
@@ -29,3 +16,14 @@ const styles = {
     backgroundColor: '#82AE46',
   },
 };
+
+function BaseButton(content) {
+  return Button(content).style(styles.baseButton);
+}
+
+const WithStyle = HStack(
+  BaseButton('Primary').style(styles.buttonPrimary),
+  BaseButton('Secondary').style(styles.buttonSuccess),
+).margin({ top: 10 });
+
+export { WithStyle };

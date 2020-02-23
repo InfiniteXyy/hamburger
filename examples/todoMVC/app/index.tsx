@@ -21,7 +21,7 @@ export default function App() {
           .margin(0),
         <TodoList todoList={state.todoList} />,
       )
-        .align('center')
+        .centerItems()
         .build()}
     </appContext.Provider>
   );
