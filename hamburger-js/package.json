@@ -7,7 +7,7 @@
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
   },
-  "types": "./src/index.d.ts",
+  "types": "./@types/index.d.ts",
   "keywords": [
     "react",
     "declarative"
@@ -35,7 +35,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.6.3"
+    "typescript": "^3.8.2"
   },
   "dependencies": {
     "@types/classnames": "^2.2.9",

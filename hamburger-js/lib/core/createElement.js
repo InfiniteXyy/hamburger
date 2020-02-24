@@ -3,6 +3,8 @@ import React from 'react';
 
 /**
  * 将 styleObject 类型转变为 inline css
+ * @param {*} cssObj 
+ * @returns {string}
  */
 export function toCSS(cssObj) {
   return Object.entries(cssObj).reduce((styleString, [propName, propValue]) => {
@@ -17,9 +19,10 @@ export function toCSS(cssObj) {
 /**
  * 修改自 https://gist.github.com/sergiodxa/a493c98b7884128081bb9a281952ef33
  * 类似 React 的 createElement函数，根据配置文件，返回 JSX.Element 或普通的 Element
- * @param type
- * @param props
- * @param children
+ * @param {*} type
+ * @param {*} props
+ * @param {*} children
+ * @returns {*}
  */
 function createElement(type, props, ...children) {
   if (isReact) {

@@ -5,7 +5,12 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "allowJs": true
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "./@types"
   },
-  "include": ["./lib/*", "lib/unused/directives.ts"]
+  "include": [
+    "./lib/*",
+    "lib/unused/directives.ts"
+  ]
 }

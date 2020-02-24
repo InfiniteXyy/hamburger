@@ -2,6 +2,11 @@ import { isReact } from '../common';
 import { buildElement } from '../utils';
 import ReactDOM from 'react-dom';
 
+/**
+ * 
+ * @param {*} element 
+ * @param {string} id 
+ */
 function mount(element, id) {
   const target = document.getElementById(id);
   if (!target) return;
