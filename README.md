@@ -90,11 +90,10 @@ function BaseButton(content) {
   return Button(content).style(styles.baseButton);
 }
 
-export default function Main() {
-  return HStack(BaseButton('Primary').style(styles.buttonPrimary), BaseButton('Secondary').style(styles.buttonSuccess))
-    .margin({ top: 10 })
-    .build();
-}
+const Main = HStack(
+  BaseButton('Primary').style(styles.buttonPrimary),
+  BaseButton('Secondary').style(styles.buttonSuccess),
+).margin({ top: 10 });
 ```
 
 #### Work fine with existing jsx
@@ -102,7 +101,10 @@ export default function Main() {
 ```jsx
 function Counter() {
   const [count, setCount] = useState(0);
-  return HStack(Text(count), <button onClick={() => setCount(count + 1)}>add</button>).build();
+  return HStack(
+    Text(count),
+    <button onClick={() => setCount(count + 1)}>add</button>
+  ).build();
 }
 ```
 
@@ -118,7 +120,7 @@ function Main(props) {
     Button('click me')
       .content('disabled', isDisabled)
       .disabled(isDisabled),
-  ).build();
+  );
 }
 ```
 
