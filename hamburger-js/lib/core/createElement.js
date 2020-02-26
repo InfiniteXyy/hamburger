@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * 将 styleObject 类型转变为 inline css
- * @param {*} cssObj 
+ * @param {*} cssObj
  * @returns {string}
  */
 export function toCSS(cssObj) {
@@ -38,7 +38,7 @@ function createElement(type, props, ...children) {
       else element.setAttribute(name, value);
     });
 
-    // 3、将 children 中的每一个 Element 添加到父组件中，children 默认为 []
+    // 3、将 children 中的每一个 ChildElement 转变为 Element 并添加到父组件中，children 默认为 []
     const _children = Array.isArray(children[0]) ? children[0] : children;
     _children
       .filter(i => !!i)

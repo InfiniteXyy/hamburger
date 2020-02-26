@@ -1,12 +1,9 @@
-import { Text, VStack, HStack, Image } from 'hamburger-js';
+import { Text, VStack, HStack, Image, Link } from 'hamburger-js';
 import moment from 'moment';
 
 function MessageHeader(message) {
   return HStack(
-    HStack(
-      Text(message.author.username).bold(),
-      Text(`@${message.author.username}`).margin({ left: 10 }),
-    ).centerItems(),
+    Text(message.author.username, Link(` @${message.author.username}`)).bold(),
     Text(moment(message.createdAt).fromNow()),
   ).expandItems();
 }
@@ -14,7 +11,7 @@ function MessageHeader(message) {
 function Message(message) {
   return HStack(
     Image(message.author.image)
-      .useTheme('circle')
+      .theme('circle')
       .size(40)
       .margin({ right: 10 }),
     VStack(
@@ -22,7 +19,7 @@ function Message(message) {
       Text(message.body),
       Image(message.imageUrl)
         .hide(message.hasImage)
-        .useTheme('thumbnail')
+        .theme('thumbnail')
         .style({ maxHeight: 220 }),
     ).inflate(),
   ).margin({ top: 10, bottom: 20 });

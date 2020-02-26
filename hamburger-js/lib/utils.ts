@@ -5,12 +5,11 @@ export function generateChildKey(child: JSX.Element, index: number | string) {
   return React.cloneElement(child, { key: index });
 }
 
-export function buildElement(child: ChildElement, ) {
-  if ('build' in child) {
-    return child.build();
-  } else {
-    return child;
-  }
+export function buildElement(child: ChildElement) {
+  // Element 或 string 不需要进行 build，否则对调用它的 build
+  if (typeof child === 'string') return child;
+  if ('build' in child) return child.build();
+  return child;
 }
 
 export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea'): any {

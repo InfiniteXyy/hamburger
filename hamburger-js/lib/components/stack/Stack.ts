@@ -1,18 +1,17 @@
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
-import { ChildElement } from '../../common';
-import { buildElement } from '../../utils';
+import { ChildElement, IChildIterable } from '../../common';
 import { ViewClass } from '../View';
 
-class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> {
+class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> implements IChildIterable<ViewClass<any, any>> {
   constructor(private isHorizontal: boolean, ...elements: ChildElement[]) {
     super();
     if (Array.isArray(elements[0])) elements = elements[0];
     this._children = elements;
-    this.class(isHorizontal ? 'hbg-row' : 'hbg-col');
+    this.class(isHorizontal ? 'd-flex' : '');
   }
 
   // 功能方法
-  public mapItem(wrapper: (item: ViewClass<any, any>) => ChildElement) {
+  public mapItem(wrapper) {
     this._children = this._children.map(wrapper);
     return this;
   }
@@ -29,20 +28,22 @@ class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> {
   }
 
   public centerItems() {
-    this.class('hbg-align-center');
+    this.class('align-items-center');
     return this;
   }
 
   public expandItems() {
-    this.class('hbg-space-between');
+    this.class('justify-content-between');
     return this;
   }
 
   public inflate() {
-    if (!this.isHorizontal) {
-      this.class('hbg-inflate-horizontal');
+    if (this.isHorizontal) {
+      // 上下布局，宽度撑满
+      this.class('h-100');
     } else {
-      this.class('hbg-inflate-vertical');
+      // 左右布局，高度撑满
+      this.class('w-100');
     }
     return this;
   }

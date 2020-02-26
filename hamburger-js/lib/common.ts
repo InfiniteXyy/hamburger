@@ -1,12 +1,18 @@
+import { ViewClass } from './components/View';
+
+export type ChildElement = Element | IBuildable | string;
+
 export interface IBuildable {
   build(): Element;
 }
 
 export interface IThemeable {
-  useTheme(name: string, when?: boolean): this;
+  theme(name: string, when?: boolean): this;
 }
 
-export type ChildElement = Element | IBuildable;
+export interface IChildIterable<ChildType> {
+  mapItem(wrapper: (item: ChildType) => ChildElement)
+}
 
 const isReact = true;
 

@@ -4,10 +4,10 @@ import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
 
 export class TextClass extends ViewClass<HTMLParagraphElement, any> implements IThemeable {
-  constructor(content) {
+  constructor(...content: (string | TextClass)[]) {
     super();
     this._children = content;
-    this._tag = 'div';
+    this._tag = 'p';
   }
 
   // 内容方法
@@ -18,7 +18,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement, any> implements I
 
   // 样式方法
   public bold(when?: boolean) {
-    if (when !== false) this._props.style.fontWeight = 'bold';
+    if (when !== false) this.class('font-weight-bold');
     return this;
   }
 
@@ -37,11 +37,12 @@ export class TextClass extends ViewClass<HTMLParagraphElement, any> implements I
     return this;
   }
 
-  public useTheme(name: string, when?: boolean): this {
+  public theme(name: string, when?: boolean): this {
     if (when !== false) this.class(theme.text.variant[name]);
     return this;
   }
 }
-export function Text(content: string | number) {
-  return new TextClass(content);
+
+export function Text(...content: (string | TextClass)[]) {
+  return new TextClass(...content);
 }

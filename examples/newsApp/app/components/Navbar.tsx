@@ -2,8 +2,8 @@ import { HStack, Image, Text } from 'hamburger-js';
 
 const MyNav = HStack(
   HStack(
-    Text('时间线').bold(),
-    Image('https://via.placeholder.com/120').useTheme('circle').size(40),
+    Text('时间线').tag('strong'),
+    Image('https://via.placeholder.com/120').theme('circle').size(40),
   )
     .class('container')
     .centerItems()

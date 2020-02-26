@@ -10,7 +10,7 @@ class ImageClass extends ViewClass<HTMLImageElement, null> implements IThemeable
   }
 
   // 样式方法
-  public useTheme(name: string, when?: boolean): this {
+  public theme(name: string, when?: boolean): this {
     if (when !== false) this.class(theme.image.variant[name]);
     return this;
   }

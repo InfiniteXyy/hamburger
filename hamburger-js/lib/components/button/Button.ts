@@ -21,7 +21,7 @@ class ButtonClass extends ViewClass<HTMLButtonElement, string> implements ITheme
     return this;
   }
 
-  public useTheme(name: string, when?: boolean) {
+  public theme(name: string, when?: boolean) {
     if (when !== false) this.class(theme.button.variant[name]);
     return this;
   }
