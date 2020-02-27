@@ -1,6 +1,7 @@
-import { HStack, VStack } from '../..';
-import { buildElement, createPlaceHolder } from '../../utils';
+import { HStack, VStack } from '..';
+import { createPlaceHolder } from '../../utils';
 import { ChildElement, IBuildable } from '../../common';
+import { buildElement } from '../../core';
 
 type LayoutType =
   | 'top-main'

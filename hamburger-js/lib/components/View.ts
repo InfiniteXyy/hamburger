@@ -1,11 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
-import { should, WhenModel } from '../when';
 import theme, { IShadow } from '../themes';
-import { IBuildable } from '../common';
+import { ChildElement, IBuildable } from '../common';
 import { createElement } from '../core';
-import { buildElement } from '../utils';
 
 interface MarginModel {
   top?: number;
@@ -36,15 +34,15 @@ interface BorderModel {
   borderColor?: string;
 }
 
-export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
+export class ViewClass<T extends HTMLElement> implements IBuildable {
   protected _tag: string;
   protected _props: { style: React.CSSProperties } & React.HTMLProps<T>; // with default empty style
-  protected _children: CT | null;
+  protected _children: ChildElement[];
 
   protected constructor() {
     this._tag = 'div';
     this._props = { style: {} };
-    this._children = null;
+    this._children = [];
   }
 
   public tag(tag: string, when?: boolean) {
@@ -104,11 +102,8 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
     return this;
   }
 
-  // todo: test new 'when' model
-  public shadow(type: keyof IShadow = 'regular', when?: WhenModel | boolean) {
-    if (should(when)) {
-      this.class(theme.utility.shadow[type]);
-    }
+  public shadow(type: keyof IShadow = 'regular', when?: boolean) {
+    if (!when) this.class(theme.utility.shadow[type]);
     return this;
   }
 
@@ -149,11 +144,6 @@ export class ViewClass<T extends HTMLElement, CT> implements IBuildable {
   }
 
   public build() {
-    // 对所有子元素进行 build
-    let childrenElements: any = this._children;
-    if (Array.isArray(this._children)) {
-      childrenElements = this._children.map(buildElement);
-    }
-    return createElement(this._tag, this._props, childrenElements) as Element;
+    return createElement(this._tag, this._props, ...this._children);
   }
 }

@@ -2,16 +2,16 @@ import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
 import theme from '../../themes';
 
-class ButtonClass extends ViewClass<HTMLButtonElement, string> implements IThemeable {
-  constructor(content: string) {
+class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
+  constructor(content: string = 'button') {
     super();
     this._tag = 'button';
-    this._children = content;
+    this._children = [content];
   }
 
   // 内容方法
   public content(content: string, when?: boolean) {
-    if (when !== false) this._children = content;
+    if (when !== false) this._children = [content];
     return this;
   }
 

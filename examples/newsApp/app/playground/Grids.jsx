@@ -1,7 +1,7 @@
-import { GridCol, GridRow } from 'hamburger-js';
-import hamburger from 'hamburger-js'
+import { GridCol, GridRow, Button } from 'hamburger-js';
+import hamburger from 'hamburger-js';
 
-const Card = (
+const Card = () => (
   /** @jsx hamburger.createElement */
   <div className="card" style={{ width: '100%', marginBottom: 16 }}>
     <div className="card-body">
@@ -15,11 +15,11 @@ const Card = (
 
 
 const Grids = GridRow(
-  GridCol(Card).take(4),
-  GridCol(Card).take(8),
-  GridCol(Card).take(4),
-  GridCol(Card).take(4),
-  GridCol(Card).take(4),
+  GridCol(Card()).take(1 / 3),
+  GridCol(Card()).take(2 / 3),
+  GridCol(Card()).take(1 / 3),
+  GridCol(Card()).take(1 / 3),
+  GridCol(Card()).take(1 / 3),
 )
   .margin({ vertical: 16 });
 

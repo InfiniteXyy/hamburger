@@ -1,26 +1,16 @@
 import React from 'react';
-import { ChildElement, isReact } from './common';
+import { isReact } from './common';
 
-export function generateChildKey(child: JSX.Element, index: number | string) {
-  return React.cloneElement(child, { key: index });
+
+export function flatMap<T, U>(array: T[], callback: (value: T, index: number, array: T[]) => U[]): U[] {
+  return [].concat(...array.map(callback));
 }
 
-export function buildElement(child: ChildElement) {
-  // Element 或 string 不需要进行 build，否则对调用它的 build
-  if (typeof child === 'string') return child;
-  if ('build' in child) return child.build();
-  return child;
-}
-
+// Layout 中组件为空的填充物
 export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea'): any {
   if (isReact) {
-    return React.createElement(
-      'div',
-      {
-        style: { backgroundColor, width, height, border: '2px solid white', padding: 10 },
-      },
-      innerWords,
-    );
+    const style = { backgroundColor, width, height, border: '2px solid white', padding: 10 };
+    return React.createElement('div', { style }, innerWords);
   } else {
     const element = document.createElement('div');
     element.style.backgroundColor = backgroundColor;

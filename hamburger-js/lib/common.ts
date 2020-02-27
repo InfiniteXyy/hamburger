@@ -1,9 +1,11 @@
-import { ViewClass } from './components/View';
+// 兼容 React 和 HTML 元素
+export type HElement = Element | JSX.Element | string | null
 
-export type ChildElement = Element | IBuildable | string;
+// 元素的子元素必须是 元素 或 元素的构造器
+export type ChildElement = HElement | IBuildable;
 
 export interface IBuildable {
-  build(): Element;
+  build(): HElement;
 }
 
 export interface IThemeable {

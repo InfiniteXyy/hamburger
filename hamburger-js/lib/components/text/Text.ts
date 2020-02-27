@@ -3,7 +3,7 @@ import { FontSizeProperty, FontWeightProperty } from 'csstype';
 import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
 
-export class TextClass extends ViewClass<HTMLParagraphElement, any> implements IThemeable {
+export class TextClass extends ViewClass<HTMLParagraphElement> implements IThemeable {
   constructor(...content: (string | TextClass)[]) {
     super();
     this._children = content;
@@ -12,7 +12,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement, any> implements I
 
   // 内容方法
   public content(content: string, when?: boolean) {
-    if (when !== false) this._children = content;
+    if (when !== false) this._children = [content];
     return this;
   }
 

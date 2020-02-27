@@ -1,5 +1,4 @@
-import { Link, Text } from '../..';
-import { buildElement, generateChildKey } from '../../utils';
+import { Link, Text } from '..';
 import { ViewClass } from '../View';
 
 interface INavbarItemConfig {
@@ -16,7 +15,7 @@ interface INavbarItem extends INavbarItemConfig {
   content: string;
 }
 
-class NavbarClass extends ViewClass<HTMLDivElement, any> {
+class NavbarClass extends ViewClass<HTMLDivElement> {
   constructor(...navMenu: INavbarItem[]) {
     super();
     this._tag = 'nav';
@@ -29,8 +28,7 @@ class NavbarClass extends ViewClass<HTMLDivElement, any> {
             .class('')
             .href(i.link || defaultNavbarItemConfig.link);
         }
-      })
-      .map(buildElement);
+      });
     this.class('');
   }
 }

@@ -1,13 +1,13 @@
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 import { ChildElement, IChildIterable } from '../../common';
 import { ViewClass } from '../View';
+import { flatMap } from '../../utils';
 
-class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> implements IChildIterable<ViewClass<any, any>> {
-  constructor(private isHorizontal: boolean, ...elements: ChildElement[]) {
+class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>> {
+  constructor(private isHorizontal: boolean, elements: ChildElement[]) {
     super();
-    if (Array.isArray(elements[0])) elements = elements[0];
     this._children = elements;
-    this.class(isHorizontal ? 'd-flex' : '');
+    this.class(isHorizontal ? 'd-flex' : null);
   }
 
   // 功能方法
@@ -49,10 +49,12 @@ class StackClass extends ViewClass<HTMLDivElement, ChildElement[]> implements IC
   }
 }
 
-export function HStack(...elementsOrTag: ChildElement[]) {
-  return new StackClass(true, ...elementsOrTag);
+export function HStack(...elements: (ChildElement | ChildElement[])[]) {
+  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  return new StackClass(true, _elements);
 }
 
-export function VStack(...elementsOrTag: ChildElement[]) {
-  return new StackClass(false, ...elementsOrTag);
+export function VStack(...elements: (ChildElement | ChildElement[])[]) {
+  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  return new StackClass(false, _elements);
 }

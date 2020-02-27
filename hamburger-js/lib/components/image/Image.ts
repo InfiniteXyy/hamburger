@@ -2,7 +2,7 @@ import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
 import theme from '../../themes';
 
-class ImageClass extends ViewClass<HTMLImageElement, null> implements IThemeable {
+class ImageClass extends ViewClass<HTMLImageElement> implements IThemeable {
   constructor(src: string) {
     super();
     this._props.src = src;

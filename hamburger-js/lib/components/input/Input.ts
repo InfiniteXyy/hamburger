@@ -1,7 +1,7 @@
 import { ViewClass } from '../View';
 import theme from '../../themes';
 
-class InputClass extends ViewClass<HTMLInputElement, null> {
+class InputClass extends ViewClass<HTMLInputElement> {
   constructor(value: string, type?: string) {
     super();
     this._props.value = value;
