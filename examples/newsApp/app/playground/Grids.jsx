@@ -2,7 +2,6 @@ import { GridCol, GridRow, Button } from 'hamburger-js';
 import hamburger from 'hamburger-js';
 
 const Card = () => (
-  /** @jsx hamburger.createElement */
   <div className="card" style={{ width: '100%', marginBottom: 16 }}>
     <div className="card-body">
       <h5 className="card-title">Card title</h5>
@@ -15,12 +14,9 @@ const Card = () => (
 
 
 const Grids = GridRow(
-  GridCol(Card()).take(1 / 3),
-  GridCol(Card()).take(2 / 3),
-  GridCol(Card()).take(1 / 3),
-  GridCol(Card()).take(1 / 3),
-  GridCol(Card()).take(1 / 3),
+  [1, 2, 3, 4, 5].map(() => Card()),
 )
+  .mapItem(item => item.take(1 / 3))
   .margin({ vertical: 16 });
 
 export default Grids;

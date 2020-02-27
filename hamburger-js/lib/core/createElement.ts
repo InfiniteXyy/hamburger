@@ -22,12 +22,18 @@ export function toCSS(cssObj: { [k: string]: string }): string {
 /**
  * 修改自 https://gist.github.com/sergiodxa/a493c98b7884128081bb9a281952ef33
  * 类似 React 的 createElement函数，根据配置文件，返回 JSX.Element 或普通的 Element
+ *
+ * 只有 React 支持函数式组件
  */
 function createElement(type: string, props: { [k: string]: any }, ...children: ChildElement[]) {
   if (isReact) {
     const builtElements = children.map(buildElement);
     return React.createElement(type, props, builtElements.length === 0 ? null : builtElements);
   } else {
+    if (typeof type === 'function') {
+      console.error('检测到使用函数组件，请使用 React 内核');
+      return document.createElement('div');
+    }
     // 1、根据 type 生成对应元素
     const element = document.createElement(type);
 
@@ -36,6 +42,7 @@ function createElement(type: string, props: { [k: string]: any }, ...children: C
       if (!value) return;
       if (name === 'className') element.setAttribute('class', value);
       else if (name === 'style') element.setAttribute('style', toCSS(value));
+      else if (name === 'key') return;
       else element.setAttribute(name, value);
     });
 

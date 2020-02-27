@@ -6,6 +6,13 @@ export function flatMap<T, U>(array: T[], callback: (value: T, index: number, ar
   return [].concat(...array.map(callback));
 }
 
+export function addKey(element: any, key: any) {
+  if (typeof element === 'object' && element && element._props) {
+    element._props.key = '' + key;
+  }
+  return element;
+}
+
 // Layout 中组件为空的填充物
 export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea'): any {
   if (isReact) {
