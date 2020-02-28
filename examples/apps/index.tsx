@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './app';
+import App from './src';
 import hamburger, { applyTheme, bootstrapTheme } from 'hamburger-js';
 
 applyTheme(bootstrapTheme);

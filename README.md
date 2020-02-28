@@ -153,7 +153,7 @@ const form = VStack(
 
 
 
-### Use native hamburger core.
+#### Use native hamburger core.
 
 hamburger.js has it's own dom engine, it is designed for static website, simple and take less space.
 Also, you can use hamburger to generate static html files with command line tools.
