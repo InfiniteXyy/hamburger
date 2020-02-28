@@ -15,7 +15,7 @@
     "build:lib": "cd hamburger-js && yarn build",
     "test:lib": "cd hamburger-js && yarn build && yarn test",
     "dev:lib": "cd hamburger-js && yarn dev",
-    "playground": "cd experiment && yarn start"
+    "playground": "cd examples/basic && yarn start"
   },
   "devDependencies": {
     "lerna": "^3.16.4",

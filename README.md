@@ -23,12 +23,10 @@ Let **Code** show everything.
 😄 But when you use hamburger, you only need to _tell_ computer what to do, and the library will do all rest things for you.
 
 ```js
-Text('...')
-  .style(styles.defaultText)
-  .color('red', shouldHighlight);
+Text('...').color('red').bold();
 ```
 
-🦉 Most importantly, this lib is not a framework, it's just a helper. You can use it anywhere in the project with existing React component.
+🦉 Most importantly, this lib is more like a helper. You can use it easily in your existing `React` project, it works fine with `JSX Component` and React libraries such as `Redux`.
 
 ## Quick Start and Try
 
@@ -44,17 +42,20 @@ yarn playground
 
 #### Content in the first place
 
-```jsx
-// with tradition jsx
+```jsx harmony
+/*
+ * with traditional jsx
+ * you have to manage styles in another object, or use css className
+ */
 function App2() {
   return (
     <div>
       <div style={{ padding: 16 }}>
-        <div style={{ color: 'skyblue', fontWeight: 'bold', fontSize: 64 }}>Declarative UI</div>
-        <div style={{ color: 'pink', fontSize: 48 }}>Super Easy</div>
-        <div style={{ display: 'flex' }}>
+        <div style={styles.title}>Declarative UI</div>
+        <div style={styles.subtitle}>Super Easy</div>
+        <div style={styles.dflex}>
           <div style={{ marginRight: 4 }}>made by</div>
-          <div style={{ fontWeight: 'bold' }}>InfiniteX</div>
+          <div style={styles.author}>InfiniteX</div>
         </div>
       </div>
     </div>
@@ -69,16 +70,14 @@ function App2() {
 function Main() {
   return VStack(
     VStack(
-      Text('Declarative UI')
-        .color('skyblue')
-        .size(64)
-        .bold(),
-      Text('Super Easy')
-        .color('pink')
-        .size(48),
-      HStack(Text('made by').margin({ right: 4 }), Text('InfiniteX').bold()),
+      Text('Declarative UI').color('skyblue').size(64).bold(),
+      Text('Super Easy').color('pink').size(48),
+      HStack(
+        Text('made by').margin({ right: 4 }),
+        Text('InfiniteX').bold()
+      ),
     ).padding(16),
-  ).build();
+  );
 }
 ```
 
@@ -87,22 +86,23 @@ function Main() {
 ```js
 // build styles with chained calls
 function BaseButton(content) {
-  return Button(content).style(styles.baseButton);
+  return Button(content).shadow("large").border({ borderColor: "black", borderRadius: 4, borderWidth: 1 });
 }
 
 const Main = HStack(
-  BaseButton('Primary').style(styles.buttonPrimary),
-  BaseButton('Secondary').style(styles.buttonSuccess),
+  BaseButton('Primary').backgroundColor("blue"),
+  BaseButton('Secondary').backgroundColor("gray"),
 ).margin({ top: 10 });
 ```
 
 #### Work fine with existing jsx
 
-```jsx
+```jsx harmony
 function Counter() {
   const [count, setCount] = useState(0);
   return HStack(
     Text(count),
+    <button onClick={() => setCount(count - 1)}>minus</button>,
     <button onClick={() => setCount(count + 1)}>add</button>
   ).build();
 }
@@ -110,7 +110,7 @@ function Counter() {
 
 #### All declaration are in control with condition
 
-```jsx
+```jsx harmony
 function Main(props) {
   const { isDisabled, isImmportant } = props;
   return HStack(
@@ -124,12 +124,9 @@ function Main(props) {
 }
 ```
 
-#### All utils simple to use (developing)
+#### Easy to use utils
 
-If you want to create your Main with a classic layout, hamburger.js has already prepared for you.
-use them like
-
-```jsx
+```jsx harmony
 export default function Main() {
   return Layout('top-aside-main-bottom') // or top-main-bottom, top-main, top-aside-main, etc...
     .top(Navbar)
@@ -139,6 +136,27 @@ export default function Main() {
     .build();
 }
 ```
+
+
+#### Work together with modern UI Library
+
+```jsx harmony
+// in index.ts
+hamburger.applyTheme(bootstrapTheme)
+
+// in your component, the theme api will automatically generate bootstrap className for you.
+const form = VStack(
+  Button('primary button').theme('primary'),
+  Image('...').theme('circular')
+)
+```
+
+
+
+### Use native hamburger core.
+
+hamburger.js has it's own dom engine, it is designed for static website, simple and take less space.
+Also, you can use hamburger to generate static html files with command line tools.
 
 #### IDE is the doc (developing)
 
@@ -162,9 +180,9 @@ version 0.0.1
 - [x] More Classes (Image...)
 - [x] test input binding like v-model
 - [x] Layout Class
-- [ ] use custom theme config
+- [x] use custom theme config
 - [ ] new APIs (`.shadow("small", { on: "hover" })`) ()
-- [ ] Review
+- [x] Review
 
 version 0.0.2
 
