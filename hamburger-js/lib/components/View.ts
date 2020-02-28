@@ -1,9 +1,9 @@
-import React from 'react';
-import classnames from 'classnames';
-import { ClassValue } from 'classnames/types';
-import theme, { IShadow } from '../themes';
-import { ChildElement, IBuildable } from '../common';
-import { createElement } from '../core';
+import React from "react";
+import classnames from "classnames";
+import { ClassValue } from "classnames/types";
+import theme, { IShadow } from "../themes";
+import { ChildElement, IBuildable } from "../common";
+import { createElement } from "../core";
 
 interface MarginModel {
   top?: number;
@@ -40,7 +40,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   protected _children: ChildElement[];
 
   protected constructor() {
-    this._tag = 'div';
+    this._tag = "div";
     this._props = { style: {} };
     this._children = [];
   }
@@ -50,36 +50,36 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  private static getBoxModelObj(type: 'margin' | 'padding', value: number | PaddingModel) {
+  private static getBoxModelObj(type: "margin" | "padding", value: number | PaddingModel) {
     let result: any = {};
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       result = { [type]: value };
     } else {
-      if ('horizontal' in value) result[`${type}Left`] = result[`${type}Right`] = value.horizontal;
-      if ('vertical' in value) result[`${type}Top`] = result[`${type}Bottom`] = value.vertical;
-      if ('top' in value) result[`${type}Top`] = value.top;
-      if ('bottom' in value) result[`${type}Bottom`] = value.bottom;
-      if ('left' in value) result[`${type}Left`] = value.left;
-      if ('right' in value) result[`${type}Right`] = value.right;
+      if ("horizontal" in value) result[`${type}Left`] = result[`${type}Right`] = value.horizontal;
+      if ("vertical" in value) result[`${type}Top`] = result[`${type}Bottom`] = value.vertical;
+      if ("top" in value) result[`${type}Top`] = value.top;
+      if ("bottom" in value) result[`${type}Bottom`] = value.bottom;
+      if ("left" in value) result[`${type}Left`] = value.left;
+      if ("right" in value) result[`${type}Right`] = value.right;
     }
     return result;
   }
 
   public padding(value: number | PaddingModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value));
+    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj("padding", value));
     return this;
   }
 
   public margin(value: number | MarginModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value));
+    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj("margin", value));
     return this;
   }
 
   public size(size: number | SizeModel, when?: boolean) {
     if (when === false) return this;
-    if (typeof size === 'number') {
+    if (typeof size === "number") {
       this._props.style.width = this._props.style.height = size;
     } else {
       this._props.style.width = size.width;
@@ -90,7 +90,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public border(border: BorderModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style.border = !!border.borderWidth ? 'solid' : '';
+    this._props.style.border = !!border.borderWidth ? "solid" : "";
     this._props.style.borderRadius = border.borderRadius;
     this._props.style.borderColor = border.borderColor;
     this._props.style.borderWidth = border.borderWidth;
@@ -102,18 +102,18 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public shadow(type: keyof IShadow = 'regular', when?: boolean) {
+  public shadow(type: keyof IShadow = "regular", when?: boolean) {
     if (!when) this.class(theme.utility.shadow[type]);
     return this;
   }
 
   public unselectable() {
-    this._props.style.userSelect = 'none';
+    this._props.style.userSelect = "none";
     return this;
   }
 
   public hide(when?: boolean) {
-    if (!when) this._props.style.display = 'none';
+    if (!when) this._props.style.display = "none";
     return this;
   }
 
@@ -121,8 +121,8 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     classes = classes.filter(i => !!i);
     const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
-    else this._props.className += ' ' + className;
-    if (this._props.className === '') this._props.className = undefined;
+    else this._props.className += " " + className;
+    if (this._props.className === "") this._props.className = undefined;
     return this;
   }
 
