@@ -1,9 +1,10 @@
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
-import { ChildElement, IChildIterable } from '../../common';
+import { ChildElement, IChildIterable, IFlexBox, IThemeable } from '../../common';
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
+import theme from '../../themes';
 
-class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>> {
+class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>>, IFlexBox, IThemeable {
   constructor(private isHorizontal: boolean, elements: ChildElement[]) {
     super();
     this._children = elements;
@@ -17,23 +18,18 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   }
 
   // 布局方法
-  public align(alignItems: AlignItemsProperty) {
-    this._props.style.alignItems = alignItems;
+  public justifyContent(position) {
+    this.class(`justify-content-${position}`);
     return this;
   }
 
-  public justify(justifyContent: JustifyContentProperty) {
-    this._props.style.justifyContent = justifyContent;
+  public alignItems(position) {
+    this.class(`align-items-${position}`);
     return this;
   }
 
-  public centerItems() {
-    this.class('align-items-center');
-    return this;
-  }
-
-  public expandItems() {
-    this.class('justify-content-between');
+  public nowrap() {
+    this.class('flex-nowrap');
     return this;
   }
 
@@ -47,14 +43,19 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
     }
     return this;
   }
+
+  public theme(...name: string[]): this {
+    this.class(...name.map(i => theme.stack.variant[i]));
+    return this;
+  }
 }
 
 export function HStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
   return new StackClass(true, _elements);
 }
 
 export function VStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
   return new StackClass(false, _elements);
 }

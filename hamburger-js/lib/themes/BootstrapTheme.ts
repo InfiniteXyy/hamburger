@@ -20,6 +20,8 @@ const bootstrapTheme: IHamburgerTheme = {
       info: 'btn-info',
       danger: 'btn-danger',
       'primary-outline': 'btn-outline-primary',
+      'secondary-outline': 'btn-outline-secondary',
+      disabled: 'disabled',
     },
   },
   text: {
@@ -30,6 +32,17 @@ const bootstrapTheme: IHamburgerTheme = {
       h4: 'h4',
       h5: 'h5',
       h6: 'h6',
+      muted: 'text-muted',
+      italic: 'font-italic',
+      lead: 'lead',
+    },
+  },
+  stack: {
+    variant: {
+      container: 'container',
+      jumbotron: 'jumbotron',
+      rounded: 'rounded',
+      'bg-light': 'bg-light',
     },
   },
   image: {

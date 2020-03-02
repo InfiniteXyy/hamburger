@@ -1,12 +1,14 @@
-import { ChildElement, IChildIterable } from '../../common';
+import { ChildElement, IChildIterable, IFlexBox } from '../../common';
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
 
-class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<GridColClass> {
+class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<GridColClass>, IFlexBox {
+  private isFlexBox = false;
+
   constructor(elements: ChildElement[]) {
     super();
     // GridRow 的子元素必须是 GridCol，否则样式上会有问题
-    this._children = elements.map(i => i instanceof GridColClass ? i : new GridColClass([i]));
+    this._children = elements.map(i => (i instanceof GridColClass ? i : new GridColClass([i])));
     this.class('row');
   }
 
@@ -14,9 +16,34 @@ class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<G
     this._children = this._children.map(wrapper);
     return this;
   }
+
+  // 布局方法
+  public justifyContent(position) {
+    if (!this.isFlexBox) {
+      this.isFlexBox = true;
+      this.class('d-flex');
+    }
+    this.class(`justify-content-${position}`);
+    return this;
+  }
+
+  public alignItems(position) {
+    if (!this.isFlexBox) {
+      this.isFlexBox = true;
+      this.class('d-flex');
+    }
+    this.class(`align-items-${position}`);
+    return this;
+  }
+
+  public nowrap() {
+    this.class('flex-nowrap');
+    return this;
+  }
 }
 
-class GridColClass extends ViewClass<HTMLDivElement> {
+class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
+  private isFlexBox = false;
   constructor(elements: ChildElement[]) {
     super();
     this._children = elements;
@@ -29,14 +56,43 @@ class GridColClass extends ViewClass<HTMLDivElement> {
     this.class(`col-${takeAmount}`);
     return this;
   }
+
+  // 布局方法
+  public justifyContent(position) {
+    if (!this.isFlexBox) {
+      this.isFlexBox = true;
+      this.class('d-flex');
+    }
+    this.class(`justify-content-${position}`);
+    return this;
+  }
+
+  public alignItems(position) {
+    if (!this.isFlexBox) {
+      this.isFlexBox = true;
+      this.class('d-flex');
+    }
+    this.class(`align-items-${position}`);
+    return this;
+  }
+
+  public nowrap() {
+    this.class('flex-nowrap');
+    return this;
+  }
+
+  public centerText() {
+    this.class('text-center');
+    return this;
+  }
 }
 
 export function GridRow(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
   return new GridRowClass(_elements);
 }
 
 export function GridCol(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => Array.isArray(i) ? i : [i]);
+  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
   return new GridColClass(_elements);
 }

@@ -21,8 +21,8 @@ class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
     return this;
   }
 
-  public theme(name: string, when?: boolean) {
-    if (when !== false) this.class(theme.button.variant[name]);
+  public theme(...name: string[]) {
+    this.class(...name.map(i => theme.button.variant[i]));
     return this;
   }
 }

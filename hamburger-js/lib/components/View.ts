@@ -1,26 +1,26 @@
-import React from "react";
-import classnames from "classnames";
-import { ClassValue } from "classnames/types";
-import theme, { IShadow } from "../themes";
-import { ChildElement, IBuildable } from "../common";
-import { createElement } from "../core";
+import React from 'react';
+import classnames from 'classnames';
+import { ClassValue } from 'classnames/types';
+import theme, { IShadow } from '../themes';
+import { ChildElement, IBuildable } from '../common';
+import { createElement } from '../core';
 
-interface MarginModel {
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-  horizontal?: number;
-  vertical?: number;
+interface MarginModel<T> {
+  top?: T;
+  bottom?: T;
+  left?: T;
+  right?: T;
+  horizontal?: T;
+  vertical?: T;
 }
 
-interface PaddingModel {
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-  horizontal?: number;
-  vertical?: number;
+interface PaddingModel<T> {
+  top?: T;
+  bottom?: T;
+  left?: T;
+  right?: T;
+  horizontal?: T;
+  vertical?: T;
 }
 
 interface SizeModel {
@@ -40,7 +40,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   protected _children: ChildElement[];
 
   protected constructor() {
-    this._tag = "div";
+    this._tag = 'div';
     this._props = { style: {} };
     this._children = [];
   }
@@ -50,36 +50,57 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  private static getBoxModelObj(type: "margin" | "padding", value: number | PaddingModel) {
+  private static getBoxModelObj<T>(type: 'margin' | 'padding', value: number | PaddingModel<T>) {
     let result: any = {};
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       result = { [type]: value };
     } else {
-      if ("horizontal" in value) result[`${type}Left`] = result[`${type}Right`] = value.horizontal;
-      if ("vertical" in value) result[`${type}Top`] = result[`${type}Bottom`] = value.vertical;
-      if ("top" in value) result[`${type}Top`] = value.top;
-      if ("bottom" in value) result[`${type}Bottom`] = value.bottom;
-      if ("left" in value) result[`${type}Left`] = value.left;
-      if ("right" in value) result[`${type}Right`] = value.right;
+      if ('horizontal' in value) result[`${type}Left`] = result[`${type}Right`] = value.horizontal;
+      if ('vertical' in value) result[`${type}Top`] = result[`${type}Bottom`] = value.vertical;
+      if ('top' in value) result[`${type}Top`] = value.top;
+      if ('bottom' in value) result[`${type}Bottom`] = value.bottom;
+      if ('left' in value) result[`${type}Left`] = value.left;
+      if ('right' in value) result[`${type}Right`] = value.right;
     }
     return result;
   }
 
-  public padding(value: number | PaddingModel, when?: boolean) {
+  private static getBootstrapBoxModel<T>(type: 'm' | 'p', value: string | PaddingModel<T>): string {
+    if (typeof value === 'string') {
+      return type + '-' + value;
+    } else {
+      if ('horizontal' in value) return `${type}x-${value.horizontal}`;
+      if ('vertical' in value) return `${type}y-${value.vertical}`;
+      if ('top' in value) return `${type}t-${value.top}`;
+      if ('bottom' in value) return `${type}b-${value.bottom}`;
+      if ('left' in value) return `${type}l-${value.left}`;
+      if ('right' in value) return `${type}r-${value.right}`;
+    }
+  }
+
+  public padding<T>(value: number | string | PaddingModel<T>, when?: boolean) {
     if (when === false) return this;
-    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj("padding", value));
+    if (typeof value === 'number') {
+      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value));
+    } else {
+      this.class(ViewClass.getBootstrapBoxModel('p', value));
+    }
     return this;
   }
 
-  public margin(value: number | MarginModel, when?: boolean) {
+  public margin<T>(value: number | string | MarginModel<T>, when?: boolean) {
     if (when === false) return this;
-    this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj("margin", value));
+    if (typeof value === 'number') {
+      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value));
+    } else {
+      this.class(ViewClass.getBootstrapBoxModel('m', value));
+    }
     return this;
   }
 
   public size(size: number | SizeModel, when?: boolean) {
     if (when === false) return this;
-    if (typeof size === "number") {
+    if (typeof size === 'number') {
       this._props.style.width = this._props.style.height = size;
     } else {
       this._props.style.width = size.width;
@@ -90,7 +111,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public border(border: BorderModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style.border = !!border.borderWidth ? "solid" : "";
+    this._props.style.border = !!border.borderWidth ? 'solid' : '';
     this._props.style.borderRadius = border.borderRadius;
     this._props.style.borderColor = border.borderColor;
     this._props.style.borderWidth = border.borderWidth;
@@ -102,18 +123,18 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public shadow(type: keyof IShadow = "regular", when?: boolean) {
+  public shadow(type: keyof IShadow = 'regular', when?: boolean) {
     if (!when) this.class(theme.utility.shadow[type]);
     return this;
   }
 
   public unselectable() {
-    this._props.style.userSelect = "none";
+    this._props.style.userSelect = 'none';
     return this;
   }
 
   public hide(when?: boolean) {
-    if (!when) this._props.style.display = "none";
+    if (!when) this._props.style.display = 'none';
     return this;
   }
 
@@ -121,8 +142,8 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     classes = classes.filter(i => !!i);
     const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
-    else this._props.className += " " + className;
-    if (this._props.className === "") this._props.className = undefined;
+    else this._props.className += ' ' + className;
+    if (this._props.className === '') this._props.className = undefined;
     return this;
   }
 

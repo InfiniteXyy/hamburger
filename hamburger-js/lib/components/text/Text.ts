@@ -37,8 +37,8 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
     return this;
   }
 
-  public theme(name: string, when?: boolean): this {
-    if (when !== false) this.class(theme.text.variant[name]);
+  public theme(...name: string[]): this {
+    this.class(...name.map(i => theme.text.variant[i]));
     return this;
   }
 }

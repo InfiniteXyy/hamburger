@@ -8,6 +8,9 @@ export interface IHamburgerTheme {
   utility: {
     shadow: IShadow;
   };
+  stack: {
+    variant: { [k: string]: string };
+  },
   button: {
     common: string;
     variant: { [k: string]: string };
