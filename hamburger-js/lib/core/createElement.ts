@@ -40,6 +40,12 @@ function createElement(type: string, props: { [k: string]: any }, ...children: C
     // 1、根据 type 生成对应元素
     const element = document.createElement(type);
 
+    // 2.0、如果 props 中含有 html 标记，则不需要对其他内容做任何处理
+    if (props.dangerouslySetInnerHTML) {
+      element.innerHTML = props.dangerouslySetInnerHTML.__html
+      return element;
+    }
+
     // 2、遍历 props 参数，应用到 element 中，对于特殊的参数名进行处理
     Object.entries(props || {}).forEach(([name, value]) => {
       if (!value) return;

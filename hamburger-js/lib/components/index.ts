@@ -1,4 +1,5 @@
 export * from './View';             // 空组件
+export * from './PureHTML';         // HTML 组件
 
 export * from './input/Input';      // 输入框
 export * from './image/Image';      // 图像

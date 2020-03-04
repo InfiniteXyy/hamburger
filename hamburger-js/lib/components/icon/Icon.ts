@@ -4,7 +4,7 @@ class IconClass extends ViewClass<any> {
   constructor(name: string) {
     super();
     this.tag('i');
-    this.class('fas', `fa-${name}`); // font-awesome
+    this.class(`gg-${name}`); // css.gg
   }
 
   color(value: string) {

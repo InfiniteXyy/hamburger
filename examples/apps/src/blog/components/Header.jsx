@@ -9,10 +9,10 @@ function NavLink(text) {
 
 const Title = VStack(
   GridRow(
-    GridCol(Link('RSS 订阅')),
+    GridCol(Link('RSS 订阅').theme('muted')),
     GridCol(Text('InfiniteX').theme('h4')).centerText(),
     GridCol(
-      Icon('search').margin({ right: '3' }).color("gray"),
+      Icon('search').margin({ right: '3' }).color('gray'),
       Button('注册').theme('secondary-outline'),
     ).justifyContent('end').alignItems('center'),
   ).alignItems('center').nowrap(),

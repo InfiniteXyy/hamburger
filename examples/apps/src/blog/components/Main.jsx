@@ -1,7 +1,9 @@
 import hamburger, { Button, HStack } from 'hamburger-js';
 import { GridCol, GridRow, VStack, Text, Link } from 'hamburger-js';
-import { List } from 'hamburger-js/lib';
+import { List, PureHTML } from "hamburger-js/lib";
 import { mainPost } from '../mockData';
+import MarkdownIt from 'markdown-it'
+const md = new MarkdownIt();
 
 function ItalicTitle(text) {
   return Text(text)
@@ -32,7 +34,7 @@ function MainBlog(post) {
     VStack(
       Text(post.title).tag('h2').class('blog-post-title'),
       Text(post.subtitle).class('blog-post-meta'),
-      post.content.split('\n').map(i => Text(i)),
+      PureHTML(md.render(post.content)),
     ).class('blog-post'),
     HStack(
       Button('上一页').theme('primary').margin({ right: 3 }),
