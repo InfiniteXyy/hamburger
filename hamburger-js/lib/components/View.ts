@@ -80,8 +80,17 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public padding<T>(value: number | string | PaddingModel<T>, when?: boolean) {
     if (when === false) return this;
-    if (typeof value === 'number') {
-      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value));
+    let isPlainBoxModelObj = false;
+    if (typeof value === 'object') {
+      for (let key in value) {
+        if (typeof value[key] === 'number') {
+          isPlainBoxModelObj = true;
+          break;
+        }
+      }
+    }
+    if (typeof value === 'number' || isPlainBoxModelObj) {
+      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value as any));
     } else {
       this.class(ViewClass.getBootstrapBoxModel('p', value));
     }
@@ -90,8 +99,17 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public margin<T>(value: number | string | MarginModel<T>, when?: boolean) {
     if (when === false) return this;
-    if (typeof value === 'number') {
-      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value));
+    let isPlainBoxModelObj = false;
+    if (typeof value === 'object') {
+      for (let key in value) {
+        if (typeof value[key] === 'number') {
+          isPlainBoxModelObj = true;
+          break;
+        }
+      }
+    }
+    if (typeof value === 'number' || isPlainBoxModelObj) {
+      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value as any));
     } else {
       this.class(ViewClass.getBootstrapBoxModel('m', value));
     }

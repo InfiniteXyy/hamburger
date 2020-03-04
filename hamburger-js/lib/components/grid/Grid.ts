@@ -3,10 +3,11 @@ import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
 
 class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<GridColClass>, IFlexBox {
-  private isFlexBox = false;
+  private isFlexBox;
 
   constructor(elements: ChildElement[]) {
     super();
+    this.isFlexBox = false;
     // GridRow 的子元素必须是 GridCol，否则样式上会有问题
     this._children = elements.map(i => (i instanceof GridColClass ? i : new GridColClass([i])));
     this.class('row');
@@ -43,9 +44,10 @@ class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<G
 }
 
 class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
-  private isFlexBox = false;
+  private isFlexBox;
   constructor(elements: ChildElement[]) {
     super();
+    this.isFlexBox = false;
     this._children = elements;
     this.class('col');
   }

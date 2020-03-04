@@ -6,14 +6,12 @@ describe('stack component test', function() {
   it('should align/justify success', function() {
     const wrapper = shallow(
       VStack()
-        .align('center')
-        .justify('space-between')
+        .alignItems('center')
+        .justifyContent('between')
         .build(),
     );
-    expect(wrapper.props().style).toMatchObject({
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    });
+    expect(wrapper.props().className).toContain("align-items-center");
+    expect(wrapper.props().className).toContain("justify-content-between");
   });
 
   it('should render Children success', function() {
