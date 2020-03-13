@@ -1,4 +1,3 @@
-import StaticPage from './src/staticPage';
-
-const root = document.getElementById('root');
-root.appendChild(StaticPage);
+import dslComponent from './src/dslTest';
+import hamburger from 'hamburger-js';
+hamburger.mount(dslComponent, "root")
