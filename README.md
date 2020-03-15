@@ -86,7 +86,7 @@ function Main() {
 ```js
 // build styles with chained calls
 function BaseButton(content) {
-  return Button(content).shadow("large").border({ borderColor: "black", borderRadius: 4, borderWidth: 1 });
+  return Button(content).shadow("large").border({ color: "black", radius: 4, width: 1 });
 }
 
 const Main = HStack(
@@ -185,7 +185,7 @@ version 0.0.1
 - [x] Review
 
 version 0.0.2
-
+- [ ] DSL support
 - [ ] VSCode plugin, type `@`, and auto suggest all available components
 - [ ] compatibility with popular UI Library
 - [ ] performance test

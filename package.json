@@ -7,6 +7,7 @@
   "workspaces": [
     "hamburger-js",
     "examples/**",
+    "hamburger-loader",
     "experiment"
   ],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",

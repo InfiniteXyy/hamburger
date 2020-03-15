@@ -1,0 +1,32 @@
+{
+  "name": "hamburger-loader",
+  "version": "0.0.1",
+  "private": false,
+  "main": "./dist/index.js",
+  "author": {
+    "email": "xuyiyangwing@gmail.com",
+    "name": "Yiyang Xu"
+  },
+  "types": "./index.d.ts",
+  "keywords": [
+    "hamburger",
+    "webpack-loader",
+    "declarative"
+  ],
+  "scripts": {
+    "dev": "babel . --watch --out-file=./dist/hamburger-loader.js",
+    "build": "babel . --out-file=./dist/hamburger-loader.js"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "hamburger": "0.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-flow": "^7.8.3"
+  },
+  "dependencies": {
+  }
+}

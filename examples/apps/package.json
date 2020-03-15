@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "hamburger-js": "0.0.1",
+    "hamburger-loader": "0.0.1",
     "markdown-it": "^10.0.0",
     "moment": "^2.24.0",
     "react": "^16.9.0",

@@ -29,9 +29,9 @@ interface SizeModel {
 }
 
 interface BorderModel {
-  borderRadius?: number;
-  borderWidth?: number;
-  borderColor?: string;
+  radius?: number;
+  width?: number;
+  color?: string;
 }
 
 export class ViewClass<T extends HTMLElement> implements IBuildable {
@@ -129,10 +129,10 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public border(border: BorderModel, when?: boolean) {
     if (when === false) return this;
-    this._props.style.border = !!border.borderWidth ? 'solid' : '';
-    this._props.style.borderRadius = border.borderRadius;
-    this._props.style.borderColor = border.borderColor;
-    this._props.style.borderWidth = border.borderWidth;
+    this._props.style.border = !!border.width ? 'solid' : '';
+    this._props.style.borderRadius = border.radius;
+    this._props.style.borderColor = border.color;
+    this._props.style.borderWidth = border.width;
     return this;
   }
 

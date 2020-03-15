@@ -48,7 +48,7 @@ describe.each([HStack, VStack, Text, Button, Input])('test base html %p', functi
   it('should border correct', function() {
     const wrapper = shallow(
       Type()
-        .border({ borderRadius: 10, borderColor: 'red', borderWidth: 1 })
+        .border({ radius: 10, color: 'red', width: 1 })
         .build(),
     );
     expect(wrapper.props().style).toMatchObject({

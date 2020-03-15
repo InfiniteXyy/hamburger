@@ -6,13 +6,16 @@ import Texts from './Texts';
 import Grids from './Grids';
 import Reactive from './Reactive';
 import hamburger from 'hamburger-js';
+import Dsl from './Dsl';
+
 const Playground = VStack(
+  Dsl,
   Buttons,
   Images,
   Inputs,
   Texts,
   Grids,
-  <Reactive />,
+  <Reactive/>,
 ).class('container');
 
 export default Playground;

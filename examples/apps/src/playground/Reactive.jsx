@@ -7,7 +7,7 @@ function Counter(count, setCount) {
     Text('字体大小：' + count).tag('strong').margin({ horizontal: 10 }),
     Button('plus').onClick(() => setCount(count + 1)).theme('primary-outline'),
   )
-    .centerItems()
+    .alignItems('center')
     .margin({ vertical: 20 });
 }
 

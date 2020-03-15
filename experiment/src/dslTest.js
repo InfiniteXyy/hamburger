@@ -1,7 +1,10 @@
-import hamburger, { Text, Image, HStack, Button, VStack } from 'hamburger-js';
+// @flow
+import hamburger, { Text, Image, HStack, Button, VStack, Link } from 'hamburger-js';
 
 function betterEval(method, userArgs = {}) {
-  const argObj = { Text, Image, HStack, Button, VStack, ...userArgs };
+  const fakerArgs = { fakeTime: '2019年10月3日' };
+  const argObj = { Text, Image, HStack, Button, VStack, Link, ...userArgs, ...fakerArgs };
+  console.log(method);
   return new Function(...Object.keys(argObj), `return ${method}`)(...Object.values(argObj));
 }
 
@@ -17,7 +20,7 @@ function hbg(input) {
   };
 
   let fatherItem = root;
-  const reg = /@(\w+)(=(\w+))?/g;
+  const reg = /@([\w\\.]+)(=(\w+))?/g;
   for (let line of lines) {
     // 匹配获取元素名
     const matchedNames = line.match(/\w+/);
@@ -40,7 +43,17 @@ function hbg(input) {
     // 获取样式参数
     let match = reg.exec(line);
     while (match != null) {
-      currentItem.decorator[match[1]] = match[3] || true;
+      // 获取数值
+      let value = match[3] || true;
+      // 获取键值
+      let key: string = match[1];
+      // 键值划分
+      if (/\./.test(key)) {
+        const temp = key.split('.');
+        key = temp[0];
+        value = { [temp[1]]: value };
+      }
+      currentItem.decorator[key] = value;
       match = reg.exec(line);
     }
     // 获取参数
@@ -54,10 +67,16 @@ function hbg(input) {
     result += `${current.title}`;
     let decorators = '';
     for (let key in current.decorator) {
-      if (current.decorator[key] === true) {
-        decorators += `.${key}()`;
-      } else {
-        decorators += `.${key}("${current.decorator[key]}")`;
+      switch (typeof current.decorator[key]) {
+        case 'boolean':
+          decorators += `.${key}()`;
+          break;
+        case 'object':
+          decorators += `.${key}(${JSON.stringify(current.decorator[key])})`;
+          break;
+        default:
+          decorators += `.${key}("${current.decorator[key]}")`;
+          break;
       }
     }
     if (current.children.length === 0) {
@@ -68,8 +87,10 @@ function hbg(input) {
     for (let child of current.children) {
       dfs(child);
     }
-    if (current.father.title !== 'root') result += '),\n';
-    else result += ')';
+    if (current.children.length !== 0) {
+      result += `)${decorators}`;
+    }
+    if (current.father.title !== 'root') result += ',\n';
   }
 
   dfs(root.children[0]);
@@ -86,12 +107,13 @@ function hbg(input) {
 }
 
 const Main = hbg`
-VStack {             @padding=10 @alignItems=center
-  Image(imgLink)     @theme=thumbnail
-  Text {             @variant=secondary
-    Text(name)       @bold
-    Text(email)
+VStack {             @padding=3
+  Image(imgLink)     @theme=thumbnail @size.width=300px
+  HStack{           
+    Link(name)       @bold
+    Text(email)      @margin.left=2
   }
+  Text(fakeTime)
 Button("Follow")     @theme=primary
 }
 `.data({

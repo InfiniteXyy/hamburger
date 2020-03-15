@@ -1,5 +1,5 @@
 {
-  "packages": ["hamburger-js", "examples/**", "experiment"],
+  "packages": ["hamburger-js", "examples/**", "experiment", "hamburger-loader"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "0.0.1"
