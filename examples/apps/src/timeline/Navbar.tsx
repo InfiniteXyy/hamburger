@@ -6,8 +6,8 @@ const MyNav = HStack(
     Image('https://via.placeholder.com/120').theme('circle').size(40),
   )
     .class('container')
-    .centerItems()
-    .expandItems()
+    .alignItems('center')
+    .inflate()
     .padding({ vertical: 10 }),
 )
   .shadow('small');

@@ -5,7 +5,7 @@ function MessageHeader(message) {
   return HStack(
     Text(message.author.username, Link(` @${message.author.username}`)).bold(),
     Text(moment(message.createdAt).fromNow()),
-  ).expandItems();
+  ).inflate();
 }
 
 function Message(message) {

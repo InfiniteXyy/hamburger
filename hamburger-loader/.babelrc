@@ -1,9 +1,15 @@
 {
   "presets": [
-    "@babel/preset-env",
-    "@babel/preset-flow"
+    "@babel/preset-flow",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ]
   ],
-  "sourceFileName": "./index.js",
   "ignore": [
     "./dist/**"
   ]

@@ -53,7 +53,7 @@ function TodoList(props: ITodoListProps) {
       .margin({ top: 30 })
       .padding({ horizontal: 10 })
       .padding({ bottom: 10 }, props.todoList.length !== 0)
-      .border({ borderRadius: 8 })
+      .border({ radius: 8 })
       .style({ backgroundColor: "white" })
       .build()}
   </div>;

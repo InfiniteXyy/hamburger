@@ -26,14 +26,14 @@ function ListItem(props: IListItemProps) {
         .margin(0)
         .fontSize(24)
         .class("list-item", { completed: item.finished })
-    ).align("center"),
+    ).alignItems("center"),
     Button("×")
       .onClick(onRemove)
       .class("delete-icon")
   )
     .class("list-item-container")
-    .align("center")
-    .justify("space-between")
+    .alignItems("center")
+    .justifyContent("between")
     .size({ width: 550, height: 58 });
 }
 

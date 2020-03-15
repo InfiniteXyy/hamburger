@@ -7,7 +7,7 @@ VStack {             @padding=3 @border.color=gray @border.width=3
     Link(fakeEmail)  @bold
   }
   Text(fakeTime)
-Button("Follow")     @theme=primary
+  Button("Follow")     @theme=primary
 }
 `.data({
   imgLink: 'https://static.runoob.com/images/demo/demo2.jpg',

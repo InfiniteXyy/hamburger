@@ -76,6 +76,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
       if ('left' in value) return `${type}l-${value.left}`;
       if ('right' in value) return `${type}r-${value.right}`;
     }
+    return '';
   }
 
   public padding<T>(value: number | string | PaddingModel<T>, when?: boolean) {

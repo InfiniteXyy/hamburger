@@ -14,8 +14,8 @@
     "declarative"
   ],
   "scripts": {
-    "dev": "babel . --watch --out-file=./dist/hamburger-loader.js",
-    "build": "babel . --out-file=./dist/hamburger-loader.js"
+    "dev": "babel . --watch --out-dir=./dist",
+    "build": "babel . --out-dir=./dist"
   },
   "license": "MIT",
   "peerDependencies": {
