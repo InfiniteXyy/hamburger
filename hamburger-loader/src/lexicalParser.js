@@ -44,7 +44,7 @@ function lexParse(code: string): TokenLine[] {
   // 获取声明：Element(Parameter)
   for (let line of result) {
     const matchKey = /^(\w+)/g.exec(line.source);
-    const matchValue = /\(([\w"']+)\)/g.exec(line.source);
+    const matchValue = /\(("?.*"?)\)/g.exec(line.source);
     if (matchKey) line.define = { key: matchKey[1] };
     if (matchValue && matchKey) line.define.value = matchValue[1];
   }

@@ -42,7 +42,7 @@ function dfs(current, resultObject) {
     resultObject.content += ")".concat(decorators);
   }
 
-  if (current.father.title !== 'root') resultObject.content += ',\n';
+  resultObject.content += ',\n';
 }
 
 function codeGenerator(ast) {
@@ -50,7 +50,9 @@ function codeGenerator(ast) {
     content: '',
     argList: []
   };
-  dfs(ast, resultObject);
+  dfs(ast, resultObject); // 去除最后一个逗号
+
+  resultObject.content = resultObject.content.substr(0, resultObject.content.lastIndexOf(','));
   return resultObject;
 }
 

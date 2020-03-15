@@ -1,9 +1,0 @@
-VStack {             @padding=3 @border.color=gray @border.width=3
-  Image(imgLink)     @theme=thumbnail @size.width=300px
-  HStack {
-    Text(name)       @margin.right=2
-    Link(fakeEmail)  @bold
-  }
-  Text(fakeTime)
-  Button("Follow")     @theme=primary
-}

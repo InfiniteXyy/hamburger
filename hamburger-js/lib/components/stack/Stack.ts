@@ -5,9 +5,12 @@ import { flatMap } from '../../utils';
 import theme from '../../themes';
 
 class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>>, IFlexBox, IThemeable {
+  private isFlex: boolean;
+
   constructor(private isHorizontal: boolean, elements: ChildElement[]) {
     super();
     this._children = elements;
+    this.isFlex = isHorizontal;
     this.class(isHorizontal ? 'd-flex' : null);
   }
 
@@ -19,11 +22,19 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
 
   // 布局方法
   public justifyContent(position) {
+    if (!this.isFlex) {
+      this.isFlex = true;
+      this.class('d-flex', 'flex-column');
+    }
     this.class(`justify-content-${position}`);
     return this;
   }
 
   public alignItems(position) {
+    if (!this.isFlex) {
+      this.isFlex = true;
+      this.class('d-flex', 'flex-column');
+    }
     this.class(`align-items-${position}`);
     return this;
   }

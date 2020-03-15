@@ -35,13 +35,15 @@ function dfs(current: TreeNode, resultObject: JSResultObject) {
   if (current.children.length !== 0) {
     resultObject.content += `)${decorators}`;
   }
-  if (current.father.title !== 'root') resultObject.content += ',\n';
+  resultObject.content += ',\n';
 }
 
 
 function codeGenerator(ast: TreeNode): JSResultObject {
   const resultObject: JSResultObject = { content: '', argList: [] };
   dfs(ast, resultObject);
+  // 去除最后一个逗号
+  resultObject.content = resultObject.content.substr(0, resultObject.content.lastIndexOf(','));
   return resultObject;
 }
 

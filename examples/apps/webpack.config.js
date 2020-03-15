@@ -28,6 +28,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.hbg$/i,
+        use: ['raw-loader'],
+      },
     ],
   },
   resolve: {
@@ -36,5 +40,4 @@ module.exports = {
   output: {
     filename: 'bundle.js',
   },
-
 };

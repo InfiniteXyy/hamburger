@@ -42,7 +42,7 @@ const fakerArgs = { Time: '2019年10月3日', Name: 'xyy', Email: 'xuyiyangwing@
 
 function betterEval(jsCodeObj: JSResultObject, userArgs = {}) {
   const argObj = { ...HamburgerComponents, ...userArgs };
-  console.log('eval: ' + jsCodeObj.content);
+  console.info('eval: ' + jsCodeObj.content);
   for (let i of jsCodeObj.argList) {
     if (!argObj.hasOwnProperty(i)) {
       if (i.startsWith('fake')) {
@@ -57,9 +57,11 @@ function betterEval(jsCodeObj: JSResultObject, userArgs = {}) {
 
 
 function hbg(hbgSource, ...keys) {
-  const code = String.raw(hbgSource, ...keys);
-
+  let code;
+  if (typeof hbgSource === 'string') code = hbgSource;
+  else code = String.raw(hbgSource, ...keys);
   const tokens = lexParse(code);
+
   const ast = syntaxParse(tokens);
   const jsCode = codeGenerator(ast);
   return {

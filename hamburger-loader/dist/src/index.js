@@ -52,7 +52,7 @@ function betterEval(jsCodeObj) {
 
   var argObj = _objectSpread({}, HamburgerComponents, {}, userArgs);
 
-  console.log('eval: ' + jsCodeObj.content);
+  console.info('eval: ' + jsCodeObj.content);
 
   for (var i of jsCodeObj.argList) {
     if (!argObj.hasOwnProperty(i)) {
@@ -68,11 +68,13 @@ function betterEval(jsCodeObj) {
 }
 
 function hbg(hbgSource) {
+  var code;
+
   for (var _len = arguments.length, keys = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     keys[_key - 1] = arguments[_key];
   }
 
-  var code = String.raw(hbgSource, ...keys);
+  if (typeof hbgSource === 'string') code = hbgSource;else code = String.raw(hbgSource, ...keys);
   var tokens = (0, _lexicalParser.default)(code);
   var ast = (0, _syntaxParser.default)(tokens);
   var jsCode = (0, _codeGenerator.default)(ast);
