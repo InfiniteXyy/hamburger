@@ -5,7 +5,7 @@ function MessageHeader(message) {
   return HStack(
     Text(message.author.username, Link(` @${message.author.username}`)).bold(),
     Text(moment(message.createdAt).fromNow()),
-  ).inflate();
+  ).justifyContent("between");
 }
 
 function Message(message) {
@@ -21,7 +21,7 @@ function Message(message) {
         .hide(message.hasImage)
         .theme('thumbnail')
         .style({ maxHeight: 220 }),
-    ).inflate(),
+    ).class('w-100'),
   ).margin({ top: 10, bottom: 20 });
 }
 

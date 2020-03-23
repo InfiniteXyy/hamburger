@@ -7,7 +7,7 @@ const MyNav = HStack(
   )
     .class('container')
     .alignItems('center')
-    .inflate()
+    .justifyContent('between')
     .padding({ vertical: 10 }),
 )
   .shadow('small');

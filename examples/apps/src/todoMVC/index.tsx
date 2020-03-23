@@ -2,9 +2,8 @@ import { useReducer } from "react";
 import hamburger from "hamburger-js";
 import React from "react";
 import "./index.css";
-import { Input, Text, VStack } from "hamburger-js";
 import TodoList from "./TodoList";
-import { appReducer, IAction, IAppState, initState, setInput } from "./store";
+import { appReducer, IAction, IAppState, initState } from "./store";
 
 export const appContext = React.createContext<{
   state: IAppState;

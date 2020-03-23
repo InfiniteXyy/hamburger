@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "hamburger-js";
 import "./Checkbox.css";
 

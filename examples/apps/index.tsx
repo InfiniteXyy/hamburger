@@ -1,7 +1,6 @@
 import React from 'react';
-import App from './src';
 import hamburger, { applyTheme, bootstrapTheme } from 'hamburger-js';
+import App from './src';
 
 applyTheme(bootstrapTheme);
 hamburger.mount(App, 'root');
-// console.log(hamburger.buildStaticHTML(App));

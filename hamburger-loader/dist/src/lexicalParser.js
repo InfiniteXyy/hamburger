@@ -35,7 +35,7 @@ function lexParse(code) {
 
   for (var _line of result) {
     var matchKey = /^(\w+)/g.exec(_line.source);
-    var matchValue = /\(([\w"']+)\)/g.exec(_line.source);
+    var matchValue = /\(("?.*"?)\)/g.exec(_line.source);
     if (matchKey) _line.define = {
       key: matchKey[1]
     };
