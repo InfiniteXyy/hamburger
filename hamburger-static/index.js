@@ -13,7 +13,6 @@ class HamburgerStaticConfig {
   }
   output(outputPath) {
     this.config.outputPath = outputPath;
-    console.log(this.config);
     this.config.routeMap.forEach(route => {
       const pagePath = path.join(outputPath, `${route.path || 'index'}.html`);
       const Node = route.view;

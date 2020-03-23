@@ -4,12 +4,20 @@
   "main": "index.js",
   "devDependencies": {
     "hamburger-js": "0.0.1",
+    "hamburger-loader": "0.0.1",
     "hamburger-static": "0.0.1",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/node": "^7.8.7"
+    "sucrase": "^3.12.1",
+    "nodemon": "^2.0.2",
+    "live-server": "^1.2.1",
+    "concurrently": "^5.1.0"
   },
   "scripts": {
-    "build": "babel-node index.js"
+    "build": "sucrase-node index.js",
+    "serve": "live-server ./dist",
+    "watch": "nodemon --exec sucrase-node index.js",
+    "dev": "concurrently \"npm run serve\" \"npm run watch\""
+  },
+  "nodemonConfig": {
+    "ignore": ["dist/*"]
   }
 }

@@ -1,16 +1,12 @@
-import { IBuildable } from "../common";
-import { createElement } from "../core";
+import { ViewClass } from './View';
 
-class PureHTMLClass implements IBuildable {
-  constructor(private html: string) {
-  }
-
-  build() {
-    return createElement("div", { dangerouslySetInnerHTML: { __html: this.html } });
+class PureHTMLClass extends ViewClass<HTMLElement> {
+  constructor(html: string) {
+    super();
+    this._props.dangerouslySetInnerHTML = { __html: html };
   }
 }
 
 export function PureHTML(html: string) {
   return new PureHTMLClass(html);
-
 }

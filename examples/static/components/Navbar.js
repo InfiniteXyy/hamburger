@@ -3,6 +3,7 @@ import { HStack, Link } from 'hamburger-js';
 export default function() {
   return HStack(
     Link('home').href('/'),
-    Link('about').href('/about'),
-  ).mapItem(i => i.margin({ right: 10 }));
+    Link('detail').href('/detail.html'),
+    Link('about').href('/about.html'),
+  ).mapItem(i => i.margin({ right: 10 })).margin({ bottom: '3' });
 }

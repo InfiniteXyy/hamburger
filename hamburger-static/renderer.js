@@ -58,6 +58,12 @@ function walk(root) {
   //   root = { _props, _children, _tag: root.type };
   // }
 
+  let innerResult = '';
+  // 如果 props 中含有 html 标记，则 children 即为简单的 html 块
+  if ((root._props || {}).dangerouslySetInnerHTML) {
+    innerResult += root._props.dangerouslySetInnerHTML.__html;
+  }
+
   // 处理 props
   const props = Object.entries(root._props || {}).reduce((propString, [propName, propValue]) => {
     if (propName === 'className') propName = 'class';
@@ -67,15 +73,14 @@ function walk(root) {
   }, '');
 
   // 处理 children
-  let childrenResult = '';
   if (Array.isArray(root._children)) {
     for (const child of root._children) {
-      childrenResult += walk(child);
+      innerResult += walk(child);
     }
   }
 
   let result = `<${root._tag}${props}>`;
-  result += childrenResult;
+  result += innerResult;
   if (needCollapse(root._tag)) result += `</${root._tag}>`;
   return result;
 }

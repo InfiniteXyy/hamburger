@@ -6,4 +6,4 @@ const data = {
   name: 'xyy',
 };
 
-export default hbg(template).data(data);
+export default hbg(data)(template);

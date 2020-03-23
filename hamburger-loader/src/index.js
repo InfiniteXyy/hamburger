@@ -55,25 +55,30 @@ function betterEval(jsCodeObj: JSResultObject, userArgs = {}) {
   return new Function(...Object.keys(argObj), `return ${jsCodeObj.content}`)(...Object.values(argObj));
 }
 
-
-function hbg(hbgSource, ...keys) {
-  let code;
-  if (typeof hbgSource === 'string') code = hbgSource;
-  else code = String.raw(hbgSource, ...keys);
+function renderToNode(code: string, userArgs = {}) {
   const tokens = lexParse(code);
 
   const ast = syntaxParse(tokens);
   const jsCode = codeGenerator(ast);
-  return {
-    userArgs: {},
-    build() {
-      return betterEval(jsCode, this.userArgs).build();
-    },
-    data(args) {
-      this.userArgs = args;
-      return this;
-    },
-  };
+  return betterEval(jsCode, userArgs);
+}
+
+function hbg(userArgs, ..._keys) {
+  if (typeof userArgs === 'object') {
+    // 使用参数的情况
+    return (hbgSource, ...keys) => {
+      let code;
+      if (typeof hbgSource === 'string') code = hbgSource;
+      else code = String.raw(hbgSource, ...keys);
+      return renderToNode(code, userArgs);
+    };
+  } else {
+    // 不使用参数的情况
+    let code;
+    if (typeof userArgs === 'string') code = userArgs;
+    else code = String.raw(userArgs, ..._keys);
+    return renderToNode(code, userArgs);
+  }
 }
 
 export default hbg;
