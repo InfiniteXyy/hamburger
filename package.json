@@ -1,13 +1,14 @@
 {
-  "name": "react-test",
+  "name": "hamburger",
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
-  "repository": "https://github.com/InfiniteXyy/hamburger-js.git",
+  "repository": "https://github.com/hamburger-js/hamburger",
   "workspaces": [
     "hamburger-js",
-    "examples/**",
     "hamburger-loader",
+    "hamburger-cli",
+    "examples/**",
     "experiment"
   ],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
@@ -19,7 +20,6 @@
     "playground": "cd examples/basic && yarn start"
   },
   "devDependencies": {
-    "lerna": "^3.16.4",
     "prettier": "^1.18.2"
   }
 }
