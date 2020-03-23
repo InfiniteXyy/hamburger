@@ -1,0 +1,15 @@
+{
+  "name": "hamburger-static-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "hamburger-js": "0.0.1",
+    "hamburger-static": "0.0.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/node": "^7.8.7"
+  },
+  "scripts": {
+    "build": "babel-node index.js"
+  }
+}

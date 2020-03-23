@@ -5,9 +5,7 @@
   "private": true,
   "repository": "https://github.com/hamburger-js/hamburger",
   "workspaces": [
-    "hamburger-js",
-    "hamburger-loader",
-    "hamburger-cli",
+    "hamburger-*",
     "examples/**",
     "experiment"
   ],

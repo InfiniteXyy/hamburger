@@ -1,7 +1,14 @@
 {
   "name": "hamburger-cli",
-  "version": "1.0.0",
-  "main": "src/hamburger.js",
+  "version": "0.0.1",
+  "private": false,
+  "bin": {
+    "hbg": "./dist/hamburger.js"
+  },
+  "main": "./dist/hamburger.js",
+  "files": [
+    "./dist*"
+  ],
   "dependencies": {
     "commander": "^5.0.0",
     "enquirer": "^2.3.4"
@@ -9,7 +16,8 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/cli": "^7.8.4",
-    "@babel/preset-env": "^7.9.0"
+    "@babel/preset-env": "^7.9.0",
+    "hamburger-js": "0.0.1"
   },
   "scripts": {
     "dev": "babel -w ./src --out-dir=dist",

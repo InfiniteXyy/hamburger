@@ -22,6 +22,6 @@ export interface IFlexBox {
   alignItems(position: 'center'): this;
 }
 
-const isReact = true;
+const isReact = false;
 
 export { isReact };

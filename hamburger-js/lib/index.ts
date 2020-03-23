@@ -1,12 +1,13 @@
 export * from './components';
 export * from './themes';
-import { mount, buildStaticHTML, createElement } from './core';
+import { mount, createElement, buildElement } from './core';
+export { ChildElement } from './common';
 
 // 对外 API
 const hamburger = {
   mount,
-  buildStaticHTML,
   createElement,
+  buildElement
 };
 
 export default hamburger;
