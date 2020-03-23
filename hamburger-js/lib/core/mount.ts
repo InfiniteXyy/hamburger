@@ -1,19 +1,72 @@
-import { ChildElement, HElement, isReact } from '../common';
-import { buildElement } from '../core';
-import ReactDOM from 'react-dom';
+import { ChildElement, DOMElement } from '../common';
+import hamburger from '../index';
+import middleware from './platformMiddleware';
 
 /**
- *
- * @param {*} element
- * @param {string} id
+ * 将 styleObject 类型转变为 inline css
  */
+export function toCSS(cssObj: { [k: string]: string }): string {
+  let result = '';
+  for (const key in cssObj) {
+    const value = cssObj[key];
+    const propName = key.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+    let propValue = value;
+    if (Number.isInteger(+value)) {
+      propValue += 'px';
+    }
+    result += `${propName}:${propValue};`;
+  }
+  return result;
+}
+
+function domfy(root: DOMElement): Element | Text {
+  // 将 DOMElement 组件转为标准的 document node
+  const { type, children } = root!;
+  const props = root.props || {};
+
+  if (typeof root.type === 'function') {
+    console.error('检测到使用函数组件，请使用 React 内核');
+    return document.createElement('div');
+  }
+  if (type === 'svg') {
+    console.error('检测到使用 JSX SVG 组件，请使用 React 内核');
+  }
+
+  // 1、若 type 为 null 说明是字符串
+  if (type === null) return document.createTextNode(props.content || '');
+
+  // 2、根据 type 生成对应元素
+  const element = document.createElement(type);
+
+  // 3、如果 props 中含有 html 标记，则不需要对其他内容做任何处理
+  if (props.dangerouslySetInnerHTML && props.dangerouslySetInnerHTML.__html) {
+    element.innerHTML = props.dangerouslySetInnerHTML.__html;
+    return element;
+  }
+
+  // 4、遍历 props 参数，应用到 element 中，对于特殊的参数名进行处理
+  Object.entries(props || {}).forEach(([name, value]) => {
+    if (!value) return;
+    if (name === 'className') element.setAttribute('class', value);
+    else if (name === 'style') element.setAttribute('style', toCSS(value));
+    else if (name === 'key') return;
+    else element.setAttribute(name, value);
+  });
+
+  // 5、将 children 中的每一个 DOMElement 转变为 Element 元素 并添加到父组件中，children 默认为 []
+  children.map(domfy).forEach(child => element.appendChild(child));
+  return element;
+}
+
 function mount(element: ChildElement, id: string) {
   const target = document.getElementById(id);
   if (!target) return;
-  // 根据配置的内核，buildElement 返回的 element 类型也会不同
-  // React 会返回 JSX.Element，默认会返回浏览器自带的 Element，因此可以直接使用 appendChild
-  if (isReact) ReactDOM.render(buildElement(element) as JSX.Element, target);
-  else target.appendChild(buildElement(element) as Element);
+  if (hamburger.core.length !== 0) return middleware.mount(element, id);
+  if (typeof element === 'string' || typeof element === 'number') {
+    target.appendChild(document.createTextNode(element.toString()));
+  } else {
+    target.appendChild(domfy(element.build()));
+  }
 }
 
 export default mount;

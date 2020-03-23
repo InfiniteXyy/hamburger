@@ -67,30 +67,38 @@ function betterEval(jsCodeObj) {
   return new Function(...Object.keys(argObj), "return ".concat(jsCodeObj.content))(...Object.values(argObj));
 }
 
-function hbg(hbgSource) {
-  var code;
-
-  for (var _len = arguments.length, keys = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    keys[_key - 1] = arguments[_key];
-  }
-
-  if (typeof hbgSource === 'string') code = hbgSource;else code = String.raw(hbgSource, ...keys);
+function renderToNode(code) {
+  var userArgs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var tokens = (0, _lexicalParser.default)(code);
   var ast = (0, _syntaxParser.default)(tokens);
   var jsCode = (0, _codeGenerator.default)(ast);
-  return {
-    userArgs: {},
+  return betterEval(jsCode, userArgs);
+}
 
-    build() {
-      return betterEval(jsCode, this.userArgs).build();
-    },
+function hbg(userArgs) {
+  if (typeof userArgs === 'object') {
+    // 使用参数的情况
+    return function (hbgSource) {
+      var code;
 
-    data(args) {
-      this.userArgs = args;
-      return this;
+      for (var _len2 = arguments.length, keys = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        keys[_key2 - 1] = arguments[_key2];
+      }
+
+      if (typeof hbgSource === 'string') code = hbgSource;else code = String.raw(hbgSource, ...keys);
+      return renderToNode(code, userArgs);
+    };
+  } else {
+    // 不使用参数的情况
+    var code;
+
+    for (var _len = arguments.length, _keys = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      _keys[_key - 1] = arguments[_key];
     }
 
-  };
+    if (typeof userArgs === 'string') code = userArgs;else code = String.raw(userArgs, ..._keys);
+    return renderToNode(code, userArgs);
+  }
 }
 
 var _default = hbg;

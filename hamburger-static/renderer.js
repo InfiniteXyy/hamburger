@@ -62,6 +62,7 @@ function walk(root) {
   // 如果 props 中含有 html 标记，则 children 即为简单的 html 块
   if ((root._props || {}).dangerouslySetInnerHTML) {
     innerResult += root._props.dangerouslySetInnerHTML.__html;
+    delete root._props.dangerouslySetInnerHTML;
   }
 
   // 处理 props

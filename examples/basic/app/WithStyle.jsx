@@ -21,9 +21,11 @@ function BaseButton(content) {
   return Button(content).style(styles.baseButton);
 }
 
-const WithStyle = HStack(
-  BaseButton('Primary').style(styles.buttonPrimary),
-  BaseButton('Secondary').style(styles.buttonSuccess),
-).margin({ top: 10 });
+function WithStyle() {
+  return HStack(
+    BaseButton('Primary').style(styles.buttonPrimary),
+    BaseButton('Secondary').style(styles.buttonSuccess),
+  ).margin({ top: 10 });
+}
 
 export { WithStyle };

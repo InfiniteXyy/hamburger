@@ -1,7 +1,6 @@
 import { HStack, VStack } from '..';
 import { createPlaceHolder } from '../../utils';
 import { ChildElement, IBuildable } from '../../common';
-import { buildElement } from '../../core';
 
 type LayoutType =
   | 'top-main'
@@ -29,22 +28,22 @@ class LayoutClass implements IBuildable {
   }
 
   public top(element: ChildElement) {
-    this.topElement = buildElement(element);
+    this.topElement = element;
     return this;
   }
 
   public bottom(element: ChildElement) {
-    this.bottomElement = buildElement(element);
+    this.bottomElement = element;
     return this;
   }
 
   public main(element: ChildElement) {
-    this.mainElement = buildElement(element);
+    this.mainElement = element;
     return this;
   }
 
   public aside(element: ChildElement) {
-    this.asideElement = buildElement(element);
+    this.asideElement = element;
     return this;
   }
 

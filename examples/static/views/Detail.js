@@ -2,7 +2,7 @@ import { hbg } from 'hamburger-loader';
 import { VStack } from 'hamburger-js';
 import Navbar from '../components/Navbar';
 
-export default function Detail() {
+export default function() {
   const data = {
     imgLink: 'https://static.runoob.com/images/demo/demo2.jpg',
     name: 'xyy',

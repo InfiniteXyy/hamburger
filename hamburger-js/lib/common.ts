@@ -1,11 +1,15 @@
-// 兼容 React 和 HTML 元素
-export type HElement = Element | JSX.Element | string | null;
-
 // 元素的子元素必须是 元素 或 元素的构造器
-export type ChildElement = HElement | IBuildable;
+export type ChildElement = string | number | IBuildable;
+
+// 经过 build 后的元素
+export type DOMElement = {
+  type: string | null;
+  props: { [key: string]: any };
+  children: DOMElement[];
+};
 
 export interface IBuildable {
-  build(): HElement;
+  build(): DOMElement;
 }
 
 export interface IThemeable {
@@ -21,7 +25,3 @@ export interface IFlexBox {
   justifyContent(position: 'center' | 'end'): this;
   alignItems(position: 'center'): this;
 }
-
-const isReact = true;
-
-export { isReact };

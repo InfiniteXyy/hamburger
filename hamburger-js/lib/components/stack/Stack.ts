@@ -1,4 +1,3 @@
-import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 import { ChildElement, IChildIterable, IFlexBox, IThemeable } from '../../common';
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';

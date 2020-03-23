@@ -1,9 +1,10 @@
 // setup file
+import hamburger from '../lib';
 const { configure } = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 
-// set theme to default bootstrap
-// const hamburger = require('hamburger-js')
-// hamburger.applyTheme(hamburger.bootstrapTheme)
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+hamburger.setUp(React, ReactDOM);
 configure({ adapter: new Adapter() });

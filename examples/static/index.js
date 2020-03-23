@@ -9,5 +9,5 @@ staticWebManager()
     { path: 'about', view: About() },
     { path: 'detail', view: Detail() }],
   )
-  .template('./index.html', 'root')
+  .template('./public/index.html', 'root')
   .output('./dist');

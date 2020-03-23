@@ -5,6 +5,6 @@ import Blog from "./blog";
 import { VStack } from "hamburger-js";
 
 // const App = TodoMVC;
-const App = VStack(Playground);
-// const App = Blog;
+// const App = VStack(Playground);
+const App = Blog;
 export default App;

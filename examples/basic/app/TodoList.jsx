@@ -3,7 +3,7 @@ import { HStack, VStack, Input, Button, Text } from 'hamburger-js';
 
 function FlatButton() {
   return Button('✖')
-    .border({ borderWidth: 0 })
+    .border({ width: 0 })
     .style({ color: '#9b9b9b' });
 }
 
@@ -34,20 +34,16 @@ export default function TodoList() {
         .props({ checked: importantCheck }),
       Button('add').onClick(onAdd),
     )
-      .justify('space-between')
-      .align('center'),
-    ...list.map(item =>
+      .justifyContent('between')
+      .alignItems('center'),
+    list.map(item =>
       HStack(
-        Text(item.title)
-          .color('blue')
-          .color('red', item.important)
-          .bold(item.important),
+        Text(item.title).color('blue').color('red', item.important).bold(item.important),
         FlatButton().onClick(onRemove(item)),
       )
-        .justify('space-between')
+        .justifyContent('between')
         .margin({ top: 10 }),
     ),
   )
-    .size({ width: 250 })
     .build();
 }
