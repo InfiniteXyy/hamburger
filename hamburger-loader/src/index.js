@@ -42,13 +42,12 @@ const fakerArgs = { Time: '2019年10月3日', Name: 'xyy', Email: 'xuyiyangwing@
 
 function betterEval(jsCodeObj: JSResultObject, userArgs = {}) {
   const argObj = { ...HamburgerComponents, ...userArgs };
-  console.info('eval: ' + jsCodeObj.content);
   for (let i of jsCodeObj.argList) {
     if (!argObj.hasOwnProperty(i)) {
+      // 将 dsl 中使用到的 fake* 变量替换为 mock 数据
+      // 若存在用户定义的 fake 变量，则优先使用用户的变量
       if (i.startsWith('fake')) {
         argObj[i] = fakerArgs[i.replace('fake', '')] || i;
-      } else {
-        argObj[i] = i;
       }
     }
   }
