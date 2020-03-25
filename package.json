@@ -12,10 +12,15 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build:cli": "cd hamburger-cli && yarn build",
     "build:lib": "cd hamburger-js && yarn build",
-    "test:lib": "cd hamburger-js && yarn build && yarn test",
+    "build:dsl": "cd hamburger-loader && yarn build",
+    "test:lib": "cd hamburger-js && yarn test",
     "dev:lib": "cd hamburger-js && yarn dev",
-    "playground": "cd examples/basic && yarn start"
+    "build": "yarn build:cli && yarn build:lib && yarn build:cli && yarn build:dsl",
+    "test": "yarn test",
+    "dev": "yarn dev:lib",
+    "playground": "cd examples/apps && yarn start"
   },
   "devDependencies": {
     "prettier": "^1.18.2"

@@ -1,3 +1,5 @@
+import { ViewClass } from "./components";
+
 // 元素的子元素必须是 元素 或 元素的构造器
 export type ChildElement = string | number | IBuildable;
 
@@ -16,7 +18,7 @@ export interface IThemeable {
   theme(...name: string[]): this;
 }
 
-export interface IChildIterable<ChildType> {
+export interface IChildIterable<ChildType extends ViewClass<any>> {
   mapItem(wrapper: (item: ChildType) => ChildElement);
 }
 
