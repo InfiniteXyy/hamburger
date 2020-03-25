@@ -1,9 +1,9 @@
 import { ChildElement, DOMElement } from '../common';
-import middleware from './platformMiddleware';
 import hamburger from '../index';
 
-function createElement(type: string, props: { [k: string]: any }, ..._children: ChildElement[]): DOMElement {
-  let children = Array.isArray(_children) ? _children : [_children];
+// 由组件的build方法调用，不建议直接使用
+function createElement(type: string, props: { [k: string]: any }, ...children): DOMElement {
+  if (Array.isArray(children[0])) children = children[0]; // 适配 JSX 语法
   const hamburgerChildren = children.map(i => {
     if (typeof i === 'string' || typeof i === 'number') {
       return { type: null, props: { content: i.toString() }, children: [] };
@@ -19,11 +19,8 @@ function createElement(type: string, props: { [k: string]: any }, ..._children: 
     props,
     children: hamburgerChildren,
   };
-  if (hamburger.core.length === 0) {
-    return result;
-  } else {
-    return middleware.createElement(result);
-  }
+
+  return hamburger.platform.createElement(result);
 }
 
 export default createElement;

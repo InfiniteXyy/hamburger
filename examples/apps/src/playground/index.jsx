@@ -8,14 +8,8 @@ import Reactive from './Reactive';
 import hamburger from 'hamburger-js';
 import Dsl from './Dsl';
 
-const Playground = VStack(
-  Dsl,
-  Buttons,
-  Images,
-  Inputs,
-  Texts,
-  Grids,
-  <Reactive/>,
-).class('container');
+function Playground() {
+  return VStack(Dsl, Buttons, Images, Inputs, Texts, Grids, <Reactive />).class('container');
+}
 
 export default Playground;

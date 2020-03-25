@@ -184,6 +184,6 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   }
 
   public build() {
-    return createElement(this._tag, this._props, ...this._children);
+    return createElement(this._tag, this._props, this._children);
   }
 }
