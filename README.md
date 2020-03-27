@@ -33,39 +33,18 @@ Text('...').color('red').bold();
 ```bash
 git clone https://github.com/hamburger-js/hamburger.git
 cd hamburger
-yarn # or npm i
-yarn dev:lib
-yarn playground
+yarn
+yarn build
+cd examples
+# choose any template you are interested with
 ```
 
 ## Features
 
 #### Content in the first place
-
 ```jsx harmony
 /*
- * with traditional jsx
- * you have to manage styles in another object, or use css className
- */
-function App2() {
-  return (
-    <div>
-      <div style={{ padding: 16 }}>
-        <div style={styles.title}>Declarative UI</div>
-        <div style={styles.subtitle}>Super Easy</div>
-        <div style={styles.dflex}>
-          <div style={{ marginRight: 4 }}>made by</div>
-          <div style={styles.author}>InfiniteX</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/*
- * with declarative api
- * You can see that the Annoying duplicated `<div style={{` was all removed!
- * 😊 And the most important thing, content, is put in the very first place.
+ * The most important thing, content, is always put in the very first place.
  */
 function Main() {
   return VStack(
@@ -76,55 +55,75 @@ function Main() {
         Text('made by').margin({ right: 4 }),
         Text('InfiniteX').bold()
       ),
-    ).padding(16),
+    ).shadow("small"),
   );
 }
 ```
 
-#### Easy to write higher order styled components
 
+#### Use DSL to simplify the code
+```
+// variable start with "fake" will turn into mock data by the platform
+
+HStack {               @padding=3 @margin.vertical=3 @size.width=550px @shadow @border.radius=10px
+  Image(imgLink)       @theme=thumbnail @size.width=300px @margin.right=3
+  VStack {
+    Text(name)         @margin.right=3 @margin.bottom=0 @theme=h3
+    Link(fakeEmail)    @bold @margin.bottom=3
+    Text(fakeTime)
+    Button("Follow")   @theme=primary
+  }
+}
+```
+
+#### Build reactive web use traditional Observer mode. (no vdom)
 ```js
-// build styles with chained calls
-function BaseButton(content) {
-  return Button(content).shadow("large").border({ color: "black", radius: 4, width: 1 });
-}
-
-const Main = HStack(
-  BaseButton('Primary').backgroundColor("blue"),
-  BaseButton('Secondary').backgroundColor("gray"),
-).margin({ top: 10 });
-```
-
-#### Work fine with existing jsx
-
-```jsx harmony
-function Counter() {
-  const [count, setCount] = useState(0);
-  return HStack(
-    Text(count),
-    <button onClick={() => setCount(count - 1)}>minus</button>,
-    <button onClick={() => setCount(count + 1)}>add</button>
-  ).build();
-}
-```
-
-#### All declaration are in control with condition
-
-```jsx harmony
-function Main(props) {
-  const { isDisabled, isImmportant } = props;
-  return HStack(
-    Text('love hamburger')
-      .color('blue')
-      .color('red', isImportant),
-    Button('click me')
-      .content('disabled', isDisabled)
-      .disabled(isDisabled),
+function counter(data) {
+  return VStack(
+    Text(data.count).theme('h1'),
+    Button('add')
+      .onClick(() => data.count++) // just change the data
+      .theme('primary'),
   );
 }
+
+function anotherList({ count }) {
+  return VStack(
+    Text('something').fontSize(count),
+  );
+}
+
+function root() {
+  const provider = listen({ count: 10 });
+  return VStack(
+    provider(counter)(),
+    Text("all subscriber will automatically update when data changes"),
+    provider(anotherList)(),
+  );
+}
+
+export default root;
 ```
 
-#### Easy to use utils
+#### Build static website
+```js
+// generate static web with declarative API
+import staticWebManager from 'hamburger-static';
+import About from './views/About';
+import Home from './views/Home';
+import Detail from './views/Detail';
+
+staticWebManager()
+  .route([
+    { path: '', view: Home() },
+    { path: 'about', view: About() },
+    { path: 'detail', view: Detail() }],
+  )
+  .template('./public/index.html', 'root')
+  .output('./dist');
+```
+
+#### A bunch of useful components
 
 ```jsx harmony
 export default function Main() {
@@ -137,12 +136,23 @@ export default function Main() {
 }
 ```
 
-
-#### Work together with modern UI Library
+#### Work together with modern Library such as React and Bootstrap
 
 ```jsx harmony
-// in index.ts
-hamburger.applyTheme(bootstrapTheme)
+// in index.js
+hamburger.setUp(React, ReactDOM).mount(App, "root")
+
+// in Counter.jsx
+function Counter() {
+  const [count, setCount] = useState(0); // React hooks available if you have setUp react and reactdom
+  count [username, setUsername] = useState("");
+  return HStack(
+    Input(username).bind(setUsername),
+    Text(count),
+    <button onClick={() => setCount(count - 1)}>minus</button>,
+    <button onClick={() => setCount(count + 1)}>add</button>
+  ).build();
+}
 
 // in your component, the theme api will automatically generate bootstrap className for you.
 const form = VStack(
@@ -185,15 +195,16 @@ version 0.0.1
 - [x] Review
 
 version 0.0.2
-- [ ] DSL support
-- [ ] VSCode plugin, type `@`, and auto suggest all available components
-- [ ] compatibility with popular UI Library
+- [x] DSL support
+- [ ] Reactive mode
+- [x] VSCode plugin, type `@`, and auto suggest all available components
+- [x] compatibility with popular UI Library
 - [ ] performance test
 
 ## More
 
 This project was mostly inspired by `Swift UI`. Although I am not familiar with Swift, I think this programming style is really cool!
 
-Since I am still a beginner and a student in React society, any guidance is really precious to me.
+Since I am still a beginner and a student in frontend society, any guidance is really precious to me.
 
 if you have any opinion or suggestion, give me an **issue**!
