@@ -177,7 +177,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public props(props: React.HTMLProps<T>, when?: boolean) {
+  public props(props: React.HTMLProps<T> & { 'data-id': string }, when?: boolean) {
     if (when === false) return this;
     this._props = Object.assign(this._props, props);
     return this;

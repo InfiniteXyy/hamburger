@@ -76,29 +76,27 @@ HStack {               @padding=3 @margin.vertical=3 @size.width=550px @shadow @
 }
 ```
 
-#### Build reactive web use traditional Observer mode. (no vdom)
+#### Build reactive web use traditional Observer mode. (no vdom) (developing)
 ```js
-function counter(data) {
+function Counter(data) {
   return VStack(
     Text(data.count).theme('h1'),
-    Button('add')
-      .onClick(() => data.count++) // just change the data
-      .theme('primary'),
+    Button('add').onClick(() => data.count++) // just change the data
   );
 }
 
-function anotherList({ count }) {
+function AnotherConsumer(data) {
   return VStack(
-    Text('something').fontSize(count),
+    Text('something').fontSize(data.count),
   );
 }
 
 function root() {
-  const provider = listen({ count: 10 });
+  const withCount = listen({ count: 10 });
   return VStack(
-    provider(counter)(),
+    withCount(Counter)(),
     Text("all subscriber will automatically update when data changes"),
-    provider(anotherList)(),
+    withCount(AnotherConsumer)(),
   );
 }
 

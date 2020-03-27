@@ -44,7 +44,7 @@ function domfy(root: DOMElement): Element | Text {
     if (!value) return;
     if (name === 'className') element.setAttribute('class', value);
     else if (name === 'style') element.setAttribute('style', toCSS(value));
-    else if (name === 'onClick') element.addEventListener('click', value);
+    else if (name.startsWith('on')) element.addEventListener(name.toLowerCase().slice(2), value);
     else if (name === 'key') return;
     else element.setAttribute(name, value);
   });

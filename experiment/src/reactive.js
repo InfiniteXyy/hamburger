@@ -1,5 +1,4 @@
-import { VStack, Text, Button } from 'hamburger-js';
-import domfy from 'hamburger-js/src/core/domfy';
+import { VStack, Text, Button, Input, listen } from 'hamburger-js';
 
 function counter(data) {
   return VStack(
@@ -16,43 +15,28 @@ function anotherList({ count }) {
   );
 }
 
-function randString(length) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
-function listen(dataObj) {
-  const dataId = randString(10);
-  const consumers = [];
-  const proxy = new Proxy(dataObj, {
-    set(target, p, value, receiver) {
-      const result = Reflect.set(target, p, value, receiver);
-      document.querySelectorAll(`[data-id=${dataId}]`).forEach((item, i) => {
-        const parent = item.parentNode;
-        parent.replaceChild(domfy(consumers[i](proxy).props({ 'data-id': dataId }).build()), item);
-      });
-      return result;
-    },
-  });
-  return component => () => {
-    consumers.push(component);
-    return component(proxy).props({ 'data-id': dataId });
+function todoList(data) {
+  // const inputData = { input: '' };
+  const dataList = ['Vue', 'Angular', 'Elm', 'Reason', 'Svelte'];
+  const onAddCallback = () => {
+    data.todo = [...data.todo, dataList[Math.floor(Math.random() * 5)]];
   };
+  return VStack(
+    // listen(inputData)((data) => Input(data.input).bind(val => data.input = val))(),
+    Button('addTodo').onClick(onAddCallback),
+    data.todo.map(i => Text(i)),
+  );
 }
-
 
 function root() {
-  const binder = listen({ count: 10 });
+  const withCount = listen({ count: 10 });
+  const withTodoList = listen({ todo: ['React'], input: '' });
 
   return VStack(
-    binder(counter)(),
-    Text("divider"),
-    binder(anotherList)(),
+    withCount(counter)(),
+    Text('divider'),
+    withCount(anotherList)(),
+    withTodoList(todoList)(),
   );
 }
 
