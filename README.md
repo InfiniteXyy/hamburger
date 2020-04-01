@@ -134,7 +134,7 @@ export default function Main() {
 }
 ```
 
-#### Work together with modern Library such as React and Bootstrap
+#### Work together with React, also compatible with JSX
 
 ```jsx harmony
 // in index.js
@@ -196,7 +196,7 @@ version 0.0.2
 - [x] DSL support
 - [ ] Reactive mode
 - [x] VSCode plugin, type `@`, and auto suggest all available components
-- [x] compatibility with popular UI Library
+- [x] compatible with popular UI Library
 - [ ] performance test
 
 ## More

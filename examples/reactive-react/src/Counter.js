@@ -1,7 +1,6 @@
 import { Button, HStack } from 'hamburger-js';
 import { Text } from 'hamburger-js';
 import { useState } from 'react';
-
 export default function Counter() {
   const [count, setCount] = useState(0);
   return HStack(

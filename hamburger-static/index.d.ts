@@ -8,7 +8,7 @@ interface IRoute {
 declare class HamburgerStaticConfig {
   private config;
   route(routeMap: IRoute[]): this;
-  output(path: ChildElement): void;
+  output(path: string): void;
   template(file: string, target: string): this;
 }
 

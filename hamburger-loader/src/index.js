@@ -56,7 +56,6 @@ function betterEval(jsCodeObj: JSResultObject, userArgs = {}) {
 
 function renderToNode(code: string, userArgs = {}) {
   const tokens = lexParse(code);
-
   const ast = syntaxParse(tokens);
   const jsCode = codeGenerator(ast);
   return betterEval(jsCode, userArgs);
