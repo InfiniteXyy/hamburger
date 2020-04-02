@@ -1,0 +1,24 @@
+{
+  "name": "hamburger-market-compare",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "parcel ./index.html --no-cache"
+  },
+  "dependencies": {
+    "hamburger-js": "0.0.1",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "parcel-bundler": "^1.12.3",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

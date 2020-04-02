@@ -1,38 +1,5 @@
 import { Button, HStack, VStack, Text, Input, Table, TableRow, listen } from 'hamburger-js';
-import { logPlugin } from './Counter';
-
-function withCount(itemList) {
-  return itemList.map(i => ({ ...i, count: 0, checked: true }));
-}
-
-const ItemList = withCount([
-  {
-    id: 0,
-    name: 'iPhone 11',
-    price: '8999',
-  },
-  {
-    id: 1,
-    name: 'iPad Pro',
-    price: '4999',
-  },
-  {
-    id: 2,
-    name: 'Airpods pro',
-    price: '1999',
-  },
-  {
-    id: 3,
-    name: '橘子',
-    price: '5',
-  },
-  {
-    id: 4,
-    name: '苹果',
-    price: '3',
-  },
-]);
-const store = { items: ItemList };
+import { ItemList } from './store';
 
 function Counter(item) {
   return HStack(
@@ -41,7 +8,7 @@ function Counter(item) {
       .disabled(item.count === 0),
     Text(` ${item.count} `)
       .tag('b')
-      .margin({ right: 10 }),
+      .margin({ horizontal: 4 }),
     Button('+').onClick(() => item.count++),
   );
 }
@@ -49,7 +16,7 @@ function Counter(item) {
 function Checkbox(value, onToggle, label) {
   if (label)
     return Input(value, 'checkbox')
-      .label(label)
+      .wrapLabel(label)
       .onClick(() => onToggle(!value));
   return Input(value, 'checkbox').onClick(() => onToggle(!value));
 }
@@ -81,4 +48,4 @@ function Market(data) {
   );
 }
 
-export default listen(store, logPlugin)(Market);
+export default listen({ items: ItemList })(Market);

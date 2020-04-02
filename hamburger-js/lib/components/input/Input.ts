@@ -16,7 +16,7 @@ class InputClass extends ViewClass<HTMLInputElement> {
     return this;
   }
 
-  public label(text: string) {
+  public wrapLabel(text: string) {
     this._tag = 'label';
     this._children = [Input(this.value, this.type), text];
     this._props = { style: {} };

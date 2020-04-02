@@ -6,7 +6,7 @@
   "repository": "https://github.com/hamburger-js/hamburger",
   "workspaces": [
     "hamburger-*",
-    "examples/**",
+    "examples/*",
     "experiment"
   ],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
