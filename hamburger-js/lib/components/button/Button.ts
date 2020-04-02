@@ -1,6 +1,6 @@
 import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
-import theme from '../../themes';
+import hamburger from '../../index';
 
 class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
   constructor(content: string = 'button') {
@@ -22,11 +22,11 @@ class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
   }
 
   public theme(...name: string[]) {
-    this.class(...name.map(i => theme.button.variant[i]));
+    this.class(...name.map(i => hamburger.theme.button.variant[i]));
     return this;
   }
 }
 
 export function Button(content: string) {
-  return new ButtonClass(content).class(theme.button.common);
+  return new ButtonClass(content).class(hamburger.theme.button.common);
 }

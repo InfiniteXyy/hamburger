@@ -10,7 +10,7 @@ export interface IHamburgerTheme {
   };
   stack: {
     variant: { [k: string]: string };
-  },
+  };
   button: {
     common: string;
     variant: { [k: string]: string };
@@ -30,12 +30,6 @@ export interface IHamburgerTheme {
 import bootstrapTheme from './BootstrapTheme'; // developing
 import semanticTheme from './SemanticTheme'; // developing
 import hamburgerTheme from './HamburgerTheme';
+import noTheme from './NoTheme';
 
-let theme = bootstrapTheme;
-
-export function applyTheme(them: IHamburgerTheme) {
-  theme = bootstrapTheme;
-}
-
-export { bootstrapTheme };
-export default theme;
+export { bootstrapTheme, noTheme };

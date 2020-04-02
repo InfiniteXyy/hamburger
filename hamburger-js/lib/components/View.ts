@@ -1,9 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
-import theme, { IShadow } from '../themes';
+import { IShadow } from '../themes';
 import { ChildElement, IBuildable } from '../common';
 import { createElement } from '../core';
+import hamburger from '../index';
 
 interface MarginModel<T> {
   top?: T;
@@ -143,7 +144,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   }
 
   public shadow(type: keyof IShadow = 'regular', when?: boolean) {
-    if (!when) this.class(theme.utility.shadow[type]);
+    if (!when) this.class(hamburger.theme.utility.shadow[type]);
     return this;
   }
 
@@ -184,6 +185,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   }
 
   public build() {
+    if (Object.keys(this._props.style).length === 0) delete this._props.style;
     return createElement(this._tag, this._props, this._children);
   }
 }

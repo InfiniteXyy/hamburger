@@ -1,7 +1,7 @@
 import { ChildElement, IChildIterable, IFlexBox, IThemeable } from '../../common';
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
-import theme from '../../themes';
+import hamburger from '../../index';
 
 class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>>, IFlexBox, IThemeable {
   private isFlex: boolean;
@@ -55,7 +55,7 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   }
 
   public theme(...name: string[]): this {
-    this.class(...name.map(i => theme.stack.variant[i]));
+    this.class(...name.map(i => hamburger.theme.stack.variant[i]));
     return this;
   }
 }

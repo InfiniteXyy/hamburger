@@ -5,15 +5,9 @@ const store = { count: 0 };
 
 function Counter(data, title) {
   return HStack(
-    Button('minus')
-      .onClick(() => data.count--)
-      .theme('primary'),
-    Text(title + data.count)
-      .theme('h3')
-      .margin({ horizontal: '3' }),
-    Button('add')
-      .onClick(() => data.count++)
-      .theme('primary'),
+    Button('minus').onClick(() => data.count--),
+    Text(title + data.count).margin({ horizontal: '3' }),
+    Button('add').onClick(() => data.count++),
   );
 }
 

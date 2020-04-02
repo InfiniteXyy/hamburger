@@ -19,11 +19,8 @@ class HamburgerPlatform implements IHamburgerPlatform<DOMElement> {
   }
 }
 
-let count = 0;
 class ReactPlatform implements IHamburgerPlatform<ReactElement> {
-  constructor(public React, public ReactDOM) {
-    count++;
-  }
+  constructor(public React, public ReactDOM) {}
   createElement(child: DOMElement): ReactElement {
     const { React } = this;
     if (child.type === null) {

@@ -1,4 +1,3 @@
-import hamburger from 'hamburger-js';
+import hamburger, { noTheme } from 'hamburger-js';
 import App from './src/App';
-
-hamburger.mount(App(), 'root');
+hamburger.applyTheme(noTheme).mount(App(), 'root');

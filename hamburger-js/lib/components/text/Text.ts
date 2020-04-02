@@ -1,7 +1,7 @@
-import theme from '../../themes';
 import { FontSizeProperty, FontWeightProperty } from 'csstype';
 import { ViewClass } from '../View';
 import { IThemeable } from '../../common';
+import hamburger from '../../index';
 
 export class TextClass extends ViewClass<HTMLParagraphElement> implements IThemeable {
   constructor(...content: (string | TextClass)[]) {
@@ -38,7 +38,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
   }
 
   public theme(...name: string[]): this {
-    this.class(...name.map(i => theme.text.variant[i]));
+    this.class(...name.map(i => hamburger.theme.text.variant[i]));
     return this;
   }
 }

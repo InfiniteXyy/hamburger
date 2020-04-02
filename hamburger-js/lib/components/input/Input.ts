@@ -1,10 +1,11 @@
 import { ViewClass } from '../View';
-import theme from '../../themes';
+import hamburger from '../../index';
 
 class InputClass extends ViewClass<HTMLInputElement> {
-  constructor(value: string, type?: string) {
+  constructor(private value: string, private type?: string) {
     super();
-    this._props.value = value;
+    if (type === 'checkbox') this._props.checked = !!value;
+    else this._props.value = value;
     this._props.type = type;
     this._tag = 'input';
   }
@@ -12,6 +13,13 @@ class InputClass extends ViewClass<HTMLInputElement> {
   // 功能方法
   public onChange(callback: any) {
     this._props.onChange = callback;
+    return this;
+  }
+
+  public label(text: string) {
+    this._tag = 'label';
+    this._children = [Input(this.value, this.type), text];
+    this._props = { style: {} };
     return this;
   }
 
@@ -24,5 +32,5 @@ class InputClass extends ViewClass<HTMLInputElement> {
 }
 
 export function Input(value: string, type?: string) {
-  return new InputClass(value, type).class(theme.input.common);
+  return new InputClass(value, type).class(hamburger.theme.input.common);
 }
