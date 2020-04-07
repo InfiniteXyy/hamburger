@@ -4,7 +4,7 @@ import hamburger from '../../index';
 class InputClass extends ViewClass<HTMLInputElement> {
   constructor(private value: string, private type?: string) {
     super();
-    if (type === 'checkbox') this._props.checked = !!value;
+    if (type === 'checkbox') this._props.checked = value as unknown as boolean;
     else this._props.value = value;
     this._props.type = type;
     this._tag = 'input';
@@ -23,10 +23,16 @@ class InputClass extends ViewClass<HTMLInputElement> {
     return this;
   }
 
-  public bind<T>(onChange: (value: T) => void) {
-    this._props.onChange = (event: any) => {
-      onChange(event.target.value);
-    };
+  public bind<T>(onChange: (value: T) => void, reactive?: boolean) {
+    if (!reactive) {
+      this._props.onChange = (event: any) => {
+        onChange(event.target.value);
+      };
+    } else {
+      this._props.onInput = (event: any) => {
+        onChange(event.target.value);
+      };
+    }
     return this;
   }
 }

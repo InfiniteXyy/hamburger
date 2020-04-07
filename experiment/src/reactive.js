@@ -5,7 +5,7 @@ function counter(data) {
     Text(data.count).theme('h1'),
     Button('add')
       .onClick(() => data.count++)
-      .theme('primary'),
+      .theme('primary')
   );
 }
 
@@ -24,7 +24,7 @@ function todoList(data) {
   return VStack(
     // listen(inputData)((data) => Input(data.input).bind(val => data.input = val))(),
     Button('addTodo').onClick(onAddCallback),
-    data.todo.map(i => Text(i)),
+    data.todo.map((i) => Text(i))
   );
 }
 
@@ -36,7 +36,7 @@ function root() {
     withCount(counter)(),
     Text('divider'),
     withCount(anotherList)(),
-    withTodoList(todoList)(),
+    withTodoList(todoList)()
   );
 }
 

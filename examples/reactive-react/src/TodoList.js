@@ -5,7 +5,7 @@ function TodoItem(content) {
   return Text(content).bold().margin(0);
 }
 
-export default function() {
+export default function () {
   const [items, setItems] = useState(['Kotlin', 'Swift', 'Go', 'Rust']);
   const [value, setValue] = useState('');
   const addTodo = useCallback(() => {
@@ -18,6 +18,6 @@ export default function() {
       Input(value).bind(setValue).size({ width: 200 }).margin({ right: '3' }),
       Button('增加').onClick(addTodo).theme('secondary-outline'),
     ),
-    items.map(i => TodoItem(i)),
+    items.map((i) => TodoItem(i)),
   ).margin({ top: '4' });
 }

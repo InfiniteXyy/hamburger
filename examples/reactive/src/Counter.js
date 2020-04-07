@@ -1,24 +1,24 @@
-import { Button, HStack } from 'hamburger-js';
+import { Button, HStack, VStack, Input } from 'hamburger-js';
 import { Text, listen } from 'hamburger-js';
 
-const store = { count: 0 };
+const store = { count: 0, text: '' };
 
 function Counter(data, title) {
-  return HStack(
-    Button('minus').onClick(() => data.count--),
-    Text(title + data.count).margin({ horizontal: '3' }),
-    Button('add').onClick(() => data.count++),
+  return VStack(
+    HStack(
+      Button('minus').onClick(() => data.count--),
+      Text(title + data.count).margin({ horizontal: '3' }),
+      Button('add').onClick(() => data.count++)
+    ),
+    Input(data.text).bind((val) => (data.text = val), true),
+    Text(data.text)
   );
 }
 
 export const logPlugin = {
-  beforeUpdate(state, target, value) {
-    console.log(`before set [${target}] = ${value}`);
-    console.log(state);
-  },
+  beforeUpdate(state, target, value) {},
   afterUpdate(state, target, value) {
-    console.log(`after`);
-    console.log(state);
+    console.log(`after`, state);
   },
 };
 

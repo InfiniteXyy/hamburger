@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of itemList" :key="item.id">
+        <tr v-for="item of itemList" :key="item.id" :class="{ 'disabled-row': !item.checked }">
           <td>
             <input type="checkbox" v-model="item.checked" />
           </td>
@@ -48,18 +48,29 @@ export default {
       this.itemList.splice(this.itemList.indexOf(item), 1);
     },
   },
-  computed: {
+  mounted() {
+    window.vueBench = () => {
+      this.itemList[0].count++;
+    };
+  },
+  computed: {l
     totalPrice() {
-      return this.itemList.filter(i => i.checked).reduce((prev, cur) => prev + cur.count * cur.price, 0);
+      return this.itemList.filter((i) => i.checked).reduce((prev, cur) => prev + cur.count * cur.price, 0);
     },
     allChecked: {
       get() {
-        return this.itemList.every(i => i.checked);
+        return this.itemList.every((i) => i.checked);
       },
       set(val) {
-        this.itemList.forEach(item => (item.checked = val));
+        this.itemList.forEach((item) => (item.checked = val));
       },
     },
   },
 };
 </script>
+
+<style scoped>
+.disabled {
+  opacity: 0.5;
+}
+</style>

@@ -129,6 +129,12 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
+  public opacity(value: number, when?: boolean) {
+    if (when === false) return this;
+    this._props.style.opacity = value;
+    return this;
+  }
+
   public border(border: BorderModel, when?: boolean) {
     if (when === false) return this;
     this._props.style.border = !!border.width ? 'solid' : '';
@@ -185,7 +191,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   }
 
   public build() {
-    if (Object.keys(this._props.style).length === 0) delete this._props.style;
+    if (this._props.style && Object.keys(this._props.style).length === 0) delete this._props.style;
     return createElement(this._tag, this._props, this._children);
   }
 }

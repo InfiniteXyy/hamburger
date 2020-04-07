@@ -4,7 +4,7 @@ export function toCSS(cssObj: { [k: string]: string }): string {
   let result = '';
   for (const key in cssObj) {
     const value = cssObj[key];
-    const propName = key.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+    const propName = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
     let propValue = value;
     if (Number.isInteger(+value)) {
       propValue += 'px';
@@ -50,7 +50,7 @@ function domfy(root: DOMElement): Element | Text {
   });
 
   // 5、将 children 中的每一个 DOMElement 转变为 Element 元素 并添加到父组件中，children 默认为 []
-  children.map(domfy).forEach(child => element.appendChild(child));
+  children.map(domfy).forEach((child) => element.appendChild(child));
   return element;
 }
 

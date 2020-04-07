@@ -1,32 +1,33 @@
 import React from 'react';
 import { ItemList } from './store';
+import { List } from 'immutable';
 
 class Market extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemList: ItemList,
+      itemList: List(ItemList),
     };
   }
 
-  setItemCount(id, val) {
-    this.setState(prevState => ({
-      itemList: prevState.itemList.map(i => {
-        if (i.id === id) {
-          return {
-            ...i,
-            count: val,
-          };
-        }
-        return i;
-      }),
-    }));
+  componentDidMount() {
+    // for bench mark
+    window.reactBench = () => this.setItemCount(0, 1);
+  }
+
+  setItemCount(id, delta) {
+    this.setState((prevState) => {
+      let index = prevState.itemList.findIndex((i) => i.id === id);
+      return {
+        itemList: prevState.itemList.setIn([index, 'count'], prevState.itemList.get(index).count + delta),
+      };
+    });
   }
 
   setAllChecked() {
-    const prevChecked = this.state.itemList.every(i => i.checked);
-    this.setState(prevState => ({
-      itemList: prevState.itemList.map(i => ({
+    const prevChecked = this.state.itemList.every((i) => i.checked);
+    this.setState((prevState) => ({
+      itemList: prevState.itemList.map((i) => ({
         ...i,
         checked: !prevChecked,
       })),
@@ -34,28 +35,23 @@ class Market extends React.Component {
   }
 
   setItemChecked(id, val) {
-    this.setState(prevState => ({
-      itemList: prevState.itemList.map(i => {
-        if (i.id === id) {
-          return {
-            ...i,
-            checked: val,
-          };
-        }
-        return i;
-      }),
-    }));
+    this.setState((prevState) => {
+      let index = prevState.itemList.findIndex((i) => i.id === id);
+      return {
+        itemList: prevState.itemList.setIn([index, 'checked'], val),
+      };
+    });
   }
 
   removeItem(id) {
-    this.setState(prevState => ({
-      itemList: prevState.itemList.filter(item => item.id !== id),
+    this.setState((prevState) => ({
+      itemList: prevState.itemList.filter((item) => item.id !== id),
     }));
   }
 
   render() {
     const totalPrice = this.state.itemList
-      .filter(i => i.checked)
+      .filter((i) => i.checked)
       .reduce((prev, cur) => prev + cur.count * cur.price, 0);
 
     return (
@@ -68,7 +64,7 @@ class Market extends React.Component {
                 <label>
                   <input
                     type="checkbox"
-                    checked={this.state.itemList.every(i => i.checked)}
+                    checked={this.state.itemList.every((i) => i.checked)}
                     onChange={this.setAllChecked.bind(this)}
                   />
                   全选
@@ -81,8 +77,8 @@ class Market extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.itemList.map(item => (
-              <tr key={item.id}>
+            {this.state.itemList.map((item) => (
+              <tr key={item.id} style={item.checked ? {} : { opacity: 0.5 }}>
                 <td>
                   <input
                     type="checkbox"
@@ -93,11 +89,11 @@ class Market extends React.Component {
                 <td>{item.name}</td>
                 <td>{item.price}元</td>
                 <td>
-                  <button onClick={() => this.setItemCount(item.id, item.count - 1)} disabled={item.count === 0}>
+                  <button onClick={() => this.setItemCount(item.id, -1)} disabled={item.count === 0}>
                     -
                   </button>
                   <b style={{ margin: '0 4px' }}> {item.count} </b>
-                  <button onClick={() => this.setItemCount(item.id, item.count + 1)}>+</button>
+                  <button onClick={() => this.setItemCount(item.id, 1)}>+</button>
                 </td>
                 <td>
                   <button onClick={() => this.removeItem(item.id)}>移除</button>

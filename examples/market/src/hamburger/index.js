@@ -1,4 +1,4 @@
-import hamburger from "hamburger-js";
-import Market from "./Market";
+import hamburger, { noTheme } from 'hamburger-js';
+import Market from './Market';
 
-hamburger.mount(Market(), "hamburger-app");
+hamburger.applyTheme(noTheme).mount(Market(), 'hamburger-app');

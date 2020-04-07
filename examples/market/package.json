@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "parcel ./index.html --no-cache"
+    "start": "parcel ./index.html --no-cache",
+    "build": "parcel build ./index.html"
   },
   "dependencies": {
     "hamburger-js": "0.0.1",
@@ -14,7 +15,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "vue": "^2.6.11",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "immutable": "^4.0.0-rc.12"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.1.1",

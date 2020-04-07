@@ -1,12 +1,12 @@
 import { hbg } from 'hamburger-loader';
 import Navbar from '../components/Navbar';
 
-export default function() {
+export default function () {
   const data = {
     imgLink: 'https://static.runoob.com/images/demo/demo2.jpg',
     name: 'xyy',
-    fakeEmail: "myfake@fake.com", // 替换默认的 fake 值
-    Navbar,                       // 在 dsl 中使用自定义组件需要显式声明
+    fakeEmail: 'myfake@fake.com', // 替换默认的 fake 值
+    Navbar, // 在 dsl 中使用自定义组件需要显式声明
   };
   return hbg(data)`
     Navbar() 
@@ -20,5 +20,5 @@ export default function() {
       }
     }  
     PureHTML("<h1 class='display-4'>using <b>hamburger-lang</b> template</h1>")
-    `
+    `;
 }
