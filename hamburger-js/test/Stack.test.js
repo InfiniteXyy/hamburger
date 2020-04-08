@@ -10,8 +10,8 @@ describe('stack component test', function() {
         .justifyContent('between')
         .build(),
     );
-    expect(wrapper.props().className).toContain("align-items-center");
-    expect(wrapper.props().className).toContain("justify-content-between");
+    expect(wrapper.props().className).toContain("items-center");
+    expect(wrapper.props().className).toContain("justify-between");
   });
 
   it('should render Children success', function() {

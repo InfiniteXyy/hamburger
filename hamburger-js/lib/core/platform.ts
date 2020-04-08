@@ -51,7 +51,7 @@ class VuePlatform implements IHamburgerPlatform<any> {
 
   render(root: any, id: string) {
     const { Vue } = this;
-    const meta = root.meta ?? {};
+    const meta = root.meta || {};
     new Vue({
       ...meta,
       render(h) {

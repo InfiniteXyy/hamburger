@@ -26,7 +26,7 @@ describe('Text component test', () => {
         .build(),
     );
 
-    expect(wrapper.props().className).toStrictEqual("font-weight-bold");
+    expect(wrapper.props().className).toStrictEqual("bold");
   });
 
   it.each([true, false])('should style text with statement', function(state) {
