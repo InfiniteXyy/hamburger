@@ -53,7 +53,7 @@ function ToggleAllCheckbox(store) {
   )
     .wrapLabel('全选')
     .onChange(() => {
-      store.items = store.items.map((i) => ({ ...i, checked: !allChecked }));
+      store.items.forEach((item) => (item.checked = !allChecked));
     });
 }
 

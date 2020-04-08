@@ -10,7 +10,7 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
     super();
     this._children = elements;
     this.isFlex = isHorizontal;
-    this.class(isHorizontal ? 'd-flex' : null);
+    this.class(isHorizontal ? 'flex' : null);
   }
 
   // 功能方法
@@ -23,18 +23,18 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   public justifyContent(position) {
     if (!this.isFlex) {
       this.isFlex = true;
-      this.class('d-flex', 'flex-column');
+      this.class('flex', 'flex-column');
     }
-    this.class(`justify-content-${position}`);
+    this.class(`justify-${position}`);
     return this;
   }
 
   public alignItems(position) {
     if (!this.isFlex) {
       this.isFlex = true;
-      this.class('d-flex', 'flex-column');
+      this.class('flex', 'flex-column');
     }
-    this.class(`align-items-${position}`);
+    this.class(`items-${position}`);
     return this;
   }
 
@@ -44,28 +44,22 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   }
 
   public inflate() {
-    if (this.isHorizontal) {
-      // 上下布局，宽度撑满
-      this.class('h-100');
-    } else {
-      // 左右布局，高度撑满
-      this.class('w-100');
-    }
+    this.class('fit');
     return this;
   }
 
   public theme(...name: string[]): this {
-    this.class(...name.map(i => hamburger.theme.stack.variant[i]));
+    this.class(...name.map((i) => hamburger.theme.stack.variant[i]));
     return this;
   }
 }
 
 export function HStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
+  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(true, _elements);
 }
 
 export function VStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
+  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(false, _elements);
 }

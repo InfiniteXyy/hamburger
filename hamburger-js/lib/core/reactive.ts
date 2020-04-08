@@ -50,18 +50,28 @@ function updateDom(dom, parentDom, prevProps, nextProps) {
     });
 }
 
+function replaceDOM(dom, newTree) {
+  dom.parentNode.replaceChild(domfy(newTree), dom);
+}
+
 function reconcileChildren(node, prevTree, curTree, parentNode = null) {
   let curNode = node;
   if (prevTree.type !== curTree.type) {
     // 若标签不同，则直接重新渲染
+    replaceDOM(node, curTree);
   } else {
     // 若props不同，则对原来元素进行更新
     if (!deepEqual(prevTree.props, curTree.props)) {
       updateDom(curNode, parentNode, prevTree.props, curTree.props);
     }
-    // 之后再处理子元素的比较
-    for (let i = 0; i < prevTree.children.length; i++) {
-      reconcileChildren(curNode.children[i], prevTree.children[i], curTree.children[i], curNode);
+    // 结构性变化，直接重新渲染
+    if (prevTree.children.length !== curTree.children.length) {
+      replaceDOM(node, curTree);
+    } else {
+      // 若子元素个数相同，则一一比较
+      for (let i = 0; i < prevTree.children.length; i++) {
+        reconcileChildren(curNode.children[i], prevTree.children[i], curTree.children[i], curNode);
+      }
     }
   }
 }

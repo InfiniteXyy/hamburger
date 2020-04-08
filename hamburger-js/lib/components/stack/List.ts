@@ -8,7 +8,7 @@ class ListClass extends ViewClass<HTMLUListElement> {
     // GridRow 的子元素必须是 GridCol，否则样式上会有问题
     this._children = elements.map(i => (i instanceof ListItemClass ? i : new ListItemClass(i)));
     this.tag('ol');
-    this.class('list-unstyled');
+    this.class('list-reset');
   }
 }
 

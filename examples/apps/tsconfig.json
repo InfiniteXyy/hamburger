@@ -7,5 +7,5 @@
     "esModuleInterop": true,
     "jsx": "react"
   },
-  "include": ["./app/*", "index.tsx"]
+  "include": ["./src/**/*", "index.tsx"]
 }

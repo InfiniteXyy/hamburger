@@ -22,18 +22,18 @@ class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<G
   public justifyContent(position) {
     if (!this.isFlexBox) {
       this.isFlexBox = true;
-      this.class('d-flex');
+      this.class('flex');
     }
-    this.class(`justify-content-${position}`);
+    this.class(`justify-${position}`);
     return this;
   }
 
   public alignItems(position) {
     if (!this.isFlexBox) {
       this.isFlexBox = true;
-      this.class('d-flex');
+      this.class('flex');
     }
-    this.class(`align-items-${position}`);
+    this.class(`items-${position}`);
     return this;
   }
 
@@ -63,9 +63,9 @@ class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
   public justifyContent(position) {
     if (!this.isFlexBox) {
       this.isFlexBox = true;
-      this.class('d-flex');
+      this.class('flex');
     }
-    this.class(`justify-content-${position}`);
+    this.class(`justify-${position}`);
     return this;
   }
 
@@ -74,7 +74,7 @@ class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
       this.isFlexBox = true;
       this.class('d-flex');
     }
-    this.class(`align-items-${position}`);
+    this.class(`items-${position}`);
     return this;
   }
 
@@ -84,7 +84,7 @@ class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
   }
 
   public centerText() {
-    this.class('text-center');
+    this.class('center');
     return this;
   }
 }

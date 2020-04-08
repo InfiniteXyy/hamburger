@@ -68,14 +68,14 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   private static getBootstrapBoxModel<T>(type: 'm' | 'p', value: string | PaddingModel<T>): string {
     if (typeof value === 'string') {
-      return type + '-' + value;
+      return type + value;
     } else {
-      if ('horizontal' in value) return `${type}x-${value.horizontal}`;
-      if ('vertical' in value) return `${type}y-${value.vertical}`;
-      if ('top' in value) return `${type}t-${value.top}`;
-      if ('bottom' in value) return `${type}b-${value.bottom}`;
-      if ('left' in value) return `${type}l-${value.left}`;
-      if ('right' in value) return `${type}r-${value.right}`;
+      if ('horizontal' in value) return `${type}x${value.horizontal}`;
+      if ('vertical' in value) return `${type}y${value.vertical}`;
+      if ('top' in value) return `${type}t${value.top}`;
+      if ('bottom' in value) return `${type}b${value.bottom}`;
+      if ('left' in value) return `${type}l${value.left}`;
+      if ('right' in value) return `${type}r${value.right}`;
     }
     return '';
   }
@@ -165,7 +165,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
   }
 
   public class(...classes: ClassValue[]) {
-    classes = classes.filter(i => !!i);
+    classes = classes.filter((i) => !!i);
     const className = classnames(classes);
     if (!this._props.className) this._props.className = className;
     else this._props.className += ' ' + className;
@@ -184,7 +184,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public props(props: React.HTMLProps<T> & { 'data-id': string }, when?: boolean) {
+  public props(props: any, when?: boolean) {
     if (when === false) return this;
     this._props = Object.assign(this._props, props);
     return this;

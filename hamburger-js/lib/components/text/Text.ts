@@ -18,7 +18,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
 
   // 样式方法
   public bold(when?: boolean) {
-    if (when !== false) this.class('font-weight-bold');
+    if (when !== false) this.class('bold');
     return this;
   }
 

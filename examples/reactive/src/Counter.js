@@ -10,16 +10,14 @@ function Counter(data, title) {
       Text(title + data.count).margin({ horizontal: '3' }),
       Button('add').onClick(() => data.count++)
     ),
-    Input(data.text).bind((val) => (data.text = val), true),
-    Text(data.text)
+    Text('Hello ' + data.text).theme('h3').bold(),
+    Input(data.text).bind((val) => (data.text = val), true)
   );
 }
 
 export const logPlugin = {
   beforeUpdate(state, target, value) {},
-  afterUpdate(state, target, value) {
-    console.log(`after`, state);
-  },
+  afterUpdate(state, target, value) {},
 };
 
 export default listen(store, logPlugin)(Counter);
