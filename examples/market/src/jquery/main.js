@@ -1,6 +1,6 @@
-import $ from 'jquery';
-import _ from 'lodash';
-import { ItemList } from './store';
+const _ = require("lodash")
+const $ = require("jquery")
+const { ItemList } = require("./store")
 
 function renderTotalPrice() {
   const totalPrice = itemList.filter((i) => i.checked).reduce((prev, cur) => prev + cur.count * cur.price, 0);

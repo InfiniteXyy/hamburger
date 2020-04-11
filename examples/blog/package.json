@@ -1,0 +1,24 @@
+{
+  "name": "hamburger-static-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "hamburger-js": "0.0.1",
+    "hamburger-loader": "0.0.1",
+    "hamburger-static": "0.0.1",
+    "sucrase": "^3.12.1",
+    "nodemon": "^2.0.2",
+    "live-server": "^1.2.1",
+    "concurrently": "^5.1.0",
+    "markdown-it": "^10.0.0"
+  },
+  "scripts": {
+    "serve": "live-server ./dist",
+    "build": "sucrase-node index.js",
+    "watch": "nodemon --exec yarn build",
+    "dev": "concurrently \"npm run serve\" \"npm run watch\""
+  },
+  "nodemonConfig": {
+    "ignore": ["dist/*"]
+  }
+}

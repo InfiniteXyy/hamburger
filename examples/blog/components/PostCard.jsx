@@ -1,5 +1,9 @@
 import hamburger from 'hamburger-js';
 
+const React = {
+  createElement: hamburger.createElement,
+};
+
 function Card(post) {
   return (
     <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -8,11 +12,11 @@ function Card(post) {
         <h3 className="mb-0">{post.title}</h3>
         <div className="my-1 text-muted">{post.time}</div>
         <p className="card-text mb-auto">{post.description}</p>
-        <a href="#" className="stretched-link">
+        <a href={`post/${post.title}.html`} className="stretched-link">
           继续阅读
         </a>
       </div>
-      <div className="col-auto d-none d-lg-block" style={{width: 200, height: 250}}>
+      <div className="col-auto d-none d-lg-block" style={{ width: 200, height: 250 }}>
         <img src={post.img} className="img-fluid" />
       </div>
     </div>

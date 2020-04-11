@@ -13,9 +13,9 @@ class HamburgerStaticConfig {
   }
   output(outputPath) {
     this.config.outputPath = outputPath;
-    this.config.routeMap.forEach(route => {
+    this.config.routeMap.forEach((route) => {
       const pagePath = path.join(outputPath, `${route.path || 'index'}.html`);
-      const Node = route.view;
+      const Node = 'build' in route.view ? route.view.build() : route.view;
       const html = buildStaticHTML(Node, { template: this.config.template });
       fse.outputFileSync(pagePath, html, console.error);
     });

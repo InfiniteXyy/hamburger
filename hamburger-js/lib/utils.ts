@@ -1,3 +1,5 @@
+import { ViewClass, VStack } from './components';
+
 export function flatMap<T, U>(array: T[], callback: (value: T) => U[]): U[] {
   const result: U[] = [];
   for (let i of array) {
@@ -19,13 +21,11 @@ export function createPlaceHolder(width: string, height: string, innerWords: str
   //   const style = { backgroundColor, width, height, border: '2px solid white', padding: 10 };
   //   return React.createElement('div', { style }, innerWords);
   // } else {
-  const element = document.createElement('div');
-  element.style.backgroundColor = backgroundColor;
-  element.style.width = width;
-  element.style.height = height;
-  element.style.border = '2px solid white';
-  element.style.padding = '10px';
-  element.innerText = innerWords;
-  return element;
-  // }
+  return VStack().style({
+    backgroundColor,
+    width,
+    height,
+    border: '2px solid white',
+    padding: 10,
+  });
 }
