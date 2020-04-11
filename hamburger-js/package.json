@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "test": "tsc && jest"
+    "test": "jest"
   },
   "license": "MIT",
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
     "babel-jest": "^24.9.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.9.0",
