@@ -33,7 +33,7 @@ function Market(data) {
   }
 
   return VStack(
-    Text('Hamburger 购物车').tag('h1'),
+    Text('Hamburger').tag('h1'),
     Table(
       TableRow(Checkbox(allChecked, checkAll, '全选'), '商品名称', '商品单价', '购买数量', '操作'),
       data.items.map((item) =>

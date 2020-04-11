@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Vue 购物车</h1>
+    <h1>Vue</h1>
     <table>
       <thead>
         <tr>
@@ -22,7 +22,7 @@
           <td>{{ item.price }}元</td>
           <td>
             <button @click="item.count--" :disabled="item.count === 0">-</button>
-            <b style="margin: 0 4px;">{{ item.count }}</b>
+            <b>{{ item.count }}</b>
             <button @click="item.count++">+</button>
           </td>
           <td>
@@ -53,7 +53,7 @@ export default {
       this.itemList[0].count++;
     };
   },
-  computed: {l
+  computed: {
     totalPrice() {
       return this.itemList.filter((i) => i.checked).reduce((prev, cur) => prev + cur.count * cur.price, 0);
     },

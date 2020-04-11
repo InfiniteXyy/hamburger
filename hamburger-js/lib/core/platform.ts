@@ -43,6 +43,8 @@ class ReactPlatform implements IHamburgerPlatform<ReactElement> {
 }
 
 class VuePlatform implements IHamburgerPlatform<any> {
+  static RootAttributes = ['staticClass', 'class', 'style', 'key', 'ref', 'refInFor', 'slot', 'scopedSlots', 'model'];
+
   constructor(public Vue) {}
 
   createElement(child: DOMElement): DOMElement {
@@ -55,10 +57,10 @@ class VuePlatform implements IHamburgerPlatform<any> {
     new Vue({
       ...meta,
       render(h) {
-        let _root = root.build(this);
+        let _root = root.build.call(this, this);
         return h(_root.type, VuePlatform.mapProps(_root.props), VuePlatform.mapChildren(_root.children, h));
       },
-    }).$mount('#root');
+    }).$mount('#' + id);
     return document.getElementById(id);
   }
 
@@ -77,10 +79,15 @@ class VuePlatform implements IHamburgerPlatform<any> {
     let _props: any = {};
     for (let key in props) {
       if (key === 'className') _props.class = props[key];
-      else if (key.startsWith('on')) {
-        if (!_props.on) _props['on'] = {};
+      else if (this.RootAttributes.includes(key)) {
+        _props[key] = props[key];
+      } else if (key.startsWith('on')) {
+        if (!_props.on) _props.on = {};
         _props['on'][key.substring(2).toLowerCase()] = props[key];
-      } else _props[key] = props;
+      } else {
+        if (!_props.domProps) _props.domProps = {};
+        _props.domProps[key] = props[key];
+      }
     }
     return _props;
   }

@@ -56,7 +56,7 @@ class Market extends React.Component {
 
     return (
       <div>
-        <h1>React 购物车</h1>
+        <h1>React</h1>
         <table>
           <thead>
             <tr>

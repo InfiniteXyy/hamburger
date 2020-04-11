@@ -1,8 +1,15 @@
-function meta(metaObject) {
+function meta(
+  metaObject
+): (
+  fn: Function
+) => {
+  meta: any;
+  build: (meta: any) => any;
+} {
   return (componentFn) => ({
     meta: metaObject,
-    build: (meta) => {
-      return componentFn(meta).build();
+    build: function (meta) {
+      return componentFn.call(this, meta).build();
     },
   });
 }

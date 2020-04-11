@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: './index.tsx',
@@ -7,6 +8,7 @@ module.exports = {
     contentBase: './dist',
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',

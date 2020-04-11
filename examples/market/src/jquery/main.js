@@ -36,7 +36,7 @@ function renderItemRow(item) {
        <button id="minus" ${item.count === 0 ? 'disabled' : ''}>
          -
        </button>
-       <b id="count" style="margin: 0 4px;">${item.count}</b>
+       <b id="count">${item.count}</b>
        <button id="plus">+</button>
      </td>
      <td>

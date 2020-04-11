@@ -52,7 +52,7 @@ function Market() {
     setItems(items.filter((i) => i !== item));
   }
   return VStack(
-    Text('Hamburger-React 购物车').tag('h1'),
+    Text('Hamburger-React').tag('h1'),
     Table(
       TableRow(Checkbox(allChecked, checkAll, '全选'), '商品名称', '商品单价', '购买数量', '操作'),
       items.map((item) =>
