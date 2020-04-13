@@ -2,9 +2,9 @@ import { ViewClass } from '../View';
 import hamburger from '../../index';
 
 class InputClass extends ViewClass<HTMLInputElement> {
-  constructor(private value: string, private type?: string) {
+  constructor(private value: any, private type?: string) {
     super();
-    if (type === 'checkbox') this._props.checked = value as unknown as boolean;
+    if (type === 'checkbox') this._props.checked = (value as unknown) as boolean;
     else this._props.value = value;
     this._props.type = type;
     this._tag = 'input';
@@ -15,6 +15,23 @@ class InputClass extends ViewClass<HTMLInputElement> {
     this._props.onChange = callback;
     return this;
   }
+  public onInput(callback: any) {
+    this._props.onInput = callback;
+    return this;
+  }
+  public onKeyPress(keyCode, callback) {
+    this._props.onKeyPress = function (e) {
+      if (e.key === keyCode) {
+        e.preventDefault();
+        callback();
+      }
+    };
+    return this;
+  }
+  public placeholder(val) {
+    this._props.placeholder = val;
+    return this;
+  }
 
   public wrapLabel(text: string) {
     this._tag = 'label';
@@ -23,8 +40,8 @@ class InputClass extends ViewClass<HTMLInputElement> {
     return this;
   }
 
-  public bind<T>(onChange: (value: T) => void, reactive?: boolean) {
-    if (!reactive) {
+  public bind<T>(onChange: (value: T) => void, lazy?: boolean) {
+    if (lazy) {
       this._props.onChange = (event: any) => {
         onChange(event.target.value);
       };
@@ -37,6 +54,6 @@ class InputClass extends ViewClass<HTMLInputElement> {
   }
 }
 
-export function Input(value: string, type?: string) {
+export function Input(value: any, type?: string) {
   return new InputClass(value, type).class(hamburger.theme.input.common);
 }

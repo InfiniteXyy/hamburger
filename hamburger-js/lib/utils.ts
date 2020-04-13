@@ -1,4 +1,4 @@
-import { ViewClass, VStack } from './components';
+import { Text, VStack } from './components';
 
 export function flatMap<T, U>(array: T[], callback: (value: T) => U[]): U[] {
   const result: U[] = [];
@@ -16,12 +16,14 @@ export function addKey(element: any, key: any) {
 }
 
 // Layout 中组件为空的填充物
-export function createPlaceHolder(width: string, height: string, innerWords: string, backgroundColor = '#eaeaea'): any {
-  // if (isReact) {
-  //   const style = { backgroundColor, width, height, border: '2px solid white', padding: 10 };
-  //   return React.createElement('div', { style }, innerWords);
-  // } else {
-  return VStack().style({
+export function createPlaceHolder(
+  box: { width?: string; height?: string },
+  innerWords: string,
+  backgroundColor = '#eaeaea'
+): any {
+  const { width, height } = box;
+
+  return VStack(Text(innerWords.toUpperCase()).fontSize(20).color('#4a4a4a').bold().margin(0)).style({
     backgroundColor,
     width,
     height,

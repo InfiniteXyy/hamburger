@@ -24,6 +24,6 @@ export interface IChildIterable<ChildType extends ViewClass<any>> {
 
 export interface IFlexBox {
   nowrap(): this;
-  justifyContent(position: 'center' | 'end'): this;
-  alignItems(position: 'center'): this;
+  justifyContent(position: 'center' | 'end', when?: boolean): this;
+  alignItems(position: 'center', when?: boolean): this;
 }

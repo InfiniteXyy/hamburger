@@ -47,9 +47,8 @@ function listen(
         const result = Reflect.set(target, p, typeof value === 'object' ? createProxy(value) : value, receiver);
         document.querySelectorAll(`[data-id=${dataId}]`).forEach((item, i) => {
           const { componentFn, args, lastTree } = consumers[i];
-          const tree = componentFn(proxy, ...args)
-            .props({ 'data-id': dataId })
-            .build();
+          const tree = componentFn(proxy, ...args).build();
+          tree.props['data-id'] = dataId;
           // 添加上一次渲染的缓存
           rerender(item, lastTree, tree);
           consumers[i].lastTree = tree;
@@ -62,19 +61,26 @@ function listen(
   }
 
   const proxy = createProxy(dataObj);
-  return (componentFn) => (...args) => {
-    consumers.push({ componentFn, args, lastTree: null });
-    const index = consumers.length - 1;
-    return {
-      build() {
-        const result = componentFn(proxy, ...args)
-          .props({ 'data-id': dataId })
-          .build();
-        consumers[index].lastTree = result;
-        return result;
-      },
+  const fn = (componentFn) => {
+    return (...args) => {
+      consumers.push({ componentFn, args, lastTree: null });
+      const index = consumers.length - 1;
+      return {
+        build() {
+          const tree = componentFn(proxy, ...args).build();
+          tree.props['data-id'] = dataId;
+          consumers[index].lastTree = tree;
+          return tree;
+        },
+      };
     };
   };
+  fn.react = (effect) => effect(proxy);
+  return fn;
 }
 
-export default listen;
+function react(listener) {
+  return listener.react;
+}
+
+export { listen, react };

@@ -13,6 +13,16 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
     this.class(isHorizontal ? 'flex' : null);
   }
 
+  reverse(when?: boolean): this {
+    if (when === false) return this;
+    if (!this.isFlex) {
+      this.isFlex = true;
+      this.class('flex', 'flex-column');
+    }
+    this._props.style.flexDirection = this.isHorizontal ? 'row-reverse' : 'column-reverse';
+    return this;
+  }
+
   // 功能方法
   public mapItem(wrapper) {
     this._children = this._children.map(wrapper);
@@ -20,7 +30,8 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   }
 
   // 布局方法
-  public justifyContent(position) {
+  public justifyContent(position, when?: boolean) {
+    if (when === false) return this;
     if (!this.isFlex) {
       this.isFlex = true;
       this.class('flex', 'flex-column');
@@ -29,7 +40,8 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
     return this;
   }
 
-  public alignItems(position) {
+  public alignItems(position, when?: boolean) {
+    if (when === false) return this;
     if (!this.isFlex) {
       this.isFlex = true;
       this.class('flex', 'flex-column');

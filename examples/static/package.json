@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "sucrase-node index.js",
-    "serve": "live-server ./dist",
+    "serve": "live-server ./dist --watch ./dist",
     "watch": "nodemon --exec sucrase-node index.js",
     "dev": "concurrently \"npm run serve\" \"npm run watch\""
   },

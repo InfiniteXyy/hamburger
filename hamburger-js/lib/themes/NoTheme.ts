@@ -13,8 +13,7 @@ const noTheme: IHamburgerTheme = {
   },
   button: {
     common: '',
-    variant: {
-    },
+    variant: {},
   },
   text: {
     variant: {
@@ -27,15 +26,15 @@ const noTheme: IHamburgerTheme = {
     },
   },
   stack: {
-    variant: {
-    },
+    variant: {},
   },
   image: {
     common: '',
     variant: {
+      circle: 'circle',
+      rounded: 'rounded',
     },
   },
 };
 
 export default noTheme;
-

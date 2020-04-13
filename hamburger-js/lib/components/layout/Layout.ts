@@ -10,7 +10,8 @@ type LayoutType =
   | 'top-aside-main-bottom'
   | 'main-bottom'
   | 'aside-main'
-  | 'aside-main-bottom';
+  | 'aside-main-bottom'
+  | 'aside-bottom-main';
 
 class LayoutClass implements IBuildable {
   private topElement: ChildElement;
@@ -21,10 +22,10 @@ class LayoutClass implements IBuildable {
 
   constructor(type: LayoutType) {
     this.layoutType = type || 'top-main';
-    this.topElement = createPlaceHolder('100vw', '48px', 'top');
-    this.bottomElement = createPlaceHolder('100vw', '48px', 'bottom');
-    this.asideElement = createPlaceHolder('20vw', '75vh', 'aside');
-    this.mainElement = createPlaceHolder('80vw', '75vh', 'main');
+    this.topElement = createPlaceHolder({ height: '70px' }, 'top');
+    this.bottomElement = createPlaceHolder({ height: '70px' }, 'bottom');
+    this.asideElement = createPlaceHolder({ width: '200px' }, 'aside');
+    this.mainElement = createPlaceHolder({ width: '500px', height: '500px' }, 'main');
   }
 
   public top(element: ChildElement) {
@@ -64,6 +65,8 @@ class LayoutClass implements IBuildable {
       case 'aside-main':
         return HStack(this.asideElement, this.mainElement).build();
       case 'aside-main-bottom':
+        return HStack(this.asideElement, VStack(this.mainElement, this.bottomElement)).build();
+      case 'aside-bottom-main':
         return VStack(HStack(this.asideElement, this.mainElement), this.bottomElement).build();
     }
   }

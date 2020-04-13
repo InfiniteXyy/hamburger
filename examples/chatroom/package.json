@@ -1,0 +1,20 @@
+{
+  "name": "hamburger-chatroom-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "elizabot": "^0.0.2",
+    "faker": "^4.1.0",
+    "hamburger-js": "0.0.1",
+    "hamburger-loader": "0.0.1",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.11",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.3"
+  },
+  "scripts": {
+    "start": "parcel ./index.html"
+  }
+}
