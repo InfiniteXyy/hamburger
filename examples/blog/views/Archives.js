@@ -12,7 +12,7 @@ function About() {
 
 export default function() {
   return Layout('top-main-bottom')
-    .top(Header)
+    .top(Header())
     .main(About())
     .bottom(Footer);
 }

@@ -5,7 +5,8 @@ import About from './views/About';
 import Archives from './views/Archives';
 import Tags from './views/Tags';
 import { posts } from './mockData';
-
+import hamburger, { bootstrapTheme } from 'hamburger-js';
+hamburger.applyTheme(bootstrapTheme)
 staticWebManager()
   .route([
     { path: '', view: Home() },
@@ -14,5 +15,6 @@ staticWebManager()
     { path: 'archives', view: Archives() },
     { path: 'tags', view: Tags() },
   ])
-  .template('./public/index.html', 'root')
+  .template('./index.html', 'root')
+  .assets('./assets')
   .output('./dist');

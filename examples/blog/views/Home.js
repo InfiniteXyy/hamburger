@@ -41,7 +41,7 @@ function MainBlog(post) {
 
 export default function () {
   return Layout('top-main-bottom')
-    .top(VStack(Header, VStack(Jumbotron(), Display())))
+    .top(VStack(Header(), VStack(Jumbotron(), Display())))
     .main(VStack(GridRow(MainBlog(mainPost), Aside())))
     .bottom(Footer);
 }

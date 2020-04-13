@@ -11,7 +11,7 @@ function Counter(data, title) {
       Button('add').onClick(() => data.count++)
     ),
     Text('Hello ' + data.text).theme('h3').bold(),
-    Input(data.text).bind((val) => (data.text = val), true)
+    Input(data.text).bind((val) => (data.text = val))
   );
 }
 

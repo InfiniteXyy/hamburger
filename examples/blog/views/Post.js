@@ -1,4 +1,4 @@
-import { GridRow, Layout, VStack, Text } from 'hamburger-js';
+import { GridRow, Layout, VStack, Text, PureHTML } from 'hamburger-js';
 import Header from '../components/Header';
 import md from 'markdown-it'
 
@@ -6,8 +6,8 @@ import Footer from '../components/Footer';
 
 export default function (post) {
   return Layout('top-main-bottom')
-    .top(Header)
-    .main(Text(md().render(post.content)))
+    .top(Header())
+    .main(PureHTML(md().render(post.content)))
     .bottom(Footer);
 }
 

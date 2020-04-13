@@ -14,6 +14,7 @@ interface Consumer {
 }
 
 const keyPool = [];
+
 function randString(length: number): string {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -27,47 +28,36 @@ function randString(length: number): string {
 }
 
 function listen(
-  dataObj: {},
+  reactiveObj: any,
   config: ListenerConfig = {}
 ): (componentFn: (...args) => ViewClass<any>) => (...userArgs) => IBuildable {
   const dataId = randString(10);
   const consumers: Consumer[] = [];
+  // 自动封装为proxy
+  if (!reactiveObj._isProxy) reactiveObj = reactive(reactiveObj);
 
-  function createProxy(object) {
-    for (let i of Object.keys(object)) {
-      if (typeof object[i] === 'object') {
-        object[i] = createProxy(object[i]);
-      }
-    }
-    return new Proxy(object, {
-      set(target, p, value, receiver) {
-        const { beforeUpdate, afterUpdate } = config;
-        if (beforeUpdate) beforeUpdate(dataObj, p, value);
-        // start
-        const result = Reflect.set(target, p, typeof value === 'object' ? createProxy(value) : value, receiver);
-        document.querySelectorAll(`[data-id=${dataId}]`).forEach((item, i) => {
-          const { componentFn, args, lastTree } = consumers[i];
-          const tree = componentFn(proxy, ...args).build();
-          tree.props['data-id'] = dataId;
-          // 添加上一次渲染的缓存
-          rerender(item, lastTree, tree);
-          consumers[i].lastTree = tree;
-          // end
-          if (afterUpdate) afterUpdate(dataObj, p, value);
-        });
-        return result;
-      },
+  reactiveObj.subscribe((target, property, value) => {
+    const { beforeUpdate, afterUpdate } = config;
+    if (beforeUpdate) beforeUpdate(target, property, value);
+    // start
+    document.querySelectorAll(`[data-id=${dataId}]`).forEach((item, i) => {
+      const { componentFn, args, lastTree } = consumers[i];
+      const tree = componentFn(reactiveObj, ...args).build();
+      tree.props['data-id'] = dataId;
+      rerender(item, lastTree, tree); // 添加上一次渲染的缓存
+      consumers[i].lastTree = tree;
     });
-  }
+    // end
+    if (afterUpdate) afterUpdate(target, property, value);
+  });
 
-  const proxy = createProxy(dataObj);
-  const fn = (componentFn) => {
+  return (componentFn) => {
     return (...args) => {
       consumers.push({ componentFn, args, lastTree: null });
       const index = consumers.length - 1;
       return {
         build() {
-          const tree = componentFn(proxy, ...args).build();
+          const tree = componentFn(reactiveObj, ...args).build();
           tree.props['data-id'] = dataId;
           consumers[index].lastTree = tree;
           return tree;
@@ -75,12 +65,34 @@ function listen(
       };
     };
   };
-  fn.react = (effect) => effect(proxy);
-  return fn;
 }
 
-function react(listener) {
-  return listener.react;
+function reactive<T extends object>(obj: T, subscribers = []): T {
+  function subscribe(fn) {
+    subscribers.push(fn);
+    return () => (subscribers = subscribers.filter((i) => i !== fn));
+  }
+
+  for (let key of Object.keys(obj)) {
+    if (typeof obj[key] === 'object') {
+      obj[key] = reactive(obj[key], subscribers);
+    }
+  }
+  return new Proxy(obj, {
+    set(target, property, value, receiver) {
+      const proxyValue = typeof value === 'object' ? reactive(value, subscribers) : value;
+      const result = Reflect.set(target, property, proxyValue, receiver);
+      if (property !== 'length') {
+        subscribers.forEach((fn) => fn(target, property, value));
+      }
+      return result;
+    },
+    get(target, property, receiver) {
+      if (property === 'subscribe') return subscribe;
+      if (property === '_isProxy') return true;
+      return Reflect.get(target, property, receiver);
+    },
+  });
 }
 
-export { listen, react };
+export { listen, reactive };

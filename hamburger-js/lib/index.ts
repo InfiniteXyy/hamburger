@@ -8,7 +8,7 @@ import { HamburgerPlatform, ReactPlatform, VuePlatform } from './core/platform';
 import { IHamburgerTheme, noTheme } from './themes';
 export { ChildElement } from './common';
 
-export { listen, react, meta, IHamburgerPlatform } from './core';
+export { listen, reactive, meta, IHamburgerPlatform } from './core';
 
 class Hamburger {
   platform: IHamburgerPlatform<any> = new HamburgerPlatform();

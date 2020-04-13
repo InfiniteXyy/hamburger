@@ -8,6 +8,7 @@ class HamburgerStaticConfig {
     this.config = {
       outputPath: 'dist',
       template: null,
+      assetsFolder: null,
       routeMap: {},
     };
   }
@@ -19,6 +20,9 @@ class HamburgerStaticConfig {
       const html = buildStaticHTML(Node, { template: this.config.template });
       fse.outputFileSync(pagePath, html, console.error);
     });
+    if (this.config.assetsFolder) {
+      fse.copySync(this.config.assetsFolder, this.config.outputPath);
+    }
   }
 
   route(routeMap) {
@@ -29,6 +33,11 @@ class HamburgerStaticConfig {
   template(file, target) {
     const content = fs.readFileSync(file).toString();
     this.config.template = { content, target };
+    return this;
+  }
+
+  assets(folder) {
+    this.config.assetsFolder = folder;
     return this;
   }
 }
