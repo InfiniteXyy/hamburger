@@ -3,11 +3,13 @@ import { ReactElement } from 'react';
 import domfy from './domfy';
 
 export interface IHamburgerPlatform<PElement> {
+  name: string;
   createElement(child: DOMElement): PElement; // platform element
   render(root: PElement, id: string): any;
 }
 
 class HamburgerPlatform implements IHamburgerPlatform<DOMElement> {
+  name = 'Hamburger';
   createElement(child) {
     return child;
   }
@@ -21,6 +23,7 @@ class HamburgerPlatform implements IHamburgerPlatform<DOMElement> {
 }
 
 class ReactPlatform implements IHamburgerPlatform<ReactElement> {
+  name = 'React';
   constructor(public React, public ReactDOM) {}
   createElement(child: DOMElement): ReactElement {
     const { React } = this;
@@ -43,6 +46,7 @@ class ReactPlatform implements IHamburgerPlatform<ReactElement> {
 }
 
 class VuePlatform implements IHamburgerPlatform<any> {
+  name = 'Vue';
   static RootAttributes = ['staticClass', 'class', 'style', 'key', 'ref', 'refInFor', 'slot', 'scopedSlots', 'model'];
 
   constructor(public Vue) {}

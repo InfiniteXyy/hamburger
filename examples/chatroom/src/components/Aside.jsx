@@ -1,4 +1,5 @@
-import { HStack, Icon, Image, Input, listen, Text, VStack } from 'hamburger-js';
+// @jsx hamburger.createElement
+import hamburger, { HStack, Icon, Image, Input, listen, Text, VStack } from 'hamburger-js';
 import { actions, withStore } from '../store';
 
 function FriendItem(friend, currentId) {

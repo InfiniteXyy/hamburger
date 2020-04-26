@@ -15,7 +15,6 @@ class Hamburger {
   theme: IHamburgerTheme = noTheme;
 
   setUp(coreEngine, domEngine?) {
-    console.log(coreEngine.name);
     if (coreEngine.name === 'Vue') {
       this.platform = new VuePlatform(coreEngine);
     } else {

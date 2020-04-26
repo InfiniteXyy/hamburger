@@ -41,7 +41,7 @@ class InputClass extends ViewClass<HTMLInputElement> {
   }
 
   public bind<T>(onChange: (value: T) => void, lazy?: boolean) {
-    if (lazy) {
+    if (lazy || hamburger.platform.name === 'React') {
       this._props.onChange = (event: any) => {
         onChange(event.target.value);
       };
