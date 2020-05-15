@@ -5,19 +5,18 @@
   "private": true,
   "repository": "https://github.com/hamburger-js/hamburger",
   "workspaces": [
-    "hamburger-*",
     "examples/*",
-    "packages/*",
-    "experiment"
+    "experiment",
+    "packages/*"
   ],
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build:cli": "cd hamburger-cli && yarn build",
-    "build:lib": "cd hamburger-js && yarn build",
-    "build:dsl": "cd hamburger-loader && yarn build",
-    "test:lib": "cd hamburger-js && yarn test",
-    "dev:lib": "cd hamburger-js && yarn dev",
+    "build:cli": "cd packages/hamburger-cli && yarn build",
+    "build:lib": "cd packages/hamburger-js && yarn build",
+    "build:dsl": "cd packages/hamburger-loader && yarn build",
+    "test:lib": "cd packages/hamburger-js && yarn test",
+    "dev:lib": "cd packages/hamburger-js && yarn dev",
     "build": "yarn build:cli && yarn build:lib && yarn build:cli && yarn build:dsl",
     "test": "yarn test",
     "dev": "yarn dev:lib",
