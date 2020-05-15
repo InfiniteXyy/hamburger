@@ -5,6 +5,7 @@
   "dependencies": {
     "@hamburger/core": "0.0.1",
     "@hamburger/loader": "0.0.1",
+    "@hamburger/platform-react": "0.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

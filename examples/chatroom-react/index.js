@@ -1,8 +1,8 @@
 import hamburger, { noTheme } from '@hamburger/core';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactPlatform from '@hamburger/platform-react'
+
 import App from './src/App';
 import 'antd/dist/antd.css';
 import './styles.scss';
 
-hamburger.setUp(React, ReactDOM).applyTheme(noTheme).mount(App, 'root');
+hamburger.setPlatform(ReactPlatform).applyTheme(noTheme).mount(App, 'root');

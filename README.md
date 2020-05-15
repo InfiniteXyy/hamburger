@@ -138,7 +138,7 @@ export default function Main() {
 
 ```jsx harmony
 // in index.js
-hamburger.setUp(React, ReactDOM).mount(App, "root")
+hamburger.setPlatform(ReactPlatform).mount(App, "root")
 
 // in Counter.jsx
 function Counter() {

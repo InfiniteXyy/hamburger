@@ -1,0 +1,25 @@
+{
+  "name": "@hamburger/platform-react",
+  "version": "0.0.1",
+  "description": "render with React in hamburger project",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": "https://github.com/hamburger-js/hamburger",
+  "keywords": [
+    "hamburger-js"
+  ],
+  "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "@hamburger/core": "0.0.1",
+    "react": ">16.0.0",
+    "react-dom": ">16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  }
+}

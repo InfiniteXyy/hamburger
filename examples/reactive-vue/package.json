@@ -5,6 +5,7 @@
   "dependencies": {
     "@hamburger/core": "0.0.1",
     "@hamburger/loader": "0.0.1",
+    "@hamburger/platform-vue": "0.0.1",
     "vue": "2.6.11"
   },
   "devDependencies": {

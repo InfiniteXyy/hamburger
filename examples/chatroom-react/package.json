@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.0.6",
     "@hamburger/core": "0.0.1",
     "@hamburger/loader": "0.0.1",
+    "@hamburger/platform-react": "0.0.1",
     "antd": "^4.1.5",
     "elizabot": "^0.0.2",
     "faker": "^4.1.0",

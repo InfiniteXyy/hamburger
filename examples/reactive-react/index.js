@@ -1,6 +1,6 @@
 import hamburger from '@hamburger/core';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactPlatform from '@hamburger/platform-react';
 import App from './src/App';
 
-hamburger.setUp(React, ReactDOM).mount(App, 'root');
+hamburger.setPlatform(ReactPlatform).mount(App, 'root');

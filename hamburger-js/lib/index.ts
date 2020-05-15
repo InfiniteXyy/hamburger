@@ -1,25 +1,19 @@
-import { ChildElement } from './common';
-
-export * from './components';
-export * from './themes';
-
-import { mount, createElement, IHamburgerPlatform } from './core';
-import { HamburgerPlatform, ReactPlatform, VuePlatform } from './core/platform';
+import { mount, createElement, HamburgerPlatform } from './core';
 import { IHamburgerTheme, noTheme } from './themes';
-export { ChildElement } from './common';
+import { ChildElement, DOMElement } from './common';
 
-export { listen, reactive, meta, IHamburgerPlatform } from './core';
+interface IHamburgerPlatform<PElement = any> {
+  name: string;
+  createElement(child: DOMElement): PElement; // platform element
+  render(root: PElement, id: string): any;
+}
 
 class Hamburger {
-  platform: IHamburgerPlatform<any> = new HamburgerPlatform();
+  platform: IHamburgerPlatform<any> = HamburgerPlatform;
   theme: IHamburgerTheme = noTheme;
 
-  setUp(coreEngine, domEngine?) {
-    if (coreEngine.name === 'Vue') {
-      this.platform = new VuePlatform(coreEngine);
-    } else {
-      this.platform = new ReactPlatform(coreEngine, domEngine);
-    }
+  setPlatform(platform: IHamburgerPlatform) {
+    this.platform = platform;
     return this;
   }
 
@@ -37,4 +31,10 @@ class Hamburger {
   }
 }
 
+export * from './components';
+export * from './themes';
+
+export { listen, reactive, meta } from './core';
+export { ChildElement, DOMElement } from './common';
+export { IHamburgerPlatform };
 export default new Hamburger();

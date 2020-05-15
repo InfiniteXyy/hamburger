@@ -1,5 +1,5 @@
 import hamburger from '@hamburger/core';
-import Vue from 'vue';
+import VuePlatform from '@hamburger/platform-vue';
 import App from './src/App';
 
-hamburger.setUp(Vue).mount(App, 'root');
+hamburger.setPlatform(VuePlatform).mount(App, 'root');
