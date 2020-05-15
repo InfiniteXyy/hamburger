@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Hamburger, { Input, VStack } from "hamburger-js";
+import Hamburger, { Input, VStack } from "@hamburger/core";
 import ListItem from "./components/ListItem";
 import { addItem, ITodoItem, removeItem, setInput, toggleItem } from "./store";
 import { appContext } from "./index";

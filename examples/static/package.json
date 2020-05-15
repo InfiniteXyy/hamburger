@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
-    "hamburger-js": "0.0.1",
-    "hamburger-loader": "0.0.1",
-    "hamburger-static": "0.0.1",
+    "@hamburger/core": "0.0.1",
+    "@hamburger/loader": "0.0.1",
+    "@hamburger/static": "0.0.1",
     "sucrase": "^3.12.1",
     "nodemon": "^2.0.2",
     "live-server": "^1.2.1",

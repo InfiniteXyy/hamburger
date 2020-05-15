@@ -1,4 +1,4 @@
-import { Layout, listen } from 'hamburger-js';
+import { Layout, listen } from '@hamburger/core';
 import Aside from './components/Aside';
 import InputBox from './components/Inputbox';
 import Main from './components/Main';

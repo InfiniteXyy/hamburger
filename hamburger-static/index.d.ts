@@ -1,4 +1,4 @@
-import { ChildElement } from 'hamburger-js';
+import { ChildElement } from '@hamburger/core';
 
 interface IRoute {
   path: string;

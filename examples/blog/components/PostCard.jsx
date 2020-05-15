@@ -1,4 +1,4 @@
-import hamburger from 'hamburger-js';
+import hamburger from '@hamburger/core';
 
 const React = {
   createElement: hamburger.createElement,

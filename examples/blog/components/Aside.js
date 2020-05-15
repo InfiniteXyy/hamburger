@@ -1,4 +1,4 @@
-import { GridCol, Link, List, Text, VStack } from 'hamburger-js';
+import { GridCol, Link, List, Text, VStack } from '@hamburger/core';
 
 function ItalicTitle(text) {
   return Text(text).tag('h4').theme('italic');

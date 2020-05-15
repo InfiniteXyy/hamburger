@@ -1,4 +1,4 @@
-import hamburger, { noTheme } from 'hamburger-js';
+import hamburger, { noTheme } from '@hamburger/core';
 import App from './src/App';
 import "./styles.scss"
 

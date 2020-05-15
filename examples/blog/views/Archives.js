@@ -1,4 +1,4 @@
-import { GridRow, Layout, VStack, Text } from 'hamburger-js';
+import { GridRow, Layout, VStack, Text } from '@hamburger/core';
 import Header from '../components/Header';
 
 import Footer from '../components/Footer';

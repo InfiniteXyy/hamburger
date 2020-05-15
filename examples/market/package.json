@@ -9,7 +9,7 @@
     "build": "parcel build ./index.html"
   },
   "dependencies": {
-    "hamburger-js": "0.0.1",
+    "@hamburger/core": "0.0.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "react": "^16.9.0",

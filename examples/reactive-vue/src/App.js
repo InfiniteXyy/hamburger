@@ -1,4 +1,4 @@
-import { VStack, Text, Button, meta } from 'hamburger-js';
+import { VStack, Text, Button, meta } from '@hamburger/core';
 
 const store = {
   data() {

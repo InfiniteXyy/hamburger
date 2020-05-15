@@ -1,4 +1,4 @@
-import { hbg } from 'hamburger-loader';
+import { hbg } from '@hamburger/loader';
 import Navbar from '../components/Navbar';
 
 export default function () {

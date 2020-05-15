@@ -2,6 +2,6 @@
   "name": "<app-name>",
   "version": "1.0.0",
   "dependencies": {
-    "hamburger-js": "0.0.1"
+    "@hamburger/core": "0.0.1"
   }
 }

@@ -1,4 +1,4 @@
-import hamburger, { noTheme } from 'hamburger-js';
+import hamburger, { noTheme } from '@hamburger/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Market from './Market';

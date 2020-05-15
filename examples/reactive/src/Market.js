@@ -1,4 +1,4 @@
-import { Button, HStack, VStack, Text, Input, Table, TableRow, listen } from 'hamburger-js';
+import { Button, HStack, VStack, Text, Input, Table, TableRow, listen } from '@hamburger/core';
 function withCount(itemList) {
   return itemList.map((i) => ({ ...i, count: 0, checked: true }));
 }

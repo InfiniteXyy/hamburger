@@ -1,4 +1,4 @@
-import { Button, HStack, GridCol, GridRow, VStack, Text, Link, Layout, PureHTML, List } from 'hamburger-js';
+import { Button, HStack, GridCol, GridRow, VStack, Text, Link, Layout, PureHTML, List } from '@hamburger/core';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Aside from '../components/Aside';

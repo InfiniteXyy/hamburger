@@ -1,5 +1,5 @@
 {
-  "name": "hamburger-cli",
+  "name": "@hamburger/cli",
   "version": "0.0.1",
   "private": false,
   "bin": {
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "sucrase": "^3.12.1",
-    "hamburger-js": "0.0.1"
+    "@hamburger/core": "0.0.1"
   },
   "scripts": {
     "build": "sucrase ./src -d dist --transforms imports",

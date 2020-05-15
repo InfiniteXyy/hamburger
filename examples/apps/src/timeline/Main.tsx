@@ -1,4 +1,4 @@
-import { VStack, Button } from 'hamburger-js';
+import { VStack, Button } from '@hamburger/core';
 import { messages } from '../mockData';
 import { renderMessageList } from './MessageList';
 

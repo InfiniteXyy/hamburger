@@ -1,4 +1,4 @@
-import { Button, HStack, VStack, Text, Input, Table, TableRow, listen } from 'hamburger-js';
+import { Button, HStack, VStack, Text, Input, Table, TableRow, listen } from '@hamburger/core';
 import { ItemList } from './store';
 
 function Counter(item) {

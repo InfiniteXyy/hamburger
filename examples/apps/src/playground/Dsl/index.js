@@ -1,4 +1,4 @@
-import { hbg } from 'hamburger-loader';
+import { hbg } from '@hamburger/loader';
 import template from './template.hbg';
 
 const data = {

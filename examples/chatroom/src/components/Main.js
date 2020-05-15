@@ -1,4 +1,4 @@
-import { Button, HStack, Text, VStack } from 'hamburger-js';
+import { Button, HStack, Text, VStack } from '@hamburger/core';
 import Bubble from './Bubble';
 import { withStore } from '../store';
 import Loading from './Loading';

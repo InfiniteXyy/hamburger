@@ -19,7 +19,7 @@ import hamburger, {
   Icon,
   Input,
   List,
-} from 'hamburger-js';
+} from '@hamburger/core';
 
 const HamburgerComponents = {
   Text,

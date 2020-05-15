@@ -1,5 +1,5 @@
 // @flow
-import hamburger, { Text, Image, HStack, Button, VStack, Link } from 'hamburger-js';
+import hamburger, { Text, Image, HStack, Button, VStack, Link } from '@hamburger/core';
 
 function betterEval(method, userArgs = {}) {
   const fakerArgs = { fakeTime: '2019年10月3日' };

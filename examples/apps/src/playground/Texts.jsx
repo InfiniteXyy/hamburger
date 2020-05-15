@@ -1,4 +1,4 @@
-import { VStack, Text } from 'hamburger-js';
+import { VStack, Text } from '@hamburger/core';
 
 const Texts = VStack(
   Text('heading 1').theme('h1'),

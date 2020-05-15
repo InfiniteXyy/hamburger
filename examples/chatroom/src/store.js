@@ -1,5 +1,5 @@
 import { friends, Me, responseMessage } from './mock';
-import { listen, reactive } from 'hamburger-js';
+import { listen, reactive } from '@hamburger/core';
 
 const store = reactive({
   friends: friends,

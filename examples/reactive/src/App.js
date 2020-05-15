@@ -1,4 +1,4 @@
-import { VStack, Text } from 'hamburger-js';
+import { VStack, Text } from '@hamburger/core';
 import Counter from './Counter';
 import Market from './Market';
 

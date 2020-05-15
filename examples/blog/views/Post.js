@@ -1,4 +1,4 @@
-import { GridRow, Layout, VStack, Text, PureHTML } from 'hamburger-js';
+import { GridRow, Layout, VStack, Text, PureHTML } from '@hamburger/core';
 import Header from '../components/Header';
 import md from 'markdown-it'
 

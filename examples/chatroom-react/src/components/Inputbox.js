@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, VStack, HStack } from 'hamburger-js';
+import { Input, VStack, HStack } from '@hamburger/core';
 import { useStore } from '../store';
 import { useState } from 'react';
 import { Button, message } from 'antd';

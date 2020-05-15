@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, HStack, Text, VStack } from 'hamburger-js';
+import { Button, HStack, Text, VStack } from '@hamburger/core';
 import Bubble from './Bubble';
 import { useStore } from '../store';
 import Loading from './Loading';

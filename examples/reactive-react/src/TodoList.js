@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { VStack, Text, Input, HStack, Button } from 'hamburger-js';
+import { VStack, Text, Input, HStack, Button } from '@hamburger/core';
 
 function TodoItem(content) {
   return Text(content).bold().margin(0);

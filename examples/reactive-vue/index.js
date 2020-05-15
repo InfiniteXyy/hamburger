@@ -1,4 +1,4 @@
-import hamburger from 'hamburger-js';
+import hamburger from '@hamburger/core';
 import Vue from 'vue';
 import App from './src/App';
 

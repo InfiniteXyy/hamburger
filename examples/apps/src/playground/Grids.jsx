@@ -1,5 +1,5 @@
-import { GridCol, GridRow, Button } from 'hamburger-js';
-import hamburger from 'hamburger-js';
+import { GridCol, GridRow, Button } from '@hamburger/core';
+import hamburger from '@hamburger/core';
 
 const Card = () => (
   <div className="card" style={{ width: '100%', marginBottom: 16 }}>

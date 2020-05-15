@@ -1,11 +1,11 @@
-import staticWebManager from 'hamburger-static';
+import staticWebManager from '@hamburger/static';
 import Home from './views/Home';
 import Post from './views/Post';
 import About from './views/About';
 import Archives from './views/Archives';
 import Tags from './views/Tags';
 import { posts } from './mockData';
-import hamburger, { bootstrapTheme } from 'hamburger-js';
+import hamburger, { bootstrapTheme } from '@hamburger/core';
 hamburger.applyTheme(bootstrapTheme)
 staticWebManager()
   .route([

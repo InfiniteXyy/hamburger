@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import hamburger from "hamburger-js";
+import hamburger from "@hamburger/core";
 import React from "react";
 import "./index.css";
 import TodoList from "./TodoList";

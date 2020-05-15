@@ -1,4 +1,4 @@
-import { Button, HStack, VStack, Text } from 'hamburger-js';
+import { Button, HStack, VStack, Text } from '@hamburger/core';
 import { useState } from 'react';
 
 function Counter(count, setCount) {

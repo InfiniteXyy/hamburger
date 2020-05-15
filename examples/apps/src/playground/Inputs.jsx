@@ -1,4 +1,4 @@
-import { HStack, Input } from 'hamburger-js';
+import { HStack, Input } from '@hamburger/core';
 
 
 const Inputs = HStack(

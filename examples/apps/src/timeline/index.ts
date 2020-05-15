@@ -1,4 +1,4 @@
-import { Layout, VStack } from 'hamburger-js';
+import { Layout, VStack } from '@hamburger/core';
 import Navbar from './Navbar';
 import Main from './Main';
 

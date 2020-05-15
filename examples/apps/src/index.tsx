@@ -1,5 +1,5 @@
 import Playground from './playground';
-import { VStack } from 'hamburger-js';
+import { VStack } from '@hamburger/core';
 
 // const App = TodoMVC;
 // const App = Blog;

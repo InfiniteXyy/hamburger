@@ -1,5 +1,5 @@
 // @jsx hamburger.createElement
-import hamburger, { HStack, Icon, Image, Input, listen, Text, VStack } from 'hamburger-js';
+import hamburger, { HStack, Icon, Image, Input, listen, Text, VStack } from '@hamburger/core';
 import { useStore } from '../store';
 import { useState } from 'react';
 import { Dropdown, Menu } from 'antd';

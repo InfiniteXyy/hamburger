@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, VStack } from 'hamburger-js';
+import { Image, Text, VStack } from '@hamburger/core';
 import Counter from './Counter';
 import TodoList from './TodoList';
 import { WithStyle } from './WithStyle';

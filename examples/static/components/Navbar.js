@@ -1,4 +1,4 @@
-import { HStack, Link } from 'hamburger-js';
+import { HStack, Link } from '@hamburger/core';
 
 export default function() {
   return HStack(

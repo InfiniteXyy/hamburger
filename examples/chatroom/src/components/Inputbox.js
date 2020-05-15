@@ -1,4 +1,4 @@
-import { Input, VStack, listen, HStack, Icon } from 'hamburger-js';
+import { Input, VStack, listen, HStack, Icon } from '@hamburger/core';
 import { actions } from '../store';
 
 function InputBox(data) {

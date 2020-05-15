@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "hamburger-js": "0.0.1",
-    "hamburger-loader": "0.0.1",
+    "@hamburger/core": "0.0.1",
+    "@hamburger/loader": "0.0.1",
     "vue": "2.6.11"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
-import { VStack, GridRow, Link, Button, Text, GridCol, HStack } from 'hamburger-js';
+import { VStack, GridRow, Link, Button, Text, GridCol, HStack, Icon } from '@hamburger/core';
 import { links } from '../mockData';
-import { Icon } from 'hamburger-js/lib';
+
 
 function NavLink(navItem) {
   return Link(navItem.title).theme('muted').margin({ horizontal: '4' }).href(navItem.path);

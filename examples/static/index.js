@@ -1,4 +1,4 @@
-import staticWebManager from 'hamburger-static';
+import staticWebManager from '@hamburger/static';
 import About from './views/About';
 import Home from './views/Home';
 import Detail from './views/Detail';

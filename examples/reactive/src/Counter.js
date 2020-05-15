@@ -1,5 +1,5 @@
-import { Button, HStack, VStack, Input } from 'hamburger-js';
-import { Text, listen } from 'hamburger-js';
+import { Button, HStack, VStack, Input } from '@hamburger/core';
+import { Text, listen } from '@hamburger/core';
 
 const store = { count: 0, text: '' };
 

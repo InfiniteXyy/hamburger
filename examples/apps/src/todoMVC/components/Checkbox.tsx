@@ -1,4 +1,4 @@
-import { Button } from "hamburger-js";
+import { Button } from "@hamburger/core";
 import "./Checkbox.css";
 
 interface ICheckboxProps {

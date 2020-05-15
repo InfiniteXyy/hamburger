@@ -1,4 +1,4 @@
-import { Text, VStack, Input } from 'hamburger-js';
+import { Text, VStack, Input } from '@hamburger/core';
 import Navbar from '../components/Navbar';
 
 export default function() {

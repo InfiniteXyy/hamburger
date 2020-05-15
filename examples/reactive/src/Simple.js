@@ -1,4 +1,4 @@
-import { Button, HStack, VStack, Input, listen, Text } from 'hamburger-js';
+import { Button, HStack, VStack, Input, listen, Text } from '@hamburger/core';
 
 const store = {
   items: [

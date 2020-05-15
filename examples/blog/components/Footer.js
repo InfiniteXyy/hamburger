@@ -1,4 +1,4 @@
-import { VStack, Text, Link } from 'hamburger-js';
+import { VStack, Text, Link } from '@hamburger/core';
 
 const Footer = VStack(
   Text('Blog template built for ', Link('Bootstrap'), ' by ', Link('@mdo')),

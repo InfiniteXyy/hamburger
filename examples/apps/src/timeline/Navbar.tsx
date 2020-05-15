@@ -1,4 +1,4 @@
-import { HStack, Image, Text } from 'hamburger-js';
+import { HStack, Image, Text } from '@hamburger/core';
 
 const MyNav = HStack(
   HStack(

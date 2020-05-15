@@ -5,8 +5,8 @@
   "dependencies": {
     "elizabot": "^0.0.2",
     "faker": "^4.1.0",
-    "hamburger-js": "0.0.1",
-    "hamburger-loader": "0.0.1",
+    "@hamburger/core": "0.0.1",
+    "@hamburger/loader": "0.0.1",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {

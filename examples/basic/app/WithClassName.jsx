@@ -1,4 +1,4 @@
-import { HStack, Button } from 'hamburger-js';
+import { HStack, Button } from '@hamburger/core';
 import './WithClassName.css';
 
 function FlatButton(content) {

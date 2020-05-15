@@ -1,4 +1,4 @@
-import { HStack, Text, Image } from "hamburger-js";
+import { HStack, Text, Image } from "@hamburger/core";
 
 function Bubble(message) {
   return HStack(

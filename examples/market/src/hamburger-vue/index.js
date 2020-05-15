@@ -1,4 +1,4 @@
-import hamburger, { noTheme } from 'hamburger-js';
+import hamburger, { noTheme } from '@hamburger/core';
 import Vue from 'vue';
 
 import Market from './Market';

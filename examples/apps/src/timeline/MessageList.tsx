@@ -1,4 +1,4 @@
-import { Text, VStack, HStack, Image, Link } from 'hamburger-js';
+import { Text, VStack, HStack, Image, Link } from '@hamburger/core';
 import moment from 'moment';
 
 function MessageHeader(message) {

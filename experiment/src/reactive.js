@@ -1,4 +1,4 @@
-import { VStack, Text, Button, Input, listen } from 'hamburger-js';
+import { VStack, Text, Button, Input, listen } from '@hamburger/core';
 
 function counter(data) {
   return VStack(

@@ -1,5 +1,5 @@
 // @jsx hamburger.createElement
-import hamburger, { Layout, Text } from 'hamburger-js';
+import hamburger, { Layout, Text } from '@hamburger/core';
 import Aside from './components/Aside';
 import InputBox from './components/Inputbox';
 import Main from './components/Main';
