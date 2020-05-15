@@ -9,11 +9,10 @@
   },
   "dependencies": {
     "@hamburger/core": "0.0.1",
-    "@hamburger/platform-react": "0.0.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "@hamburger/loader": "0.0.1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.6.5"
   }
 }

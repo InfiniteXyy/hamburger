@@ -9,7 +9,7 @@ class GridRowClass extends ViewClass<HTMLDivElement> implements IChildIterable<G
     super();
     this.isFlexBox = false;
     // GridRow 的子元素必须是 GridCol，否则样式上会有问题
-    this._children = elements.map(i => (i instanceof GridColClass ? i : new GridColClass([i])));
+    this._children = elements.map((i) => (i instanceof GridColClass ? i : new GridColClass([i])));
     this.class('row');
   }
 
@@ -90,11 +90,14 @@ class GridColClass extends ViewClass<HTMLDivElement> implements IFlexBox {
 }
 
 export function GridRow(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
+  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new GridRowClass(_elements);
 }
 
 export function GridCol(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, i => (Array.isArray(i) ? i : [i]));
+  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new GridColClass(_elements);
 }
+
+GridRow.__class__ = GridRowClass;
+GridCol.__class__ = GridColClass;

@@ -16,3 +16,5 @@ class IconClass extends ViewClass<any> {
 export function Icon(name: string) {
   return new IconClass(name);
 }
+
+Icon.__class__ = IconClass;

@@ -1,10 +1,10 @@
 import { FontSizeProperty, FontWeightProperty } from 'csstype';
-import { ViewClass } from '../View';
-import { IThemeable } from '../../common';
+import { ViewClass, ViewProps } from '../View';
+import { Conditional, IThemeable, Primitive } from '../../common';
 import hamburger from '../../index';
 
 export class TextClass extends ViewClass<HTMLParagraphElement> implements IThemeable {
-  constructor(...content: (string | TextClass)[]) {
+  constructor(...content: (Primitive | TextClass)[]) {
     super();
     this._children = content;
     this._tag = 'p';
@@ -38,11 +38,25 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
   }
 
   public theme(...name: string[]): this {
-    this.class(...name.map(i => hamburger.theme.text.variant[i]));
+    this.class(...name.map((i) => hamburger.theme.text.variant[i]));
     return this;
   }
 }
 
-export function Text(...content: (string | TextClass)[]) {
+export type TextProps = ViewProps & {
+  color?: Conditional<string>;
+  content?: Conditional<string>;
+  bold?: boolean;
+  fontSize?: Conditional<FontSizeProperty<string | number>>;
+  fontWeight?: Conditional<FontWeightProperty>;
+  theme?: string[] | string;
+};
+
+// @ts-ignore
+export function Text(props: TextProps): JSX.Element;
+export function Text(...content: (Primitive | TextClass)[]): TextClass;
+export function Text(...content: (Primitive | TextClass)[]) {
   return new TextClass(...content);
 }
+
+Text.__class__ = TextClass;

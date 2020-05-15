@@ -75,3 +75,4 @@ class LayoutClass implements IBuildable {
 export function Layout(type: LayoutType) {
   return new LayoutClass(type);
 }
+Layout.__class__ = LayoutClass;

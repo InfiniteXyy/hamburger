@@ -11,7 +11,7 @@ class ImageClass extends ViewClass<HTMLImageElement> implements IThemeable {
 
   // 样式方法
   public theme(...name: string[]) {
-    this.class(...name.map(i => hamburger.theme.image.variant[i]));
+    this.class(...name.map((i) => hamburger.theme.image.variant[i]));
     return this;
   }
 }
@@ -19,3 +19,5 @@ class ImageClass extends ViewClass<HTMLImageElement> implements IThemeable {
 export function Image(src: string) {
   return new ImageClass(src).class(hamburger.theme.image.common);
 }
+
+Image.__class__ = ImageClass;

@@ -14,4 +14,3 @@ export * from './layout/Layout';    // 页面布局
 
 export * from './button/Button';    // 按钮
 export * from './icon/Icon';        // 图标
-export * from './nav/Navbar';       // 导航栏

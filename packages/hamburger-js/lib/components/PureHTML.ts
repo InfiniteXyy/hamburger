@@ -10,3 +10,5 @@ class PureHTMLClass extends ViewClass<HTMLElement> {
 export function PureHTML(html: string) {
   return new PureHTMLClass(html);
 }
+
+PureHTML.__class__ = PureHTMLClass;

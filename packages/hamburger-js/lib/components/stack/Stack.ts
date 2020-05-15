@@ -1,5 +1,5 @@
-import { ChildElement, IChildIterable, IFlexBox, IThemeable } from '../../common';
-import { ViewClass } from '../View';
+import { ChildElement, Conditional, IChildIterable, IFlexBox, IThemeable } from '../../common';
+import { ViewClass, ViewProps } from '../View';
 import { flatMap } from '../../utils';
 import hamburger from '../../index';
 
@@ -50,13 +50,13 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
     return this;
   }
 
-  public nowrap() {
-    this.class('flex-nowrap');
+  public nowrap(when?: boolean) {
+    if (when !== false) this.class('flex-nowrap');
     return this;
   }
 
-  public inflate() {
-    this.class('fit');
+  public inflate(when?: boolean) {
+    if (when !== false) this.class('fit');
     return this;
   }
 
@@ -66,12 +66,30 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
   }
 }
 
+export type StackProps = ViewProps & {
+  reverse?: boolean;
+  mapItem?: any;
+  justifyContent?: Conditional<string>;
+  alignItems?: Conditional<string>;
+  nowrap?: boolean;
+  inflate?: boolean;
+};
+
+// @ts-ignore
+export function HStack(props: StackProps): JSX.Element;
+export function HStack(...elements: (ChildElement | ChildElement[])[]);
 export function HStack(...elements: (ChildElement | ChildElement[])[]) {
   const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(true, _elements);
 }
 
+// @ts-ignore
+export function VStack(props: StackProps): JSX.Element;
+export function VStack(...elements: (ChildElement | ChildElement[])[]);
 export function VStack(...elements: (ChildElement | ChildElement[])[]) {
   const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(false, _elements);
 }
+
+VStack.__class__ = StackClass;
+HStack.__class__ = StackClass;

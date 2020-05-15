@@ -57,3 +57,4 @@ class InputClass extends ViewClass<HTMLInputElement> {
 export function Input(value: any, type?: string) {
   return new InputClass(value, type).class(hamburger.theme.input.common);
 }
+Input.__class__ = InputClass;

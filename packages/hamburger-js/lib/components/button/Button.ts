@@ -1,6 +1,6 @@
-import { ViewClass } from '../View';
-import { IThemeable } from '../../common';
-import hamburger from '../../index';
+import { ViewClass, ViewProps } from '../View';
+import { ChildElement, Conditional, IThemeable } from '../../common';
+import hamburger, { StackProps } from '../../index';
 
 class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
   constructor(content: string = 'button') {
@@ -22,11 +22,22 @@ class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
   }
 
   public theme(...name: string[]) {
-    this.class(...name.map(i => hamburger.theme.button.variant[i]));
+    this.class(...name.map((i) => hamburger.theme.button.variant[i]));
     return this;
   }
 }
 
-export function Button(content: string) {
+type ButtonProps = ViewProps & {
+  content?: Conditional<string>;
+  disabled?: boolean;
+  theme?: string[] | string;
+};
+
+// @ts-ignore
+export function Button(props: ButtonProps): JSX.Element;
+export function Button(content: string): ButtonClass;
+export function Button(content: string): ButtonClass {
   return new ButtonClass(content).class(hamburger.theme.button.common);
 }
+
+Button.__class__ = ButtonClass;

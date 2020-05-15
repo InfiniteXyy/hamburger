@@ -35,6 +35,12 @@ interface BorderModel {
   color?: string;
 }
 
+export type ViewProps = {
+  children: any;
+  onClick?: (e) => void;
+  [k: string]: any;
+};
+
 export class ViewClass<T extends HTMLElement> implements IBuildable {
   protected _tag: string;
   protected _props: { style: React.CSSProperties } & React.HTMLProps<T>; // with default empty style
@@ -173,7 +179,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public style(styleObject: React.CSSProperties, when?: boolean) {
+  public style(styleObject: { [k: string]: any }, when?: boolean) {
     if (when === false) return this;
     this._props.style = Object.assign(this._props.style, styleObject);
     return this;

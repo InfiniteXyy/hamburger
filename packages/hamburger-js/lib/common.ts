@@ -1,7 +1,10 @@
-import { ViewClass } from "./components";
+import { ViewClass } from './components';
+
+export type Conditional<T> = T | [T, boolean];
+export type Primitive = string | number | boolean;
 
 // 元素 或 元素的构造器，用 any 兼容第三方框架类型
-export type ChildElement = string | number | IBuildable | any;
+export type ChildElement = Primitive | IBuildable | any;
 
 // Platform 中间层元素
 export type DOMElement = {
