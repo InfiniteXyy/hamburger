@@ -12,8 +12,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@hamburger/core": "0.0.1",
-    "react": ">16.0.0",
-    "react-dom": ">16.0.0"
+    "react": ">16.13.0",
+    "react-dom": ">16.13.0"
   },
   "devDependencies": {
     "typescript": "^3.8.2"

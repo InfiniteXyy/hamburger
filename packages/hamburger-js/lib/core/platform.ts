@@ -16,4 +16,5 @@ class HamburgerPlatform implements IHamburgerPlatform<DOMElement> {
   }
 }
 
-export default new HamburgerPlatform();
+const hamburgerPlatform = new HamburgerPlatform();
+export default hamburgerPlatform;

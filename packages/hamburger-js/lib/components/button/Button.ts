@@ -1,6 +1,6 @@
 import { ViewClass, ViewProps } from '../View';
-import { ChildElement, Conditional, IThemeable } from '../../common';
-import hamburger, { StackProps } from '../../index';
+import { Conditional, IThemeable } from '../../common';
+import hamburger from '../../index';
 
 class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
   constructor(content: string = 'button') {

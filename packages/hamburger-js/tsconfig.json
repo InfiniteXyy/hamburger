@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./src",
-    "target": "es6",
+    "target": "esnext",
     "module": "commonjs",
     "esModuleInterop": true,
     "experimentalDecorators": true,

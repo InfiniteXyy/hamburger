@@ -3,8 +3,6 @@ import hamburger from '../index';
 
 // 暴露给外部的接口，将组件挂载到网页上
 function mount(element: ChildElement, id: string) {
-  // @ts-ignore
-  import('basscss/css/basscss.min.css');
   const target = document.getElementById(id);
   if (!target) return;
   if (typeof element === 'string' || typeof element === 'number') {

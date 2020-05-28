@@ -31,10 +31,12 @@ class Hamburger {
   }
 }
 
+const hamburger = new Hamburger();
+
 export * from './components';
 export * from './themes';
 
 export { listen, reactive, meta } from './core';
 export { ChildElement, DOMElement } from './common';
 export { IHamburgerPlatform };
-export default new Hamburger();
+export default hamburger;

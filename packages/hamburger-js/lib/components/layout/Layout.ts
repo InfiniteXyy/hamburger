@@ -1,5 +1,4 @@
-import { HStack, VStack } from '..';
-import { createPlaceHolder } from '../../utils';
+import { HStack, Text, VStack } from '..';
 import { ChildElement, IBuildable } from '../../common';
 
 type LayoutType =
@@ -70,6 +69,21 @@ class LayoutClass implements IBuildable {
         return VStack(HStack(this.asideElement, this.mainElement), this.bottomElement).build();
     }
   }
+}
+
+function createPlaceHolder(
+  box: { width?: string; height?: string },
+  innerWords: string,
+  backgroundColor = '#eaeaea'
+): any {
+  const { width, height } = box;
+  return VStack(Text(innerWords.toUpperCase()).fontSize(20).color('#4a4a4a').bold().margin(0)).style({
+    backgroundColor,
+    width,
+    height,
+    border: '2px solid white',
+    padding: 10,
+  });
 }
 
 export function Layout(type: LayoutType) {

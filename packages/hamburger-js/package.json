@@ -15,19 +15,20 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "bundle": "rollup -c rollup.config.js"
   },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
+    "@hamburger/platform-react": "0.0.1",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.18",
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
-    "@hamburger/platform-react": "0.0.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "^3.10.0",
@@ -36,8 +37,10 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "basscss": "^8.1.0",
     "classnames": "^2.2.6",
     "fast-deep-equal": "^3.1.1"
+  },
+  "peerDependencies": {
+    "basscss": "^8.1.0"
   }
 }

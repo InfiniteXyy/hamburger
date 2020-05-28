@@ -1,6 +1,6 @@
 import hamburger, { noTheme } from '@hamburger/core';
-import Vue from 'vue';
+import VuePlatform from '@hamburger/platform-vue';
 
 import Market from './Market';
 
-hamburger.applyTheme(noTheme).setUp(Vue).mount(Market, 'hamburger-vue-app');
+hamburger.applyTheme(noTheme).setPlatform(VuePlatform).mount(Market, 'hamburger-vue-app');

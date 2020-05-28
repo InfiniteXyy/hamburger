@@ -1,4 +1,4 @@
-import React from 'react';
+import { CSSProperties, HTMLProps, MouseEventHandler } from 'react';
 import classnames from 'classnames';
 import { ClassValue } from 'classnames/types';
 import { IShadow } from '../themes';
@@ -43,7 +43,7 @@ export type ViewProps = {
 
 export class ViewClass<T extends HTMLElement> implements IBuildable {
   protected _tag: string;
-  protected _props: { style: React.CSSProperties } & React.HTMLProps<T>; // with default empty style
+  protected _props: { style: CSSProperties } & HTMLProps<T>; // with default empty style
   protected _children: ChildElement[];
 
   protected constructor() {
@@ -150,7 +150,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public onClick(callback: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void) {
+  public onClick(callback: MouseEventHandler<T>) {
     this._props.onClick = callback;
     return this;
   }
