@@ -4,14 +4,8 @@ import { useState } from 'react';
 export default function Counter() {
   const [count, setCount] = useState(0);
   return HStack(
-    Button('minus')
-      .onClick(() => setCount(count - 1))
-      .theme('primary'),
-    Text('count: ' + count)
-      .theme('h3')
-      .margin({ horizontal: '3' }),
-    Button('add')
-      .onClick(() => setCount(count + 1))
-      .theme('primary')
-  ).margin({ top: '3' });
+    Button('minus').onClick(() => setCount(count - 1)),
+    Text('count: ' + count).margin({ horizontal: 30, vertical: 0 }),
+    Button('add').onClick(() => setCount(count + 1))
+  ).margin({ vertical: 30 });
 }

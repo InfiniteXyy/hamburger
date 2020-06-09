@@ -1,42 +1,25 @@
-import { mount, createElement, HamburgerPlatform } from './core';
-import { IHamburgerTheme, noTheme } from './themes';
-import { ChildElement, DOMElement } from './common';
+import { ChildElement, HamburgerPlatform } from './types';
+import { config } from './config';
+import { mount, createElement } from './core';
 
-interface IHamburgerPlatform<PElement = any> {
-  name: string;
-  createElement(child: DOMElement): PElement; // platform element
-  render(root: PElement, id: string): any;
-}
-
-class Hamburger {
-  platform: IHamburgerPlatform<any> = HamburgerPlatform;
-  theme: IHamburgerTheme = noTheme;
-
-  setPlatform(platform: IHamburgerPlatform) {
-    this.platform = platform;
+const hamburger = {
+  setPlatform(platform: HamburgerPlatform) {
+    config.platform = platform;
     return this;
-  }
+  },
 
-  applyTheme(theme: IHamburgerTheme) {
-    this.theme = theme;
-    return this;
-  }
-
-  mount(element: ChildElement, id: string) {
+  mount(child: ChildElement, id: string) {
+    const element = 'build' in child ? child.build() : child;
     return mount(element, id);
-  }
+  },
 
   createElement(type: string, props: { [k: string]: any }, ...children) {
     return createElement(type, props, ...children);
-  }
-}
-
-const hamburger = new Hamburger();
+  },
+};
 
 export * from './components';
-export * from './themes';
 
-export { listen, reactive, meta } from './core';
-export { ChildElement, DOMElement } from './common';
-export { IHamburgerPlatform };
+export { listen, reactive } from './core';
+export { HamburgerPlatform, ChildElement } from './types';
 export default hamburger;

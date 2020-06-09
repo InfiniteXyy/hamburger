@@ -1,37 +1,23 @@
-import { CSSProperties, HTMLProps, MouseEventHandler } from 'react';
-import classnames from 'classnames';
-import { ClassValue } from 'classnames/types';
-import { IShadow } from '../themes';
-import { ChildElement, IBuildable } from '../common';
+import { ChildElement, IView } from '../types';
 import { createElement } from '../core';
-import hamburger from '../index';
 
-interface MarginModel<T> {
-  top?: T;
-  bottom?: T;
-  left?: T;
-  right?: T;
-  horizontal?: T;
-  vertical?: T;
-}
-
-interface PaddingModel<T> {
-  top?: T;
-  bottom?: T;
-  left?: T;
-  right?: T;
-  horizontal?: T;
-  vertical?: T;
+interface BoxModel {
+  top?: number | string;
+  bottom?: number | string;
+  left?: number | string;
+  right?: number | string;
+  horizontal?: number | string;
+  vertical?: number | string;
 }
 
 interface SizeModel {
-  height?: number;
-  width?: number;
+  height?: number | string;
+  width?: number | string;
 }
 
 interface BorderModel {
-  radius?: number;
-  width?: number;
+  radius?: number | string;
+  width?: number | string;
   color?: string;
 }
 
@@ -41,9 +27,9 @@ export type ViewProps = {
   [k: string]: any;
 };
 
-export class ViewClass<T extends HTMLElement> implements IBuildable {
+export class ViewClass implements IView {
   protected _tag: string;
-  protected _props: { style: CSSProperties } & HTMLProps<T>; // with default empty style
+  protected _props: { [key: string]: any };
   protected _children: ChildElement[];
 
   protected constructor() {
@@ -57,9 +43,9 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  private static getBoxModelObj<T>(type: 'margin' | 'padding', value: number | PaddingModel<T>) {
+  private static getBoxModelObj(type: 'margin' | 'padding', value: number | string | BoxModel) {
     let result: any = {};
-    if (typeof value === 'number') {
+    if (typeof value === 'number' || typeof value === 'string') {
       result = { [type]: value };
     } else {
       if ('horizontal' in value) result[`${type}Left`] = result[`${type}Right`] = value.horizontal;
@@ -72,61 +58,21 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return result;
   }
 
-  private static getBootstrapBoxModel<T>(type: 'm' | 'p', value: string | PaddingModel<T>): string {
-    if (typeof value === 'string') {
-      return type + value;
-    } else {
-      if ('horizontal' in value) return `${type}x${value.horizontal}`;
-      if ('vertical' in value) return `${type}y${value.vertical}`;
-      if ('top' in value) return `${type}t${value.top}`;
-      if ('bottom' in value) return `${type}b${value.bottom}`;
-      if ('left' in value) return `${type}l${value.left}`;
-      if ('right' in value) return `${type}r${value.right}`;
-    }
-    return '';
-  }
-
-  public padding<T>(value: number | string | PaddingModel<T>, when?: boolean) {
+  public padding(value: number | string | BoxModel, when?: boolean) {
     if (when === false) return this;
-    let isPlainBoxModelObj = false;
-    if (typeof value === 'object') {
-      for (let key in value) {
-        if (typeof value[key] === 'number') {
-          isPlainBoxModelObj = true;
-          break;
-        }
-      }
-    }
-    if (typeof value === 'number' || isPlainBoxModelObj) {
-      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value as any));
-    } else {
-      this.class(ViewClass.getBootstrapBoxModel('p', value));
-    }
+    Object.assign(this._props.style, ViewClass.getBoxModelObj('padding', value));
     return this;
   }
 
-  public margin<T>(value: number | string | MarginModel<T>, when?: boolean) {
+  public margin<T>(value: number | string | BoxModel, when?: boolean) {
     if (when === false) return this;
-    let isPlainBoxModelObj = false;
-    if (typeof value === 'object') {
-      for (let key in value) {
-        if (typeof value[key] === 'number') {
-          isPlainBoxModelObj = true;
-          break;
-        }
-      }
-    }
-    if (typeof value === 'number' || isPlainBoxModelObj) {
-      this._props.style = Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value as any));
-    } else {
-      this.class(ViewClass.getBootstrapBoxModel('m', value));
-    }
+    Object.assign(this._props.style, ViewClass.getBoxModelObj('margin', value));
     return this;
   }
 
-  public size(size: number | SizeModel, when?: boolean) {
+  public size(size: number | string | SizeModel, when?: boolean) {
     if (when === false) return this;
-    if (typeof size === 'number') {
+    if (typeof size === 'number' || typeof size === 'string') {
       this._props.style.width = this._props.style.height = size;
     } else {
       this._props.style.width = size.width;
@@ -150,18 +96,8 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public onClick(callback: MouseEventHandler<T>) {
+  public onClick(callback) {
     this._props.onClick = callback;
-    return this;
-  }
-
-  public shadow(type: keyof IShadow = 'regular', when?: boolean) {
-    if (!when) this.class(hamburger.theme.utility.shadow[type]);
-    return this;
-  }
-
-  public unselectable() {
-    this._props.style.userSelect = 'none';
     return this;
   }
 
@@ -170,18 +106,16 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
     return this;
   }
 
-  public class(...classes: ClassValue[]) {
-    classes = classes.filter((i) => !!i);
-    const className = classnames(classes);
+  public class(...classes: string[]) {
+    const className = classes.join(' ');
     if (!this._props.className) this._props.className = className;
     else this._props.className += ' ' + className;
-    if (this._props.className === '') this._props.className = undefined;
     return this;
   }
 
   public style(styleObject: { [k: string]: any }, when?: boolean) {
     if (when === false) return this;
-    this._props.style = Object.assign(this._props.style, styleObject);
+    Object.assign(this._props.style, styleObject);
     return this;
   }
 
@@ -192,7 +126,7 @@ export class ViewClass<T extends HTMLElement> implements IBuildable {
 
   public props(props: any, when?: boolean) {
     if (when === false) return this;
-    this._props = Object.assign(this._props, props);
+    Object.assign(this._props, props);
     return this;
   }
 

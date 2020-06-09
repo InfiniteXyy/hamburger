@@ -1,5 +1,5 @@
-import domfy, { toCSS } from './domfy';
-const deepEqual = require('fast-deep-equal');
+import { toCSS, domfy } from './domfy';
+import { deepEqual } from 'fast-equals';
 
 // fork of didact
 const isEvent = (key) => key.startsWith('on');

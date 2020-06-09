@@ -52,6 +52,15 @@ function mapProps(props) {
     }
     return _props;
 }
+function withVue(config) {
+    return function (componentFn) { return function () { return ({
+        meta: config,
+        build: function () {
+            return componentFn.call(this, this).build();
+        },
+    }); }; };
+}
+exports.withVue = withVue;
 var VuePlatform = /** @class */ (function () {
     function VuePlatform() {
         this.name = 'Vue';
@@ -60,6 +69,7 @@ var VuePlatform = /** @class */ (function () {
         return child;
     };
     VuePlatform.prototype.render = function (root, id) {
+        console.log(root);
         var meta = root.meta || {};
         new vue_1.default(__assign(__assign({}, meta), { render: function (h) {
                 var _root = root.build.call(this, this);

@@ -1,8 +1,8 @@
 import { ViewClass } from '../View';
-import { ChildElement } from '../../common';
+import { ChildElement } from '../../types';
 import { flatMap } from '../../utils';
 
-class ListClass extends ViewClass<HTMLUListElement> {
+class ListClass extends ViewClass {
   constructor(elements: ChildElement[]) {
     super();
     // GridRow 的子元素必须是 GridCol，否则样式上会有问题
@@ -12,7 +12,7 @@ class ListClass extends ViewClass<HTMLUListElement> {
   }
 }
 
-class ListItemClass extends ViewClass<HTMLLIElement> {
+class ListItemClass extends ViewClass {
   constructor(element: ChildElement) {
     super();
     this.tag('li');

@@ -1,5 +1,4 @@
-import { ViewClass } from '../components';
-import { DOMElement, IBuildable } from '../common';
+import { DOMElement, IBuildable, IView } from '../types';
 import rerender from './reactive';
 
 interface ListenerConfig {
@@ -30,7 +29,7 @@ function randString(length: number): string {
 function listen(
   reactiveObj: any,
   config: ListenerConfig = {}
-): (componentFn: (...args) => ViewClass<any>) => (...userArgs) => IBuildable {
+): (componentFn: (...args) => IView) => (...userArgs) => IBuildable {
   const dataId = randString(10);
   const consumers: Consumer[] = [];
   // 自动封装为proxy

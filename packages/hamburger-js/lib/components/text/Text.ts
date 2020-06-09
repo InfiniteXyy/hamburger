@@ -1,9 +1,7 @@
-import { FontSizeProperty, FontWeightProperty } from 'csstype';
 import { ViewClass, ViewProps } from '../View';
-import { Conditional, IThemeable, Primitive } from '../../common';
-import hamburger from '../../index';
+import { Conditional, Primitive } from '../../types';
 
-export class TextClass extends ViewClass<HTMLParagraphElement> implements IThemeable {
+export class TextClass extends ViewClass {
   constructor(...content: (Primitive | TextClass)[]) {
     super();
     this._children = content;
@@ -22,7 +20,7 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
     return this;
   }
 
-  public fontSize(value: FontSizeProperty<string | number>, when?: boolean) {
+  public fontSize(value: string | number, when?: boolean) {
     if (when !== false) this._props.style.fontSize = value;
     return this;
   }
@@ -32,13 +30,8 @@ export class TextClass extends ViewClass<HTMLParagraphElement> implements ITheme
     return this;
   }
 
-  public fontWeight(value: FontWeightProperty, when?: boolean) {
+  public fontWeight(value: string, when?: boolean) {
     if (when !== false) this._props.style.fontWeight = value;
-    return this;
-  }
-
-  public theme(...name: string[]): this {
-    this.class(...name.map((i) => hamburger.theme.text.variant[i]));
     return this;
   }
 }
@@ -47,8 +40,8 @@ export type TextProps = ViewProps & {
   color?: Conditional<string>;
   content?: Conditional<string>;
   bold?: boolean;
-  fontSize?: Conditional<FontSizeProperty<string | number>>;
-  fontWeight?: Conditional<FontWeightProperty>;
+  fontSize?: Conditional<string | number>;
+  fontWeight?: Conditional<string>;
   theme?: string[] | string;
 };
 

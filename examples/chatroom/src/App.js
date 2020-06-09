@@ -3,7 +3,7 @@ import Aside from './components/Aside';
 import InputBox from './components/Inputbox';
 import Main from './components/Main';
 import 'normalize.css/normalize.css';
-
+import 'basscss/css/basscss.css'
 
 function App() {
   return Layout('aside-main-bottom')

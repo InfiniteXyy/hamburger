@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "elizabot": "^0.0.2",
-    "faker": "^4.1.0",
     "@hamburger/core": "0.0.1",
     "@hamburger/loader": "0.0.1",
+    "basscss": "^8.1.0",
+    "elizabot": "^0.0.2",
+    "faker": "^4.1.0",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {

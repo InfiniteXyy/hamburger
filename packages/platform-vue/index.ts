@@ -1,5 +1,5 @@
 import Vue, { CreateElement, VNode } from 'vue';
-import { DOMElement, ChildElement, IHamburgerPlatform } from '@hamburger/core';
+import { ChildElement, HamburgerPlatform } from '@hamburger/core';
 
 const RootAttributes = ['staticClass', 'class', 'style', 'key', 'ref', 'refInFor', 'slot', 'scopedSlots', 'model'];
 function mapChildren(children: ChildElement[], h: CreateElement): VNode[] | null {
@@ -30,14 +30,24 @@ function mapProps(props: { [k: string]: any }) {
   return _props;
 }
 
-class VuePlatform implements IHamburgerPlatform<DOMElement> {
+function withVue(config: typeof Vue) {
+  return (componentFn: any) => () => ({
+    meta: config,
+    build: function () {
+      return componentFn.call(this, this).build();
+    },
+  });
+}
+
+class VuePlatform implements HamburgerPlatform {
   name = 'Vue';
 
-  createElement(child: DOMElement): DOMElement {
+  createElement(child: any): any {
     return child;
   }
 
   render(root: VNode | ChildElement, id: string) {
+    console.log(root);
     const meta = root.meta || {};
     new Vue({
       ...meta,
@@ -49,4 +59,6 @@ class VuePlatform implements IHamburgerPlatform<DOMElement> {
     return document.getElementById(id);
   }
 }
+
+export { withVue };
 export default new VuePlatform();

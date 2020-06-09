@@ -2,7 +2,9 @@
   "name": "@hamburger/core",
   "version": "0.0.1",
   "private": false,
-  "main": "./src/index.js",
+  "main": "dist/hamburger.cjs.js",
+  "module": "dist/hamburger.esm.js",
+  "browser": "dist/hamburger.umd.js",
   "author": {
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
@@ -13,10 +15,9 @@
     "declarative"
   ],
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
+    "build": "tsc --outDir ./src --declaration --declarationDir ./@types",
     "test": "jest",
-    "bundle": "rollup -c rollup.config.js"
+    "bundle": "rollup -c"
   },
   "license": "MIT",
   "devDependencies": {
@@ -24,6 +25,8 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@hamburger/platform-react": "0.0.1",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "@rollup/plugin-typescript": "^4.1.2",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.18",
@@ -34,13 +37,11 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.9.0",
+    "rollup": "^2.15.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "fast-deep-equal": "^3.1.1"
-  },
-  "peerDependencies": {
-    "basscss": "^8.1.0"
+    "fast-equals": "^2.0.0"
   }
 }

@@ -1,5 +1,6 @@
-import { HStack, Text, VStack } from '..';
-import { ChildElement, IBuildable } from '../../common';
+import { HStack, VStack } from '../stack/Stack';
+import { Text } from '../text/Text';
+import { ChildElement, IBuildable } from '../../types';
 
 type LayoutType =
   | 'top-main'

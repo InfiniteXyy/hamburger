@@ -1,7 +1,7 @@
 import { ViewClass } from '../View';
-import hamburger from '../../index';
+import { config } from '../../config';
 
-class InputClass extends ViewClass<HTMLInputElement> {
+class InputClass extends ViewClass {
   constructor(private value: any, private type?: string) {
     super();
     if (type === 'checkbox') this._props.checked = (value as unknown) as boolean;
@@ -41,7 +41,7 @@ class InputClass extends ViewClass<HTMLInputElement> {
   }
 
   public bind<T>(onChange: (value: T) => void, lazy?: boolean) {
-    if (lazy || hamburger.platform.name === 'React') {
+    if (lazy || config.platform.name === 'React') {
       this._props.onChange = (event: any) => {
         onChange(event.target.value);
       };
@@ -55,6 +55,6 @@ class InputClass extends ViewClass<HTMLInputElement> {
 }
 
 export function Input(value: any, type?: string) {
-  return new InputClass(value, type).class(hamburger.theme.input.common);
+  return new InputClass(value, type);
 }
 Input.__class__ = InputClass;

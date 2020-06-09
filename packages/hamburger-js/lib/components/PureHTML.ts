@@ -1,6 +1,6 @@
 import { ViewClass } from './View';
 
-class PureHTMLClass extends ViewClass<HTMLElement> {
+class PureHTMLClass extends ViewClass {
   constructor(html: string) {
     super();
     this._props.dangerouslySetInnerHTML = { __html: html };

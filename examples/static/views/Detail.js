@@ -10,13 +10,13 @@ export default function () {
   };
   return hbg(data)`
     Navbar() 
-    HStack {               @padding=3 @margin.vertical=3 @size.width=550px @shadow @border.radius=10px
-      Image(imgLink)       @theme=thumbnail @size.width=300px @margin.right=3
+    HStack {               @padding=3 @margin.vertical=3 @size.width=550px @border.radius=10px
+      Image(imgLink)       @size.width=300px @margin.right=3
       VStack {
-        Text(name)         @margin.right=3 @margin.bottom=0 @theme=h3
+        Text(name)         @margin.right=3 @margin.bottom=0 @tag=h3
         Link(fakeEmail)    @bold @margin.bottom=3
         Text(fakeTime)
-        Button("Follow")   @theme=primary
+        Button("Follow")
       }
     }  
     PureHTML("<h1 class='display-4'>using <b>hamburger-lang</b> template</h1>")

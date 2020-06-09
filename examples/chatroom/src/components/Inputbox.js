@@ -1,4 +1,4 @@
-import { Input, VStack, listen, HStack, Icon } from '@hamburger/core';
+import { Input, VStack, listen, HStack } from '@hamburger/core';
 import { actions } from '../store';
 
 function InputBox(data) {
@@ -8,7 +8,6 @@ function InputBox(data) {
   }
 
   return VStack(
-    HStack(Icon('smile'), Icon('folder'), Icon('link'), Icon('smartphone')),
     Input(data.input)
       .bind((val) => (data.input = val))
       .tag('textarea')

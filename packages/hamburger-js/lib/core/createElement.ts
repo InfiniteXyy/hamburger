@@ -1,4 +1,4 @@
-import hamburger from '../index';
+import { config } from '../config';
 
 // 由组件的build方法调用，不建议直接使用
 function createElement(type: string | Function, props: { [k: string]: any }, ...children) {
@@ -14,7 +14,7 @@ function createElement(type: string | Function, props: { [k: string]: any }, ...
   });
 
   let result;
-  if (hamburger.platform.name === 'Hamburger' && typeof type === 'function') {
+  if (config.platform.name === 'Hamburger' && typeof type === 'function') {
     // handle JSX in hamburger
     if ('__class__' in (type as object)) {
       // if Hamburger component builder
@@ -37,7 +37,7 @@ function createElement(type: string | Function, props: { [k: string]: any }, ...
     };
   }
 
-  return hamburger.platform.createElement(result);
+  return config.platform.createElement(result);
 }
 
-export default createElement;
+export { createElement };

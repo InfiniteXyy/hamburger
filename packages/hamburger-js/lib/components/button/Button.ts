@@ -1,8 +1,7 @@
 import { ViewClass, ViewProps } from '../View';
-import { Conditional, IThemeable } from '../../common';
-import hamburger from '../../index';
+import { Conditional } from '../../types';
 
-class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
+class ButtonClass extends ViewClass {
   constructor(content: string = 'button') {
     super();
     this._tag = 'button';
@@ -20,11 +19,6 @@ class ButtonClass extends ViewClass<HTMLButtonElement> implements IThemeable {
     if (when !== false) this._props.disabled = true;
     return this;
   }
-
-  public theme(...name: string[]) {
-    this.class(...name.map((i) => hamburger.theme.button.variant[i]));
-    return this;
-  }
 }
 
 type ButtonProps = ViewProps & {
@@ -37,7 +31,7 @@ type ButtonProps = ViewProps & {
 export function Button(props: ButtonProps): JSX.Element;
 export function Button(content: string): ButtonClass;
 export function Button(content: string): ButtonClass {
-  return new ButtonClass(content).class(hamburger.theme.button.common);
+  return new ButtonClass(content);
 }
 
 Button.__class__ = ButtonClass;

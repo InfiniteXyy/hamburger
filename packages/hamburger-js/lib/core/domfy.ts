@@ -1,6 +1,6 @@
-import { DOMElement } from '../common';
+import { DOMElement } from '../types';
 
-export function toCSS(cssObj: { [k: string]: string }): string {
+function toCSS(cssObj: { [k: string]: string }): string {
   let result = '';
   for (const key in cssObj) {
     const value = cssObj[key];
@@ -54,4 +54,4 @@ function domfy(root: DOMElement): Element | Text {
   return element;
 }
 
-export default domfy;
+export { domfy, toCSS };

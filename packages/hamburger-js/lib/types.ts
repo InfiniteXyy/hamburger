@@ -1,10 +1,14 @@
-import { ViewClass } from './components';
-
 export type Conditional<T> = T | [T, boolean];
 export type Primitive = string | number | boolean;
 
 // 元素 或 元素的构造器，用 any 兼容第三方框架类型
 export type ChildElement = Primitive | IBuildable | any;
+
+export type HamburgerPlatform<PElement = any> = {
+  name: string;
+  createElement(child: DOMElement): PElement; // platform element
+  render(root: PElement, id: string): any;
+};
 
 // Platform 中间层元素
 export type DOMElement = {
@@ -13,15 +17,13 @@ export type DOMElement = {
   children: DOMElement[];
 };
 
+export interface IView<T = any> extends IBuildable {}
+
 export interface IBuildable {
   build(): DOMElement;
 }
 
-export interface IThemeable {
-  theme(...name: string[]): this;
-}
-
-export interface IChildIterable<ChildType extends ViewClass<any>> {
+export interface IChildIterable<ChildType extends IView> {
   mapItem(wrapper: (item: ChildType) => ChildElement);
 }
 

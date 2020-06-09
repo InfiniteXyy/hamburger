@@ -1,5 +1,5 @@
 import { TextClass, TextProps } from './Text';
-import { Conditional } from '../../common';
+import { Conditional } from '../../types';
 
 class LinkClass extends TextClass {
   constructor(content) {

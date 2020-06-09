@@ -1,9 +1,8 @@
-import { ChildElement, Conditional, IChildIterable, IFlexBox, IThemeable } from '../../common';
+import { ChildElement, Conditional, IChildIterable, IFlexBox } from '../../types';
 import { ViewClass, ViewProps } from '../View';
 import { flatMap } from '../../utils';
-import hamburger from '../../index';
 
-class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<ViewClass<any>>, IFlexBox, IThemeable {
+class StackClass extends ViewClass implements IChildIterable<ViewClass>, IFlexBox {
   private isFlex: boolean;
 
   constructor(private isHorizontal: boolean, elements: ChildElement[]) {
@@ -57,11 +56,6 @@ class StackClass extends ViewClass<HTMLDivElement> implements IChildIterable<Vie
 
   public inflate(when?: boolean) {
     if (when !== false) this.class('fit');
-    return this;
-  }
-
-  public theme(...name: string[]): this {
-    this.class(...name.map((i) => hamburger.theme.stack.variant[i]));
     return this;
   }
 }

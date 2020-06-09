@@ -1,18 +1,18 @@
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
-import { ChildElement, IBuildable, IChildIterable } from '../../common';
-import { VStack } from '..';
+import { ChildElement, IBuildable, IChildIterable } from '../../types';
+import { VStack } from '../stack/Stack';
 
-class TableDataClass extends ViewClass<HTMLTableDataCellElement> {
-  constructor(child: ViewClass<any>) {
+class TableDataClass extends ViewClass {
+  constructor(child: ViewClass) {
     super();
     this._children = [child];
     this._tag = 'td';
   }
 }
 
-class TableRowClass extends ViewClass<HTMLTableRowElement> implements IChildIterable<TableDataClass> {
-  constructor(columns: ViewClass<any>[]) {
+class TableRowClass extends ViewClass implements IChildIterable<TableDataClass> {
+  constructor(columns: ViewClass[]) {
     super();
     this._children = columns.map((i) => new TableDataClass(i));
     this._tag = 'tr';
@@ -39,7 +39,7 @@ export function Table(header: TableRowClass, ...body: (TableRowClass | TableRowC
   return new TableClass(header, _elements);
 }
 
-export function TableRow(...column: ViewClass<any>[]) {
+export function TableRow(...column: ViewClass[]) {
   return new TableRowClass(column);
 }
 
