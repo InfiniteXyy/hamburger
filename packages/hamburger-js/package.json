@@ -15,33 +15,21 @@
     "declarative"
   ],
   "scripts": {
-    "build": "tsc --outDir ./src --declaration --declarationDir ./@types",
+    "build": "rm -r ./@types && tsc --outDir ./src --declaration --declarationDir ./@types",
     "test": "jest",
     "bundle": "rollup -c"
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-typescript": "^7.6.0",
     "@hamburger/platform-react": "0.0.1",
-    "@rollup/plugin-node-resolve": "^8.0.1",
-    "@rollup/plugin-typescript": "^4.1.2",
-    "@types/classnames": "^2.2.9",
-    "@types/enzyme": "^3.10.3",
-    "@types/jest": "^24.0.18",
-    "@types/react": "^16.9.3",
-    "@types/react-dom": "^16.9.1",
-    "babel-jest": "^24.9.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "jest": "^24.9.0",
-    "rollup": "^2.15.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "typescript": "^3.8.2"
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@types/classnames": "^2.3.1",
+    "@types/enzyme": "^3.10.10",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6"
   },
   "dependencies": {
-    "fast-equals": "^2.0.0"
+    "fast-equals": "^2.0.3"
   }
 }

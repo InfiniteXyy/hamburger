@@ -14,9 +14,6 @@
     "@hamburger/core": "0.0.1",
     "vue": ">2.6.0"
   },
-  "devDependencies": {
-    "typescript": "^3.8.2"
-  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w"

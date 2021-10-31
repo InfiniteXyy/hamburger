@@ -33,8 +33,8 @@ Text('...').color('red').bold();
 ```bash
 git clone https://github.com/hamburger-js/hamburger.git
 cd hamburger
-yarn
-yarn build
+pnpm i
+pnpm build
 cd examples
 # choose any template you are interested with
 ```

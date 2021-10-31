@@ -20,11 +20,5 @@
   "license": "MIT",
   "peerDependencies": {
     "@hamburger/core": "0.0.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/cli": "^7.8.4",
-    "@babel/preset-flow": "^7.8.3"
   }
 }

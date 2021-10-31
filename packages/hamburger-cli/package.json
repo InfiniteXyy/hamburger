@@ -10,12 +10,12 @@
     "./dist*"
   ],
   "dependencies": {
-    "commander": "^5.0.0",
-    "enquirer": "^2.3.4"
+    "commander": "^8.3.0",
+    "enquirer": "^2.3.6"
   },
   "devDependencies": {
-    "sucrase": "^3.12.1",
-    "@hamburger/core": "0.0.1"
+    "@hamburger/core": "0.0.1",
+    "sucrase": "^3.20.3"
   },
   "scripts": {
     "build": "sucrase ./src -d dist --transforms imports",

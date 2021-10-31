@@ -2,7 +2,7 @@
   "name": "@hamburger/static",
   "version": "0.0.1",
   "dependencies": {
-    "fs-extra": "^9.0.0"
+    "fs-extra": "^10.0.0"
   },
   "types": "index.d.ts",
   "peerDependencies": {
