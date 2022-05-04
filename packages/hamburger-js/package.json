@@ -15,9 +15,8 @@
     "declarative"
   ],
   "scripts": {
-    "build": "rm -r ./@types && tsc --outDir ./src --declaration --declarationDir ./@types",
-    "test": "jest",
-    "bundle": "rollup -c"
+    "build": "rimraf ./@types && tsc --outDir ./src --declaration --declarationDir ./@types && rollup -c",
+    "test": "jest"
   },
   "license": "MIT",
   "devDependencies": {

@@ -17,5 +17,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "vue": "2"
   }
 }

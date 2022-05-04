@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
-import { DOMElement, ChildElement, IHamburgerPlatform } from '@hamburger/core';
+import { ChildElement, HamburgerPlatform } from '@hamburger/core';
 
-class ReactPlatform implements IHamburgerPlatform<ReactElement> {
+class ReactPlatform implements HamburgerPlatform<ReactElement> {
   name = 'React';
   constructor() {}
-  createElement(child: DOMElement): ReactElement {
+  createElement(child: ChildElement): ReactElement {
     if (child.type === null) {
       return child.props.content; // TextNode
     }
     let children: any = [];
     if (child.children && child.children.length >= 0) {
-      children.push(...child.children.map((i) => this.createElement(i)));
+      children.push(...child.children.map((i: any) => this.createElement(i)));
     }
     return React.createElement(child.type, child.props, ...children);
   }

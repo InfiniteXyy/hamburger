@@ -20,11 +20,11 @@ function domfy(root: DOMElement): Element | Text {
   const props = root.props || {};
 
   if (typeof root.type === 'function') {
-    console.error('检测到使用函数组件，请使用 React 内核');
+    console.error('Seems like you are using function component, please use React platform');
     return document.createElement('div');
   }
   if (type === 'svg') {
-    console.error('检测到使用 JSX SVG 组件，请使用 React 内核');
+    console.error('Seems like you are using Svg in JSX, please use React platform');
   }
 
   // 1、若 type 为 null 说明是字符串
