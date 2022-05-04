@@ -1,4 +1,4 @@
 packages:
-  - "examples/*&"
+  - "examples/*"
   - "experiment"
   - "packages/**"

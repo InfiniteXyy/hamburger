@@ -1,8 +1,6 @@
 ## hamburger.js
 
-Let **IDE** teach you.
-
-Let **Code** show everything.
+An opinioned frontend framework, just for fun.
 
 [![Build Status](https://travis-ci.org/hamburger-js/hamburger.svg?branch=master)](https://travis-ci.org/hamburger-js/hamburger)
 
