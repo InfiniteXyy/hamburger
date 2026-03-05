@@ -41,10 +41,16 @@ const rule: Rule.RuleModule = {
         let current: Rule.Node = node;
 
         while (current.type === 'CallExpression') {
-          const callee = current.callee;
-          if (callee.type === 'MemberExpression' && callee.property.type === 'Identifier') {
-            methods.push(callee.property.name);
-            current = callee.object;
+          const callExpr = current as Rule.Node & { callee: Rule.Node };
+          const callee = callExpr.callee;
+          if (callee.type === 'MemberExpression') {
+            const member = callee as Rule.Node & { property: Rule.Node; object: Rule.Node };
+            if (member.property.type === 'Identifier') {
+              methods.push((member.property as Rule.Node & { name: string }).name);
+              current = member.object;
+            } else {
+              break;
+            }
           } else {
             break;
           }

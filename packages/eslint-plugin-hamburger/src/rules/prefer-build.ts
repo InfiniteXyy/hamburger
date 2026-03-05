@@ -16,6 +16,25 @@ const HAMBURGER_COMPONENTS = [
   'PureHTML',
 ];
 
+type ASTNode = Rule.Node & Record<string, unknown>;
+
+function getCallee(node: ASTNode): ASTNode | null {
+  if (node.type === 'CallExpression' && node.callee) return node.callee as ASTNode;
+  return null;
+}
+
+function getIdentifierName(node: ASTNode): string | null {
+  if (node.type === 'Identifier' && typeof node.name === 'string') return node.name;
+  return null;
+}
+
+function getMemberParts(node: ASTNode): { object: ASTNode; property: ASTNode } | null {
+  if (node.type === 'MemberExpression' && node.object && node.property) {
+    return { object: node.object as ASTNode, property: node.property as ASTNode };
+  }
+  return null;
+}
+
 /**
  * Rule: prefer-build
  *
@@ -40,48 +59,63 @@ const rule: Rule.RuleModule = {
   create(context) {
     return {
       // Check JSX elements that use hamburger component calls
-      JSXExpressionContainer(node) {
-        const expression = node.expression;
+      JSXExpressionContainer(node: Rule.Node) {
+        const expression = (node as ASTNode).expression as ASTNode | undefined;
+        if (!expression || expression.type !== 'CallExpression') return;
 
-        // Look for call expressions like Text('hello') without .build()
-        if (expression.type === 'CallExpression') {
-          const callee = expression.callee;
+        const callee = getCallee(expression);
+        if (!callee) return;
 
-          // Direct call: Text('hello')
-          if (callee.type === 'Identifier' && HAMBURGER_COMPONENTS.includes(callee.name)) {
-            // Check if parent is a member expression ending in .build()
-            const parent = node.parent;
-            if (parent && parent.type !== 'CallExpression') {
+        // Direct call: Text('hello')
+        const directName = getIdentifierName(callee);
+        if (directName && HAMBURGER_COMPONENTS.includes(directName)) {
+          context.report({
+            node: expression,
+            messageId: 'missingBuild',
+            data: { name: directName },
+          });
+          return;
+        }
+
+        // Chained call: Text('hello').color('red') - check if ends with .build()
+        const memberParts = getMemberParts(callee);
+        if (!memberParts) return;
+
+        const lastMethodName = getIdentifierName(memberParts.property);
+
+        // If the chain ends with .build(), it's fine
+        if (lastMethodName === 'build') return;
+
+        // Walk the chain to find if a hamburger component is at the root
+        let current: ASTNode = callee;
+        while (true) {
+          const parts = getMemberParts(current);
+          if (!parts) break;
+
+          const obj = parts.object;
+          if (obj.type === 'CallExpression') {
+            const innerCallee = getCallee(obj);
+            if (!innerCallee) break;
+
+            const name = getIdentifierName(innerCallee);
+            if (name && HAMBURGER_COMPONENTS.includes(name)) {
+              // Found a hamburger component at the root without .build()
               context.report({
                 node: expression,
                 messageId: 'missingBuild',
-                data: { name: callee.name },
+                data: { name },
               });
+              return;
             }
-          }
 
-          // Chained call: Text('hello').color('red') - check if ends with .build()
-          if (callee.type === 'MemberExpression') {
-            // Walk up the chain to find the root component
-            let current = callee;
-            while (current.type === 'MemberExpression' && current.object.type === 'CallExpression') {
-              const innerCallee = current.object.callee;
-              if (innerCallee.type === 'Identifier' && HAMBURGER_COMPONENTS.includes(innerCallee.name)) {
-                // Found a hamburger component at the root
-                // Check if the chain ends with .build()
-                if (current.property.type === 'Identifier' && current.property.name !== 'build') {
-                  // The last method in the chain is not build()
-                  // But we're inside JSX, so this might be intentional
-                  // Only warn if it's clearly missing
-                }
-                break;
-              }
-              if (current.object.type === 'CallExpression' && current.object.callee.type === 'MemberExpression') {
-                current = current.object.callee;
-              } else {
-                break;
-              }
+            const innerParts = getMemberParts(innerCallee);
+            if (innerParts) {
+              current = innerCallee;
+            } else {
+              break;
             }
+          } else {
+            break;
           }
         }
       },

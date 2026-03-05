@@ -58,13 +58,19 @@ const rule: Rule.RuleModule = {
         let current: Rule.Node = node;
 
         while (current.type === 'CallExpression') {
-          const callee = current.callee;
-          if (callee.type === 'MemberExpression' && callee.property.type === 'Identifier') {
-            const methodName = callee.property.name;
-            if (STYLE_METHODS.includes(methodName)) {
-              methodCalls.push({ name: methodName, node: callee.property });
+          const callExpr = current as Rule.Node & { callee: Rule.Node };
+          const callee = callExpr.callee;
+          if (callee.type === 'MemberExpression') {
+            const member = callee as Rule.Node & { property: Rule.Node; object: Rule.Node };
+            if (member.property.type === 'Identifier') {
+              const prop = member.property as Rule.Node & { name: string };
+              if (STYLE_METHODS.includes(prop.name)) {
+                methodCalls.push({ name: prop.name, node: member.property });
+              }
+              current = member.object;
+            } else {
+              break;
             }
-            current = callee.object;
           } else {
             break;
           }
