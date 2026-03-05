@@ -1,7 +1,7 @@
 {
   "name": "@hamburger/platform-vue",
   "version": "0.0.0",
-  "description": "render with React in hamburger project",
+  "description": "render with Vue in hamburger project",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/hamburger-js/hamburger",
@@ -11,14 +11,14 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@hamburger/core": "0.0.1",
-    "vue": ">2.6.0"
+    "@hamburger/core": ">=0.0.1",
+    "vue": ">=3.0.0"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w"
   },
   "devDependencies": {
-    "vue": "2"
+    "vue": "^3.5.0"
   }
 }

@@ -8,7 +8,7 @@
     "start": "parcel serve ./index.html"
   },
   "dependencies": {
-    "@hamburger/core": "0.0.1",
-    "@hamburger/loader": "0.0.1"
+    "@hamburger/core": "workspace:*",
+    "@hamburger/loader": "workspace:*"
   }
 }

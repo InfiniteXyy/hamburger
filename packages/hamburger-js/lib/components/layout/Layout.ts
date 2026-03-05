@@ -1,6 +1,6 @@
 import { HStack, VStack } from '../stack/Stack';
 import { Text } from '../text/Text';
-import { ChildElement, IBuildable } from '../../types';
+import { ChildElement, DOMElement, IBuildable } from '../../types';
 
 type LayoutType =
   | 'top-main'
@@ -28,27 +28,27 @@ class LayoutClass implements IBuildable {
     this.mainElement = createPlaceHolder({ width: '500px', height: '500px' }, 'main');
   }
 
-  public top(element: ChildElement) {
+  public top(element: ChildElement): this {
     this.topElement = element;
     return this;
   }
 
-  public bottom(element: ChildElement) {
+  public bottom(element: ChildElement): this {
     this.bottomElement = element;
     return this;
   }
 
-  public main(element: ChildElement) {
+  public main(element: ChildElement): this {
     this.mainElement = element;
     return this;
   }
 
-  public aside(element: ChildElement) {
+  public aside(element: ChildElement): this {
     this.asideElement = element;
     return this;
   }
 
-  public build() {
+  public build(): DOMElement {
     switch (this.layoutType) {
       case 'top-main':
         return VStack(this.topElement, this.mainElement).build();
@@ -76,7 +76,7 @@ function createPlaceHolder(
   box: { width?: string; height?: string },
   innerWords: string,
   backgroundColor = '#eaeaea'
-): any {
+): IBuildable {
   const { width, height } = box;
   return VStack(Text(innerWords.toUpperCase()).fontSize(20).color('#4a4a4a').bold().margin(0)).style({
     backgroundColor,
@@ -87,7 +87,8 @@ function createPlaceHolder(
   });
 }
 
-export function Layout(type: LayoutType) {
+export function Layout(type: LayoutType): LayoutClass {
   return new LayoutClass(type);
 }
-Layout.__class__ = LayoutClass;
+
+(Layout as { __class__?: typeof LayoutClass }).__class__ = LayoutClass;

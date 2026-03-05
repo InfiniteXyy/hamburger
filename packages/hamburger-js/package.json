@@ -2,6 +2,7 @@
   "name": "@hamburger/core",
   "version": "0.0.1",
   "private": false,
+  "type": "module",
   "main": "dist/hamburger.cjs.js",
   "module": "dist/hamburger.esm.js",
   "browser": "dist/hamburger.umd.js",
@@ -15,20 +16,20 @@
     "declarative"
   ],
   "scripts": {
-    "build": "rimraf ./@types && tsc --outDir ./src --declaration --declarationDir ./@types && rollup -c",
-    "test": "jest"
+    "build": "rimraf ./@types && tsc --declaration --declarationDir ./@types --emitDeclarationOnly && rollup -c",
+    "test": "vitest run"
   },
   "license": "MIT",
   "devDependencies": {
-    "@hamburger/platform-react": "0.0.1",
-    "@rollup/plugin-node-resolve": "^13.0.6",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/classnames": "^2.3.1",
-    "@types/enzyme": "^3.10.10",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6"
+    "@hamburger/platform-react": "workspace:*",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.0",
+    "vitest": "^3.0.0",
+    "happy-dom": "^17.0.0",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/jest-dom": "^6.6.0"
   },
   "dependencies": {
-    "fast-equals": "^2.0.3"
+    "fast-equals": "^5.2.0"
   }
 }

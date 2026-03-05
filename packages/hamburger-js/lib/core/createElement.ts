@@ -1,43 +1,47 @@
 import { config } from '../config';
+import { ChildElement, DOMElement, IBuildable } from '../types';
 
-// 由组件的build方法调用，不建议直接使用
-function createElement(type: string | Function, props: { [k: string]: any }, ...children) {
-  if (Array.isArray(children[0])) children = children[0]; // 适配 JSX 语法
-  const hamburgerChildren = children.map((i) => {
-    if (typeof i === 'string' || typeof i === 'number') {
-      return { type: null, props: { content: i.toString() }, children: [] };
-    } else if ('build' in i) {
-      return i.build();
+type ComponentFunction = ((...args: unknown[]) => IBuildable) & { __class__?: unknown };
+
+function createElement(
+  type: string | ComponentFunction,
+  props: Record<string, unknown>,
+  children: ChildElement[]
+): DOMElement {
+  if (Array.isArray(children[0])) children = children[0] as ChildElement[];
+
+  const hamburgerChildren: DOMElement[] = children.map((i) => {
+    if (typeof i === 'string' || typeof i === 'number' || typeof i === 'boolean') {
+      return { type: null, props: { content: String(i) }, children: [] };
+    } else if (i && typeof i === 'object' && 'build' in i) {
+      return (i as IBuildable).build();
     } else {
-      return i;
+      return i as DOMElement;
     }
   });
 
-  let result;
+  let result: DOMElement;
   if (config.platform.name === 'Hamburger' && typeof type === 'function') {
-    // handle JSX in hamburger
-    if ('__class__' in (type as object)) {
-      // if Hamburger component builder
-      let component = type(...children);
-      for (let builder in props) {
-        if (builder in component) {
-          component[builder].call(component, props[builder]);
+    if ('__class__' in type) {
+      const component = type(...children) as IBuildable & Record<string, unknown>;
+      for (const builder in props) {
+        if (builder in component && typeof component[builder] === 'function') {
+          (component[builder] as (v: unknown) => void).call(component, props[builder]);
         }
       }
       result = component.build();
     } else {
-      // just run it with props
-      result = type({ ...props, children });
+      result = type({ ...props, children }) as unknown as DOMElement;
     }
   } else {
     result = {
-      type,
+      type: type as string,
       props,
       children: hamburgerChildren,
     };
   }
 
-  return config.platform.createElement(result);
+  return config.platform.createElement(result) as DOMElement;
 }
 
 export { createElement };

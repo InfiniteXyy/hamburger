@@ -11,9 +11,9 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@hamburger/core": "0.0.1",
-    "react": ">16.13.0",
-    "react-dom": ">16.13.0"
+    "@hamburger/core": ">=0.0.1",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "scripts": {
     "build": "tsc",

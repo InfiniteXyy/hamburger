@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es5",
+    "moduleResolution": "bundler",
+    "target": "es2022",
     "module": "esnext",
     "esModuleInterop": true,
-    "experimentalDecorators": true
-  }
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "./@types"
+  },
+  "include": ["lib/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

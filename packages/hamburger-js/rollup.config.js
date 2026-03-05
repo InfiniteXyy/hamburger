@@ -1,13 +1,16 @@
+import { createRequire } from 'node:module';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import pkg from './package.json';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 /** @type {import('rollup').RollupOptions[]} */
 const options = [
   {
     input: './lib/index.ts',
-    output: { name: 'hamburger', file: pkg.browser, format: 'umd' },
-    plugins: [typescript(), resolve()],
+    output: { name: 'hamburger', file: pkg.browser, format: 'umd', exports: 'named' },
+    plugins: [typescript({ declaration: false, declarationDir: undefined }), resolve()],
   },
   {
     input: './lib/index.ts',
@@ -15,7 +18,7 @@ const options = [
       { file: pkg.module, format: 'esm' },
       { file: pkg.main, format: 'cjs' },
     ],
-    plugins: [typescript(), resolve()],
+    plugins: [typescript({ declaration: false, declarationDir: undefined }), resolve()],
   },
 ];
 

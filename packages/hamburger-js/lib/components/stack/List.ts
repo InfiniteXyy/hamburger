@@ -5,7 +5,6 @@ import { flatMap } from '../../utils';
 class ListClass extends ViewClass {
   constructor(elements: ChildElement[]) {
     super();
-    // GridRow 的子元素必须是 GridCol，否则样式上会有问题
     this._children = elements.map((i) => (i instanceof ListItemClass ? i : new ListItemClass(i)));
     this.tag('ol');
     this.class('list-reset');
@@ -20,14 +19,14 @@ class ListItemClass extends ViewClass {
   }
 }
 
-export function List(...elements: (ChildElement | ChildElement[])[]) {
+export function List(...elements: (ChildElement | ChildElement[])[]): ListClass {
   const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
   return new ListClass(_elements);
 }
 
-export function ListItem(element: ChildElement) {
+export function ListItem(element: ChildElement): ListItemClass {
   return new ListItemClass(element);
 }
 
-List.__class__ = ListClass;
-ListItem.__class__ = ListItemClass;
+(List as { __class__?: typeof ListClass }).__class__ = ListClass;
+(ListItem as { __class__?: typeof ListItemClass }).__class__ = ListItemClass;

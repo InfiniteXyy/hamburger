@@ -2,10 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": true,
-    "target": "es5",
+    "target": "es2022",
     "declaration": true,
     "esModuleInterop": true,
-    "noImplicitAny": true
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"]
 }

@@ -14,11 +14,14 @@
     "declarative"
   ],
   "scripts": {
-    "dev": "babel . --watch --out-dir=./dist",
-    "build": "babel . --out-dir=./dist"
+    "dev": "sucrase ./src --watch --out-dir=./dist --transforms imports",
+    "build": "sucrase ./src --out-dir=./dist --transforms imports"
   },
   "license": "MIT",
+  "devDependencies": {
+    "sucrase": "^3.35.0"
+  },
   "peerDependencies": {
-    "@hamburger/core": "0.0.1"
+    "@hamburger/core": ">=0.0.1"
   }
 }

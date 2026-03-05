@@ -8,30 +8,33 @@ export class TextClass extends ViewClass {
     this._tag = 'p';
   }
 
-  // 内容方法
-  public content(content: string, when?: boolean) {
-    if (when !== false) this._children = [content];
+  public content(content: string, when?: boolean): this {
+    if (when === false) return this;
+    this._children = [content];
     return this;
   }
 
-  // 样式方法
-  public bold(when?: boolean) {
-    if (when !== false) this.class('bold');
+  public bold(when?: boolean): this {
+    if (when === false) return this;
+    this.class('bold');
     return this;
   }
 
-  public fontSize(value: string | number, when?: boolean) {
-    if (when !== false) this._props.style.fontSize = value;
+  public fontSize(value: string | number, when?: boolean): this {
+    if (when === false) return this;
+    this._props.style!.fontSize = value;
     return this;
   }
 
-  public color(value: string, when?: boolean) {
-    if (when !== false) this._props.style.color = value;
+  public color(value: string, when?: boolean): this {
+    if (when === false) return this;
+    this._props.style!.color = value;
     return this;
   }
 
-  public fontWeight(value: string, when?: boolean) {
-    if (when !== false) this._props.style.fontWeight = value;
+  public fontWeight(value: string | number, when?: boolean): this {
+    if (when === false) return this;
+    this._props.style!.fontWeight = value;
     return this;
   }
 }
@@ -45,11 +48,14 @@ export type TextProps = ViewProps & {
   theme?: string[] | string;
 };
 
-// @ts-ignore
-export function Text(props: TextProps): JSX.Element;
+export function Text(props: TextProps): TextClass;
 export function Text(...content: (Primitive | TextClass)[]): TextClass;
-export function Text(...content: (Primitive | TextClass)[]) {
-  return new TextClass(...content);
+export function Text(...contentOrProps: (Primitive | TextClass | TextProps)[]): TextClass {
+  if (contentOrProps.length === 1 && typeof contentOrProps[0] === 'object' && contentOrProps[0] !== null && 'content' in contentOrProps[0]) {
+    const props = contentOrProps[0] as TextProps;
+    return new TextClass(props.content as string);
+  }
+  return new TextClass(...(contentOrProps as (Primitive | TextClass)[]));
 }
 
-Text.__class__ = TextClass;
+(Text as { __class__?: typeof TextClass }).__class__ = TextClass;

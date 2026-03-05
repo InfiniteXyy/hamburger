@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "target": "es2022",
     "esModuleInterop": true,
     "jsx": "react",
-    "jsxFactory": "hamburger.createElement"
+    "jsxFactory": "hamburger.createElement",
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules"
