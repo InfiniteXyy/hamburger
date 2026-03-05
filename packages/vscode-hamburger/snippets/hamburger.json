@@ -1,0 +1,165 @@
+{
+  "Text Component": {
+    "prefix": "@text",
+    "body": [
+      "Text('${1:content}')${2:.color('${3:color}')}${4:.fontSize(${5:16})}${6:.bold()}$0"
+    ],
+    "description": "Create a Text component"
+  },
+  "Button Component": {
+    "prefix": "@button",
+    "body": [
+      "Button('${1:label}')${2:.onClick(() => ${3:})}${4:.disabled(${5:false})}$0"
+    ],
+    "description": "Create a Button component"
+  },
+  "Input Component": {
+    "prefix": "@input",
+    "body": [
+      "Input(${1:''}, '${2:text}')${3:.placeholder('${4:Enter value}')}${5:.onChange((e) => ${6:})}$0"
+    ],
+    "description": "Create an Input component"
+  },
+  "Image Component": {
+    "prefix": "@image",
+    "body": [
+      "Image('${1:src}')${2:.size({ width: ${3:200}, height: ${4:150} })}$0"
+    ],
+    "description": "Create an Image component"
+  },
+  "Link Component": {
+    "prefix": "@link",
+    "body": [
+      "Link('${1:text}').href('${2:https://}')$0"
+    ],
+    "description": "Create a Link component"
+  },
+  "VStack Container": {
+    "prefix": "@vstack",
+    "body": [
+      "VStack(",
+      "  ${1:// children}",
+      ")${2:.padding(${3:16})}$0"
+    ],
+    "description": "Create a vertical stack container"
+  },
+  "HStack Container": {
+    "prefix": "@hstack",
+    "body": [
+      "HStack(",
+      "  ${1:// children}",
+      ")${2:.justifyContent('${3:between}')}$0"
+    ],
+    "description": "Create a horizontal stack container"
+  },
+  "Layout Component": {
+    "prefix": "@layout",
+    "body": [
+      "Layout('${1|top-main,top-main-bottom,top-aside-main,top-main-aside,top-aside-main-bottom,main-bottom,aside-main,aside-main-bottom,aside-bottom-main|}')",
+      "  .top(${2:header})",
+      "  .main(${3:content})",
+      "  ${4:.aside(${5:sidebar})}",
+      "  ${6:.bottom(${7:footer})}",
+      "  .build()$0"
+    ],
+    "description": "Create a Layout component"
+  },
+  "List Component": {
+    "prefix": "@list",
+    "body": [
+      "List(",
+      "  ${1:Text('Item 1')},",
+      "  ${2:Text('Item 2')}",
+      ")$0"
+    ],
+    "description": "Create a List component"
+  },
+  "Table Component": {
+    "prefix": "@table",
+    "body": [
+      "Table(",
+      "  TableRow(${1:Text('Header 1'), Text('Header 2')}),",
+      "  TableRow(${2:Text('Cell 1'), Text('Cell 2')})",
+      ")$0"
+    ],
+    "description": "Create a Table component"
+  },
+  "Hamburger App Setup": {
+    "prefix": "@hamburger-app",
+    "body": [
+      "import hamburger, { VStack, Text, Button } from '@hamburger/core';",
+      "",
+      "function App() {",
+      "  return VStack(",
+      "    Text('${1:Hello World}').fontSize(32).bold(),",
+      "    Button('${2:Click me}').onClick(() => ${3:alert('clicked')})",
+      "  );",
+      "}",
+      "",
+      "hamburger.mount(App(), '${4:root}');",
+      "$0"
+    ],
+    "description": "Create a basic hamburger.js app"
+  },
+  "Hamburger with React": {
+    "prefix": "@hamburger-react",
+    "body": [
+      "import hamburger, { VStack, Text, HStack, Button } from '@hamburger/core';",
+      "import ReactPlatform from '@hamburger/platform-react';",
+      "import { useState } from 'react';",
+      "",
+      "hamburger.setPlatform(ReactPlatform);",
+      "",
+      "function ${1:Component}() {",
+      "  const [${2:state}, set${2/(.*)/${1:/capitalize}/}] = useState(${3:null});",
+      "  ",
+      "  return VStack(",
+      "    ${4:// content}",
+      "  ).build();",
+      "}",
+      "",
+      "export default ${1:Component};",
+      "$0"
+    ],
+    "description": "Create a hamburger.js component with React"
+  },
+  "Reactive Counter": {
+    "prefix": "@hamburger-counter",
+    "body": [
+      "import { listen, VStack, Text, HStack, Button } from '@hamburger/core';",
+      "",
+      "function Counter(data) {",
+      "  return VStack(",
+      "    Text(String(data.count)).fontSize(48).bold(),",
+      "    HStack(",
+      "      Button('-').onClick(() => data.count--),",
+      "      Button('+').onClick(() => data.count++)",
+      "    ).justifyContent('center')",
+      "  ).padding(20);",
+      "}",
+      "",
+      "function App() {",
+      "  const withCount = listen({ count: ${1:0} });",
+      "  return VStack(",
+      "    withCount(Counter)()",
+      "  );",
+      "}",
+      "$0"
+    ],
+    "description": "Create a reactive counter example"
+  },
+  "Conditional Style": {
+    "prefix": "@cond",
+    "body": [
+      ".${1:color}('${2:value}', ${3:condition})$0"
+    ],
+    "description": "Add a conditional style"
+  },
+  "Style Chain": {
+    "prefix": "@style",
+    "body": [
+      ".padding(${1:16}).margin(${2:8}).border({ radius: ${3:4} })$0"
+    ],
+    "description": "Add common style chain"
+  }
+}

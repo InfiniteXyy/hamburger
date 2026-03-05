@@ -354,8 +354,22 @@ examples/
 
 - TypeScript 5.x with strict mode
 - Rollup 4 for bundling (UMD, ESM, CJS outputs)
-- Vitest for testing
+- Vitest for testing with happy-dom
 - pnpm workspaces for monorepo management
+- GitHub Actions for CI (Node.js 18, 20, 22)
+
+### Testing
+
+Tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/nicedayfor/happy-dom) for DOM simulation and [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) for component testing through the React platform adapter.
+
+```bash
+pnpm test             # run all tests
+pnpm test:lib         # run core library tests only
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
 
 ## Inspiration
 
