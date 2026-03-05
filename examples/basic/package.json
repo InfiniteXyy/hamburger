@@ -1,11 +1,13 @@
 {
   "name": "example",
   "version": "0.0.1",
-  "main": "index.js",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "parcel serve ./index.html"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hamburger/core": "workspace:*",
