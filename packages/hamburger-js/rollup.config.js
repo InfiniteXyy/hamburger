@@ -15,8 +15,8 @@ const options = [
   {
     input: './lib/index.ts',
     output: [
-      { file: pkg.module, format: 'esm' },
-      { file: pkg.main, format: 'cjs' },
+      { file: pkg.module, format: 'esm', exports: 'named' },
+      { file: pkg.main, format: 'cjs', exports: 'named' },
     ],
     plugins: [typescript({ declaration: false, declarationDir: undefined }), resolve()],
   },

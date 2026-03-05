@@ -14,8 +14,8 @@
     "declarative"
   ],
   "scripts": {
-    "dev": "sucrase ./src --watch --out-dir=./dist --transforms imports",
-    "build": "sucrase ./src --out-dir=./dist --transforms imports"
+    "dev": "sucrase ./src --watch --out-dir=./dist --transforms imports,flow",
+    "build": "sucrase ./src --out-dir=./dist --transforms imports,flow"
   },
   "license": "MIT",
   "devDependencies": {

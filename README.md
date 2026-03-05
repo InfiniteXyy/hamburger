@@ -1,206 +1,366 @@
 ## hamburger.js
 
-An opinioned frontend framework, just for fun.
+[![CI](https://github.com/hamburger-js/hamburger/actions/workflows/ci.yml/badge.svg)](https://github.com/hamburger-js/hamburger/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Build Status](https://travis-ci.org/hamburger-js/hamburger.svg?branch=master)](https://travis-ci.org/hamburger-js/hamburger)
+A declarative UI framework for the web, inspired by SwiftUI and Jetpack Compose.
 
 ## About
 
-😢 Have you ever encountered such scene? When you just want to highlight a word when it is selected, you have to write like:
-
-```jsx
-// inline style
-<p style={[styles.defaultText, shouldHighlight && { color: 'red' }]}>...</p>
-
-// or with classnames lib and css
-<p style={classnames({"default-text": true, "hightlight-text": shouldHighlight})}>...</p>
-...
-
-```
-
-😄 But when you use hamburger, you only need to _tell_ computer what to do, and the library will do all rest things for you.
+hamburger.js provides a fluent builder-pattern API for constructing web UIs. Instead of writing verbose JSX or HTML, you describe your UI declaratively:
 
 ```js
-Text('...').color('red').bold();
+// Traditional approach
+<p style={{ color: shouldHighlight ? 'red' : 'black', fontWeight: 'bold' }}>Hello</p>
+
+// With hamburger.js
+Text('Hello').color('red', shouldHighlight).bold()
 ```
 
-🦉 Most importantly, this lib is more like a helper. You can use it easily in your existing `React` project, it works fine with `JSX Component` and React libraries such as `Redux`.
+hamburger.js works as a standalone renderer or as a companion to React and Vue projects.
 
-## Quick Start and Try
+## Quick Start
 
 ```bash
 git clone https://github.com/hamburger-js/hamburger.git
 cd hamburger
-pnpm i
+pnpm install
 pnpm build
-cd examples
-# choose any template you are interested with
+pnpm playground
 ```
 
-## Features
+**Requirements:** Node.js >= 18, pnpm
 
-#### Content in the first place
-```jsx harmony
-/*
- * The most important thing, content, is always put in the very first place.
- */
-function Main() {
-  return VStack(
-    VStack(
-      Text('Declarative UI').color('skyblue').size(64).bold(),
-      Text('Super Easy').color('pink').size(48),
-      HStack(
-        Text('made by').margin({ right: 4 }),
-        Text('InfiniteX').bold()
-      ),
-    ).shadow("small"),
-  );
-}
-```
+## Packages
 
+| Package | Description |
+|---------|-------------|
+| `@hamburger/core` | Core library with components and rendering engine |
+| `@hamburger/platform-react` | React adapter -- use hamburger components in React apps |
+| `@hamburger/platform-vue` | Vue adapter -- use hamburger components in Vue apps |
+| `@hamburger/loader` | DSL template tag parser for shorthand syntax |
+| `@hamburger/static` | Static site generator -- render to HTML files |
+| `@hamburger/cli` | CLI tool for scaffolding new projects |
 
-#### Use DSL to simplify the code
-```
-// variable start with "fake" will turn into mock data by the platform
+## Usage
 
-HStack {               @padding=3 @margin.vertical=3 @size.width=550px @shadow @border.radius=10px
-  Image(imgLink)       @theme=thumbnail @size.width=300px @margin.right=3
-  VStack {
-    Text(name)         @margin.right=3 @margin.bottom=0 @theme=h3
-    Link(fakeEmail)    @bold @margin.bottom=3
-    Text(fakeTime)
-    Button("Follow")   @theme=primary
-  }
-}
-```
+### Standalone (Native DOM)
 
-#### Build reactive web use traditional Observer mode. (no vdom) (developing)
 ```js
-function Counter(data) {
+import hamburger, { VStack, Text, Button } from '@hamburger/core';
+
+function App() {
   return VStack(
-    Text(data.count).theme('h1'),
-    Button('add').onClick(() => data.count++) // just change the data
+    Text('Hello World').color('skyblue').fontSize(32).bold(),
+    Button('Click me').onClick(() => alert('clicked'))
   );
 }
 
-function AnotherConsumer(data) {
-  return VStack(
-    Text('something').fontSize(data.count),
-  );
-}
-
-function root() {
-  const withCount = listen({ count: 10 });
-  return VStack(
-    withCount(Counter)(),
-    Text("all subscriber will automatically update when data changes"),
-    withCount(AnotherConsumer)(),
-  );
-}
-
-export default root;
+hamburger.mount(App(), 'root');
 ```
 
-#### Build static website
+### With React
+
 ```js
-// generate static web with declarative API
+import hamburger, { VStack, Text, HStack, Input } from '@hamburger/core';
+import ReactPlatform from '@hamburger/platform-react';
+
+hamburger.setPlatform(ReactPlatform);
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return VStack(
+    Text(String(count)).fontSize(48).bold(),
+    HStack(
+      Button('- 1').onClick(() => setCount(count - 1)),
+      Button('+ 1').onClick(() => setCount(count + 1))
+    )
+  ).build();
+}
+
+hamburger.mount(Counter, 'root');
+```
+
+### Static Site Generation
+
+```js
 import staticWebManager from '@hamburger/static';
-import About from './views/About';
-import Home from './views/Home';
-import Detail from './views/Detail';
+import { VStack, Text } from '@hamburger/core';
+
+function Home() {
+  return VStack(
+    Text('Welcome').fontSize(32).bold()
+  );
+}
 
 staticWebManager()
   .route([
     { path: '', view: Home() },
-    { path: 'about', view: About() },
-    { path: 'detail', view: Detail() }],
-  )
+  ])
   .template('./public/index.html', 'root')
   .output('./dist');
 ```
 
-#### A bunch of useful components
+## API Reference
 
-```jsx harmony
-export default function Main() {
-  return Layout('top-aside-main-bottom') // or top-main-bottom, top-main, top-aside-main, etc...
-    .top(Navbar)
-    .main(MainView)
-    .aside(AsideMenu)
-    .bottom(BottomBar)
-    .build();
-}
+### Components
+
+All components return builder instances with a fluent API. Every method returns `this` for chaining. Most styling methods accept an optional `when` parameter -- pass `false` to skip the style conditionally.
+
+#### Text(content)
+
+Creates a `<p>` element with text content.
+
+```js
+Text('Hello')
+  .color('red')              // set text color
+  .fontSize(16)              // set font size (number or string)
+  .fontWeight('bold')        // set font weight
+  .bold()                    // shorthand for bold class
+  .content('new text')       // replace text content
 ```
 
-#### Work together with React, also compatible with JSX
+#### Link(content)
 
-```jsx harmony
-// in index.js
-hamburger.setPlatform(ReactPlatform).mount(App, "root")
+Creates an `<a>` element. Extends `Text` with all its methods.
 
-// in Counter.jsx
-function Counter() {
-  const [count, setCount] = useState(0); // React hooks available if you have setUp react and reactdom
-  count [username, setUsername] = useState("");
-  return HStack(
-    Input(username).bind(setUsername),
-    Text(count),
-    <button onClick={() => setCount(count - 1)}>minus</button>,
-    <button onClick={() => setCount(count + 1)}>add</button>
-  ).build();
-}
+```js
+Link('Click here')
+  .href('https://example.com')
+  .color('blue')
+```
 
-// in your component, the theme api will automatically generate bootstrap className for you.
-const form = VStack(
-  Button('primary button').theme('primary'),
-  Image('...').theme('circular')
+#### Button(content?)
+
+Creates a `<button>` element.
+
+```js
+Button('Submit')
+  .onClick(() => handleSubmit())
+  .disabled(isLoading)       // conditionally disable
+  .content('Submitting...')  // change button text
+```
+
+#### Input(value, type?)
+
+Creates an `<input>` element.
+
+```js
+Input('', 'text')
+  .placeholder('Enter name')
+  .onChange(callback)
+  .onInput(callback)
+  .onKeyPress('Enter', handleEnter)
+  .bind(setValue)            // two-way binding helper
+
+Input(true, 'checkbox')
+  .wrapLabel('Accept terms')
+```
+
+#### Image(src)
+
+Creates an `<img>` element.
+
+```js
+Image('photo.jpg')
+  .size({ width: 200, height: 150 })
+  .border({ radius: 8 })
+```
+
+#### HStack(...children) / VStack(...children)
+
+Horizontal and vertical stack containers. `HStack` uses `display: flex` with row direction.
+
+```js
+VStack(
+  Text('Title').bold(),
+  HStack(
+    Text('Left'),
+    Text('Right')
+  ).justifyContent('between')
+   .alignItems('center')
+).padding(16)
+```
+
+Stack-specific methods:
+```js
+.justifyContent('center')   // flex justify-content
+.alignItems('center')        // flex align-items
+.reverse()                   // reverse direction
+.nowrap()                    // prevent flex wrapping
+.inflate()                   // fill available space
+.mapItem(fn)                 // transform each child
+```
+
+#### List(...children)
+
+Creates an `<ol>` element. Automatically wraps non-ListItem children.
+
+```js
+List(
+  Text('Item 1'),
+  Text('Item 2'),
+  ListItem(Text('Item 3'))   // explicit ListItem
 )
 ```
 
+#### Table(header, ...rows)
 
+Creates a `<table>` with header and body rows.
 
-#### Use native hamburger core.
+```js
+Table(
+  TableRow(Text('Name'), Text('Age')),
+  TableRow(Text('Alice'), Text('30')),
+  TableRow(Text('Bob'), Text('25'))
+)
+```
 
-hamburger.js has it's own dom engine, it is designed for static website, simple and take less space.
-Also, you can use hamburger to generate static html files with command line tools.
+#### Layout(type)
 
-#### IDE is the doc (developing)
+Creates a page layout from a predefined template.
 
-hamburger.js was designed for **everyone**, even you are not quite familiar with HTML/CSS/JS.
+```js
+Layout('top-aside-main-bottom')
+  .top(Navbar)
+  .aside(Sidebar)
+  .main(Content)
+  .bottom(Footer)
+  .build()
+```
 
-If you want to use this lib, but you <u>don't want to read the doc</u>.
+Available layouts: `top-main`, `top-main-bottom`, `top-aside-main`, `top-main-aside`, `top-aside-main-bottom`, `main-bottom`, `aside-main`, `aside-main-bottom`, `aside-bottom-main`
 
-1. open you IDE and download the plugin.
-2. write a function like it was in React.
-3. Type `@`, see all available components.
-4. Type `.` after the component, see everything you can do.
+#### PureHTML(html)
 
-## TODOs
+Renders raw HTML string. Use with caution -- no sanitization is applied.
 
-version 0.0.1
+```js
+PureHTML('<strong>Bold text</strong>')
+```
 
-- [x] Base Class (View, Text)
-- [x] TypeScript support
-- [x] simple todo mvc
-- [x] Review & Test
-- [x] More Classes (Image...)
-- [x] test input binding like v-model
-- [x] Layout Class
-- [x] use custom theme config
-- [ ] new APIs (`.shadow("small", { on: "hover" })`) ()
-- [x] Review
+### Common Methods (ViewClass)
 
-version 0.0.2
-- [x] DSL support
-- [ ] Reactive mode
-- [x] VSCode plugin, type `@`, and auto suggest all available components
-- [x] compatible with popular UI Library
-- [ ] performance test
+All components inherit these methods from the base `ViewClass`:
 
-## More
+```js
+// Box model
+.padding(10)                         // uniform padding
+.padding({ top: 10, horizontal: 20 }) // directional padding
+.margin(10)                          // uniform margin
+.margin({ vertical: 8 })            // directional margin
 
-This project was mostly inspired by `Swift UI`. Although I am not familiar with Swift, I think this programming style is really cool!
+// Sizing
+.size(100)                           // width = height = 100
+.size({ width: 200, height: 100 })  // explicit dimensions
 
-Since I am still a beginner and a student in frontend society, any guidance is really precious to me.
+// Borders
+.border({ radius: 8, width: 1, color: '#ccc' })
 
-if you have any opinion or suggestion, give me an **issue**!
+// Visibility
+.opacity(0.5)
+.hide()                              // hide element
+.hide(shouldHide)                    // conditional hide
+
+// Styling
+.style({ backgroundColor: 'red' })  // inline styles
+.class('my-class', 'another')       // CSS classes
+
+// Events
+.onClick(callback)
+
+// HTML attributes
+.id('my-element')
+.tag('section')                      // change HTML tag
+.props({ 'data-testid': 'foo' })    // arbitrary attributes
+```
+
+### Conditional Styling
+
+Every method that accepts a `when` parameter applies conditionally:
+
+```js
+Text('Status')
+  .color('green', isActive)     // green only when isActive is true
+  .color('gray', !isActive)     // gray when not active
+  .bold(isImportant)            // bold only when important
+  .hide(!isVisible)             // hidden when not visible
+```
+
+### Reactive System
+
+hamburger.js includes a Proxy-based reactive system for building dynamic UIs without a virtual DOM:
+
+```js
+import { listen } from '@hamburger/core';
+
+function Counter(data) {
+  return VStack(
+    Text(String(data.count)).fontSize(32),
+    Button('+').onClick(() => data.count++)
+  );
+}
+
+function App() {
+  const withCount = listen({ count: 0 });
+  return VStack(
+    withCount(Counter)()
+  );
+}
+```
+
+### DSL Syntax
+
+The `@hamburger/loader` package provides a shorthand DSL:
+
+```
+HStack {               @padding=3 @margin.vertical=3
+  Image(imgLink)       @size.width=300px
+  VStack {
+    Text(name)         @margin.right=3
+    Link(fakeEmail)    @bold
+    Button("Follow")
+  }
+}
+```
+
+## Development
+
+```bash
+pnpm install          # install dependencies
+pnpm build            # build all packages
+pnpm test             # run tests
+pnpm dev              # watch mode for core library
+pnpm playground       # start example app
+```
+
+### Project Structure
+
+```
+packages/
+  hamburger-js/       @hamburger/core         Core library
+  platform-react/     @hamburger/platform-react   React adapter
+  platform-vue/       @hamburger/platform-vue     Vue adapter
+  hamburger-loader/   @hamburger/loader       DSL parser
+  hamburger-static/   @hamburger/static       Static site generator
+  hamburger-cli/      @hamburger/cli          CLI scaffolding
+examples/
+  basic/              Basic React example
+  reactive-react/     Reactive mode example
+  static/             Static site example
+```
+
+### Tech Stack
+
+- TypeScript 5.x with strict mode
+- Rollup 4 for bundling (UMD, ESM, CJS outputs)
+- Vitest for testing
+- pnpm workspaces for monorepo management
+
+## Inspiration
+
+This project is inspired by SwiftUI and Jetpack Compose. The goal is to bring declarative, fluent UI construction to the web.
+
+## License
+
+MIT
