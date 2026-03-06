@@ -18,11 +18,7 @@ class ReactPlatform implements HamburgerPlatform<ReactElement> {
     return React.createElement(child.type, child.props as Record<string, unknown>, ...children);
   }
 
-  render(root: ReactElement | DOMElement | IBuildable, id: string): Root {
-    const element = (root && typeof root === 'object' && 'build' in root)
-      ? (root as IBuildable).build()
-      : root as DOMElement;
-
+  render(root: ReactElement | DOMElement | IBuildable | (() => DOMElement), id: string): Root {
     const container = document.getElementById(id);
     if (!container) throw new Error(`Element with id "${id}" not found`);
 
@@ -31,6 +27,18 @@ class ReactPlatform implements HamburgerPlatform<ReactElement> {
       reactRoot = createRoot(container);
       this.roots.set(id, reactRoot);
     }
+
+    // If root is a function, treat it as a React functional component.
+    // Wrap it so React manages its lifecycle and hooks work correctly.
+    if (typeof root === 'function') {
+      const Component = () => this.createElement((root as () => DOMElement)());
+      reactRoot.render(React.createElement(Component));
+      return reactRoot;
+    }
+
+    const element = (root && typeof root === 'object' && 'build' in root)
+      ? (root as IBuildable).build()
+      : root as DOMElement;
 
     const reactElement = this.createElement(element);
     reactRoot.render(reactElement);

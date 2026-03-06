@@ -18,11 +18,11 @@ function App() {
       Section('Sample Reactive', SampleReactive),
       Section('Sample DSL', SampleDSL),
       Section('Sample JSX', SampleJSX),
-      Section('Sample Layout', SampleLayout)
-    )
+      Section('Sample Layout', SampleLayout),
+    ).size({ width: 700 }),
   )
-    .padding(20)
-    .size({ width: 700 });
+    .alignItems('center')
+    .size({ width: '100%' });
 }
 
 export default App;

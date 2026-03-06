@@ -1,15 +1,14 @@
-// @flow
 import type { TreeNode } from './syntaxParser';
 
-export type JSResultObject = {
+export interface JSResultObject {
   content: string;
-  argList: string[]
+  argList: string[];
 }
 
 function dfs(current: TreeNode, resultObject: JSResultObject) {
   resultObject.content += `${current.title}`;
   let decorators = '';
-  for (let key in current.decorator) {
+  for (const key in current.decorator) {
     switch (typeof current.decorator[key]) {
       case 'boolean':
         decorators += `.${key}()`;
@@ -24,12 +23,12 @@ function dfs(current: TreeNode, resultObject: JSResultObject) {
   }
   if (current.children.length === 0) {
     // 将所有需要的参数添加到 args 列表
-    if (!/"/.test(current.param)) resultObject.argList.push((current.param));
+    if (!/"/.test(current.param)) resultObject.argList.push(current.param);
     resultObject.content += `(${current.param || '""'})${decorators},\n`;
     return;
   }
   resultObject.content += '(\n';
-  for (let child of current.children) {
+  for (const child of current.children) {
     dfs(child, resultObject);
   }
   if (current.children.length !== 0) {
@@ -38,12 +37,14 @@ function dfs(current: TreeNode, resultObject: JSResultObject) {
   resultObject.content += ',\n';
 }
 
-
 function codeGenerator(ast: TreeNode): JSResultObject {
   const resultObject: JSResultObject = { content: '', argList: [] };
   dfs(ast, resultObject);
   // 去除最后一个逗号
-  resultObject.content = resultObject.content.substr(0, resultObject.content.lastIndexOf(','));
+  resultObject.content = resultObject.content.substring(
+    0,
+    resultObject.content.lastIndexOf(','),
+  );
   return resultObject;
 }
 

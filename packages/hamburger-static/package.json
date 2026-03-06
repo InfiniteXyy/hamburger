@@ -1,11 +1,32 @@
 {
   "name": "@hamburger/static",
   "version": "0.0.1",
-  "dependencies": {
-    "fs-extra": "^11.2.0"
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
   },
-  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  },
   "peerDependencies": {
-    "@hamburger/core": ">=0.0.1"
+    "@hamburger/core": "workspace:*"
   }
 }

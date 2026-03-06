@@ -2,8 +2,22 @@
   "name": "@hamburger/platform-react",
   "version": "0.0.1",
   "description": "render with React in hamburger project",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "repository": "https://github.com/hamburger-js/hamburger",
   "keywords": [
     "hamburger-js"
@@ -11,12 +25,20 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@hamburger/core": ">=0.0.1",
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "@hamburger/core": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w"
+    "build": "tsup",
+    "dev": "tsup --watch"
   }
 }

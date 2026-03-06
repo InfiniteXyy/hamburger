@@ -1,9 +1,16 @@
 {
   "name": "@hamburger/platform-vue",
   "version": "0.0.0",
-  "description": "render with Vue in hamburger project",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "description": "render with Vue in hamburger project (Vue 2 API - deprecated)",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "repository": "https://github.com/hamburger-js/hamburger",
   "keywords": [
     "hamburger-js"
@@ -11,14 +18,16 @@
   "author": "Yiyang Xu <xuyiyangwing@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@hamburger/core": ">=0.0.1",
+    "@hamburger/core": "workspace:*",
     "vue": ">=3.0.0"
   },
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w"
-  },
   "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
     "vue": "^3.5.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
   }
 }

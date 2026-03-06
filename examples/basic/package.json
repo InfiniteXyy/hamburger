@@ -12,5 +12,9 @@
   "dependencies": {
     "@hamburger/core": "workspace:*",
     "@hamburger/loader": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "typescript": "catalog:"
   }
 }

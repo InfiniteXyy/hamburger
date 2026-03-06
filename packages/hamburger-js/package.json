@@ -3,28 +3,37 @@
   "version": "0.0.1",
   "private": false,
   "type": "module",
-  "main": "dist/hamburger.cjs.js",
-  "module": "dist/hamburger.esm.js",
-  "browser": "dist/hamburger.umd.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "author": {
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
   },
-  "types": "./@types/index.d.ts",
   "keywords": [
     "react",
     "declarative"
   ],
   "scripts": {
-    "build": "rimraf ./@types && tsc --declaration --declarationDir ./@types --emitDeclarationOnly && rollup -c",
+    "build": "tsup",
     "test": "vitest run"
   },
   "license": "MIT",
   "devDependencies": {
-    "@hamburger/platform-react": "workspace:*",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-typescript": "^12.1.0",
-    "vitest": "^3.0.0",
+    "tsup": "catalog:",
+    "vitest": "catalog:",
     "happy-dom": "^17.0.0",
     "@testing-library/react": "^16.1.0",
     "@testing-library/jest-dom": "^6.6.0"

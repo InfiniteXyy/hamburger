@@ -2,24 +2,26 @@
   "name": "@hamburger/cli",
   "version": "0.0.1",
   "private": false,
+  "type": "module",
   "bin": {
     "hbg": "./dist/hamburger.js"
   },
-  "main": "./dist/hamburger.js",
+  "main": "dist/hamburger.js",
   "files": [
-    "./dist*"
+    "dist"
   ],
+  "scripts": {
+    "build": "tsup",
+    "start": "tsx ./src/hamburger.ts"
+  },
   "dependencies": {
     "commander": "^13.0.0",
     "enquirer": "^2.4.1"
   },
   "devDependencies": {
     "@hamburger/core": "workspace:*",
-    "sucrase": "^3.35.0"
-  },
-  "scripts": {
-    "build": "sucrase ./src -d dist --transforms imports",
-    "start": "sucrase-node ./src/hamburger.js"
+    "tsup": "catalog:",
+    "typescript": "catalog:"
   },
   "license": "MIT"
 }
