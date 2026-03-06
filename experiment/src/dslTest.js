@@ -9,7 +9,7 @@ function betterEval(method, userArgs = {}) {
 }
 
 function hbg(input) {
-  const lines = input[0].split('\n').filter(i => i.trim() !== '');
+  const lines = input[0].split('\n').filter((i) => i.trim() !== '');
 
   const root = {
     title: 'root',
@@ -25,7 +25,7 @@ function hbg(input) {
     // 匹配获取元素名
     const matchedNames = line.match(/\w+/);
     // 若没有匹配到，说明层级在上升
-    if (!matchedNames || [...line].some(i => i === '}')) {
+    if (!matchedNames || [...line].some((i) => i === '}')) {
       fatherItem = fatherItem.father;
       continue;
     }
@@ -39,7 +39,7 @@ function hbg(input) {
     };
     fatherItem.children.push(currentItem);
     // 若发现左大括号，说明层级在下降
-    if ([...line].some(i => i === '{')) fatherItem = currentItem;
+    if ([...line].some((i) => i === '{')) fatherItem = currentItem;
     // 获取样式参数
     let match = reg.exec(line);
     while (match != null) {

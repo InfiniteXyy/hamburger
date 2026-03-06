@@ -3,11 +3,7 @@ import { Text } from '../lib';
 
 describe('Text component', () => {
   it('should style text', () => {
-    const tree = Text('Hello')
-      .color('red')
-      .fontSize(10)
-      .fontWeight(200)
-      .build();
+    const tree = Text('Hello').color('red').fontSize(10).fontWeight(200).build();
 
     expect(tree.props.style).toStrictEqual({
       fontSize: 10,

@@ -8,21 +8,21 @@ VSCode extension for hamburger.js - IntelliSense, snippets, and documentation.
 
 Type `@` followed by a component name to get code snippets:
 
-| Prefix | Description |
-|--------|-------------|
-| `@text` | Text component |
-| `@button` | Button component |
-| `@input` | Input component |
-| `@image` | Image component |
-| `@link` | Link component |
-| `@vstack` | Vertical stack container |
-| `@hstack` | Horizontal stack container |
-| `@layout` | Layout component |
-| `@list` | List component |
-| `@table` | Table component |
-| `@hamburger-app` | Full app boilerplate |
-| `@hamburger-react` | React integration boilerplate |
-| `@hamburger-counter` | Reactive counter example |
+| Prefix               | Description                   |
+| -------------------- | ----------------------------- |
+| `@text`              | Text component                |
+| `@button`            | Button component              |
+| `@input`             | Input component               |
+| `@image`             | Image component               |
+| `@link`              | Link component                |
+| `@vstack`            | Vertical stack container      |
+| `@hstack`            | Horizontal stack container    |
+| `@layout`            | Layout component              |
+| `@list`              | List component                |
+| `@table`             | Table component               |
+| `@hamburger-app`     | Full app boilerplate          |
+| `@hamburger-react`   | React integration boilerplate |
+| `@hamburger-counter` | Reactive counter example      |
 
 ### IntelliSense
 

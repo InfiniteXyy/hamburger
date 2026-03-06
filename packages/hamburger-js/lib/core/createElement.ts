@@ -6,7 +6,7 @@ type ComponentFunction = ((...args: unknown[]) => IBuildable) & { __class__?: un
 function createElement(
   type: string | ComponentFunction,
   props: Record<string, unknown>,
-  children: ChildElement[]
+  children: ChildElement[],
 ): DOMElement {
   if (Array.isArray(children[0])) children = children[0] as ChildElement[];
 

@@ -5,14 +5,12 @@ function counter(data) {
     Text(data.count).theme('h1'),
     Button('add')
       .onClick(() => data.count++)
-      .theme('primary')
+      .theme('primary'),
   );
 }
 
 function anotherList({ count }) {
-  return VStack(
-    Text('something').fontSize(count),
-  );
+  return VStack(Text('something').fontSize(count));
 }
 
 function todoList(data) {
@@ -24,7 +22,7 @@ function todoList(data) {
   return VStack(
     // listen(inputData)((data) => Input(data.input).bind(val => data.input = val))(),
     Button('addTodo').onClick(onAddCallback),
-    data.todo.map((i) => Text(i))
+    data.todo.map((i) => Text(i)),
   );
 }
 
@@ -32,12 +30,7 @@ function root() {
   const withCount = listen({ count: 10 });
   const withTodoList = listen({ todo: ['React'], input: '' });
 
-  return VStack(
-    withCount(counter)(),
-    Text('divider'),
-    withCount(anotherList)(),
-    withTodoList(todoList)()
-  );
+  return VStack(withCount(counter)(), Text('divider'), withCount(anotherList)(), withTodoList(todoList)());
 }
 
 export default root;

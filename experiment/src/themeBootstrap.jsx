@@ -17,7 +17,7 @@ function VStack(...children) {
   };
   return {
     build() {
-      return <div className={stylesheet.classify()}>{children.map(child => child.build())}</div>;
+      return <div className={stylesheet.classify()}>{children.map((child) => child.build())}</div>;
     },
     shadow(variant) {
       stylesheet.shadow = variant;
@@ -39,9 +39,6 @@ function Text(content) {
 }
 
 const Container = () => {
-  return VStack(Text('From hamburger🍔'))
-    .padding(3)
-    .shadow('lg')
-    .build();
+  return VStack(Text('From hamburger🍔')).padding(3).shadow('lg').build();
 };
 export default <Container />;

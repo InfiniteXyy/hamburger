@@ -16,10 +16,7 @@ describe('PureHTML component', () => {
   });
 
   it('should support styling methods', () => {
-    const tree = PureHTML('<p>Content</p>')
-      .padding(10)
-      .class('html-container')
-      .build();
+    const tree = PureHTML('<p>Content</p>').padding(10).class('html-container').build();
 
     expect(tree.props.style?.padding).toBe(10);
     expect(tree.props.className).toBe('html-container');

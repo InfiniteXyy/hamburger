@@ -45,14 +45,14 @@ export default [
 
 ## Rules
 
-| Rule | Default | Type | Description |
-|------|---------|------|-------------|
-| `no-empty-stack` | error | problem | Disallow empty HStack or VStack |
-| `no-duplicate-style-methods` | warn | problem | Disallow duplicate style method calls in a chain |
-| `no-conflicting-visibility` | warn | problem | Disallow using .hide() with .opacity() |
-| `require-content` | warn | problem | Require content argument for Text and Button |
-| `prefer-build` | warn | suggestion | Ensure .build() is called when used in JSX |
-| `no-raw-html` | off | suggestion | Discourage PureHTML() due to XSS risk |
+| Rule                         | Default | Type       | Description                                      |
+| ---------------------------- | ------- | ---------- | ------------------------------------------------ |
+| `no-empty-stack`             | error   | problem    | Disallow empty HStack or VStack                  |
+| `no-duplicate-style-methods` | warn    | problem    | Disallow duplicate style method calls in a chain |
+| `no-conflicting-visibility`  | warn    | problem    | Disallow using .hide() with .opacity()           |
+| `require-content`            | warn    | problem    | Require content argument for Text and Button     |
+| `prefer-build`               | warn    | suggestion | Ensure .build() is called when used in JSX       |
+| `no-raw-html`                | off     | suggestion | Discourage PureHTML() due to XSS risk            |
 
 ### `hamburger/no-empty-stack`
 
@@ -74,13 +74,13 @@ Warns when the same builder method is called multiple times in a chain. The late
 
 ```js
 // Bad -- second .color() overwrites the first
-Text('hello').color('red').bold().color('blue')
+Text('hello').color('red').bold().color('blue');
 
 // Bad -- second .padding() overwrites the first
-Button('ok').padding(10).margin(5).padding(20)
+Button('ok').padding(10).margin(5).padding(20);
 
 // Good
-Text('hello').color('blue').bold()
+Text('hello').color('blue').bold();
 ```
 
 ### `hamburger/no-conflicting-visibility`
@@ -89,11 +89,11 @@ Warns when `.hide()` and `.opacity()` are both used in the same chain. `.hide()`
 
 ```js
 // Bad -- hide() makes opacity meaningless
-Text('hi').hide().opacity(0.5)
+Text('hi').hide().opacity(0.5);
 
 // Good -- use one or the other
-Text('hi').hide()
-Text('hi').opacity(0)
+Text('hi').hide();
+Text('hi').opacity(0);
 ```
 
 ### `hamburger/require-content`
@@ -102,12 +102,12 @@ Requires that `Text()` and `Button()` are called with content. Empty text/button
 
 ```js
 // Bad
-Text()
-Button()
+Text();
+Button();
 
 // Good
-Text('Hello World')
-Button('Submit')
+Text('Hello World');
+Button('Submit');
 ```
 
 ### `hamburger/prefer-build`
@@ -132,12 +132,12 @@ Warns when `PureHTML()` is used. `PureHTML()` injects raw HTML without sanitizat
 
 ```js
 // Warned (when enabled)
-PureHTML(userInput)
-PureHTML('<script>alert("xss")</script>')
+PureHTML(userInput);
+PureHTML('<script>alert("xss")</script>');
 
 // Preferred
-Text(userContent)
-VStack(Text('structured'), Text('content'))
+Text(userContent);
+VStack(Text('structured'), Text('content'));
 ```
 
 ## License

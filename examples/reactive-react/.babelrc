@@ -1,7 +1,10 @@
 {
   "plugins": [
-    ["@babel/plugin-transform-react-jsx", {
-      "pragma": "hamburger.createElement"
-    }]
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "pragma": "hamburger.createElement"
+      }
+    ]
   ]
 }

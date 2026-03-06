@@ -7,7 +7,7 @@ function Counter() {
     <Text color={'gray'}>
       created By <span style={{ textDecoration: 'underline' }}>hello</span>
     </Text>,
-    Text('use together!')
+    Text('use together!'),
   );
 }
 

@@ -41,10 +41,7 @@ function codeGenerator(ast: TreeNode): JSResultObject {
   const resultObject: JSResultObject = { content: '', argList: [] };
   dfs(ast, resultObject);
   // 去除最后一个逗号
-  resultObject.content = resultObject.content.substring(
-    0,
-    resultObject.content.lastIndexOf(','),
-  );
+  resultObject.content = resultObject.content.substring(0, resultObject.content.lastIndexOf(','));
   return resultObject;
 }
 

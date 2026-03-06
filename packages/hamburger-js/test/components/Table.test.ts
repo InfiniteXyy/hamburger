@@ -5,10 +5,7 @@ import { Button } from '../../lib/components/button/Button';
 
 describe('Table component', () => {
   it('should create table structure with thead and tbody', () => {
-    const tree = Table(
-      TableRow(Text('Name'), Text('Age')),
-      TableRow(Text('Alice'), Text('30')),
-    ).build();
+    const tree = Table(TableRow(Text('Name'), Text('Age')), TableRow(Text('Alice'), Text('30'))).build();
 
     expect(tree.type).toBe('table');
     expect(tree.children).toHaveLength(2);
@@ -17,10 +14,7 @@ describe('Table component', () => {
   });
 
   it('should convert header cells to th tags', () => {
-    const tree = Table(
-      TableRow(Text('Col1'), Text('Col2')),
-      TableRow(Text('A'), Text('B')),
-    ).build();
+    const tree = Table(TableRow(Text('Col1'), Text('Col2')), TableRow(Text('A'), Text('B'))).build();
 
     const thead = tree.children[0];
     // thead contains a tr
@@ -33,11 +27,7 @@ describe('Table component', () => {
   });
 
   it('should render body rows as tr with td cells', () => {
-    const tree = Table(
-      TableRow(Text('Header')),
-      TableRow(Text('Row1')),
-      TableRow(Text('Row2')),
-    ).build();
+    const tree = Table(TableRow(Text('Header')), TableRow(Text('Row1')), TableRow(Text('Row2'))).build();
 
     const tbody = tree.children[1];
     expect(tbody.children).toHaveLength(2);
@@ -50,24 +40,15 @@ describe('Table component', () => {
   });
 
   it('should accept flattened array of body rows', () => {
-    const rows = [
-      TableRow(Text('A'), Text('1')),
-      TableRow(Text('B'), Text('2')),
-    ];
-    const tree = Table(
-      TableRow(Text('Name'), Text('Value')),
-      rows,
-    ).build();
+    const rows = [TableRow(Text('A'), Text('1')), TableRow(Text('B'), Text('2'))];
+    const tree = Table(TableRow(Text('Name'), Text('Value')), rows).build();
 
     const tbody = tree.children[1];
     expect(tbody.children).toHaveLength(2);
   });
 
   it('should handle single column table', () => {
-    const tree = Table(
-      TableRow(Text('Title')),
-      TableRow(Text('Data')),
-    ).build();
+    const tree = Table(TableRow(Text('Title')), TableRow(Text('Data'))).build();
 
     expect(tree.type).toBe('table');
     const thead = tree.children[0];
@@ -76,10 +57,7 @@ describe('Table component', () => {
   });
 
   it('should support various element types in cells', () => {
-    const tree = Table(
-      TableRow(Text('Action')),
-      TableRow(Button('Click')),
-    ).build();
+    const tree = Table(TableRow(Text('Action')), TableRow(Button('Click'))).build();
 
     expect(tree.type).toBe('table');
     const tbody = tree.children[1];

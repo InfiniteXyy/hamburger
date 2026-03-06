@@ -6,6 +6,6 @@ export default function Counter() {
   return HStack(
     Button('minus').onClick(() => setCount(count - 1)),
     Text('count: ' + count).margin({ horizontal: 30, vertical: 0 }),
-    Button('add').onClick(() => setCount(count + 1))
+    Button('add').onClick(() => setCount(count + 1)),
   ).margin({ vertical: 30 });
 }

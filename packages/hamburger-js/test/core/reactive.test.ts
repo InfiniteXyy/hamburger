@@ -27,11 +27,7 @@ describe('reactive', () => {
     state.count = 1;
 
     expect(subscriber).toHaveBeenCalledTimes(1);
-    expect(subscriber).toHaveBeenCalledWith(
-      expect.objectContaining({ count: 1 }),
-      'count',
-      1,
-    );
+    expect(subscriber).toHaveBeenCalledWith(expect.objectContaining({ count: 1 }), 'count', 1);
   });
 
   it('should notify multiple subscribers', () => {
@@ -93,9 +89,7 @@ describe('reactive', () => {
 
     // push triggers both the index set and length set,
     // but length should be filtered out
-    const lengthCalls = subscriber.mock.calls.filter(
-      (call) => call[1] === 'length',
-    );
+    const lengthCalls = subscriber.mock.calls.filter((call) => call[1] === 'length');
     expect(lengthCalls).toHaveLength(0);
   });
 

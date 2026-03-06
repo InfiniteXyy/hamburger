@@ -15,6 +15,6 @@ export default function () {
   };
   return VStack(
     HStack(Input(value).bind(setValue).size({ width: 200 }).margin({ right: '3' }), Button('add').onClick(addTodo)),
-    items.map((i) => TodoItem(i))
+    items.map((i) => TodoItem(i)),
   ).margin({ top: '4' });
 }

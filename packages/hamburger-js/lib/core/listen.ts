@@ -35,12 +35,12 @@ function randString(length: number): string {
 
 function listen(
   reactiveObj: Record<string, unknown>,
-  config: ListenerConfig = {}
+  config: ListenerConfig = {},
 ): (componentFn: (...args: unknown[]) => IView) => (...userArgs: unknown[]) => IBuildable {
   const dataId = randString(10);
   const consumers: Consumer[] = [];
 
-  const proxy = (reactiveObj as unknown as ReactiveProxy);
+  const proxy = reactiveObj as unknown as ReactiveProxy;
   if (!proxy._isProxy) reactiveObj = reactive(reactiveObj) as Record<string, unknown>;
   const reactiveProxy = reactiveObj as unknown as ReactiveProxy;
 
@@ -76,7 +76,9 @@ function listen(
 function reactive<T extends object>(obj: T, subscribers: SubscriberFn[] = []): T {
   function subscribe(fn: SubscriberFn): () => void {
     subscribers.push(fn);
-    return () => { subscribers = subscribers.filter((i) => i !== fn); };
+    return () => {
+      subscribers = subscribers.filter((i) => i !== fn);
+    };
   }
 
   for (const key of Object.keys(obj)) {

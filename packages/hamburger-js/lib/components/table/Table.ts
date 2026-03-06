@@ -25,7 +25,10 @@ class TableRowClass extends ViewClass implements IChildIterable<TableDataClass> 
 }
 
 class TableClass implements IBuildable {
-  constructor(private header: TableRowClass, private body: TableRowClass[]) {}
+  constructor(
+    private header: TableRowClass,
+    private body: TableRowClass[],
+  ) {}
 
   build(): DOMElement {
     const header = VStack(this.header.mapItem((i) => i.tag('th'))).tag('thead');

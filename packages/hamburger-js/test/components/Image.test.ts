@@ -9,11 +9,7 @@ describe('Image component', () => {
   });
 
   it('should support base ViewClass methods', () => {
-    const tree = Image('test.jpg')
-      .padding(10)
-      .margin(5)
-      .class('thumbnail')
-      .build();
+    const tree = Image('test.jpg').padding(10).margin(5).class('thumbnail').build();
 
     expect(tree.props.style?.padding).toBe(10);
     expect(tree.props.style?.margin).toBe(5);

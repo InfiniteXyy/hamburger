@@ -42,15 +42,12 @@ function walk(root: DOMElement | string): string {
   }
 
   // 处理 props
-  const props = Object.entries(root.props || {}).reduce(
-    (propString, [propName, propValue]) => {
-      if (propName === 'className') propName = 'class';
-      if (propName === 'style') propValue = toCSS(propValue as Record<string, string | number>);
-      if (!propValue) return propString;
-      return `${propString} ${propName}="${propValue}"`;
-    },
-    '',
-  );
+  const props = Object.entries(root.props || {}).reduce((propString, [propName, propValue]) => {
+    if (propName === 'className') propName = 'class';
+    if (propName === 'style') propValue = toCSS(propValue as Record<string, string | number>);
+    if (!propValue) return propString;
+    return `${propString} ${propName}="${propValue}"`;
+  }, '');
 
   // 处理 children
   if (Array.isArray(root.children)) {

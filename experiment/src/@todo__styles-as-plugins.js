@@ -8,6 +8,6 @@ VStack(
   List(
     ListItem('Item 1'), //
     ListItem('Item 2'), //
-    ListItem('Item 3').style(font('bold')) //
-  ).style(list('disc'))
+    ListItem('Item 3').style(font('bold')), //
+  ).style(list('disc')),
 );

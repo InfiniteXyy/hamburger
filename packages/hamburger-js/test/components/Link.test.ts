@@ -22,11 +22,7 @@ describe('Link component', () => {
   });
 
   it('should inherit TextClass styling methods', () => {
-    const tree = Link('Click me')
-      .color('blue')
-      .bold()
-      .fontSize(14)
-      .build();
+    const tree = Link('Click me').color('blue').bold().fontSize(14).build();
 
     expect(tree.props.style?.color).toBe('blue');
     expect(tree.props.style?.fontSize).toBe(14);

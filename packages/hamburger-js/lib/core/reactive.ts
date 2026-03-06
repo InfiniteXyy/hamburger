@@ -6,8 +6,14 @@ type Props = Record<string, unknown>;
 
 const isEvent = (key: string): boolean => key.startsWith('on');
 const isProperty = (key: string): boolean => !isEvent(key);
-const isNew = (prev: Props, next: Props) => (key: string): boolean => prev[key] !== next[key];
-const isGone = (_prev: Props, next: Props) => (key: string): boolean => !(key in next);
+const isNew =
+  (prev: Props, next: Props) =>
+  (key: string): boolean =>
+    prev[key] !== next[key];
+const isGone =
+  (_prev: Props, next: Props) =>
+  (key: string): boolean =>
+    !(key in next);
 
 function updateDom(dom: Element, parentDom: Element | null, prevProps: Props, nextProps: Props): void {
   // Remove old properties
@@ -59,7 +65,7 @@ function reconcileChildren(
   node: Element | Text,
   prevTree: DOMElement,
   curTree: DOMElement,
-  parentNode: Element | null = null
+  parentNode: Element | null = null,
 ): void {
   if (prevTree.type !== curTree.type) {
     replaceDOM(node, curTree);
@@ -71,12 +77,7 @@ function reconcileChildren(
       replaceDOM(node, curTree);
     } else {
       for (let i = 0; i < prevTree.children.length; i++) {
-        reconcileChildren(
-          (node as Element).children[i],
-          prevTree.children[i],
-          curTree.children[i],
-          node as Element
-        );
+        reconcileChildren((node as Element).children[i], prevTree.children[i], curTree.children[i], node as Element);
       }
     }
   }

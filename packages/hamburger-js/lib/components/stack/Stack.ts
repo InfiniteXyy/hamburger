@@ -5,7 +5,10 @@ import { flatMap } from '../../utils';
 class StackClass extends ViewClass implements IChildIterable<ViewClass>, IFlexBox {
   private isFlex: boolean;
 
-  constructor(private isHorizontal: boolean, elements: ChildElement[]) {
+  constructor(
+    private isHorizontal: boolean,
+    elements: ChildElement[],
+  ) {
     super();
     this._children = elements;
     this.isFlex = isHorizontal;
@@ -71,7 +74,10 @@ export type StackProps = ViewProps & {
 
 export function HStack(props: StackProps): StackClass;
 export function HStack(...elements: (ChildElement | ChildElement[])[]): StackClass;
-export function HStack(first?: StackProps | ChildElement | ChildElement[], ...rest: (ChildElement | ChildElement[])[]): StackClass {
+export function HStack(
+  first?: StackProps | ChildElement | ChildElement[],
+  ...rest: (ChildElement | ChildElement[])[]
+): StackClass {
   if (first && typeof first === 'object' && !Array.isArray(first) && 'children' in first && !('build' in first)) {
     return new StackClass(true, (first as StackProps).children || []);
   }
@@ -82,7 +88,10 @@ export function HStack(first?: StackProps | ChildElement | ChildElement[], ...re
 
 export function VStack(props: StackProps): StackClass;
 export function VStack(...elements: (ChildElement | ChildElement[])[]): StackClass;
-export function VStack(first?: StackProps | ChildElement | ChildElement[], ...rest: (ChildElement | ChildElement[])[]): StackClass {
+export function VStack(
+  first?: StackProps | ChildElement | ChildElement[],
+  ...rest: (ChildElement | ChildElement[])[]
+): StackClass {
   if (first && typeof first === 'object' && !Array.isArray(first) && 'children' in first && !('build' in first)) {
     return new StackClass(false, (first as StackProps).children || []);
   }

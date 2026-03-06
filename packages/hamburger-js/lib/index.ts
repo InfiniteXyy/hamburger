@@ -15,9 +15,7 @@ const hamburger: HamburgerInstance = {
   },
 
   mount(child: ChildElement, id: string): void {
-    const element = (child && typeof child === 'object' && 'build' in child)
-      ? (child as IBuildable).build()
-      : child;
+    const element = child && typeof child === 'object' && 'build' in child ? (child as IBuildable).build() : child;
     return mount(element, id);
   },
 

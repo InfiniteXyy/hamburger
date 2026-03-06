@@ -9,7 +9,7 @@ class ReactPlatform implements HamburgerPlatform<ReactElement> {
 
   createElement(child: DOMElement): ReactElement {
     if (child.type === null) {
-      return (child.props.content as string) as unknown as ReactElement;
+      return child.props.content as string as unknown as ReactElement;
     }
     const children: ReactElement[] = [];
     if (child.children && child.children.length >= 0) {
@@ -36,9 +36,8 @@ class ReactPlatform implements HamburgerPlatform<ReactElement> {
       return reactRoot;
     }
 
-    const element = (root && typeof root === 'object' && 'build' in root)
-      ? (root as IBuildable).build()
-      : root as DOMElement;
+    const element =
+      root && typeof root === 'object' && 'build' in root ? (root as IBuildable).build() : (root as DOMElement);
 
     const reactElement = this.createElement(element);
     reactRoot.render(reactElement);

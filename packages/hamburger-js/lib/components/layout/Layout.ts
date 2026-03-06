@@ -75,7 +75,7 @@ class LayoutClass implements IBuildable {
 function createPlaceHolder(
   box: { width?: string; height?: string },
   innerWords: string,
-  backgroundColor = '#eaeaea'
+  backgroundColor = '#eaeaea',
 ): IBuildable {
   const { width, height } = box;
   return VStack(Text(innerWords.toUpperCase()).fontSize(20).color('#4a4a4a').bold().margin(0)).style({

@@ -45,11 +45,7 @@ const rule: Rule.RuleModule = {
         // We only care about the outermost call in a chain.
         // Walk the chain from this node and collect method names.
         // Only process if the parent is NOT a MemberExpression (meaning we're at the top).
-        if (
-          node.parent &&
-          node.parent.type === 'MemberExpression' &&
-          node.parent.object === node
-        ) {
+        if (node.parent && node.parent.type === 'MemberExpression' && node.parent.object === node) {
           // This call is the object of a further member access -- skip, we'll process from the top.
           return;
         }

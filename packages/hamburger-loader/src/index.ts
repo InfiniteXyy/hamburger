@@ -48,9 +48,7 @@ function betterEval(jsCodeObj: JSResultObject, userArgs: Record<string, unknown>
       }
     }
   }
-  return new Function(...Object.keys(argObj), `return ${jsCodeObj.content}`)(
-    ...Object.values(argObj),
-  );
+  return new Function(...Object.keys(argObj), `return ${jsCodeObj.content}`)(...Object.values(argObj));
 }
 
 function renderToNode(code: string, userArgs: Record<string, unknown> = {}) {
@@ -60,9 +58,7 @@ function renderToNode(code: string, userArgs: Record<string, unknown> = {}) {
   return betterEval(jsCode, userArgs);
 }
 
-function hbg(
-  userArgs: Record<string, unknown>,
-): (hbgSource: TemplateStringsArray, ...keys: unknown[]) => unknown;
+function hbg(userArgs: Record<string, unknown>): (hbgSource: TemplateStringsArray, ...keys: unknown[]) => unknown;
 function hbg(userArgs: TemplateStringsArray, ...keys: unknown[]): unknown;
 function hbg(userArgs: Record<string, unknown> | TemplateStringsArray, ..._keys: unknown[]) {
   if (typeof userArgs === 'object' && !Array.isArray(userArgs) && !('raw' in userArgs)) {

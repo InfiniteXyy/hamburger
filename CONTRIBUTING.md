@@ -5,17 +5,20 @@ Thank you for your interest in contributing to hamburger.js!
 ## Development Setup
 
 1. **Fork and clone the repository**
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/hamburger.git
    cd hamburger
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Build the project**
+
    ```bash
    pnpm build
    ```
@@ -44,6 +47,7 @@ examples/
 ## Making Changes
 
 1. **Create a branch**
+
    ```bash
    git checkout -b feature/my-feature
    ```
@@ -51,11 +55,13 @@ examples/
 2. **Make your changes** following the code style of the project
 
 3. **Run tests** to ensure nothing is broken
+
    ```bash
    pnpm test
    ```
 
 4. **Format your code**
+
    ```bash
    pnpm prettier --write .
    ```

@@ -11,10 +11,10 @@ hamburger.js provides a fluent builder-pattern API for constructing web UIs. Ins
 
 ```js
 // Traditional approach
-<p style={{ color: shouldHighlight ? 'red' : 'black', fontWeight: 'bold' }}>Hello</p>
+<p style={{ color: shouldHighlight ? 'red' : 'black', fontWeight: 'bold' }}>Hello</p>;
 
 // With hamburger.js
-Text('Hello').color('red', shouldHighlight).bold()
+Text('Hello').color('red', shouldHighlight).bold();
 ```
 
 hamburger.js works as a standalone renderer or as a companion to React and Vue projects.
@@ -33,14 +33,14 @@ pnpm playground
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `@hamburger/core` | Core library with components and rendering engine |
+| Package                     | Description                                             |
+| --------------------------- | ------------------------------------------------------- |
+| `@hamburger/core`           | Core library with components and rendering engine       |
 | `@hamburger/platform-react` | React adapter -- use hamburger components in React apps |
-| `@hamburger/platform-vue` | Vue adapter -- use hamburger components in Vue apps |
-| `@hamburger/loader` | DSL template tag parser for shorthand syntax |
-| `@hamburger/static` | Static site generator -- render to HTML files |
-| `@hamburger/cli` | CLI tool for scaffolding new projects |
+| `@hamburger/platform-vue`   | Vue adapter -- use hamburger components in Vue apps     |
+| `@hamburger/loader`         | DSL template tag parser for shorthand syntax            |
+| `@hamburger/static`         | Static site generator -- render to HTML files           |
+| `@hamburger/cli`            | CLI tool for scaffolding new projects                   |
 
 ## Usage
 
@@ -52,7 +52,7 @@ import hamburger, { VStack, Text, Button } from '@hamburger/core';
 function App() {
   return VStack(
     Text('Hello World').color('skyblue').fontSize(32).bold(),
-    Button('Click me').onClick(() => alert('clicked'))
+    Button('Click me').onClick(() => alert('clicked')),
   );
 }
 
@@ -73,8 +73,8 @@ function Counter() {
     Text(String(count)).fontSize(48).bold(),
     HStack(
       Button('- 1').onClick(() => setCount(count - 1)),
-      Button('+ 1').onClick(() => setCount(count + 1))
-    )
+      Button('+ 1').onClick(() => setCount(count + 1)),
+    ),
   ).build();
 }
 
@@ -88,15 +88,11 @@ import staticWebManager from '@hamburger/static';
 import { VStack, Text } from '@hamburger/core';
 
 function Home() {
-  return VStack(
-    Text('Welcome').fontSize(32).bold()
-  );
+  return VStack(Text('Welcome').fontSize(32).bold());
 }
 
 staticWebManager()
-  .route([
-    { path: '', view: Home() },
-  ])
+  .route([{ path: '', view: Home() }])
   .template('./public/index.html', 'root')
   .output('./dist');
 ```
@@ -113,11 +109,11 @@ Creates a `<p>` element with text content.
 
 ```js
 Text('Hello')
-  .color('red')              // set text color
-  .fontSize(16)              // set font size (number or string)
-  .fontWeight('bold')        // set font weight
-  .bold()                    // shorthand for bold class
-  .content('new text')       // replace text content
+  .color('red') // set text color
+  .fontSize(16) // set font size (number or string)
+  .fontWeight('bold') // set font weight
+  .bold() // shorthand for bold class
+  .content('new text'); // replace text content
 ```
 
 #### Link(content)
@@ -125,9 +121,7 @@ Text('Hello')
 Creates an `<a>` element. Extends `Text` with all its methods.
 
 ```js
-Link('Click here')
-  .href('https://example.com')
-  .color('blue')
+Link('Click here').href('https://example.com').color('blue');
 ```
 
 #### Button(content?)
@@ -137,8 +131,8 @@ Creates a `<button>` element.
 ```js
 Button('Submit')
   .onClick(() => handleSubmit())
-  .disabled(isLoading)       // conditionally disable
-  .content('Submitting...')  // change button text
+  .disabled(isLoading) // conditionally disable
+  .content('Submitting...'); // change button text
 ```
 
 #### Input(value, type?)
@@ -151,10 +145,9 @@ Input('', 'text')
   .onChange(callback)
   .onInput(callback)
   .onKeyPress('Enter', handleEnter)
-  .bind(setValue)            // two-way binding helper
+  .bind(setValue); // two-way binding helper
 
-Input(true, 'checkbox')
-  .wrapLabel('Accept terms')
+Input(true, 'checkbox').wrapLabel('Accept terms');
 ```
 
 #### Image(src)
@@ -162,9 +155,7 @@ Input(true, 'checkbox')
 Creates an `<img>` element.
 
 ```js
-Image('photo.jpg')
-  .size({ width: 200, height: 150 })
-  .border({ radius: 8 })
+Image('photo.jpg').size({ width: 200, height: 150 }).border({ radius: 8 });
 ```
 
 #### HStack(...children) / VStack(...children)
@@ -174,15 +165,12 @@ Horizontal and vertical stack containers. `HStack` uses `display: flex` with row
 ```js
 VStack(
   Text('Title').bold(),
-  HStack(
-    Text('Left'),
-    Text('Right')
-  ).justifyContent('between')
-   .alignItems('center')
-).padding(16)
+  HStack(Text('Left'), Text('Right')).justifyContent('between').alignItems('center'),
+).padding(16);
 ```
 
 Stack-specific methods:
+
 ```js
 .justifyContent('center')   // flex justify-content
 .alignItems('center')        // flex align-items
@@ -200,8 +188,8 @@ Creates an `<ol>` element. Automatically wraps non-ListItem children.
 List(
   Text('Item 1'),
   Text('Item 2'),
-  ListItem(Text('Item 3'))   // explicit ListItem
-)
+  ListItem(Text('Item 3')), // explicit ListItem
+);
 ```
 
 #### Table(header, ...rows)
@@ -209,11 +197,7 @@ List(
 Creates a `<table>` with header and body rows.
 
 ```js
-Table(
-  TableRow(Text('Name'), Text('Age')),
-  TableRow(Text('Alice'), Text('30')),
-  TableRow(Text('Bob'), Text('25'))
-)
+Table(TableRow(Text('Name'), Text('Age')), TableRow(Text('Alice'), Text('30')), TableRow(Text('Bob'), Text('25')));
 ```
 
 #### Layout(type)
@@ -221,12 +205,7 @@ Table(
 Creates a page layout from a predefined template.
 
 ```js
-Layout('top-aside-main-bottom')
-  .top(Navbar)
-  .aside(Sidebar)
-  .main(Content)
-  .bottom(Footer)
-  .build()
+Layout('top-aside-main-bottom').top(Navbar).aside(Sidebar).main(Content).bottom(Footer).build();
 ```
 
 Available layouts: `top-main`, `top-main-bottom`, `top-aside-main`, `top-main-aside`, `top-aside-main-bottom`, `main-bottom`, `aside-main`, `aside-main-bottom`, `aside-bottom-main`
@@ -236,7 +215,7 @@ Available layouts: `top-main`, `top-main-bottom`, `top-aside-main`, `top-main-as
 Renders raw HTML string. Use with caution -- no sanitization is applied.
 
 ```js
-PureHTML('<strong>Bold text</strong>')
+PureHTML('<strong>Bold text</strong>');
 ```
 
 ### Common Methods (ViewClass)
@@ -281,10 +260,10 @@ Every method that accepts a `when` parameter applies conditionally:
 
 ```js
 Text('Status')
-  .color('green', isActive)     // green only when isActive is true
-  .color('gray', !isActive)     // gray when not active
-  .bold(isImportant)            // bold only when important
-  .hide(!isVisible)             // hidden when not visible
+  .color('green', isActive) // green only when isActive is true
+  .color('gray', !isActive) // gray when not active
+  .bold(isImportant) // bold only when important
+  .hide(!isVisible); // hidden when not visible
 ```
 
 ### Reactive System
@@ -297,15 +276,13 @@ import { listen } from '@hamburger/core';
 function Counter(data) {
   return VStack(
     Text(String(data.count)).fontSize(32),
-    Button('+').onClick(() => data.count++)
+    Button('+').onClick(() => data.count++),
   );
 }
 
 function App() {
   const withCount = listen({ count: 0 });
-  return VStack(
-    withCount(Counter)()
-  );
+  return VStack(withCount(Counter)());
 }
 ```
 

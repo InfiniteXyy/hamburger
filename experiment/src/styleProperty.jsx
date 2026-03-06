@@ -9,7 +9,7 @@ import { styleResult } from './config-parser';
 function VStack(...children) {
   return {
     build() {
-      return <div>{children.map(child => child.build())}</div>;
+      return <div>{children.map((child) => child.build())}</div>;
     },
   };
 }
@@ -47,9 +47,7 @@ const Container = () => {
   return VStack(
     Text(styleResult),
     Text('Hi~').fontSize('large'),
-    Text('are you ok')
-      .fontSize('small')
-      .color('secondary'),
+    Text('are you ok').fontSize('small').color('secondary'),
   ).build();
 };
 export default <Container />;

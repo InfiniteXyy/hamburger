@@ -50,8 +50,7 @@ const rule: Rule.RuleModule = {
       recommended: true,
     },
     messages: {
-      missingBuild:
-        'Hamburger component "{{name}}" may need .build() when used in JSX or passed to React.',
+      missingBuild: 'Hamburger component "{{name}}" may need .build() when used in JSX or passed to React.',
     },
     schema: [],
   },

@@ -2,7 +2,10 @@ import { ViewClass } from '../View';
 import { config } from '../../config';
 
 class InputClass extends ViewClass {
-  constructor(private value: string | boolean, private type?: string) {
+  constructor(
+    private value: string | boolean,
+    private type?: string,
+  ) {
     super();
     if (type === 'checkbox') this._props.checked = value as boolean;
     else this._props.value = value;

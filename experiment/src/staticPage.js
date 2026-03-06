@@ -16,7 +16,7 @@ function VStack(...children) {
   return {
     build() {
       const element = document.createElement('div');
-      children.forEach(child => element.appendChild(child.build()));
+      children.forEach((child) => element.appendChild(child.build()));
       element.className = stylesheet.classify();
       return element;
     },
@@ -41,9 +41,6 @@ function Text(content) {
   };
 }
 
-const Container = VStack(
-  Text('Hi~'),
-  Text('are you ok'),
-).shadow('lg');
+const Container = VStack(Text('Hi~'), Text('are you ok')).shadow('lg');
 
 export default Container.build();

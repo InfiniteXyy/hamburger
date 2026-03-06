@@ -29,11 +29,7 @@ const rule: Rule.RuleModule = {
     return {
       CallExpression(node) {
         // Only process the outermost call in a chain
-        if (
-          node.parent &&
-          node.parent.type === 'MemberExpression' &&
-          node.parent.object === node
-        ) {
+        if (node.parent && node.parent.type === 'MemberExpression' && node.parent.object === node) {
           return;
         }
 

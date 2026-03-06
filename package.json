@@ -4,6 +4,7 @@
   "main": "index.js",
   "private": true,
   "repository": "https://github.com/hamburger-js/hamburger",
+  "packageManager": "pnpm@10.30.3",
   "engines": {
     "node": ">=18"
   },

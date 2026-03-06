@@ -118,24 +118,17 @@ describe('ViewClass base methods', () => {
 
   describe('class method', () => {
     it('should accumulate multiple class calls', () => {
-      const tree = VStack()
-        .class('a')
-        .class('b', 'c')
-        .build();
+      const tree = VStack().class('a').class('b', 'c').build();
       expect(tree.props.className).toBe('a b c');
     });
 
     it('should filter null classes', () => {
-      const tree = VStack()
-        .class('a', null, 'b')
-        .build();
+      const tree = VStack().class('a', null, 'b').build();
       expect(tree.props.className).toBe('a b');
     });
 
     it('should handle all-null classes', () => {
-      const tree = VStack()
-        .class(null, null)
-        .build();
+      const tree = VStack().class(null, null).build();
       // No className should be set
       expect(tree.props.className).toBeUndefined();
     });

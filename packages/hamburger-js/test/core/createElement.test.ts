@@ -74,12 +74,16 @@ describe('createElement', () => {
   });
 
   it('should preserve all props', () => {
-    const result = createElement('input', {
-      type: 'text',
-      value: 'hello',
-      className: 'input-field',
-      style: { color: 'red' },
-    }, []);
+    const result = createElement(
+      'input',
+      {
+        type: 'text',
+        value: 'hello',
+        className: 'input-field',
+        style: { color: 'red' },
+      },
+      [],
+    );
     expect(result.props.type).toBe('text');
     expect(result.props.value).toBe('hello');
     expect(result.props.className).toBe('input-field');

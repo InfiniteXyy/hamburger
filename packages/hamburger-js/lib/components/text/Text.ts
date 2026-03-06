@@ -51,7 +51,12 @@ export type TextProps = ViewProps & {
 export function Text(props: TextProps): TextClass;
 export function Text(...content: (Primitive | TextClass)[]): TextClass;
 export function Text(...contentOrProps: (Primitive | TextClass | TextProps)[]): TextClass {
-  if (contentOrProps.length === 1 && typeof contentOrProps[0] === 'object' && contentOrProps[0] !== null && 'content' in contentOrProps[0]) {
+  if (
+    contentOrProps.length === 1 &&
+    typeof contentOrProps[0] === 'object' &&
+    contentOrProps[0] !== null &&
+    'content' in contentOrProps[0]
+  ) {
     const props = contentOrProps[0] as TextProps;
     return new TextClass(props.content as string);
   }

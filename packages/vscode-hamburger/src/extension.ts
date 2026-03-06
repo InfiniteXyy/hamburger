@@ -97,7 +97,7 @@ export function activate(context: vscode.ExtensionContext) {
       },
     },
     '@',
-    '.'
+    '.',
   );
 
   // Register hover provider for documentation
@@ -122,7 +122,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         return undefined;
       },
-    }
+    },
   );
 
   context.subscriptions.push(completionProvider, hoverProvider);

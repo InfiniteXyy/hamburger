@@ -7,7 +7,7 @@ staticWebManager()
   .route([
     { path: '', view: Home() },
     { path: 'about', view: About() },
-    { path: 'detail', view: Detail() }],
-  )
+    { path: 'detail', view: Detail() },
+  ])
   .template('./public/index.html', 'root')
   .output('./dist');

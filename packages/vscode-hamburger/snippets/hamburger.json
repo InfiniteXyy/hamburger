@@ -1,55 +1,37 @@
 {
   "Text Component": {
     "prefix": "@text",
-    "body": [
-      "Text('${1:content}')${2:.color('${3:color}')}${4:.fontSize(${5:16})}${6:.bold()}$0"
-    ],
+    "body": ["Text('${1:content}')${2:.color('${3:color}')}${4:.fontSize(${5:16})}${6:.bold()}$0"],
     "description": "Create a Text component"
   },
   "Button Component": {
     "prefix": "@button",
-    "body": [
-      "Button('${1:label}')${2:.onClick(() => ${3:})}${4:.disabled(${5:false})}$0"
-    ],
+    "body": ["Button('${1:label}')${2:.onClick(() => ${3:})}${4:.disabled(${5:false})}$0"],
     "description": "Create a Button component"
   },
   "Input Component": {
     "prefix": "@input",
-    "body": [
-      "Input(${1:''}, '${2:text}')${3:.placeholder('${4:Enter value}')}${5:.onChange((e) => ${6:})}$0"
-    ],
+    "body": ["Input(${1:''}, '${2:text}')${3:.placeholder('${4:Enter value}')}${5:.onChange((e) => ${6:})}$0"],
     "description": "Create an Input component"
   },
   "Image Component": {
     "prefix": "@image",
-    "body": [
-      "Image('${1:src}')${2:.size({ width: ${3:200}, height: ${4:150} })}$0"
-    ],
+    "body": ["Image('${1:src}')${2:.size({ width: ${3:200}, height: ${4:150} })}$0"],
     "description": "Create an Image component"
   },
   "Link Component": {
     "prefix": "@link",
-    "body": [
-      "Link('${1:text}').href('${2:https://}')$0"
-    ],
+    "body": ["Link('${1:text}').href('${2:https://}')$0"],
     "description": "Create a Link component"
   },
   "VStack Container": {
     "prefix": "@vstack",
-    "body": [
-      "VStack(",
-      "  ${1:// children}",
-      ")${2:.padding(${3:16})}$0"
-    ],
+    "body": ["VStack(", "  ${1:// children}", ")${2:.padding(${3:16})}$0"],
     "description": "Create a vertical stack container"
   },
   "HStack Container": {
     "prefix": "@hstack",
-    "body": [
-      "HStack(",
-      "  ${1:// children}",
-      ")${2:.justifyContent('${3:between}')}$0"
-    ],
+    "body": ["HStack(", "  ${1:// children}", ")${2:.justifyContent('${3:between}')}$0"],
     "description": "Create a horizontal stack container"
   },
   "Layout Component": {
@@ -66,12 +48,7 @@
   },
   "List Component": {
     "prefix": "@list",
-    "body": [
-      "List(",
-      "  ${1:Text('Item 1')},",
-      "  ${2:Text('Item 2')}",
-      ")$0"
-    ],
+    "body": ["List(", "  ${1:Text('Item 1')},", "  ${2:Text('Item 2')}", ")$0"],
     "description": "Create a List component"
   },
   "Table Component": {
@@ -150,16 +127,12 @@
   },
   "Conditional Style": {
     "prefix": "@cond",
-    "body": [
-      ".${1:color}('${2:value}', ${3:condition})$0"
-    ],
+    "body": [".${1:color}('${2:value}', ${3:condition})$0"],
     "description": "Add a conditional style"
   },
   "Style Chain": {
     "prefix": "@style",
-    "body": [
-      ".padding(${1:16}).margin(${2:8}).border({ radius: ${3:4} })$0"
-    ],
+    "body": [".padding(${1:16}).margin(${2:8}).border({ radius: ${3:4} })$0"],
     "description": "Add common style chain"
   }
 }

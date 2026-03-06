@@ -81,10 +81,7 @@ describe('Input component - extended', () => {
     });
 
     it('should reset props to clean state', () => {
-      const tree = Input('val')
-        .padding(10)
-        .wrapLabel('Label')
-        .build();
+      const tree = Input('val').padding(10).wrapLabel('Label').build();
 
       // Props should be reset (wrapLabel resets _props)
       expect(tree.props.value).toBeUndefined();

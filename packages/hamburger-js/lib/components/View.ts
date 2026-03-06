@@ -43,7 +43,10 @@ export class ViewClass implements IView {
     return this;
   }
 
-  private static getBoxModelObj(type: 'margin' | 'padding', value: number | string | BoxModel): Record<string, unknown> {
+  private static getBoxModelObj(
+    type: 'margin' | 'padding',
+    value: number | string | BoxModel,
+  ): Record<string, unknown> {
     let result: Record<string, unknown> = {};
     if (typeof value === 'number' || typeof value === 'string') {
       result = { [type]: value };

@@ -30,9 +30,7 @@ describe('Integration: build -> domfy pipeline', () => {
   });
 
   it('should render Input to real DOM', () => {
-    const tree = Input('hello', 'text')
-      .placeholder('Type here')
-      .build();
+    const tree = Input('hello', 'text').placeholder('Type here').build();
     const el = domfy(tree) as HTMLInputElement;
 
     expect(el.tagName).toBe('INPUT');
@@ -41,13 +39,9 @@ describe('Integration: build -> domfy pipeline', () => {
   });
 
   it('should render nested VStack with children', () => {
-    const tree = VStack(
-      Text('Title').bold(),
-      HStack(
-        Button('OK'),
-        Button('Cancel'),
-      ),
-    ).padding(20).build();
+    const tree = VStack(Text('Title').bold(), HStack(Button('OK'), Button('Cancel')))
+      .padding(20)
+      .build();
     const el = domfy(tree) as HTMLElement;
 
     expect(el.tagName).toBe('DIV');
@@ -70,9 +64,7 @@ describe('Integration: build -> domfy pipeline', () => {
   });
 
   it('should render Image to real DOM', () => {
-    const tree = Image('photo.jpg')
-      .size({ width: 200, height: 150 })
-      .build();
+    const tree = Image('photo.jpg').size({ width: 200, height: 150 }).build();
     const el = domfy(tree) as HTMLImageElement;
 
     expect(el.tagName).toBe('IMG');
@@ -103,20 +95,13 @@ describe('Integration: build -> domfy pipeline', () => {
 
   it('should render complex nested layout', () => {
     const tree = VStack(
-      HStack(
-        Text('Logo').bold(),
-        HStack(
-          Link('Home').href('/'),
-          Link('About').href('/about'),
-        ),
-      ).justifyContent('between').padding(10),
+      HStack(Text('Logo').bold(), HStack(Link('Home').href('/'), Link('About').href('/about')))
+        .justifyContent('between')
+        .padding(10),
       VStack(
         Text('Main content').fontSize(18),
         Input('', 'text').placeholder('Search...'),
-        HStack(
-          Button('Save').class('btn-primary'),
-          Button('Cancel').class('btn-secondary'),
-        ),
+        HStack(Button('Save').class('btn-primary'), Button('Cancel').class('btn-secondary')),
       ).padding(20),
     ).build();
 
@@ -129,7 +114,11 @@ describe('Integration: build -> domfy pipeline', () => {
 
   it('should attach event listeners on DOM elements', () => {
     let clicked = false;
-    const tree = Button('Click').onClick(() => { clicked = true; }).build();
+    const tree = Button('Click')
+      .onClick(() => {
+        clicked = true;
+      })
+      .build();
     const el = domfy(tree) as HTMLButtonElement;
 
     el.click();

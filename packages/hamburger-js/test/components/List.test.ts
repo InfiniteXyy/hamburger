@@ -22,10 +22,7 @@ describe('List component', () => {
   });
 
   it('should preserve explicit ListItem wrappers', () => {
-    const tree = List(
-      ListItem(Text('Explicit')),
-      Text('Auto-wrapped'),
-    ).build();
+    const tree = List(ListItem(Text('Explicit')), Text('Auto-wrapped')).build();
 
     expect(tree.children).toHaveLength(2);
     tree.children.forEach((child) => {
@@ -40,10 +37,7 @@ describe('List component', () => {
   });
 
   it('should support ViewClass base methods', () => {
-    const tree = List(Text('Item'))
-      .padding(10)
-      .id('my-list')
-      .build();
+    const tree = List(Text('Item')).padding(10).id('my-list').build();
 
     expect(tree.props.style?.padding).toBe(10);
     expect(tree.props.id).toBe('my-list');
