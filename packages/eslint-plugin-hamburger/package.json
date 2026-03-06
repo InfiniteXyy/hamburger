@@ -1,0 +1,31 @@
+{
+  "name": "eslint-plugin-hamburger",
+  "version": "0.0.1",
+  "description": "ESLint rules for hamburger.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "hamburger"
+  ],
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^9.6.0",
+    "eslint": "^9.18.0",
+    "typescript": "~5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "license": "MIT"
+}

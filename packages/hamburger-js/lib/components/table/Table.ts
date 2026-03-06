@@ -1,6 +1,6 @@
 import { ViewClass } from '../View';
 import { flatMap } from '../../utils';
-import { ChildElement, IBuildable, IChildIterable } from '../../types';
+import { ChildElement, DOMElement, IBuildable, IChildIterable } from '../../types';
 import { VStack } from '../stack/Stack';
 
 class TableDataClass extends ViewClass {
@@ -18,8 +18,8 @@ class TableRowClass extends ViewClass implements IChildIterable<TableDataClass> 
     this._tag = 'tr';
   }
 
-  mapItem(wrapper: (item: TableDataClass) => ChildElement) {
-    this._children = this._children.map(wrapper);
+  mapItem(wrapper: (item: TableDataClass) => ChildElement): this {
+    this._children = this._children.map(wrapper as (item: ChildElement) => ChildElement);
     return this;
   }
 }
@@ -27,21 +27,21 @@ class TableRowClass extends ViewClass implements IChildIterable<TableDataClass> 
 class TableClass implements IBuildable {
   constructor(private header: TableRowClass, private body: TableRowClass[]) {}
 
-  build() {
+  build(): DOMElement {
     const header = VStack(this.header.mapItem((i) => i.tag('th'))).tag('thead');
     const body = VStack(this.body).tag('tbody');
     return VStack(header, body).tag('table').build();
   }
 }
 
-export function Table(header: TableRowClass, ...body: (TableRowClass | TableRowClass[])[]) {
+export function Table(header: TableRowClass, ...body: (TableRowClass | TableRowClass[])[]): TableClass {
   const _elements = flatMap(body, (i) => (Array.isArray(i) ? i : [i]));
   return new TableClass(header, _elements);
 }
 
-export function TableRow(...column: ViewClass[]) {
+export function TableRow(...column: ViewClass[]): TableRowClass {
   return new TableRowClass(column);
 }
 
-Table.__class__ = TableClass;
-TableRow.__class__ = TableRowClass;
+(Table as { __class__?: typeof TableClass }).__class__ = TableClass;
+(TableRow as { __class__?: typeof TableRowClass }).__class__ = TableRowClass;

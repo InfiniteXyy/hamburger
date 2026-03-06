@@ -1,18 +1,25 @@
 import { DOMElement, IBuildable, IView } from '../types';
 import rerender from './reactive';
 
+type SubscriberFn = (target: object, property: string | symbol, value: unknown) => void;
+
+interface ReactiveProxy {
+  _isProxy: boolean;
+  subscribe: (fn: SubscriberFn) => () => void;
+}
+
 interface ListenerConfig {
-  beforeUpdate?: (state?, target?, value?) => void;
-  afterUpdate?: (state?, target?, value?) => void;
+  beforeUpdate?: (state: unknown, target: unknown, value: unknown) => void;
+  afterUpdate?: (state: unknown, target: unknown, value: unknown) => void;
 }
 
 interface Consumer {
-  componentFn: Function;
-  args: any;
+  componentFn: (...args: unknown[]) => IView;
+  args: unknown[];
   lastTree: DOMElement | null;
 }
 
-const keyPool = [];
+const keyPool: string[] = [];
 
 function randString(length: number): string {
   let result = '';
@@ -27,31 +34,31 @@ function randString(length: number): string {
 }
 
 function listen(
-  reactiveObj: any,
+  reactiveObj: Record<string, unknown>,
   config: ListenerConfig = {}
-): (componentFn: (...args) => IView) => (...userArgs) => IBuildable {
+): (componentFn: (...args: unknown[]) => IView) => (...userArgs: unknown[]) => IBuildable {
   const dataId = randString(10);
   const consumers: Consumer[] = [];
-  // 自动封装为proxy
-  if (!reactiveObj._isProxy) reactiveObj = reactive(reactiveObj);
 
-  reactiveObj.subscribe((target, property, value) => {
+  const proxy = (reactiveObj as unknown as ReactiveProxy);
+  if (!proxy._isProxy) reactiveObj = reactive(reactiveObj) as Record<string, unknown>;
+  const reactiveProxy = reactiveObj as unknown as ReactiveProxy;
+
+  reactiveProxy.subscribe((target: object, property: string | symbol, value: unknown) => {
     const { beforeUpdate, afterUpdate } = config;
     if (beforeUpdate) beforeUpdate(target, property, value);
-    // start
     document.querySelectorAll(`[data-id=${dataId}]`).forEach((item, i) => {
       const { componentFn, args, lastTree } = consumers[i];
       const tree = componentFn(reactiveObj, ...args).build();
       tree.props['data-id'] = dataId;
-      rerender(item, lastTree, tree); // 添加上一次渲染的缓存
+      rerender(item, lastTree, tree);
       consumers[i].lastTree = tree;
     });
-    // end
     if (afterUpdate) afterUpdate(target, property, value);
   });
 
-  return (componentFn) => {
-    return (...args) => {
+  return (componentFn: (...args: unknown[]) => IView) => {
+    return (...args: unknown[]): IBuildable => {
       consumers.push({ componentFn, args, lastTree: null });
       const index = consumers.length - 1;
       return {
@@ -66,27 +73,28 @@ function listen(
   };
 }
 
-function reactive<T extends object>(obj: T, subscribers = []): T {
-  function subscribe(fn) {
+function reactive<T extends object>(obj: T, subscribers: SubscriberFn[] = []): T {
+  function subscribe(fn: SubscriberFn): () => void {
     subscribers.push(fn);
-    return () => (subscribers = subscribers.filter((i) => i !== fn));
+    return () => { subscribers = subscribers.filter((i) => i !== fn); };
   }
 
-  for (let key of Object.keys(obj)) {
-    if (typeof obj[key] === 'object') {
-      obj[key] = reactive(obj[key], subscribers);
+  for (const key of Object.keys(obj)) {
+    const val = (obj as Record<string, unknown>)[key];
+    if (val && typeof val === 'object') {
+      (obj as Record<string, unknown>)[key] = reactive(val as object, subscribers);
     }
   }
   return new Proxy(obj, {
-    set(target, property, value, receiver) {
-      const proxyValue = typeof value === 'object' ? reactive(value, subscribers) : value;
+    set(target: T, property: string | symbol, value: unknown, receiver: unknown) {
+      const proxyValue = value && typeof value === 'object' ? reactive(value as object, subscribers) : value;
       const result = Reflect.set(target, property, proxyValue, receiver);
       if (property !== 'length') {
         subscribers.forEach((fn) => fn(target, property, value));
       }
       return result;
     },
-    get(target, property, receiver) {
+    get(target: T, property: string | symbol, receiver: unknown) {
       if (property === 'subscribe') return subscribe;
       if (property === '_isProxy') return true;
       return Reflect.get(target, property, receiver);

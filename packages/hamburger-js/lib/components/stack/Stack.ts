@@ -18,18 +18,16 @@ class StackClass extends ViewClass implements IChildIterable<ViewClass>, IFlexBo
       this.isFlex = true;
       this.class('flex', 'flex-column');
     }
-    this._props.style.flexDirection = this.isHorizontal ? 'row-reverse' : 'column-reverse';
+    this._props.style!.flexDirection = this.isHorizontal ? 'row-reverse' : 'column-reverse';
     return this;
   }
 
-  // 功能方法
-  public mapItem(wrapper) {
-    this._children = this._children.map(wrapper);
+  public mapItem(wrapper: (item: ViewClass) => ChildElement): this {
+    this._children = this._children.map(wrapper as (item: ChildElement) => ChildElement);
     return this;
   }
 
-  // 布局方法
-  public justifyContent(position, when?: boolean) {
+  public justifyContent(position: string, when?: boolean): this {
     if (when === false) return this;
     if (!this.isFlex) {
       this.isFlex = true;
@@ -39,7 +37,7 @@ class StackClass extends ViewClass implements IChildIterable<ViewClass>, IFlexBo
     return this;
   }
 
-  public alignItems(position, when?: boolean) {
+  public alignItems(position: string, when?: boolean): this {
     if (when === false) return this;
     if (!this.isFlex) {
       this.isFlex = true;
@@ -49,41 +47,49 @@ class StackClass extends ViewClass implements IChildIterable<ViewClass>, IFlexBo
     return this;
   }
 
-  public nowrap(when?: boolean) {
-    if (when !== false) this.class('flex-nowrap');
+  public nowrap(when?: boolean): this {
+    if (when === false) return this;
+    this.class('flex-nowrap');
     return this;
   }
 
-  public inflate(when?: boolean) {
-    if (when !== false) this.class('fit');
+  public inflate(when?: boolean): this {
+    if (when === false) return this;
+    this.class('fit');
     return this;
   }
 }
 
 export type StackProps = ViewProps & {
   reverse?: boolean;
-  mapItem?: any;
+  mapItem?: (item: ViewClass) => ChildElement;
   justifyContent?: Conditional<string>;
   alignItems?: Conditional<string>;
   nowrap?: boolean;
   inflate?: boolean;
 };
 
-// @ts-ignore
-export function HStack(props: StackProps): JSX.Element;
-export function HStack(...elements: (ChildElement | ChildElement[])[]);
-export function HStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
+export function HStack(props: StackProps): StackClass;
+export function HStack(...elements: (ChildElement | ChildElement[])[]): StackClass;
+export function HStack(first?: StackProps | ChildElement | ChildElement[], ...rest: (ChildElement | ChildElement[])[]): StackClass {
+  if (first && typeof first === 'object' && !Array.isArray(first) && 'children' in first && !('build' in first)) {
+    return new StackClass(true, (first as StackProps).children || []);
+  }
+  const all = first !== undefined ? [first as ChildElement | ChildElement[], ...rest] : rest;
+  const _elements = flatMap(all, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(true, _elements);
 }
 
-// @ts-ignore
-export function VStack(props: StackProps): JSX.Element;
-export function VStack(...elements: (ChildElement | ChildElement[])[]);
-export function VStack(...elements: (ChildElement | ChildElement[])[]) {
-  const _elements = flatMap(elements, (i) => (Array.isArray(i) ? i : [i]));
+export function VStack(props: StackProps): StackClass;
+export function VStack(...elements: (ChildElement | ChildElement[])[]): StackClass;
+export function VStack(first?: StackProps | ChildElement | ChildElement[], ...rest: (ChildElement | ChildElement[])[]): StackClass {
+  if (first && typeof first === 'object' && !Array.isArray(first) && 'children' in first && !('build' in first)) {
+    return new StackClass(false, (first as StackProps).children || []);
+  }
+  const all = first !== undefined ? [first as ChildElement | ChildElement[], ...rest] : rest;
+  const _elements = flatMap(all, (i) => (Array.isArray(i) ? i : [i]));
   return new StackClass(false, _elements);
 }
 
-VStack.__class__ = StackClass;
-HStack.__class__ = StackClass;
+(VStack as { __class__?: typeof StackClass }).__class__ = StackClass;
+(HStack as { __class__?: typeof StackClass }).__class__ = StackClass;

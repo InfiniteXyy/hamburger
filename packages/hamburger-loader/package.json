@@ -2,23 +2,41 @@
   "name": "@hamburger/loader",
   "version": "0.0.1",
   "private": false,
-  "main": "./dist/index.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "author": {
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
   },
-  "types": "./index.d.ts",
   "keywords": [
     "hamburger",
     "webpack-loader",
     "declarative"
   ],
   "scripts": {
-    "dev": "babel . --watch --out-dir=./dist",
-    "build": "babel . --out-dir=./dist"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
   "license": "MIT",
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  },
   "peerDependencies": {
-    "@hamburger/core": "0.0.1"
+    "@hamburger/core": "workspace:*"
   }
 }

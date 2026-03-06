@@ -2,33 +2,43 @@
   "name": "@hamburger/core",
   "version": "0.0.1",
   "private": false,
-  "main": "dist/hamburger.cjs.js",
-  "module": "dist/hamburger.esm.js",
-  "browser": "dist/hamburger.umd.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "author": {
     "email": "xuyiyangwing@gmail.com",
     "name": "Yiyang Xu"
   },
-  "types": "./@types/index.d.ts",
   "keywords": [
     "react",
     "declarative"
   ],
   "scripts": {
-    "build": "rimraf ./@types && tsc --outDir ./src --declaration --declarationDir ./@types && rollup -c",
-    "test": "jest"
+    "build": "tsup",
+    "test": "vitest run"
   },
   "license": "MIT",
   "devDependencies": {
-    "@hamburger/platform-react": "0.0.1",
-    "@rollup/plugin-node-resolve": "^13.0.6",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/classnames": "^2.3.1",
-    "@types/enzyme": "^3.10.10",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6"
+    "tsup": "catalog:",
+    "vitest": "catalog:",
+    "happy-dom": "^17.0.0",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/jest-dom": "^6.6.0"
   },
   "dependencies": {
-    "fast-equals": "^2.0.3"
+    "fast-equals": "^5.2.0"
   }
 }

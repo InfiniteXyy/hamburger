@@ -8,8 +8,8 @@ class ImageClass extends ViewClass {
   }
 }
 
-export function Image(src: string) {
+export function Image(src: string): ImageClass {
   return new ImageClass(src);
 }
 
-Image.__class__ = ImageClass;
+(Image as { __class__?: typeof ImageClass }).__class__ = ImageClass;

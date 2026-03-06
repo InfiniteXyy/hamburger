@@ -8,15 +8,15 @@ class ButtonClass extends ViewClass {
     this._children = [content];
   }
 
-  // 内容方法
-  public content(content: string, when?: boolean) {
-    if (when !== false) this._children = [content];
+  public content(content: string, when?: boolean): this {
+    if (when === false) return this;
+    this._children = [content];
     return this;
   }
 
-  // 样式方法
-  public disabled(when?: boolean) {
-    if (when !== false) this._props.disabled = true;
+  public disabled(when?: boolean): this {
+    if (when === false) return this;
+    this._props.disabled = true;
     return this;
   }
 }
@@ -27,11 +27,13 @@ type ButtonProps = ViewProps & {
   theme?: string[] | string;
 };
 
-// @ts-ignore
-export function Button(props: ButtonProps): JSX.Element;
-export function Button(content: string): ButtonClass;
-export function Button(content: string): ButtonClass {
-  return new ButtonClass(content);
+export function Button(props: ButtonProps): ButtonClass;
+export function Button(content?: string): ButtonClass;
+export function Button(contentOrProps?: string | ButtonProps): ButtonClass {
+  if (typeof contentOrProps === 'object') {
+    return new ButtonClass(contentOrProps.content as string | undefined);
+  }
+  return new ButtonClass(contentOrProps);
 }
 
-Button.__class__ = ButtonClass;
+(Button as { __class__?: typeof ButtonClass }).__class__ = ButtonClass;

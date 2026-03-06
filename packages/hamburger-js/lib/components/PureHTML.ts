@@ -7,8 +7,8 @@ class PureHTMLClass extends ViewClass {
   }
 }
 
-export function PureHTML(html: string) {
+export function PureHTML(html: string): PureHTMLClass {
   return new PureHTMLClass(html);
 }
 
-PureHTML.__class__ = PureHTMLClass;
+(PureHTML as { __class__?: typeof PureHTMLClass }).__class__ = PureHTMLClass;

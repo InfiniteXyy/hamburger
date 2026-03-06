@@ -1,0 +1,51 @@
+{
+  "name": "vscode-hamburger",
+  "displayName": "hamburger.js",
+  "description": "VSCode extension for hamburger.js - IntelliSense, snippets, and documentation",
+  "version": "0.0.1",
+  "publisher": "hamburger-js",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/hamburger.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/hamburger.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/hamburger.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/hamburger.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "~5.7.0"
+  }
+}
